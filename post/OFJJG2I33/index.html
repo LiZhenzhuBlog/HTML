@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>通过使用3D打印头模型进行放射治疗固定化面膜成型 | Li Zhenzhu, Ph.D</title>
+<meta name="description" content="Binzhou Medical University Hospital, Email: timeanddoctor@gmail.com.">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://blog.bioprinting.site/favicon.ico?v=1556350835272">
+<link rel="stylesheet" href="https://blog.bioprinting.site/styles/main.css">
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://blog.bioprinting.site">
+        <img src="https://blog.bioprinting.site/images/avatar.png?v=1556350835272" class="site-logo">
+        <h1 class="site-title">Li Zhenzhu, Ph.D</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            Home
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            Archives
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            Tags
+          </a>
+        
+      
+        
+          <a href="/paper" class="site-nav">
+            Paper
+          </a>
+        
+      
+        
+          <a href="/3dprinting" class="site-nav">
+            3D printing
+          </a>
+        
+      
+        
+          <a href="/bigbridgerobot" class="site-nav">
+            BigBridgeRobot
+          </a>
+        
+      
+        
+          <a href="/business" class="site-nav">
+            Business
+          </a>
+        
+      
+        
+          <a href="https://blog.bioprinting.site/post/meeting/" class="site-nav">
+            Training
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      Binzhou Medical University Hospital, Email: timeanddoctor@gmail.com.
+    </div>
+    <div class="site-footer">
+      Powered by Li Zhenzhu
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">通过使用3D打印头模型进行放射治疗固定化面膜成型</h2>
+            <div class="post-date">2019-02-14</div>
+            
+              <div class="feature-container" style="background-image: url('https://blog.bioprinting.site/post-images/OFJJG2I33.jpg')">
+              </div>
+            
+            <div class="post-content">
+              <p><a href="https://www.ncbi.nlm.nih.gov/pubmed/?term=Pham%20QV%5BAuthor%5D&amp;cauthor=true&amp;cauthor_uid=30380998">Quoc-Viêt Vincent Pham</a>,<sup>1</sup> <a href="https://www.ncbi.nlm.nih.gov/pubmed/?term=Lavall%26%23x000e9%3Be%20AP%5BAuthor%5D&amp;cauthor=true&amp;cauthor_uid=30380998">Annie-Pier Lavallée</a>, BEng,<sup>2</sup> <a href="https://www.ncbi.nlm.nih.gov/pubmed/?term=Foias%20A%5BAuthor%5D&amp;cauthor=true&amp;cauthor_uid=30380998">Alexandru Foias</a>, CAPM, MScA,<sup>3</sup> <a href="https://www.ncbi.nlm.nih.gov/pubmed/?term=Roberge%20D%5BAuthor%5D&amp;cauthor=true&amp;cauthor_uid=30380998">David Roberge</a>, MD, FRCPC,<sup>4,</sup><sup>5</sup> <a href="https://www.ncbi.nlm.nih.gov/pubmed/?term=Mitrou%20E%5BAuthor%5D&amp;cauthor=true&amp;cauthor_uid=30380998">Ellis Mitrou</a>, MSc,<sup>4</sup> and <a href="https://www.ncbi.nlm.nih.gov/pubmed/?term=Wong%20P%5BAuthor%5D&amp;cauthor=true&amp;cauthor_uid=30380998">Philip Wong</a>, MSc, MD, FRCPC<sup>4,</sup><sup>5</sup></p>
+<p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6259067/">Author information</a> <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6259067/">Article notes</a> <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6259067/">Copyright and License information</a> <a href="https://www.ncbi.nlm.nih.gov/pmc/about/disclaimer/">Disclaimer</a></p>
+<p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6259067/" title="Go to other sections in this page">Go to:</a></p>
+<h2 id="abstract">Abstract</h2>
+<h3 id="purpose">Purpose:</h3>
+<p>To evaluate the feasibility of a workflow free of a simulation appointment using three-dimensional-printed heads and custom immobilization devices.</p>
+<h3 id="materials-and-methods">Materials and Methods:</h3>
+<p>Simulation computed tomography scans of 11 patients who received radiotherapy for brain tumors were used to create three-dimensional printable models of the patients’ heads and neck rests. The models were three-dimensional-printed using fused deposition modeling and reassembled. Then, thermoplastic immobilization masks were molded onto them. These setups were then computed tomography-scanned and compared against the volumes from the original patient computed tomography-scans. Following translational +/− rotational coregistrations of the volumes from three-dimensional-printed models and the patients, the similarities and accuracies of the setups were evaluated using Dice similarity coefficients, Hausdorff distances, differences in centroid positions, and angular deviations. Potential dosimetric differences secondary to inaccuracies in the rotational positioning of patients were calculated.</p>
+<h3 id="results">Results:</h3>
+<p>Mean angular deviation of the 3D-printout from the original volume for the Pitch, Yaw, and Roll were 1.1° (standard deviation = 0.77°), 0.59° (standard deviation = 0.41°), and 0.79° (standard deviation = 0.86°), respectively. Following translational + rotational shifts, the mean Dice similarity coefficients of the three-dimensional-printed and original volumes was 0.985 (standard deviation = 0.002) while the mean Hausdorff distance was 0.9 mm (standard error of the mean: 0.1 mm). The mean centroid vector displacement was 0.5 mm (standard deviation: 0.3 mm). Compared to plans that were coregistered using translational + rotational shifts, the D<sub>95</sub> of the brain from three-dimensional-printed heads adjusted for TR shifts only differed by −0.1% (standard deviation = 0.2%).</p>
+<h3 id="conclusions">Conclusions:</h3>
+<p>Patient head volumes and positions at simulation computed tomography scans can be accurately reproduced using three-dimensional-printed models, which can be used to mold radiotherapy immobilization masks onto. This strategy, if applied on diagnostic computed tomography scans, may allow symptomatic and frail patients to avoid a computed tomography-simulation and mask molding session in preparation for palliative whole brain radiotherapy.</p>
+<p>**Keywords: **brain, radiotherapy, 3D printing, simulation, palliative, immobilization</p>
+<p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6259067/" title="Go to other sections in this page">Go to:</a></p>
+<h2 id="introduction">Introduction</h2>
+<p>The lifetime risk of being diagnosed with cancer is 40% among people living in developed countries.<sup><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6259067/#bibr1-1533033818809051">1</a></sup>Twenty to forty percent of patients with cancer will develop brain metastases.<sup><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6259067/#bibr2-1533033818809051">2</a></sup> Many patients with brain metastases are elderly and frail due to comorbidities, disease progression, and/or toxicities from prior and ongoing treatments. Whole brain radiotherapy (WBRT) is used to reduce neurological symptoms (eg, convulsions, headache, weakness, and numbness) from brain metastases.<sup><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6259067/#bibr3-1533033818809051">3</a></sup></p>
+<p>Patients referred for WBRT have had a prior diagnostic computed tomography (CT)-scan. Despite a prior CT scan, all patients undergo another simulation CT-scan (CT-sim), in which patients will be placed in a reproducible position to prepare for radiation treatments. Patients also endure a molding session to create a personalized plastic mask that secures the patient’s head in a fixed position during the CT-sim and radiation treatments. Alternate techniques to immobilize patients for WBRT, such as ones based on the use of strip tapes instead of thermoplastic masks, had previously been evaluated for claustrophobic patients.<sup><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6259067/#bibr4-1533033818809051">4</a></sup></p>
+<p>Novel applications of additive manufacturing (three-dimensional [3D]-printing) technology in radiotherapy have primarily been used to print brachytherapy applicators and bolus materials to improve radiation dose delivery.<sup><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6259067/#bibr5-1533033818809051">5</a></sup> A prior study has shown the feasibility of 3D-printing heads (3D-Head) and masks using CT-sim images.<sup><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6259067/#bibr6-1533033818809051">6</a></sup> However, the authors did not describe its practical utilization, radiation dosimetry, and implementation. With the widespread commercialization of 3D-printers, the cost of 3D-Head has now been reduced to approximately CAD100 (actual material and personnel cost from this study). This cost is expected to decrease as 3D-printer technology evolves, and will likely be considerably less than the cost of the CT-sim and molding session.</p>
+<p>We hypothesize that patient positions at CT scans can be reproduced using 3D-printer products, which would reduce the need of a CT-sim and molding session. The uptake of 3D-printer methodologies could liberate resources from Radiation Oncology departments and improve the patient experience by reducing visits, interventions, and waiting times (<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6259067/figure/fig1-1533033818809051/">Figure 1</a>).</p>
+<p><a href="https://www.ncbi.nlm.nih.gov/core/lw/2.0/html/tileshop_pmc/tileshop_pmc_inline.html?title=Click%20on%20image%20to%20zoom&amp;p=PMC3&amp;id=6259067_10.1177_1533033818809051-fig1.jpg"><img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6259067/bin/10.1177_1533033818809051-fig1.jpg" alt="An external file that holds a picture, illustration, etc.Object name is 10.1177_1533033818809051-fig1.jpg" title="Click on image to zoom"></a></p>
+<p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6259067/figure/fig1-1533033818809051/?report=objectonly">Open in a separate window</a></p>
+<p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6259067/figure/fig1-1533033818809051/">Figure 1.</a></p>
+<p>Current and proposed approaches for the elaboration of WBRT treatment. WBRT indicates whole brain radiotherapy.</p>
+<p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6259067/" title="Go to other sections in this page">Go to:</a></p>
+<h2 id="material-and-methods">Material and Methods</h2>
+<p>Institutional ethics approval (CE 15.157) was obtained for a retrospective review of the clinical data and images obtained from patients who received brain radiotherapy (<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6259067/table/table1-1533033818809051/">Table 1</a>).</p>
+<h3 id="table-1">Table 1.</h3>
+<p>Characteristics of Patients and Structure Volumes.</p>
+<table>
+<thead>
+<tr>
+<th>Age</th>
+<th>Gender</th>
+<th>Tumor Histology</th>
+<th>Head Volume (cc)</th>
+<th>Brain Volume (cc)</th>
+<th>Eyes Volume (cc)</th>
+<th>3D-Head Volume (cc)</th>
+<th>Head-3D-Head % Volume Difference</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>55</td>
+<td>M</td>
+<td>Meningioma</td>
+<td>3558</td>
+<td>1358</td>
+<td>15</td>
+<td>3522</td>
+<td>−1.0</td>
+</tr>
+<tr>
+<td>55</td>
+<td>F</td>
+<td>Endometrial cancer metastases</td>
+<td>3429</td>
+<td>1430</td>
+<td>15</td>
+<td>3384</td>
+<td>−1.3</td>
+</tr>
+<tr>
+<td>47</td>
+<td>F</td>
+<td>Lung cancer metastases</td>
+<td>3256</td>
+<td>1159</td>
+<td>13</td>
+<td>3153</td>
+<td>−3.3</td>
+</tr>
+<tr>
+<td>65</td>
+<td>F</td>
+<td>Endometrial cancer metastases</td>
+<td>2713</td>
+<td>1165</td>
+<td>15</td>
+<td>2698</td>
+<td>−0.6</td>
+</tr>
+<tr>
+<td>57</td>
+<td>F</td>
+<td>Breast cancer metastases</td>
+<td>3422</td>
+<td>1334</td>
+<td>17</td>
+<td>3331</td>
+<td>−2.7</td>
+</tr>
+<tr>
+<td>54</td>
+<td>F</td>
+<td>Lung cancer metastases</td>
+<td>3838</td>
+<td>1257</td>
+<td>16</td>
+<td>3798</td>
+<td>−1.1</td>
+</tr>
+<tr>
+<td>48</td>
+<td>M</td>
+<td>Kidney cancer metastases</td>
+<td>3741</td>
+<td>1421</td>
+<td>13</td>
+<td>3692</td>
+<td>−1.3</td>
+</tr>
+<tr>
+<td>85</td>
+<td>F</td>
+<td>Lung cancer metastases</td>
+<td>3055</td>
+<td>1149</td>
+<td>13</td>
+<td>3026</td>
+<td>−0.9</td>
+</tr>
+<tr>
+<td>71</td>
+<td>F</td>
+<td>Lung cancer metastases</td>
+<td>3560</td>
+<td>1412</td>
+<td>14</td>
+<td>3493</td>
+<td>−1.9</td>
+</tr>
+<tr>
+<td>52</td>
+<td>F</td>
+<td>Meningioma</td>
+<td>4638</td>
+<td>1597</td>
+<td>25</td>
+<td>4551</td>
+<td>−1.9</td>
+</tr>
+<tr>
+<td>69</td>
+<td>F</td>
+<td>Lung cancer metastases</td>
+<td>4096</td>
+<td>1375</td>
+<td>14</td>
+<td>4014</td>
+<td>−2.0</td>
+</tr>
+<tr>
+<td>Average (SD)</td>
+<td>3573 (516)</td>
+<td>1332 (139)</td>
+<td>15 (3)</td>
+<td>3515 (502)</td>
+<td>−1.6 (0.8)</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6259067/table/table1-1533033818809051/?report=objectonly">Open in a separate window</a></p>
+<p>Abbreviations: 3D, three-dimensional; F, female; M, male; SD, standard deviation.</p>
+<h3 id="image-segmentation">Image Segmentation</h3>
+<p>Digital imaging and communication in medicine (DICOM) images obtained from the CT-sim of 11 patients were exported from the local radiotherapy planning system (Eclipse, Varian Medical Systems, Inc, Palo Alto, California) to an open source program (3D-Slicer, <a href="http://www.slicer.org/">http://www.slicer.org</a>).<sup><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6259067/#bibr7-1533033818809051">7</a></sup>Autosegmentations of the head and neck rest contours were obtained by selecting for voxels with Hounsfield units (HU) between −650.00 and 2976.00. Subsequently, in another 3D modeling program (CATIA, Dassault Systèmes, Vélizy-Villacoublay, France), the contoured structures were processed to (1) smooth the exterior contours, (2) isolate the head and neck rest from the other auto-segmented structures (couch table), and (3) remove the structures within the head.</p>
+<h3 id="three-dimensional-model-design">Three-Dimensional Model Design</h3>
+<p>The process of design and fabrication of the 3D-Head and neck rests (3D-NRs) are shown in <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6259067/figure/fig2-1533033818809051/">Figure 2</a>. The 3D-NRs are printed separately as, in practice, patients would rest their heads on the 3D-NRs to reassume the position of the 3D-Heads.The 3D-Head and 3D-NRs interiors were 10% filled (<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6259067/figure/fig2-1533033818809051/">Figure 2</a>). Four matching pins and holes (1 cm diameter) were designed and added to the posterior aspect of the 3D-Heads and anterior aspect of the 3D-NRs, respectively (<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6259067/figure/fig2-1533033818809051/">Figure 2</a>). These pins and holes served to realign the 3D-Heads’ positions on the 3D-NRs to ensure an accurate reproduction of the original rotational position. The contours were converted into 3D-printing compatible STL files.</p>
+<p><img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6259067/bin/10.1177_1533033818809051-fig2.jpg" alt="An external file that holds a picture, illustration, etc.Object name is 10.1177_1533033818809051-fig2.jpg" title="An external file that holds a picture, illustration, etc.
+Object name is 10.1177_1533033818809051-fig2.jpg"></p>
+<p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6259067/figure/fig2-1533033818809051/?report=objectonly">Open in a separate window</a></p>
+<p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6259067/figure/fig2-1533033818809051/">Figure 2.</a></p>
+<p>3D-printing process. The printing time and amount of material used for 3D-printing was reduced by filling the head at 10% (A and B). The head (C) and neck rest were printed independently using polylactic acid filaments at 0.3 mm deposition thickness. Four pins and holes (D) were added to the head and neck rest to realign the 3D-printouts prior to thermoplastic masks molding. 3D indicates three-dimensional.</p>
+<h3 id="three-dimensional-printing">Three-Dimensional-Printing</h3>
+<p>Three-dimensional-printing was done using the Big Builder Dual-Feed printer (Builder 3D Printers BV, Noordwijkerhout, the Netherlands), which utilized the fused deposition method from polylactic acid (PLA) filaments at 0.3-mm deposition thickness. The 3D-Heads were placed on their 3D-NRs (using the pin and hole system for alignment) on a flat table top to simulate a radiation therapy couch. Thermoplastic masks (Aquaplast RT, Orfit, Wijnegem, Belgium) that covered from the top of the 3D-Head to the chin were then molded onto the system as is standard practice for WBRT patients.</p>
+<h3 id="image-registration">Image Registration</h3>
+<p>The thermoplastic mask immobilized 3D-printed heads were CT scanned. The CT images were then imported into Eclipse for image segmentation of the surface, to be compared with the original patient images (<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6259067/figure/fig3-1533033818809051/">Figure 3</a>).</p>
+<p><a href="https://www.ncbi.nlm.nih.gov/core/lw/2.0/html/tileshop_pmc/tileshop_pmc_inline.html?title=Click%20on%20image%20to%20zoom&amp;p=PMC3&amp;id=6259067_10.1177_1533033818809051-fig3.jpg"><img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6259067/bin/10.1177_1533033818809051-fig3.jpg" alt="An external file that holds a picture, illustration, etc.Object name is 10.1177_1533033818809051-fig3.jpg" title="Click on image to zoom"></a></p>
+<p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6259067/figure/fig3-1533033818809051/?report=objectonly">Open in a separate window</a></p>
+<p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6259067/figure/fig3-1533033818809051/">Figure 3.</a></p>
+<p>Coregistration images. The surface volume, brain, and eyes of the original images were coregistered with the images obtained from the 3D-printout using 3D Slicer. The colors and volumes of the 2 sets of images are displayed in (A): The human surface contour is in green and the 3D-printout surface contour is in blue. The human brain volume is in yellow and the 3D-printout brain is in orange. The human eyes are in cyan blue and the 3D-printout eyes are in red. Small discrepancies between the 2 surface volumes are distinguished as blue contours beyond the green contours (B). Following coregistration, the dosimetry from the human plan was applied onto the 3D-printout volumes (C) to quantify the dosimetric differences to the brain and eyes. 3D indicates three-dimensional.</p>
+<p>Coregistrations of the images between the 3D-printed heads and the original patients were done using translational (TR) shifts on Eclipse or with the inclusion of rotational (TR + ROT) shifts using the iterative closest point method on 3D-Slicer. Following coregistration, the similarity between the 3D-Head and the original patient was measured using the Dice similarity index or coefficient (DSC):</p>
+<p>DSC=2*|A∩B||A|+|B|</p>
+<p>A is the total number of pixels that have intensity 1 in image <em>A (also known as number of positives in A).</em></p>
+<p>B is the total number of pixels that have intensity 1 in image <em>B (also known as number of positives in B).</em></p>
+<p>Pixels which have the value 1 in both <em>A</em> and <em>B</em> are known as <em>True Positives [TP].</em></p>
+<p>The DSC ranges from 0 to 1, with values approaching 1 representing higher similarities between 2 objects.<sup><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6259067/#bibr8-1533033818809051">8</a></sup></p>
+<p>Accuracy was calculated using the following formula:</p>
+<p>Accuracy=TP+TNTP+TN+FP+FN</p>
+<p><em>TN</em> (True Negative) represents the total number of pixels, which have the value 0 in both <em>A</em> and <em>B.</em></p>
+<p><em>FP (False Positive)</em> and <em>FN</em> (False Negative) represents the total number of pixels, which have discordant values between <em>A</em> and <em>B.</em></p>
+<p>The differences in the distances between the volumes were evaluated by collecting the maximum, mean, and 95% Hausdorff distances. The Hausdorff distance represents the maximum minimum Euclidean distance between the points of the 2 surfaces. Finally, the centroid locations of the volumes were calculated on a 3D-Slicer and compared.</p>
+<p>A difference in the centroid location between the volumes ≤ 4 mm was determined a priori to be clinically acceptable as the institutional planning target volume (PTV) margin for WBRT is 4 mm. A difference of ≤ 3° in rotation was determined a priori to be clinically acceptable as this represents the maximum degree of rotational adjustment achievable using 6D radiotherapy couches.</p>
+<h3 id="radiation-dosimetry">Radiation Dosimetry</h3>
+<p>To evaluate the dosimetric consequence of not correcting for rotational differences, contours of patients’ brain and eyes were copied onto the TR + ROT coregistered 3D-printed heads. Brain and eyes were contoured manually by a radiation oncologist (PW). Whole brain radiotherapy plans using 2 opposing lateral fields, usually with wedges, were planned on Eclipse. The plans were generated on the CT-sim scans of the original human heads with the multileaf collimator fields defined as the brain plus a margin of 8 mm. Dose was calculated with heterogeneity corrections turned off. The simulated prescription for WBRT was 30 Gy in 10 fractions. The WBRT plan was transposed onto TR or TR + ROT coregistered 3D-Heads. The HU values of the external contour of the 3D-Head images were set to zero and dose was calculated. The plans for the TR and TR + ROT coregistered CT sets were compared between each other to determine the potential effect of using translation shifts only for clinical matching before treatment.</p>
+<p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6259067/" title="Go to other sections in this page">Go to:</a></p>
+<h2 id="results-2">Results</h2>
+<h3 id="dice-similarity-coefficients-accuracy-and-volumes">Dice Similarity Coefficients, Accuracy, and Volumes</h3>
+<p>After TR coregistration (no rotations), the mean DSC was 0.981 (standard deviation [SD]: 0.007) and the accuracy was 98.4% (SD: 0.69%). When rotational shifts were included in the coregistration (TR + ROT), the mean DSC improved to 0.985 (SD: 0.0030) and the accuracy was also improved to 98.8% (SD: 0.50%; <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6259067/table/table2-1533033818809051/">Table 2</a>; <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6259067/figure/fig3-1533033818809051/">Figures 3</a> and <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6259067/figure/fig4-1533033818809051/">​and4).4</a>). The 3D-Heads were on average 1.6% (SD: 0.8%) smaller than patient heads (<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6259067/table/table1-1533033818809051/">Table 1</a>). Overall, the similarity between the 3D-Heads and original head was high.</p>
+<h3 id="table-2">Table 2.</h3>
+<p>Coregistration Results.</p>
+<table>
+<thead>
+<tr>
+<th>Values of the Coregistration</th>
+<th>Translational Coregistration</th>
+<th>Translational + Rotational Coregistration</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DSC, Mean (SD)</td>
+<td>0.981 (0.007)</td>
+<td>0.985 (0.002)</td>
+</tr>
+<tr>
+<td>Accuracy, Mean (SD)</td>
+<td>98.4% (0.7%)</td>
+<td>98.8% (0.5%)</td>
+</tr>
+<tr>
+<td>Centroid vector difference, Mean (SD)</td>
+<td>1.6 mm (0.9 mm)</td>
+<td>0.5 mm (0.3 mm)</td>
+</tr>
+<tr>
+<td>Maximum Hausdorff distance, Mean (SD)</td>
+<td>7.7 mm (1.7 mm)</td>
+<td>7.4 mm (2.4 mm)</td>
+</tr>
+<tr>
+<td>Average Hausdorff distance, Mean (SEM)</td>
+<td>1.3 mm (0.3 mm)</td>
+<td>0.9 mm (0.1 mm)</td>
+</tr>
+<tr>
+<td>95% Hausdorff distance, Mean (SD)</td>
+<td>4.1 mm (5.0 mm)</td>
+<td>2.2 mm (0.6 mm)</td>
+</tr>
+<tr>
+<td>Angle of deviation values (°)</td>
+<td>Average</td>
+<td>SD</td>
+</tr>
+<tr>
+<td>Mediolateral or yaw angle</td>
+<td>0.59</td>
+<td>0.41</td>
+</tr>
+<tr>
+<td>Anteroposterior or pitch angle</td>
+<td>1.1</td>
+<td>0.77</td>
+</tr>
+<tr>
+<td>Longitudinal or roll angle</td>
+<td>0.79</td>
+<td>0.86</td>
+</tr>
+</tbody>
+</table>
+<p>Abbreviations: DSC, dice similarity coefficients; SD, standard deviation; SEM, standard error of mean.</p>
+<p><a href="https://www.ncbi.nlm.nih.gov/core/lw/2.0/html/tileshop_pmc/tileshop_pmc_inline.html?title=Click%20on%20image%20to%20zoom&amp;p=PMC3&amp;id=6259067_10.1177_1533033818809051-fig4.jpg"><img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6259067/bin/10.1177_1533033818809051-fig4.jpg" alt="An external file that holds a picture, illustration, etc.Object name is 10.1177_1533033818809051-fig4.jpg" title="Click on image to zoom"></a></p>
+<p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6259067/figure/fig4-1533033818809051/?report=objectonly">Open in a separate window</a></p>
+<p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6259067/figure/fig4-1533033818809051/">Figure 4.</a></p>
+<p>Coregistration comparisons. Following translational (TR) or translational + rotational (TR+ROT) coregistrations, (A) the dice similarity coefficient, (B) accuracy, (C-E) Hausdorff distances, and (F) centroid vector differences from the original head were calculated.</p>
+<h3 id="hausdorff-distance">Hausdorff Distance</h3>
+<p>After TR shift only, the average maximum, average mean, and average 95% Hausdorff distances were 7.7 mm (SD: 1.7 mm), 1.3 mm (SD: 0.3 mm), and 4.1 mm (SD: 5.0 mm), respectively. After TR + ROT shifts, the average maximum, average mean, and average 95% Hausdorff distances were 7.4 mm (SD: 2.4 mm), 0.9 mm (SD: 0.1 mm), and 2.3 mm (SD: 0.6 mm), (<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6259067/table/table2-1533033818809051/">Table 2</a>) respectively. Thus, ROT adjustments further reduced the average 95% Hausdorff distances by 1.8 mm.</p>
+<h3 id="centroid-displacement">Centroid Displacement</h3>
+<p>Following coregistration using TR shifts only, the mean 3D distance between the centers of mass (centroid) of each volume was 1.6 mm (SD: 0.9 mm). After correcting for TR + ROT, the mean distance of the centroids was reduced to 0.5 mm (SD: 0.3 mm; <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6259067/table/table2-1533033818809051/">Table 2</a>).</p>
+<h3 id="angles-of-rotation">Angles of Rotation</h3>
+<p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6259067/table/table2-1533033818809051/">Table 2</a> describes the average Yaw, Pitch, and Roll angles of deviations from the original volume (after correcting for TR) were 0.59° (SD: 0.41°), 1.1° (SD: 0.77°). and 0.79° (SD: 0.86°), respectively. These rotational differences are within the institutional limits for WBRT (3°) and could be corrected with 6D couches.</p>
+<h3 id="dosimetry">Dosimetry</h3>
+<p>To determine the effect of correcting the patient’s position only using translational table motion, the dose difference between the TR coregistered and TR + ROT coregistered 3D-printed plans was calculated. <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6259067/table/table3-1533033818809051/">Table 3</a> describes the mean % dose differences of the D<sub>mean</sub>, D<sub>95</sub>, and D<sub>max</sub> of the brain (target volume) were −0.06% (SD: 0.1%), 0.1% (SD: 0.2%), and −0.04% (SD: 0.1%). For the eyes, the mean % dose difference for the D<sub>max</sub> was −1.6% (SD: 3.0%). These dosimetric differences (1.8-45 cGy) are acceptable within the current clinical context.</p>
+<h3 id="table-3">Table 3.</h3>
+<p>Radiation Dose Differences to the Brain and Eyes if Rotational Shifts Were Not Applied.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th>Brain Mean</th>
+<th>Brain Min</th>
+<th>Brain Max</th>
+<th>Brain D95</th>
+<th>Eyes Max</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ROT+TR coregistered 3D printed plan</td>
+<td>Avg (cGy)</td>
+<td>3133</td>
+<td>2792</td>
+<td>3323</td>
+<td>3018</td>
+<td>3044</td>
+</tr>
+<tr>
+<td>SD (cGy)</td>
+<td>214</td>
+<td>215</td>
+<td>234</td>
+<td>214</td>
+<td>275</td>
+<td></td>
+</tr>
+<tr>
+<td>Difference between 3D-printed plans registered using ROT+TR versus TR shifts</td>
+<td>% Dose difference</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Avg (%)</td>
+<td>−0.06</td>
+<td>−1</td>
+<td>−0.04</td>
+<td>−0.1</td>
+<td>−1.6</td>
+<td></td>
+</tr>
+<tr>
+<td>SD (%)</td>
+<td>0.1</td>
+<td>2</td>
+<td>−0.1</td>
+<td>0.2</td>
+<td>3.0</td>
+<td></td>
+</tr>
+<tr>
+<td>Dose difference</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Avg (cGy)</td>
+<td>−1.8</td>
+<td>−30</td>
+<td>−1.1</td>
+<td>−3.1</td>
+<td>−45</td>
+<td></td>
+</tr>
+<tr>
+<td>SD (cGy)</td>
+<td>2.7</td>
+<td>43</td>
+<td>4.0</td>
+<td>5.3</td>
+<td>85</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6259067/table/table3-1533033818809051/?report=objectonly">Open in a separate window</a></p>
+<p>Abbreviations: Avg, average; ROT, rotational; SD, standard deviation; TR, translational.</p>
+<p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6259067/" title="Go to other sections in this page">Go to:</a></p>
+<h2 id="discussion">Discussion</h2>
+<p>Our results suggest that a patient’s head surface geometry can be accurately reproduced using 3D-printer technology. The positioning can be accurately reproduced using the 3D-Head and 3D-NR along with the pins and holes. These 3D impressions can then be used as a surrogate to mold radiotherapy thermoplastic immobilization masks for daily WBRT.</p>
+<p>Prior studies evaluating the accuracy of auto-segmentation and coregistration algorithms for radiotherapy of the head and neck regions described a DSC of 0.5 to 0.95 for bone, which was often the most concordant structure.<sup><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6259067/#bibr9-1533033818809051">9</a>,<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6259067/#bibr10-1533033818809051">10</a></sup> Using Hausdorff distances as a metric of coregistration accuracy, prior studies had observed mean Hausdorff distances to range from 2 to 5 mm.<sup><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6259067/#bibr10-1533033818809051">10</a>-<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6259067/#bibr12-1533033818809051">12</a></sup> The mean Hausdorff distance of this study (0.87-1.3 mm) was found to be well within this range. The largest discrepancies were found to be at the ears, where segmentation smoothing was applied. Nevertheless, the high DSC (mean: 0.981) coefficients of this study demonstrated a good reproduction of the overall volume and position when using translational couch motion to correct for daily patient positioning. Given our institutional PTV margin of 4 mm in WBRT, the current strategy was deemed acceptable for further clinical evaluation in its capacity to replace CT-sim for WBRT patients.</p>
+<p>Certain radiation therapy establishments have access to a radiotherapy treatment table that allows for rotational correction of the patient’s position (6D couches). We explored the applicability of our strategy if rotational shifts were employed. Our results indicated that the incorporation of rotational adjustments increased the mean DSC from 0.981 to 0.985 and reduced the mean centroid displacement from 1.6 mm to 0.5 mm. The accuracy of the proposed strategy was within the institutional constraints (≤4 mm, ≤3°) for clinical use in WBRT.</p>
+<p>The proposed workflow implies planning on a diagnostic CT image set and delivering said treatment plan on the patient using a thermoplastic mask that was derived from the 3D impression of the patient. Assuming that daily image guidance is used to reposition patients using TR shifts, the main dosimetric impact of this workflow distills down to the exactitude of patient rotational positioning pretreatment within the thermoplastic mask. Without 6D couch correction, this means comparing the dose difference on a structure set that was registered using TR shifts only to that of a structure set that was registered using both TR + ROT shifts. Given that we are using parallel opposed fields, the differences are expected to be small, as is the case for the brain target structure, with an average D<sub>95</sub> dose difference of 0.1%. For the eyes, since they are smaller structures, rotational displacements could result in important amounts of the structure to be included or excluded from the treatment fields. Therefore, the impact of ROT shifts to the dose received by the eyes is larger than for the brain. As expected, the average Dmax received by the eyes differed by 1.6% or 45 cGy, which was still deemed a clinically acceptable difference.</p>
+<p>Three-dimensional-printing technology is evolving rapidly along with reductions in costs, improvement in speed and resolution, and an expanding array of printable materials. Prior studies conducted in 2014 determined that 3D printing of heads and masks for radiotherapy was feasible.<sup><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6259067/#bibr6-1533033818809051">6</a></sup> Through the current study, we confirm that 3D printing of patient’s head is indeed feasible with volumetric accuracy that is suitable for further clinical evaluation. Additionally, we printed 3D-NR with pins and holes to enhance our ability to reproduce a patient’s CT scan position accurately using 3D-printed products.</p>
+<p>In choosing the material for 3D-printing, PLA filaments were selected over acrylonitrile butadiene styrene (ABS) because (1) PLA is biodegradable and (2) upon cooling, PLA contracts less than ABS and therefore confers better geometric precision to 3D-printed products. Furthermore, PLA is common and affordable which rendered the material cost of our 3D-printing strategy for a set of 3D-Head and 3D-NR to be CAD30. Although we did not perform a formal cost analysis on the strategy, the cost of 3D-Head and 3D-NR is comparatively cheaper than that of a diagnostic or simulation CT scan (CAD200-400) at our institution, without considering the salary of the personnel operating the CT scan. The avoidance of an appointment to department could further reduce the cost (time and money) for the patient and his/her caregiver. Finally, the adoption of this strategy for WBRT would alleviate CT-sim time slots which could be used by other patients, thereby reducing the overall patient waiting time within the department.</p>
+<p>There are several limitations to the current strategy and evaluation methodologies. First, the present method had only been tested in patients in standard head position using CT images obtained at the time of simulation. However, at the time of diagnostic CT scan, symptomatic patients with brain metastases might assume unconventional head positions, which could render the patient’s head positioning less reproducible for daily WBRT. For example, a patient could have turned his/her head sideways or assumed a neck position that would limit the immobilization capability of thermoplastic masks or become too uncomfortable to be maintained during WBRT. As patients with brain metastases are often given corticosteroids, the surface volume of the patients could increase from the time of diagnostic CT scan due to steroid induced water retention. Thus, the thermoplastic masks molded based on diagnostic CT scan images might become tight along with slight dosimetric differences. A potential solution to improve the mask’s comfort level would be by expanding the patient’s surface volume by 1 mm prior to 3D-printing. Also, thermoplastic masks may not be suitable for claustrophobic patients, for which other immobilization strategies may be needed.<sup><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6259067/#bibr4-1533033818809051">4</a></sup> Finally, the current technique requires 36 hours to print the 3D-Head and 3D-NR for each patient. Therefore, this methodology would not be suitable for patients requiring WBRT within 1 to 2 days. Furthermore, as our institution treated approximately 200 patients annually with WBRT, at least 2 working 3D-printers would be needed to continuously generate 3D-printouts for this population.</p>
+<p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6259067/" title="Go to other sections in this page">Go to:</a></p>
+<h2 id="conclusions-2">Conclusions</h2>
+<p>Our study suggested that the reproduction of a patient’s head volume and position using 3D-printing is feasible. The similarity and accuracy were sufficiently robust to yield minimal differences in the dosimetry of patients receiving WBRT. This strategy could reduce the need for simulation, thereby streamlining and simplifying the care pathways for patients with brain metastases.</p>
+<p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6259067/" title="Go to other sections in this page">Go to:</a></p>
+<h2 id="acknowledgment">Acknowledgment</h2>
+<p>Authors thank Dr Julien Cohen-Adad in allowing our team to use his laboratory’s 3D printer for this project.</p>
+<p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6259067/" title="Go to other sections in this page">Go to:</a></p>
+<h2 id="abbreviations">Abbreviations</h2>
+<p>| 3D | three-dimensional |
+| ABS | acrylonitrile butadiene styrene |
+| CT | computed tomography |
+| DSC | dice similarity coefficients |
+| HU | Hounsfield units |
+| PLA | polylactic acid |
+| PTV | planning target volume |
+| ROT | rotational |
+| SD | standard deviation |
+| TR | translational |
+| WBRT | Whole brain radiotherapy. |</p>
+<p><strong>Authors’ Note:</strong> Quoc-Viêt Vincent Pham and Annie-Pier Lavallée, BEng, contributed equally. Ellis Mitrou, MSc and Philip Wong, MSc, MD, FRCPC contributed equally.</p>
+<p><strong>Declaration of Conflicting Interests:</strong> The author(s) declared no potential conflicts of interest with respect to the research, authorship, and/or publication of this article.</p>
+<p><strong>Funding:</strong> The author(s) disclosed receipt of the following financial support for the research, authorship, and/or publication of this article: This work was supported by funds from the Institut de Cancer de Montréal and the University of Montreal Department of Radiology, Radiation Oncology and Nuclear Medicine Support Professoral.</p>
+<p><strong>ORCID iD:</strong> Quoc-Viêt Vincent Pham <img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6259067/bin/10.1177_1533033818809051-img1.jpg" alt="An external file that holds a picture, illustration, etc.Object name is 10.1177_1533033818809051-img1.jpg"> <a href="http://orcid.org/0000-0003-3383-2316">http://orcid.org/0000-0003-3383-2316</a></p>
+<p>David Roberge, MD, FRCPC <img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6259067/bin/10.1177_1533033818809051-img1.jpg" alt="An external file that holds a picture, illustration, etc.Object name is 10.1177_1533033818809051-img1.jpg"> <a href="http://orcid.org/0000-0001-8747-648X">http://orcid.org/0000-0001-8747-648X</a></p>
+<p>Philip Wong, MSc, MD, FRCPC <img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6259067/bin/10.1177_1533033818809051-img1.jpg" alt="An external file that holds a picture, illustration, etc.Object name is 10.1177_1533033818809051-img1.jpg"> <a href="http://orcid.org/0000-0002-7761-0283">http://orcid.org/0000-0002-7761-0283</a></p>
+<p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6259067/" title="Go to other sections in this page">Go to:</a></p>
+<h2 id="references">References</h2>
+<p>1. Canadian Cancer Statistics Advisory Committee. Canadian Cancer Statistics 2018. Toronto, Canada: Canadian Cancer Society; 2018. <a href="http://cancer.ca/Canadian-Cancer-Statistics-2018-EN">cancer.ca/Canadian-Cancer-Statistics-2018-EN</a>. Accessed October 19, 2018.</p>
+<p>2. Landis SH, Murray T, Bolden S, Wingo PA. Cancer statistics, 1999. CA Cancer J Clin. 1999;49(1):8–31. [<a href="https://www.ncbi.nlm.nih.gov/pubmed/10200775">PubMed</a>]</p>
+<p>3. McTyre E, Scott J, Chinnaiyan P. Whole brain radiotherapy for brain metastasis. Surg Neurol Int. 2013;4(suppl 4):S236–S244. [<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3656558/">PMC free article</a>] [<a href="https://www.ncbi.nlm.nih.gov/pubmed/23717795">PubMed</a>]</p>
+<p>4. Rubinstein AE, Ingram WS, Anderson BM, et al. Cost-effective immobilization for whole brain radiation therapy. J Appl Clin Med Phys Amer Coll Med Phys. 2017;18(4):116–122. [<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5874864/">PMC free article</a>][<a href="https://www.ncbi.nlm.nih.gov/pubmed/28585732">PubMed</a>]</p>
+<p>5. Kim SW, Shin HJ, Kay CS, Son SH. A customized bolus produced using a 3-dimensional printer for radiotherapy. PLoS One. 2014;9(10):e110746. [<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4206462/">PMC free article</a>] [<a href="https://www.ncbi.nlm.nih.gov/pubmed/25337700">PubMed</a>]</p>
+<p>6. Laycock SD, Hulse M, Scrase CD, et al. Towards the production of radiotherapy treatment shells on 3D printers using data derived from DICOM CT and MRI: preclinical feasibility studies. J Radiotherapy Pract. 2014;14(1):92–98.</p>
+<p>7. Fedorov A, Beichel R, Kalpathy-Cramer J, et al. 3D slicer as an image computing platform for the quantitative imaging network. Magn Reson Imaging. 2012;30(9):1323–1341. [<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3466397/">PMC free article</a>][<a href="https://www.ncbi.nlm.nih.gov/pubmed/22770690">PubMed</a>]</p>
+<p>8. Dice LR. Measures of the amount of ecologic association between species. Ecology. 1945;26(3):297–302.</p>
+<p>9. Edmund JM, Nyholm T. A review of substitute CT generation for MRI-only radiation therapy. Radiat Oncol. 2017;12(1):28. [<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5270229/">PMC free article</a>] [<a href="https://www.ncbi.nlm.nih.gov/pubmed/28126030">PubMed</a>]</p>
+<p>10. Mohamed AS, Ruangskul MN, Awan MJ, et al. Quality assurance assessment of diagnostic and radiation therapy-simulation CT image registration for head and neck radiation therapy: anatomic region of interest-based comparison of rigid and deformable algorithms. Radiology. 2015;274(3):752–763. [<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4358813/">PMC free article</a>] [<a href="https://www.ncbi.nlm.nih.gov/pubmed/25380454">PubMed</a>]</p>
+<p>11. Fisher M, Applegate C, Ryalat M, et al. Evaluation of 3-D printed immobilisation shells for head and neck IMRT. Open J Radiol. 2014;4:322–328.</p>
+<p>12. Ghose S, Holloway L, Lim K, et al. A review of segmentation and deformable registration methods applied to adaptive cervical cancer radiation therapy treatment planning. Artif Intell Med. 2015;64(2):75–87. [<a href="https://www.ncbi.nlm.nih.gov/pubmed/26025124">PubMed</a>]</p>
+
+            </div>
+            
+              <div class="tag-container">
+                
+                  <a href="https://blog.bioprinting.site/tag/printing" class="tag">
+                    printing
+                  </a>
+                
+              </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://blog.bioprinting.site/post/J6tk2zmlK">
+                  <h3 class="post-title">
+                    基于扩散加权磁共振成像的人丘脑核体内概率图谱
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script type="application/javascript">
+
+AOS.init();
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+
+  </body>
+</html>

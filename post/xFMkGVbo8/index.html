@@ -1,0 +1,1653 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>用于颅内病变定位的低成本iPhone辅助增强现实解决方案 | Li Zhenzhu, Ph.D</title>
+<meta name="description" content="Binzhou Medical University Hospital, Email: timeanddoctor@gmail.com.">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://blog.bioprinting.site/favicon.ico?v=1556350835272">
+<link rel="stylesheet" href="https://blog.bioprinting.site/styles/main.css">
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://blog.bioprinting.site">
+        <img src="https://blog.bioprinting.site/images/avatar.png?v=1556350835272" class="site-logo">
+        <h1 class="site-title">Li Zhenzhu, Ph.D</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            Home
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            Archives
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            Tags
+          </a>
+        
+      
+        
+          <a href="/paper" class="site-nav">
+            Paper
+          </a>
+        
+      
+        
+          <a href="/3dprinting" class="site-nav">
+            3D printing
+          </a>
+        
+      
+        
+          <a href="/bigbridgerobot" class="site-nav">
+            BigBridgeRobot
+          </a>
+        
+      
+        
+          <a href="/business" class="site-nav">
+            Business
+          </a>
+        
+      
+        
+          <a href="https://blog.bioprinting.site/post/meeting/" class="site-nav">
+            Training
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      Binzhou Medical University Hospital, Email: timeanddoctor@gmail.com.
+    </div>
+    <div class="site-footer">
+      Powered by Li Zhenzhu
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">用于颅内病变定位的低成本iPhone辅助增强现实解决方案</h2>
+            <div class="post-date">2019-04-19</div>
+            
+            <div class="post-content">
+              <p>https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4959690/</p>
+<h2 id="抽象">抽象</h2>
+<h3 id="背景">背景</h3>
+<p>手术前颅内病变的精确定位很重要，但偶尔也很困难。现代导航系统非常有用，但价格昂贵。能够在增强现实中定位脑部病变及其表面投影的低成本解决方案将是有益的。我们使用iPhone来部分实现这一目标，并评估其在临床神经外科环境中的准确性和可行性。</p>
+<h3 id="方法主要调查结果">方法/主要调查结果</h3>
+<p>我们找到了35名患者的脑部病变，并使用iPhone，我们将病变的表面投影描绘到头部皮肤上。为了评估这种方法的准确性，我们将围绕皮肤上描绘的病变边界的计算机断层扫描（CT）标记粘贴到15名患者身上。然后在有或没有对比度增强的情况下进行CT扫描。测量CT标记与实际损伤边界之间的偏差（D）。我们发现97.7％的标记显示出高精度水平（D≤5mm）。在剩下的20名患者中，我们将基于iPhone的方法与无框架神经导航系统进行了比较。在所描绘的病变边界周围的皮肤上选择四个检查点，以评估两种方法之间的偏差。根据四个检查点的偏差计算积分偏移量。</p>
+<h3 id="结论意义">结论/意义</h3>
+<p>这种低成本，基于图像的iPhone辅助增强现实解决方案在技术上是可行的，并且有助于一些颅内病变的定位，尤其是中等大小的浅幕上颅内病变。</p>
+<p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4959690/" title="转到此页面的其他部分">去：</a></p>
+<h2 id="介绍">介绍</h2>
+<p>手术前颅内病变的精确定位非常重要。外科医生需要这些信息来选择合适的手术方法，定位患者，以及定制切口。由于头部是缺乏表面解剖标志的复杂三维（3D）结构，因此根据二维（2D）磁共振（MR）图像精确定位颅内病变及其表面投影总是困难的，尤其是当病变很小[ <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4959690/#pone.0159185.ref001">1</a> ]。现代神经导航系统是非常有帮助的，因为他们大脑中的[三个成像平面和三维模型提供实时反馈，<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4959690/#pone.0159185.ref002">2</a>，<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4959690/#pone.0159185.ref003">3</a>]。此外，当这些系统与配备有投影系统手术显微镜接口，它们可以描绘脑损伤的表面突起在增强现实（AR）[ <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4959690/#pone.0159185.ref004">4</a>，<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4959690/#pone.0159185.ref005">5</a> ]。AR是一种将计算机图形覆盖在现实世界的视频或图像上的技术。在所得到的图像中，两个原始图像共存为单个图像，以使得能够可视化上覆组织下方的内部结构，从而提供外科解剖结构的透明视图。使用这种方法，手术计划可直观且准确地确定[ <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4959690/#pone.0159185.ref002">2</a>，<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4959690/#pone.0159185.ref003">3</a> ]。这些可视化技术不断改善操作[的准确性和安全性<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4959690/#pone.0159185.ref002">2</a> - <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4959690/#pone.0159185.ref005">5</a>]，和正在成为神经外科[的重要组成部分<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4959690/#pone.0159185.ref002">2</a>，<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4959690/#pone.0159185.ref003">3</a> ]，在那里它们被主要用于开颅定位[ <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4959690/#pone.0159185.ref006">6</a> - <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4959690/#pone.0159185.ref008">8</a> ]。但是，导航系统非常昂贵; 因此，它们在发展中地区的可用性往往非常有限[ <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4959690/#pone.0159185.ref009">9</a>]。而且，用于诊断的MR图像不适合这些图像引导系统。相反，在手术前需要有或没有基准点的薄切片3D MR体积。与手术导航的应用一起，单个手术导航服务的成本对于发展中地区的患者来说通常是难以承受的。能够在手术前定位脑部病变及其在AR中的表面投影并且能够使用标准诊断MR图像的低成本技术将是有益的，尤其是如果可以避免对高度复杂和昂贵的导航系统的需求的话。在这项研究中，我们调整了iPhone（Apple Inc.，Cupertino，CA，USA）以部分实现这一目标，然后评估其在临床神经外科环境中的准确性和可行性。</p>
+<p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4959690/" title="转到此页面的其他部分">去：</a></p>
+<h2 id="材料和方法">材料和方法</h2>
+<h3 id="道德声明">道德声明</h3>
+<p>本研究经中国人民解放军总医院医学伦理委员会批准。每位患者或适当的家庭成员都签署了签署照片的知情同意书。本手稿中描述的个人提供了书面知情同意书（如PLOS同意书中所述），以便公布案件详情。</p>
+<h3 id="耐心">耐心</h3>
+<p>2014年1月至2016年5月期间，我们招募了35名在我院接受手术的患者，并使用iPhone和MR图像对其脑部病变进行了本地化。病变由第一或第三作者定位，并随机分配。使用以下标准确定病变的边界：（1）对于具有均匀增强的病变（例如脑膜瘤，胶质母细胞瘤，高级别神经胶质瘤的一部分），边界沿着病变的增强部分的边缘; （2）对于具有异质增强的病变，边界由T2液体衰减反转恢复图像中的异常信号的程度确定（实例包括低级别胶质瘤和海绵状血管瘤）。</p>
+<h3 id="mr图像预处理">MR图像预处理</h3>
+<p>使用医院的图片存档和通信系统（PACS;版本2.3; Philips Healthcare Informatics，Inc.，Foster City，CA，USA）访问所有MR图像。我们使用标准的Windows XP图像处理软件（MS Paint; Microsoft Corporation，Redmond，WA，USA）来预处理MR图像。根据手术要求和病变的图像特征选择MR序列类型。如果需要，T2加权图像或其他MR序列也可用于该方法。首先，使用PACS检查所有矢状切片，并选择包含最大病变边界的切片并保存为第一图像（<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4959690/figure/pone.0159185.g001/">图1A</a>）。然后选择中矢状切片图像并保存为第二图像（<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4959690/figure/pone.0159185.g001/">图1B</a>）。在此过程中，MR图像的放大率保持不变。接下来，在MS Paint（<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4959690/figure/pone.0159185.g001/">图1C</a>）中打开第一张图像，并选择“自由形式选择”（<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4959690/figure/pone.0159185.g001/">图1C中的</a>红色箭头）和“透明选择”（<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4959690/figure/pone.0159185.g001/">图1C中的</a>黑色箭头）工具。然后将病变与标记“P”（<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4959690/figure/pone.0159185.g001/">图1C中的</a>白色箭头）一起限定，对应于后方取向，并数字切出（<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4959690/figure/pone.0159185.g001/">图1D</a>）。在此之后，在MS Paint中打开第二图像，并将来自第一切片的肿瘤和标记P粘贴到其中（<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4959690/figure/pone.0159185.g001/">图1E中的</a>白色箭头）。调整粘贴的覆盖层的位置，直到“P”标签与其在第一幅图像中的位置重叠（红色箭头所示）<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4959690/figure/pone.0159185.g001/">图1E</a>）。因为所有选定的矢状切片属于相同的序列，所以它们都在相同的坐标系中，并且P标记的位置在所有矢状切片中保持恒定。因此，通过保持切片之间的“P”标签的重叠（<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4959690/figure/pone.0159185.g001/">图1F​​中的</a>红色和白色箭头），可以正确地描绘肿瘤在中矢状切片上的投影。最后，保存融合图像并将其传输到iPhone。所有这些步骤都在5分钟内完成，无需额外的软件。</p>
+<p><a href="https://www.ncbi.nlm.nih.gov/core/lw/2.0/html/tileshop_pmc/tileshop_pmc_inline.html?title=Click%20on%20image%20to%20zoom&amp;p=PMC3&amp;id=4959690_pone.0159185.g001.jpg"><img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4959690/bin/pone.0159185.g001.jpg" alt="包含图片，插图等的外部文件。对象名称为pone.0159185.g001.jpg" title="点击图片放大"></a></p>
+<p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4959690/figure/pone.0159185.g001/">图。1</a></p>
+<p><strong>预处理MR图像。</strong></p>
+<p>（A）选择显示最大肿瘤边界的矢状切片作为第一图像。（B）选择中矢状切片作为第二图像。（C）在MS Paint中，选择“自由形式选择”工具（红色箭头）和“透明选择”工具（黑色）。一起选择肿瘤和“P”标签（白色箭头）。（D）将选择的肿瘤和“P”标签一起切出。（E）将选定的肿瘤和“P”标记（白色箭头）粘贴到矢状切片中。红色箭头表示中矢状切片中相应的“P”标签。（F）通过使两个“P”标签重叠（半白色和半红色箭头），正确地描绘了肿瘤在中矢状切片上的投影。</p>
+<h3 id="获取患者的个人资料照片">获取患者的个人资料照片</h3>
+<p>为了获取患者的矢状位照片，采用以下技术来消除矢状位照片和中矢状MR图像之间的角度不匹配。首先，要求患者坐直，不要歪斜或转动头部。如果患者无法坐下，则要求他们仰卧。助手站在患者前面或旁边，以确保患者头部位置正确。其次，LVL CAM（Daniel LLC，App Store; Apple Inc.）用于拍摄照片。该iOS应用程序的用户界面（UI）<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4959690/figure/pone.0159185.g002/">如图2</a>所示。如果iPhone倾斜（<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4959690/figure/pone.0159185.g002/">图2A中的</a>小图片），圆形点将偏离屏幕中心的圆圈，圆圈旁边的短杆将远离水平线旋转（<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4959690/figure/pone.0159185.g002/">图2A</a>）。保持点和短杆变为绿色，表示零偏差（<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4959690/figure/pone.0159185.g002/">图2B</a>），将确保iPhone在所有平面中垂直对齐（<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4959690/figure/pone.0159185.g002/">图2B中的</a>小图片）。第三，将圆形标记定位在外耳上，并将患者的头部定位在屏幕上的中心正方形内（<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4959690/figure/pone.0159185.g002/">图2C</a>）。使用这些技术，iPhone和患者头部之间的相对位置（距离和高度）被标准化，<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4959690/figure/pone.0159185.g002/">如图2D所示</a>。通过精细调整拍摄角度，然后找到对应于<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4959690/figure/pone.0159185.g002/">图2D中的</a>位置2的最佳矢状平面。</p>
+<p><a href="https://www.ncbi.nlm.nih.gov/core/lw/2.0/html/tileshop_pmc/tileshop_pmc_inline.html?title=Click%20on%20image%20to%20zoom&amp;p=PMC3&amp;id=4959690_pone.0159185.g002.jpg"><img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4959690/bin/pone.0159185.g002.jpg" alt="包含图片，插图等的外部文件。对象名称为pone.0159185.g002.jpg" title="点击图片放大"></a></p>
+<p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4959690/figure/pone.0159185.g002/">图2</a></p>
+<p><strong>获取患者的矢状照片。</strong></p>
+<p>（A）当iPhone从前到后倾斜时，白色圆点偏离LVL CAM iOS应用程序（Daniel LLC，App Store; Apple Inc.）中的圆心。当iPhone从左向右倾斜时，圆圈侧面的短杆偏离水平线。（B）当iPhone垂直于地面时，圆点和短杆变为绿色，偏差为零。（C）瞄准外耳上的圆形标记，并将患者头部定位在屏幕上的中心方块中以获取照片。（D）图示iPhone和患者头部之间的相对位置。在正面视图中，患者的头部和iPhone都垂直于地面。距离和高度保持稳定。在头顶的视图中，</p>
+<h3 id="共同登记mr图像和矢状图">共同登记MR图像和矢状图</h3>
+<p>选择FUSED应用程序（Easy Tiger Apps LLC，App Store; Apple Inc.）将已处理的MR图像共同注册到矢状图。该iOS应用程序的UI <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4959690/figure/pone.0159185.g003/">如图3A</a>所示。选择矢状照片作为背景（<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4959690/figure/pone.0159185.g003/">图3A中的</a>绿色面板）和MR图像作为前景（<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4959690/figure/pone.0159185.g003/">图3A中的</a>蓝色面板）。因此，可以同时显示这两个图像（<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4959690/figure/pone.0159185.g003/">图3A中的</a>红色面板））。可以调整顶部MR图像的透明度以确保底层照片也是可见的。然后手动调整顶部图像的大小和旋转角度，以精确匹配MR图像的轮廓与患者头部的轮廓，保持以下解剖学标志完全重叠：嘴唇，鼻尖，头部曲线和外部枕骨突起。完成共同登记后，病变的位置清楚地显示在AR（<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4959690/figure/pone.0159185.g003/">图3A的</a>红色面板）中。绘制在患者皮肤上的网格允许将病变的矢状投影描绘在头部表面上（<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4959690/figure/pone.0159185.g003/">图3A的</a>红色面板中的小图像）。<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4959690/figure/pone.0159185.g004/">图4</a>展示了该过程的关键阶段。</p>
+<p><a href="https://www.ncbi.nlm.nih.gov/core/lw/2.0/html/tileshop_pmc/tileshop_pmc_inline.html?title=Click%20on%20image%20to%20zoom&amp;p=PMC3&amp;id=4959690_pone.0159185.g003.jpg"><img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4959690/bin/pone.0159185.g003.jpg" alt="包含图片，插图等的外部文件。对象名称为pone.0159185.g003.jpg" title="点击图片放大"></a></p>
+<p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4959690/figure/pone.0159185.g003/">图3</a></p>
+<p><strong>病变的本地化。</strong></p>
+<p>（A）FUSED（Easy Tiger Apps LLC; App Store; Apple Inc.）的用户界面。选择绿色面板中的矢状图作为背景，将蓝色面板中的MR图像作为前景。两个图像在红色面板中同时显示。根据解剖标志进行Coregistration。网格线预先在皮肤上绘制。参考融合图像，在皮肤上描绘病变的表面投影（红色面板中的小图像）。（B）通过绘制代表中矢状平面（白色箭头）的垂直平面的两条线，确定前和后肿瘤边界。通过在轴向切片（小图像）中测量病变与中矢状线的距离，可以确定外侧和内侧边界（蓝色箭头）。（C）粘贴CT标记，指示前，后和侧边界。（D）和（E）带有标记的CT图像（白色箭头）。（D）在冠状切片上，接触病变侧边缘的线和标记的边缘平行于中线绘制。（E）在矢状切片上，在脑表面上绘制接触病变前缘的垂直线和标记。</p>
+<p><a href="https://www.ncbi.nlm.nih.gov/core/lw/2.0/html/tileshop_pmc/tileshop_pmc_inline.html?title=Click%20on%20image%20to%20zoom&amp;p=PMC3&amp;id=4959690_pone.0159185.g004.jpg"><img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4959690/bin/pone.0159185.g004.jpg" alt="包含图片，插图等的外部文件。对象名称为pone.0159185.g004.jpg" title="点击图片放大"></a></p>
+<p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4959690/figure/pone.0159185.g004/">图4</a></p>
+<p><strong>示意图提供了该方法。</strong></p>
+<p>1，浏览矢状MR图像; 2，选择中矢状切片; 在图3中，选择显示病变的最大边界的切片。肿瘤和“P”标签一起从图像中切出; 如图4所示，通过确保“P”标签重叠，将肿瘤和“P”标签覆盖在中矢状MR图像上; 5，肿瘤正确投射到中矢​​状切片上; 6，获得患者的矢状图; 如图7所示，中矢状MR图像与患者的矢状照片共同登记。病变的位置以增强现实的方式显示; 在图8中，在皮肤上描绘了病变表面的表面投影。</p>
+<h3 id="找到病变的轴向投影">找到病变的轴向投影</h3>
+<p>在确定病变的矢状突起之后，绘制中矢状平面的另外两条垂直线以表示病变的前边界和后边界（<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4959690/figure/pone.0159185.g003/">图3B中</a>的白色箭头）。然后测量病变与轴向切片中的中矢状线的距离（<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4959690/figure/pone.0159185.g003/">图3B中的</a>小图像）。这允许确定侧向和内侧边界（<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4959690/figure/pone.0159185.g003/">图3B中</a>的蓝色箭头）。参考从轴向切片获得的两条垂直线和距离，可以在皮肤上描绘病变在轴向视图中的投影（<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4959690/figure/pone.0159185.g003/">图3B</a>）。</p>
+<h3 id="验证新方法的准确性">验证新方法的准确性</h3>
+<p>使用两种方法验证了这种新方法的准确性。在第一种方法（从2014年6月至2014年12月检查的15名患者）中，使用计算机断层扫描（CT）标记来确定准确性。在描绘皮肤上的病变边界后，将2至4个CT标记物粘贴到病变周围的头部表面上，以标记前部和后部和/或内侧和外侧边界（<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4959690/figure/pone.0159185.g003/">图3C）</a>）。根据病变位置和大小选择标记的数量。如果病变位于中线附近，则粘贴指示前，后和侧边界的三个标记。如果病变很小（直径&lt;1.5 cm），则表明前部和外部边界的两个标记就足够了。这些标记实际上是用于心电图监测的电极贴片。这些贴片的金属部分的半径为4mm，可以在CT图像上清晰地观察到。然后患者进行CT扫描，有或没有对比度增强（<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4959690/figure/pone.0159185.g003/">图3D和3E</a>）。使用PACS，我们测量了病变的实际边界与相应标记之间的偏差（D），以验证标记的准确性。对于额叶，顶叶或枕叶中的病变，首先选择显示前和/或后CT标记的矢状切片。绘制了接触病变边界的头部的矢状轮廓的垂直线（<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4959690/figure/pone.0159185.g003/">图3E</a>）。接下来，选择显示内侧和/或外侧CT标记的冠状切片。接触病变的内侧和/或外侧边界的线平行于大脑中线绘制（<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4959690/figure/pone.0159185.g003/">图3D</a>）。测量这些线与相应标记之间的距离并记录为D.对于颞叶或基底神经节中的病变，选择轴向切片以验证指示病变的前边界和后边界的标记的准确性，并且选择冠状切片以验证指示病变的顶部和底部边界的标记的准确性。标记的准确度水平分为三组：高（D≤5mm），中等（5 mm &lt;D≤10mm）和低水平（D&gt; 10 mm）。</p>
+<p>在第二阶段（2015年1月至2015年4月期间的20名患者），我们将该方法与我们医院使用的无框架神经导航系统（Stealth Station S7; Medtronic Navigation，Louisville，KY，USA）进行了比较。手术前，将六至八个标记粘贴在头上。使用T1加权3D MPRAGE序列（TE 3.02 ms，TR 1650 ms，矩阵尺寸256×256，FOV 250×250 mm，切片厚度1 mm）在1.5特斯拉扫描仪（Espree，Siemens，Erlangen，Germany）上进行MRI扫描。 ）。导航系统将使用3D数据集。在麻醉之前，我们使用新方法描绘了病变在皮肤上的表面投影（<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4959690/figure/pone.0159185.g005/">图5C和5D）</a>）。麻醉后，外科医生正确定位并固定患者的头部并对导航系统进行登记。记录了由导航系统计算以指示登记准确性的登记度量误差。从每个病变的表面投影的前，后，内侧，外侧，上侧或下侧，我们选择四个检查点，使用导航探头验证准确性（被动平面探头; Medtronic导航; <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4959690/figure/pone.0159185.g005/">图5E，5F，5G和5H</a>）。将探头的方向调整为与矢状平面平行（<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4959690/figure/pone.0159185.g005/">图5F和5H</a>），并垂直于头部表面（<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4959690/figure/pone.0159185.g005/">图5E和5G）</a>）。当使用“轨迹1”和“轨迹2”导航模型（<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4959690/figure/pone.0159185.g005/">图5I，5J，5K和5L</a>）时，导航系统可以从导航探测器的尖端自动绘制延长线。测量并记录延长线与病变真实边界的偏差（D）。两种方法之间的一致性测量分为高（D≤5mm），中等（5 mm &lt;D≤10mm）和低稠度（D&gt; 10 mm）。通过以下等式估计新方法和导航系统之间的积分偏移矢量（仅在计算中使用偏差的绝对值）。</p>
+<p><a href="https://www.ncbi.nlm.nih.gov/core/lw/2.0/html/tileshop_pmc/tileshop_pmc_inline.html?title=Click%20on%20image%20to%20zoom&amp;p=PMC3&amp;id=4959690_pone.0159185.g005.jpg"><img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4959690/bin/pone.0159185.g005.jpg" alt="包含图片，插图等的外部文件。对象名称为pone.0159185.g005.jpg" title="点击图片放大"></a></p>
+<p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4959690/figure/pone.0159185.g005/">图5</a></p>
+<p><strong>比较新方法与无框架神经导航系统。</strong></p>
+<p>（A）第二阶段试验中患者6的中矢状T1图像，显示额叶中的海绵状血管瘤。（B）中矢状MR图像与患者矢状图的共同配准。（C）根据共同登记结果，在皮肤上标记病变的矢状突起。（D）根据病变的矢状投影，还在皮肤上描绘了轴向投影。（E）和（F）麻醉并与导航系统共同配准后，操作员将导航探头指向病变的前边界。探头方向调整为与矢状平面平行并垂直于中矢状线。（G）和（H）操作员将导航探针指向病变的后边界。（I）在显示屏上，选择“轨迹2”导航模式; 粗蓝线表示导航探头，垂直于头部表面。它的延长线接触到病变的前缘，呈绿色。偏差为0毫米。（J）病变后缘的偏差也为零。（K）选择“轨迹1”模型，并且病变侧向边界处的偏差为2.3mm。（L）病变内侧边界的偏差为0 mm。</p>
+<p>[ 数学处理错误]</p>
+<p>[ 数学处理错误]</p>
+<h3 id="统计分析">统计分析</h3>
+<p>在每个试验阶段，根据操作者将患者分为两个亚组：第一作者在A组进行手术，第三作者在B组进行。使用Mann-Whitney U检验比较两个亚组的偏差。 。使用Mann-Whitney U检验比较两个亚组的偏移向量的大小。使用独立样本t检验或Mann-Whitney U检验进行病变大小，距脑表面的距离和登记误差度量的比较。进行Spearman等级相关以分析偏移矢量的大小与病变体积或距表面的距离之间的关系。值表示为平均值±标准偏差（SD），或中位数和第一（Q1）和第三四分位数（Q3）。所有统计分析均使用SPSS 11进行。0软件（SPSS Inc.，Chicago，IL，USA）。统计显着性的阈值设定为P = 0.05。</p>
+<p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4959690/" title="转到此页面的其他部分">去：</a></p>
+<h2 id="结果">结果</h2>
+<h3 id="第一阶段的结果">第一阶段的结果</h3>
+<p>共有15名（7名女性，8名男性）年龄在19至73岁之间的患者参加了第一阶段的准确性试验（<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4959690/table/pone.0159185.t001/">表1</a>）。每个受试者在10分钟内完成整个脑损伤定位过程（不包括准确性验证过程）。在大多数患者中，选择对比度增强的T1加权图像（T1 + C）用于定位过程，尽管在两名患者中使用矢状T2加权图像，并且MR静脉造影图像用于定位横向乙状结肠窦连接。其他病人。病变体积范围为1.1至33.6 cm <sup>3</sup>（15.1±11.5 cm <sup>3</sup>）。从病灶到脑表面的中位距离为5.8 mm（0,9.0 mm），86.7％的病灶（15个中的13个）位于脑表面10 mm范围内。在8名患者中，病变由第一作者定位，而第三作者在其他患者中进行定位过程。</p>
+<h3 id="表格1">表格1</h3>
+<p><strong>第一阶段的患者特征。</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">没有</th>
+<th style="text-align:left">性别</th>
+<th style="text-align:left">年龄（岁）</th>
+<th style="text-align:left">病变类型</th>
+<th style="text-align:left">地点</th>
+<th style="text-align:left">成像模式</th>
+<th style="text-align:left">尺寸（cm <sup>3</sup>）</th>
+<th style="text-align:left">与脑表面的距离（mm）</th>
+<th style="text-align:left">接线员（第一或第三作者）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><strong>1</strong></td>
+<td style="text-align:left">男</td>
+<td style="text-align:left">49</td>
+<td style="text-align:left">胶质母细胞瘤</td>
+<td style="text-align:left">枕叶</td>
+<td style="text-align:left">T1 + C <sup>*</sup></td>
+<td style="text-align:left">24</td>
+<td style="text-align:left">5.8</td>
+<td style="text-align:left">第一</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>2</strong></td>
+<td style="text-align:left">女</td>
+<td style="text-align:left">28</td>
+<td style="text-align:left">囊虫病</td>
+<td style="text-align:left">后额叶</td>
+<td style="text-align:left">T1 + C</td>
+<td style="text-align:left">1.7</td>
+<td style="text-align:left">8.2</td>
+<td style="text-align:left">第一</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>3</strong></td>
+<td style="text-align:left">女</td>
+<td style="text-align:left">56</td>
+<td style="text-align:left">脑膜瘤</td>
+<td style="text-align:left">内侧额叶</td>
+<td style="text-align:left">T1 + C</td>
+<td style="text-align:left">4.8</td>
+<td style="text-align:left">0</td>
+<td style="text-align:left">第三</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>4</strong></td>
+<td style="text-align:left">男</td>
+<td style="text-align:left">73</td>
+<td style="text-align:left">囊虫病</td>
+<td style="text-align:left">后颞叶</td>
+<td style="text-align:left">T1 + C</td>
+<td style="text-align:left">1.2</td>
+<td style="text-align:left">5.6</td>
+<td style="text-align:left">第三</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>五</strong></td>
+<td style="text-align:left">女</td>
+<td style="text-align:left">59</td>
+<td style="text-align:left">-</td>
+<td style="text-align:left">横向乙状窦交界处</td>
+<td style="text-align:left">MRV<sup>＃</sup></td>
+<td style="text-align:left">-</td>
+<td style="text-align:left">-</td>
+<td style="text-align:left">第一</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>6</strong></td>
+<td style="text-align:left">男</td>
+<td style="text-align:left">55</td>
+<td style="text-align:left">囊肿</td>
+<td style="text-align:left">基底神经节</td>
+<td style="text-align:left">T2 <sup>##</sup></td>
+<td style="text-align:left">33.6</td>
+<td style="text-align:left">23.9</td>
+<td style="text-align:left">第一</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>7</strong></td>
+<td style="text-align:left">男</td>
+<td style="text-align:left">三十</td>
+<td style="text-align:left">脑膜瘤</td>
+<td style="text-align:left">内侧额叶</td>
+<td style="text-align:left">T1 + C</td>
+<td style="text-align:left">17.9</td>
+<td style="text-align:left">4</td>
+<td style="text-align:left">第三</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>8</strong></td>
+<td style="text-align:left">女</td>
+<td style="text-align:left">43</td>
+<td style="text-align:left">脑膜瘤</td>
+<td style="text-align:left">内侧额叶</td>
+<td style="text-align:left">T1 + C</td>
+<td style="text-align:left">2.7</td>
+<td style="text-align:left">0</td>
+<td style="text-align:left">第一</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>9</strong></td>
+<td style="text-align:left">男</td>
+<td style="text-align:left">44</td>
+<td style="text-align:left">胶质母细胞瘤</td>
+<td style="text-align:left">后额叶</td>
+<td style="text-align:left">T1 + C</td>
+<td style="text-align:left">25</td>
+<td style="text-align:left">6.7</td>
+<td style="text-align:left">第一</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>10</strong></td>
+<td style="text-align:left">女</td>
+<td style="text-align:left">24</td>
+<td style="text-align:left">节细胞胶质瘤</td>
+<td style="text-align:left">后额叶</td>
+<td style="text-align:left">T1 + C</td>
+<td style="text-align:left">1.1</td>
+<td style="text-align:left">6</td>
+<td style="text-align:left">第一</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>11</strong></td>
+<td style="text-align:left">男</td>
+<td style="text-align:left">19</td>
+<td style="text-align:left">蛛网膜囊肿</td>
+<td style="text-align:left">顶叶</td>
+<td style="text-align:left">T2</td>
+<td style="text-align:left">32</td>
+<td style="text-align:left">0</td>
+<td style="text-align:left">第三</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>12</strong></td>
+<td style="text-align:left">男</td>
+<td style="text-align:left">44</td>
+<td style="text-align:left">脓肿</td>
+<td style="text-align:left">颞叶</td>
+<td style="text-align:left">T1 + C</td>
+<td style="text-align:left">18</td>
+<td style="text-align:left">9.8</td>
+<td style="text-align:left">第三</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>13</strong></td>
+<td style="text-align:left">女</td>
+<td style="text-align:left">53</td>
+<td style="text-align:left">脑膜瘤</td>
+<td style="text-align:left">枕叶</td>
+<td style="text-align:left">T1 + C</td>
+<td style="text-align:left">20.9</td>
+<td style="text-align:left">0</td>
+<td style="text-align:left">第一</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>14</strong></td>
+<td style="text-align:left">男</td>
+<td style="text-align:left">55</td>
+<td style="text-align:left">血肿</td>
+<td style="text-align:left">基底神经节</td>
+<td style="text-align:left">T1</td>
+<td style="text-align:left">18.6</td>
+<td style="text-align:left">21.5</td>
+<td style="text-align:left">第三</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>15</strong></td>
+<td style="text-align:left">女</td>
+<td style="text-align:left">46</td>
+<td style="text-align:left">脑膜瘤</td>
+<td style="text-align:left">后额叶</td>
+<td style="text-align:left">T1 + C</td>
+<td style="text-align:left">9.4</td>
+<td style="text-align:left">0</td>
+<td style="text-align:left">第三</td>
+</tr>
+</tbody>
+</table>
+<p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4959690/table/pone.0159185.t001/?report=objectonly">在另一个窗口打开</a></p>
+<p>*对比度增强的T1加权图像</p>
+<p>＃磁共振静脉造影</p>
+<h2 id="t2加权图像">T2加权图像</h2>
+<p>产生总共43个标记，这些标记的中值偏差为0mm（0,1.50mm）（<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4959690/table/pone.0159185.t002/">表2</a>）。对于97.7％的标记物（42个中的42个），准确度水平高（偏差≤5mm），而另一个标记物评定为中等（2.3％，43个中的1个）。此外，74.4％的标记（43个中的32个）精确描绘了病变边界（偏差= 0mm）。18.6％的标记物（43个中有8个）发现与真实病变边界的偏差，尽管其中87.5％（8个中有7个）的偏差低于4 mm。测得的最大偏差为6.5毫米。在手术过程中准确地达到了13例患者的病变，即使在病人数仅为1.7 cm <sup>3的</sup> 2号患者中也是如此。在患者4和10中，其病变体积仅为1.2和1.1cm <sup>3</sup>分别，立体定向框架用于帮助在手术期间发现病变。在患者5中，还使用标记精确地定位了横向乙状窦连接，该标记准确地放置在该解剖标志上（偏差= 0mm）。</p>
+<h3 id="表2">表2</h3>
+<p><strong>标记的偏差和准确度。</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">没有</th>
+<th style="text-align:left">标记号</th>
+<th style="text-align:left">标记位置</th>
+<th style="text-align:left">偏差（mm）</th>
+<th style="text-align:left">准确性</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><strong>1</strong></td>
+<td style="text-align:left">3</td>
+<td style="text-align:left">前面的</td>
+<td style="text-align:left">0</td>
+<td style="text-align:left">高</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+<td style="text-align:left">侧</td>
+<td style="text-align:left">0</td>
+<td style="text-align:left">高</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+<td style="text-align:left">后</td>
+<td style="text-align:left">3.5</td>
+<td style="text-align:left">高</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>2</strong></td>
+<td style="text-align:left">3</td>
+<td style="text-align:left">前面的</td>
+<td style="text-align:left">3.3</td>
+<td style="text-align:left">高</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+<td style="text-align:left">后</td>
+<td style="text-align:left">0</td>
+<td style="text-align:left">高</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+<td style="text-align:left">侧</td>
+<td style="text-align:left">0</td>
+<td style="text-align:left">高</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>3</strong></td>
+<td style="text-align:left">3</td>
+<td style="text-align:left">前面的</td>
+<td style="text-align:left">0</td>
+<td style="text-align:left">高</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+<td style="text-align:left">后</td>
+<td style="text-align:left">0</td>
+<td style="text-align:left">高</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+<td style="text-align:left">侧</td>
+<td style="text-align:left">1.5</td>
+<td style="text-align:left">高</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>4</strong></td>
+<td style="text-align:left">2</td>
+<td style="text-align:left">前面的</td>
+<td style="text-align:left">3.2</td>
+<td style="text-align:left">高</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+<td style="text-align:left">后</td>
+<td style="text-align:left">0</td>
+<td style="text-align:left">高</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>五</strong></td>
+<td style="text-align:left">1</td>
+<td style="text-align:left">最佳</td>
+<td style="text-align:left">0</td>
+<td style="text-align:left">高</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>6</strong></td>
+<td style="text-align:left">4</td>
+<td style="text-align:left">前面的</td>
+<td style="text-align:left">0</td>
+<td style="text-align:left">高</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+<td style="text-align:left">后</td>
+<td style="text-align:left">0</td>
+<td style="text-align:left">高</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+<td style="text-align:left">优越</td>
+<td style="text-align:left">0</td>
+<td style="text-align:left">高</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+<td style="text-align:left">下</td>
+<td style="text-align:left">0</td>
+<td style="text-align:left">高</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>7</strong></td>
+<td style="text-align:left">3</td>
+<td style="text-align:left">前面的</td>
+<td style="text-align:left">0</td>
+<td style="text-align:left">高</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+<td style="text-align:left">后</td>
+<td style="text-align:left">0</td>
+<td style="text-align:left">高</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+<td style="text-align:left">侧</td>
+<td style="text-align:left">0</td>
+<td style="text-align:left">高</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>8</strong></td>
+<td style="text-align:left">2</td>
+<td style="text-align:left">前面的</td>
+<td style="text-align:left">0</td>
+<td style="text-align:left">高</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+<td style="text-align:left">后</td>
+<td style="text-align:left">2.4</td>
+<td style="text-align:left">高</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>9</strong></td>
+<td style="text-align:left">4</td>
+<td style="text-align:left">前面的</td>
+<td style="text-align:left">0</td>
+<td style="text-align:left">高</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+<td style="text-align:left">后</td>
+<td style="text-align:left">0</td>
+<td style="text-align:left">高</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+<td style="text-align:left">侧</td>
+<td style="text-align:left">3.8</td>
+<td style="text-align:left">高</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+<td style="text-align:left">内侧</td>
+<td style="text-align:left">0</td>
+<td style="text-align:left">高</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>10</strong></td>
+<td style="text-align:left">2</td>
+<td style="text-align:left">前面的</td>
+<td style="text-align:left">1.5</td>
+<td style="text-align:left">高</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+<td style="text-align:left">后</td>
+<td style="text-align:left">0</td>
+<td style="text-align:left">高</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>11</strong></td>
+<td style="text-align:left">3</td>
+<td style="text-align:left">前面的</td>
+<td style="text-align:left">0</td>
+<td style="text-align:left">高</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+<td style="text-align:left">后</td>
+<td style="text-align:left">0</td>
+<td style="text-align:left">高</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+<td style="text-align:left">侧</td>
+<td style="text-align:left">2.8</td>
+<td style="text-align:left">高</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>12</strong></td>
+<td style="text-align:left">3</td>
+<td style="text-align:left">前面的</td>
+<td style="text-align:left">1.6</td>
+<td style="text-align:left">高</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+<td style="text-align:left">后</td>
+<td style="text-align:left">0</td>
+<td style="text-align:left">高</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+<td style="text-align:left">以上</td>
+<td style="text-align:left">0</td>
+<td style="text-align:left">高</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>13</strong></td>
+<td style="text-align:left">3</td>
+<td style="text-align:left">前面的</td>
+<td style="text-align:left">0</td>
+<td style="text-align:left">高</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+<td style="text-align:left">后</td>
+<td style="text-align:left">0</td>
+<td style="text-align:left">高</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+<td style="text-align:left">侧</td>
+<td style="text-align:left">0</td>
+<td style="text-align:left">高</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>14</strong></td>
+<td style="text-align:left">4</td>
+<td style="text-align:left">前面的</td>
+<td style="text-align:left">0</td>
+<td style="text-align:left">高</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+<td style="text-align:left">后</td>
+<td style="text-align:left">6.5</td>
+<td style="text-align:left">中等</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+<td style="text-align:left">优越</td>
+<td style="text-align:left">0</td>
+<td style="text-align:left">高</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+<td style="text-align:left">下</td>
+<td style="text-align:left">0</td>
+<td style="text-align:left">高</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>15</strong></td>
+<td style="text-align:left">3</td>
+<td style="text-align:left">前面的</td>
+<td style="text-align:left">0</td>
+<td style="text-align:left">高</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+<td style="text-align:left">后</td>
+<td style="text-align:left">2.0</td>
+<td style="text-align:left">高</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+<td style="text-align:left">侧</td>
+<td style="text-align:left">0</td>
+<td style="text-align:left">高</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>总</strong></td>
+<td style="text-align:left">43</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">0（0,1.50）</td>
+<td style="text-align:left"></td>
+</tr>
+</tbody>
+</table>
+<p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4959690/table/pone.0159185.t002/?report=objectonly">在另一个窗口打开</a></p>
+<p>在亚组A中，21个标记的中值偏差为0mm（0,0.38mm），而在B组中，22个标记的中值偏差也为0mm（0,1.55mm）。两个亚组之间没有显着差异（P = 0.75; <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4959690/table/pone.0159185.t003/">表3</a>）。其他变量，包括病变大小和到脑表面的距离，没有显着差异（<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4959690/table/pone.0159185.t003/">表3</a>）。</p>
+<h3 id="表3">表3</h3>
+<p><strong>不同算子标记偏差的比较。</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left"></th>
+<th style="text-align:left">A组（8）</th>
+<th style="text-align:left">B组（7）</th>
+<th style="text-align:left">p</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><strong>标记编号</strong></td>
+<td style="text-align:left">21</td>
+<td style="text-align:left">22</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>偏差（毫米）</strong></td>
+<td style="text-align:left">0（0,0.38）</td>
+<td style="text-align:left">0（0,1.55）</td>
+<td style="text-align:left">0.75</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>病变体积（cm <strong><sup><strong>3</strong></sup></strong>）</strong></td>
+<td style="text-align:left">15.26±11.87</td>
+<td style="text-align:left">14.78±12.25</td>
+<td style="text-align:left">0.94</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>与脑表面的距离（mm）</strong></td>
+<td style="text-align:left">6.00（0,8.20）</td>
+<td style="text-align:left">4.80（0,12.72）</td>
+<td style="text-align:left">0.73</td>
+</tr>
+</tbody>
+</table>
+<h3 id="第二阶段的结果">第二阶段的结果</h3>
+<p>共有20名（5名女性，15名男性）年龄为4至67岁的患者参加了第二次准确性测试（<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4959690/table/pone.0159185.t004/">表4</a>）。病灶体积范围为2.4至58.2 cm <sup>3.</sup>从病灶到脑表面的距离范围为0至49.3 mm，90％的病灶（20个中的18个）位于脑表面10 mm范围内。90％的病变（20个中的18个）是幕上的，10％（20个中的2个）位于小脑中。在11名患者中，病变由第一作者定位，而第三作者在剩余患者中进行了术前定位。</p>
+<h3 id="表4">表4</h3>
+<p><strong>第二阶段的患者特征。</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">没有</th>
+<th style="text-align:left">性别</th>
+<th style="text-align:left">年龄（岁）</th>
+<th style="text-align:left">病变类型</th>
+<th style="text-align:left">地点</th>
+<th style="text-align:left">尺寸（cm<sup>3</sup>）</th>
+<th style="text-align:left">与脑表面的距离（mm）</th>
+<th style="text-align:left">接线员（第一或第三作者）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><strong>1</strong></td>
+<td style="text-align:left">F</td>
+<td style="text-align:left">43</td>
+<td style="text-align:left">脑膜瘤</td>
+<td style="text-align:left">额叶parafalx</td>
+<td style="text-align:left">3.5</td>
+<td style="text-align:left">9.2</td>
+<td style="text-align:left">第三</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>2</strong></td>
+<td style="text-align:left">中号</td>
+<td style="text-align:left">18</td>
+<td style="text-align:left">转移瘤</td>
+<td style="text-align:left">额叶</td>
+<td style="text-align:left">58.2</td>
+<td style="text-align:left">7.1</td>
+<td style="text-align:left">第一</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>3</strong></td>
+<td style="text-align:left">中号</td>
+<td style="text-align:left">51</td>
+<td style="text-align:left">脑膜瘤</td>
+<td style="text-align:left">颞叶</td>
+<td style="text-align:left">9.4</td>
+<td style="text-align:left">0</td>
+<td style="text-align:left">第一</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>4</strong></td>
+<td style="text-align:left">中号</td>
+<td style="text-align:left">21</td>
+<td style="text-align:left">Caverneous血管瘤</td>
+<td style="text-align:left">额叶</td>
+<td style="text-align:left">7.3</td>
+<td style="text-align:left">9</td>
+<td style="text-align:left">第一</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>五</strong></td>
+<td style="text-align:left">中号</td>
+<td style="text-align:left">4</td>
+<td style="text-align:left">脉络丛乳头状瘤</td>
+<td style="text-align:left">第三脑室</td>
+<td style="text-align:left">2.4</td>
+<td style="text-align:left">49.3</td>
+<td style="text-align:left">第三</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>6</strong></td>
+<td style="text-align:left">中号</td>
+<td style="text-align:left">41</td>
+<td style="text-align:left">Caverneous血管瘤</td>
+<td style="text-align:left">额叶</td>
+<td style="text-align:left">15.5</td>
+<td style="text-align:left">5.3</td>
+<td style="text-align:left">第三</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>7</strong></td>
+<td style="text-align:left">中号</td>
+<td style="text-align:left">40</td>
+<td style="text-align:left">脑膜瘤</td>
+<td style="text-align:left">额叶</td>
+<td style="text-align:left">19.5</td>
+<td style="text-align:left">0</td>
+<td style="text-align:left">第一</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>8</strong></td>
+<td style="text-align:left">中号</td>
+<td style="text-align:left">18</td>
+<td style="text-align:left">转移瘤</td>
+<td style="text-align:left">小脑</td>
+<td style="text-align:left">6.9</td>
+<td style="text-align:left">8</td>
+<td style="text-align:left">第三</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>9</strong></td>
+<td style="text-align:left">中号</td>
+<td style="text-align:left">58</td>
+<td style="text-align:left">脑膜瘤</td>
+<td style="text-align:left">顶叶副窦</td>
+<td style="text-align:left">10.8</td>
+<td style="text-align:left">0</td>
+<td style="text-align:left">第一</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>10</strong></td>
+<td style="text-align:left">F</td>
+<td style="text-align:left">46</td>
+<td style="text-align:left">Caverneous血管瘤</td>
+<td style="text-align:left">颞叶</td>
+<td style="text-align:left">4.2</td>
+<td style="text-align:left">7</td>
+<td style="text-align:left">第一</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>11</strong></td>
+<td style="text-align:left">F</td>
+<td style="text-align:left">45</td>
+<td style="text-align:left">动静脉畸形</td>
+<td style="text-align:left">额叶</td>
+<td style="text-align:left">44.7</td>
+<td style="text-align:left">0</td>
+<td style="text-align:left">第三</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>12</strong></td>
+<td style="text-align:left">中号</td>
+<td style="text-align:left">47</td>
+<td style="text-align:left">Gliablatoma</td>
+<td style="text-align:left">枕叶</td>
+<td style="text-align:left">10.4</td>
+<td style="text-align:left">9.5</td>
+<td style="text-align:left">第一</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>13</strong></td>
+<td style="text-align:left">中号</td>
+<td style="text-align:left">34</td>
+<td style="text-align:left">脑膜瘤</td>
+<td style="text-align:left">顶叶</td>
+<td style="text-align:left">46.1</td>
+<td style="text-align:left">7.7</td>
+<td style="text-align:left">第三</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>14</strong></td>
+<td style="text-align:left">中号</td>
+<td style="text-align:left">67</td>
+<td style="text-align:left">脑膜瘤</td>
+<td style="text-align:left">额叶</td>
+<td style="text-align:left">6.2</td>
+<td style="text-align:left">0</td>
+<td style="text-align:left">第一</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>15</strong></td>
+<td style="text-align:left">中号</td>
+<td style="text-align:left">42</td>
+<td style="text-align:left">Glioblatoma</td>
+<td style="text-align:left">Insula lobe</td>
+<td style="text-align:left">36.4</td>
+<td style="text-align:left">五</td>
+<td style="text-align:left">第三</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>16</strong></td>
+<td style="text-align:left">中号</td>
+<td style="text-align:left">62</td>
+<td style="text-align:left">转移瘤</td>
+<td style="text-align:left">小脑</td>
+<td style="text-align:left">23.6</td>
+<td style="text-align:left">13.9</td>
+<td style="text-align:left">第一</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>17</strong></td>
+<td style="text-align:left">中号</td>
+<td style="text-align:left">52</td>
+<td style="text-align:left">脑膜瘤</td>
+<td style="text-align:left">额顶叶</td>
+<td style="text-align:left">56.1</td>
+<td style="text-align:left">0</td>
+<td style="text-align:left">第一</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>18</strong></td>
+<td style="text-align:left">F</td>
+<td style="text-align:left">54</td>
+<td style="text-align:left">脓肿</td>
+<td style="text-align:left">额叶</td>
+<td style="text-align:left">6.8</td>
+<td style="text-align:left">2</td>
+<td style="text-align:left">第一</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>19</strong></td>
+<td style="text-align:left">中号</td>
+<td style="text-align:left">50</td>
+<td style="text-align:left">Caverneous血管瘤</td>
+<td style="text-align:left">后额叶</td>
+<td style="text-align:left">2.8</td>
+<td style="text-align:left">0</td>
+<td style="text-align:left">第三</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>20</strong></td>
+<td style="text-align:left">F</td>
+<td style="text-align:left">22</td>
+<td style="text-align:left">星形细胞瘤（II）</td>
+<td style="text-align:left">额叶</td>
+<td style="text-align:left">13.8</td>
+<td style="text-align:left">3</td>
+<td style="text-align:left">第三</td>
+</tr>
+</tbody>
+</table>
+<p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4959690/table/pone.0159185.t004/?report=objectonly">在另一个窗口打开</a></p>
+<p>对于每位患者，我们检查了四个点的偏差，得出总共80个检查点（<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4959690/table/pone.0159185.t005/">表5</a>）。这些检查点的中值偏差为2.00 mm（0.00,3.5 mm）。88.8％的病变发现新方法与传统神经导航系统之间具有高度一致性。积分偏移矢量的幅度为2.95毫米（2.43,4.10毫米）。在患有枕骨胶质母细胞瘤的患者12中，在上边界和下边界处发现适度的偏差（&gt; 5mm）。登记误差度量4.9是该组患者中发现的最大值。在11号患者中，患有巨大的动静脉畸形，其侧边缘在MR图像中不规则且模糊，在侧边界处发现9.5mm的适度偏差。在患有小脑转移的两名患者（8和16）中，在上边界和下边界处遇到最大偏差（&gt; 10mm）。这两名患者的登记误差指标大于2（2.7和2.6）。Spearman相关性测试表明，偏移矢量的大小与病变体积（P = 0.12）或距脑表面的距离（P = 0.75）无关。对于幕上病变，所有72个检查点的中值偏差为1.85 mm（0.00,3.00 mm）。这些检查点的新方法和导航系统之间的一致性为93.1％，偏移矢量的大小为2.90 mm（2.35,3.72 mm）。Spearman相关性测试表明，偏移矢量的大小与病变体积（P = 0.21）或距脑表面的距离（P = 0.20）无关。Spearman相关性测试表明，偏移矢量的大小与病变体积（P = 0.12）或距脑表面的距离（P = 0.75）无关。对于幕上病变，所有72个检查点的中值偏差为1.85 mm（0.00,3.00 mm）。这些检查点的新方法和导航系统之间的一致性为93.1％，偏移矢量的大小为2.90 mm（2.35,3.72 mm）。Spearman相关性测试表明，偏移矢量的大小与病变体积（P = 0.21）或距脑表面的距离（P = 0.20）无关。Spearman相关性测试表明，偏移矢量的大小与病变体积（P = 0.12）或距脑表面的距离（P = 0.75）无关。对于幕上病变，所有72个检查点的中值偏差为1.85 mm（0.00,3.00 mm）。这些检查点的新方法和导航系统之间的一致性为93.1％，偏移矢量的大小为2.90 mm（2.35,3.72 mm）。Spearman相关性测试表明，偏移矢量的大小与病变体积（P = 0.21）或距脑表面的距离（P = 0.20）无关。这些检查点的新方法和导航系统之间的一致性为93.1％，偏移矢量的大小为2.90 mm（2.35,3.72 mm）。Spearman相关性测试表明，偏移矢量的大小与病变体积（P = 0.21）或距脑表面的距离（P = 0.20）无关。这些检查点的新方法和导航系统之间的一致性为93.1％，偏移矢量的大小为2.90 mm（2.35,3.72 mm）。Spearman相关性测试表明，偏移矢量的大小与病变体积（P = 0.21）或距脑表面的距离（P = 0.20）无关。</p>
+<h3 id="表5">表5</h3>
+<p><strong>新方法和导航系统的结果之间的偏差。</strong></p>
+<table>
+<thead>
+<tr>
+<th>没有</th>
+<th style="text-align:left">注册错误指标</th>
+<th>肿瘤的界限</th>
+<th>偏差（mm）</th>
+<th style="text-align:left">偏移矢量的大小</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>1</strong></td>
+<td style="text-align:left">1.4</td>
+<td>前面的</td>
+<td>3.5</td>
+<td style="text-align:left">3.2</td>
+</tr>
+<tr>
+<td></td>
+<td style="text-align:left"></td>
+<td>后</td>
+<td>2.8</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td></td>
+<td style="text-align:left"></td>
+<td>内侧</td>
+<td>0</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td></td>
+<td style="text-align:left"></td>
+<td>侧</td>
+<td>0</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td><strong>2</strong></td>
+<td style="text-align:left">1.5</td>
+<td>前面的</td>
+<td>0</td>
+<td style="text-align:left">3.0</td>
+</tr>
+<tr>
+<td></td>
+<td style="text-align:left"></td>
+<td>后</td>
+<td>3.0</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td></td>
+<td style="text-align:left"></td>
+<td>优越</td>
+<td>0</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td></td>
+<td style="text-align:left"></td>
+<td>下</td>
+<td>5.2</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td><strong>3</strong></td>
+<td style="text-align:left">1.5</td>
+<td>前面的</td>
+<td>4</td>
+<td style="text-align:left">3.8</td>
+</tr>
+<tr>
+<td></td>
+<td style="text-align:left"></td>
+<td>后</td>
+<td>0</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td></td>
+<td style="text-align:left"></td>
+<td>优越</td>
+<td>2.0 <sup>*</sup></td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td></td>
+<td style="text-align:left"></td>
+<td>下</td>
+<td>4.5 <sup>*</sup></td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td><strong>4</strong></td>
+<td style="text-align:left">1.9</td>
+<td>前面的</td>
+<td>3.8</td>
+<td style="text-align:left">2.9</td>
+</tr>
+<tr>
+<td></td>
+<td style="text-align:left"></td>
+<td>后</td>
+<td>1.9</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td></td>
+<td style="text-align:left"></td>
+<td>内侧</td>
+<td>0</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td></td>
+<td style="text-align:left"></td>
+<td>侧</td>
+<td>0</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td><strong>五</strong></td>
+<td style="text-align:left">1.8</td>
+<td>前面的</td>
+<td>0</td>
+<td style="text-align:left">1.5</td>
+</tr>
+<tr>
+<td></td>
+<td style="text-align:left"></td>
+<td>后</td>
+<td>2.5</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td></td>
+<td style="text-align:left"></td>
+<td>优越</td>
+<td>0</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td></td>
+<td style="text-align:left"></td>
+<td>下</td>
+<td>1.8</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td><strong>6</strong></td>
+<td style="text-align:left">1.5</td>
+<td>前面的</td>
+<td>0</td>
+<td style="text-align:left">1.2</td>
+</tr>
+<tr>
+<td></td>
+<td style="text-align:left"></td>
+<td>后</td>
+<td>0</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td></td>
+<td style="text-align:left"></td>
+<td>内侧</td>
+<td>0</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td></td>
+<td style="text-align:left"></td>
+<td>侧</td>
+<td>2.3</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td><strong>7</strong></td>
+<td style="text-align:left">1.6</td>
+<td>前面的</td>
+<td>2.5 <sup>*</sup></td>
+<td style="text-align:left">3.7</td>
+</tr>
+<tr>
+<td></td>
+<td style="text-align:left"></td>
+<td>后</td>
+<td>3.7 <sup>*</sup></td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td></td>
+<td style="text-align:left"></td>
+<td>内侧</td>
+<td>0</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td></td>
+<td style="text-align:left"></td>
+<td>侧</td>
+<td>4.7</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td><strong>8</strong></td>
+<td style="text-align:left">2.7</td>
+<td>优越</td>
+<td>11</td>
+<td style="text-align:left">12.1</td>
+</tr>
+<tr>
+<td></td>
+<td style="text-align:left"></td>
+<td>下</td>
+<td>13</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td></td>
+<td style="text-align:left"></td>
+<td>内侧</td>
+<td>0</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td></td>
+<td style="text-align:left"></td>
+<td>侧</td>
+<td>3.8</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td><strong>9</strong></td>
+<td style="text-align:left">1.9</td>
+<td>前面的</td>
+<td>2.8</td>
+<td style="text-align:left">2.9</td>
+</tr>
+<tr>
+<td></td>
+<td style="text-align:left"></td>
+<td>后</td>
+<td>3.0</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td></td>
+<td style="text-align:left"></td>
+<td>内侧</td>
+<td>0</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td></td>
+<td style="text-align:left"></td>
+<td>侧</td>
+<td>0</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td><strong>10</strong></td>
+<td style="text-align:left">1.4</td>
+<td>前面的</td>
+<td>1.5</td>
+<td style="text-align:left">2.4</td>
+</tr>
+<tr>
+<td></td>
+<td style="text-align:left"></td>
+<td>后</td>
+<td>0</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td></td>
+<td style="text-align:left"></td>
+<td>优越</td>
+<td>0</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td></td>
+<td style="text-align:left"></td>
+<td>下</td>
+<td>4.6</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td><strong>11</strong></td>
+<td style="text-align:left">1.6</td>
+<td>前面的</td>
+<td>0</td>
+<td style="text-align:left">5.1</td>
+</tr>
+<tr>
+<td></td>
+<td style="text-align:left"></td>
+<td>后</td>
+<td>3.5</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td></td>
+<td style="text-align:left"></td>
+<td>内侧</td>
+<td>0</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td></td>
+<td style="text-align:left"></td>
+<td>侧</td>
+<td>9.5</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td><strong>12</strong></td>
+<td style="text-align:left">4.9</td>
+<td>优越</td>
+<td>6.8</td>
+<td style="text-align:left">5.9</td>
+</tr>
+<tr>
+<td></td>
+<td style="text-align:left"></td>
+<td>下</td>
+<td>5</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td></td>
+<td style="text-align:left"></td>
+<td>内侧</td>
+<td>0</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td></td>
+<td style="text-align:left"></td>
+<td>侧</td>
+<td>0</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td><strong>13</strong></td>
+<td style="text-align:left">2.0</td>
+<td>前面的</td>
+<td>2.4</td>
+<td style="text-align:left">3.0</td>
+</tr>
+<tr>
+<td></td>
+<td style="text-align:left"></td>
+<td>后</td>
+<td>3.6</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td></td>
+<td style="text-align:left"></td>
+<td>内侧</td>
+<td>0</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td></td>
+<td style="text-align:left"></td>
+<td>侧</td>
+<td>0</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td><strong>14</strong></td>
+<td style="text-align:left">1.8</td>
+<td>前面的</td>
+<td>2.0</td>
+<td style="text-align:left">2.9</td>
+</tr>
+<tr>
+<td></td>
+<td style="text-align:left"></td>
+<td>后</td>
+<td>0</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td></td>
+<td style="text-align:left"></td>
+<td>内侧</td>
+<td>0</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td></td>
+<td style="text-align:left"></td>
+<td>侧</td>
+<td>5.5</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td><strong>15</strong></td>
+<td style="text-align:left">1.6</td>
+<td>前面的</td>
+<td>0</td>
+<td style="text-align:left">2.5</td>
+</tr>
+<tr>
+<td></td>
+<td style="text-align:left"></td>
+<td>后</td>
+<td>4.3</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td></td>
+<td style="text-align:left"></td>
+<td>优越</td>
+<td>2.6</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td></td>
+<td style="text-align:left"></td>
+<td>下</td>
+<td>0</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td><strong>16</strong></td>
+<td style="text-align:left">2.6</td>
+<td>优越</td>
+<td>12.5</td>
+<td style="text-align:left">14.2</td>
+</tr>
+<tr>
+<td></td>
+<td style="text-align:left"></td>
+<td>下</td>
+<td>15.8</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td></td>
+<td style="text-align:left"></td>
+<td>内侧</td>
+<td>0</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td></td>
+<td style="text-align:left"></td>
+<td>侧</td>
+<td>2.6</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td><strong>17</strong></td>
+<td style="text-align:left">1.8</td>
+<td>前面的</td>
+<td>4.7 <sup>*</sup></td>
+<td style="text-align:left">4.2</td>
+</tr>
+<tr>
+<td></td>
+<td style="text-align:left"></td>
+<td>后</td>
+<td>3.6 <sup>*</sup></td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td></td>
+<td style="text-align:left"></td>
+<td>内侧</td>
+<td>0</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td></td>
+<td style="text-align:left"></td>
+<td>侧</td>
+<td>0</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td><strong>18</strong></td>
+<td style="text-align:left">1.7</td>
+<td>前面的</td>
+<td>2.5</td>
+<td style="text-align:left">2.6</td>
+</tr>
+<tr>
+<td></td>
+<td style="text-align:left"></td>
+<td>后</td>
+<td>2.3</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td></td>
+<td style="text-align:left"></td>
+<td>内侧</td>
+<td>2.3</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td></td>
+<td style="text-align:left"></td>
+<td>侧</td>
+<td>0</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td><strong>19</strong></td>
+<td style="text-align:left">1.5</td>
+<td>前面的</td>
+<td>2.0</td>
+<td style="text-align:left">2.2</td>
+</tr>
+<tr>
+<td></td>
+<td style="text-align:left"></td>
+<td>后</td>
+<td>2.4</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td></td>
+<td style="text-align:left"></td>
+<td>内侧</td>
+<td>0</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td></td>
+<td style="text-align:left"></td>
+<td>侧</td>
+<td>0</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td><strong>20</strong></td>
+<td style="text-align:left">1.7</td>
+<td>前面的</td>
+<td>0</td>
+<td style="text-align:left">1.9</td>
+</tr>
+<tr>
+<td></td>
+<td style="text-align:left"></td>
+<td>后</td>
+<td>3.0</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td></td>
+<td style="text-align:left"></td>
+<td>内侧</td>
+<td>0</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td></td>
+<td style="text-align:left"></td>
+<td>侧</td>
+<td>2.4</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td><strong>总</strong></td>
+<td style="text-align:left">80</td>
+<td></td>
+<td>2.00（0.00,3.58）</td>
+<td style="text-align:left"></td>
+</tr>
+</tbody>
+</table>
+<p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4959690/table/pone.0159185.t005/?report=objectonly">在另一个窗口打开</a></p>
+<p>*偏离的方向相反。</p>
+<p>在A组中，操作员是第一作者，44个检查点的偏差为2.15 mm（0,3.95 mm），偏移矢量的幅度为3.00 mm（2.90,4.20 mm）。在B组中，36个检查点的偏差为0.90 mm（0,2.95 mm），偏移矢量的大小为2.50 mm（1.70,4.15 mm）。两个亚组之间没有显着差异（P <em>=</em> 0.3; <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4959690/table/pone.0159185.t006/">表6</a>）。其他变量，包括病变大小，登记误差度量和距脑表面的距离，没有显着差异（<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4959690/table/pone.0159185.t006/">表6</a>）。</p>
+<h3 id="表6">表6</h3>
+<p><strong>不同算子偏差的比较。</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left"></th>
+<th style="text-align:left">A组（11）</th>
+<th style="text-align:left">B组（9）</th>
+<th style="text-align:left">p</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><strong>检查点</strong></td>
+<td style="text-align:left">44</td>
+<td style="text-align:left">36</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>偏差（毫米）</strong></td>
+<td style="text-align:left">2.15（0,3.95）</td>
+<td style="text-align:left">0.90（0,2.95）</td>
+<td style="text-align:left">0.30</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>偏移矢量的大小</strong></td>
+<td style="text-align:left">3.00（2.90,4.20）</td>
+<td style="text-align:left">2.50（1.70,4.15）</td>
+<td style="text-align:left">0.18</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>病变的大小（cm <strong><sup><strong>3</strong></sup></strong>）</strong></td>
+<td style="text-align:left">10.40（6.80,23.60）</td>
+<td style="text-align:left">13.80（3.15,40.55）</td>
+<td style="text-align:left">0.71</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>与脑表面的距离（mm）</strong></td>
+<td style="text-align:left">2.00（0.00,9.00）</td>
+<td style="text-align:left">5.30（1.50,8.60）</td>
+<td style="text-align:left">0.50</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>注册错误指标</strong></td>
+<td style="text-align:left">1.80（1.50,1.90）</td>
+<td style="text-align:left">1.60（1.50,1.90）</td>
+<td style="text-align:left">0.55</td>
+</tr>
+</tbody>
+</table>
+<p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4959690/" title="转到此页面的其他部分">去：</a></p>
+<h2 id="讨论">讨论</h2>
+<p>颅内病变的精确定位是一项极其重要但艰巨的任务，尤其是当病变较小时。造成这种困难的一个主要原因是大脑是一个复杂的3D结构。神经外科医生必须在心理上将2D MRI结果转换为3D表示，并进一步想象其相对于患者大脑的3D坐标[ <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4959690/#pone.0159185.ref001">1</a> ]。为了定制皮肤切口和骨窗，外科医生必须根据患者的位置将病变的3D坐标转换回2D表面投影。这些复杂的转变要求很高，并且需要外科医生拥有经验和精确的解剖学知识[ <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4959690/#pone.0159185.ref001">1</a>]。定位困难的另一个原因是可以在MR图像上清楚地识别的表面解剖标志的短缺。根据解剖学标志构建真实世界坐标系以识别颅内病变的位置是具有挑战性的。具有附加的图像引导的技术有效地解决了由基于三维MRI容积和上执行重建这个问题共配准它的坐标系[ <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4959690/#pone.0159185.ref002">2</a>，<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4959690/#pone.0159185.ref003">3</a> ]。此外，通过显示在AR颅内病变的部位，图像引导技术可帮助指定非常精确和直观的手术方案[ <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4959690/#pone.0159185.ref004">4</a>，<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4959690/#pone.0159185.ref005">5</a>]。</p>
+<p>除了通过图像引导系统和手术显微镜实施AR的，一些作者描述的替代低成本的解决方案[ <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4959690/#pone.0159185.ref010">10</a> - <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4959690/#pone.0159185.ref018">18</a>]。这些报告证实了低成本AR解决方案在神经外科手术中的有效性。在这些报告中，用于定位脑部病变的解决方案是实用的，并且不需要专门设计的设备。Lovo等。描述了一种解决方案，其中大脑皮层和静脉循环的3D重建与使用数码相机获得的患者头部的照片共同登记<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4959690/#pone.0159185.ref010"> [10]</a>]。然后根据附着在患者头部的基准点融合两个图像。作者将这种方法应用于8名患者，并使用术中超声和基于框架的立体定位验证其准确性。但是，作者没有提供数据来评估准确度。该方法的一个限制是需要使用基准点进行额外的MRI扫描。作者没有提到的另一点是如何保持照片角度和基于3D模型的数字图像的一致性。此参数对于执行准确的共同注册至关重要。2013年，Mahvash等人。描述了一种先进的AR解决方案，并使用幻像头进行了演示[ <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4959690/#pone.0159185.ref012">12</a>]。在他们的研究中，他们使用视频投影仪将基于3D模型的数字MR图像直接投影到幻像的头部，头骨或大脑表面上。头部侧面的解剖标志和五个基准标记用于手动登记。最终结果非常好; 然而，作者没有提供其临床应用的例子。该方法的一个限制是手动调节投影的虚像的焦点，大小和位置是一个有些繁琐的过程，尤其是当患者处于手术位置时。</p>
+<p>由于相机，屏幕和智能手机处理器的进步，AR可以使用移动设备实现; 使用这种设备的方法被称为移动AR（mAR）[ <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4959690/#pone.0159185.ref019">19</a>]。这项技术使AR更方便，更实惠，更受欢迎。我们使用iPhone帮助定位颅内病变的解决方案是一种移动AR实施方案。与上述AR解决方案相比，我们的方法实现了类似的效果，但简化了MR图像的预处理，共同配准过程和AR图像生成。除了标准的Windows XP图像处理软件（Paint），iPhone和一些iOS应用程序之外，该方法不需要额外的成本或技术复杂性。所有过程都可以在10分钟内完成，无需重复MRI扫描。</p>
+<p>根据第一阶段的结果，15名患者的43个标记的偏差为0mm（0,1.50mm），97.7％的标记显示出高水平的准确性（D≤5mm）。大多数偏差（87.5％）小于4毫米，最大偏差为6.5毫米。总结这些数据，这种新方法的最大偏差应该在5毫米左右。Mascott等人。描述了30例无框神经导航手术病例，使用双侧耳屏，双侧内侧眼角和鼻根进行配准，并报告偏差约为5.4 mm [ <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4959690/#pone.0159185.ref020">20</a>]。因此，我们的技术的准确性水平应该接近他们的神经导航系统。在第二阶段的研究中，我们进一步将我们的方法与无框架神经导航系统进行了比较，并证明它们之间的偏差为2.95 mm（2.43,4.10 mm）。对于幕上病变，偏差为2.90 mm [2.35,3.72 mm]。结果在80个检查点的93.1％的高一致性范围内。如果我们进一步消除单个大配准度量误差（患者12）和不规则病变边缘（患者11）的影响，则最大偏移为4.2mm。总结约1-2毫米的配准误差指标，这种新方法的实际精度水平应该在5毫米左右，这与第一阶段的结果一致。这些数据意味着当使用解剖标志进行登记时，</p>
+<p>我们发现，我们方法的大多数变化发生在矢状图的采集中。相机高度的差异，与患者的距离，拍摄角度和缩放比例将导致照片的差异，这导致随后的方法中的进一步不一致。控制矢状图采集变化的技术的可用性是我们选择LVL CAM应用程序而不是内置iPhone相机应用程序的原因。在这项研究中，我们发现，在偏差数据没有显著操作者间差异，在任一测试阶段（表<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4959690/table/pone.0159185.t003/">（Tables3</a><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4959690/table/pone.0159185.t003/">3</a>和<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4959690/table/pone.0159185.t006/">AND6）。</a><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4959690/table/pone.0159185.t006/">6</a>）。在第二阶段，我们发现幕上病变的偏移幅度不随患者，肿瘤大小或距离脑表面的距离而变化（<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4959690/figure/pone.0159185.g006/">图6</a>）。这些发现表明，其他外科医生应该能够以可接受的准确度水平重复这种新方法。</p>
+<p><a href="https://www.ncbi.nlm.nih.gov/core/lw/2.0/html/tileshop_pmc/tileshop_pmc_inline.html?title=Click%20on%20image%20to%20zoom&amp;p=PMC3&amp;id=4959690_pone.0159185.g006.jpg"><img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4959690/bin/pone.0159185.g006.jpg" alt="包含图片，插图等的外部文件。对象名称为pone.0159185.g006.jpg" title="点击图片放大"></a></p>
+<p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4959690/figure/pone.0159185.g006/">图6</a></p>
+<p><strong>第二阶段试验中偏移向量的大小。</strong></p>
+<p>（A）散点图，说明第二阶段试验中20名患者的偏移向量的大小。两个圆点表示两名患有小脑病变的患者。标有中位数，第1和第3四分位数。（B）散点图，其中Y轴上的偏移矢量的大小和X轴上的病变体积。（C）散点图，其中Y轴上的偏移矢量的大小和X轴上的表面的损伤距离。</p>
+<p>我们新方法的关键步骤是将MR图像与使用iPhone拍摄的矢状图片共同登记。为此目的，我们设计了一种简化的手动共同登记技术。Mahvash等人报道了一种类似的技术。[ <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4959690/#pone.0159185.ref012">12</a> ]; 然而，与他们不同，我们在共同注册期间并不依赖基准。我们的理由如下：首先，人头部和脸部的轮廓是特征性的，并且易于识别。皮肤表面的解剖标志，如鼻根，前鼻脊，同侧眼的内侧和外侧角，同侧耳屏和同侧耳螺旋，都被证实对导航登记有效<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4959690/#pone.0159185.ref021"> [21]</a>]。其次，我们使用LVL CAM应用程序的技术意味着可以使用正确的头部角度轻松获取矢状图，否则会影响照片的轮廓。第三，中矢状MR图像切片很容易获得，并清楚地显示了面部和头部的明显轮廓。此外，可以以直观的方式在触摸屏上执行共同登记。我们的数据证实，这种共同注册技术是可行的，并且可以快速完成，即使它目前是手动过程。然而，该方法的进一步发展将是有益的，并且应该包括自动2D / 3D配准算法，集成和跨平台移动应用以及实时增强现实显示技术。</p>
+<p>根据我们的结果，该技术的应用范围如下：首先，这种技术不适合枕下病变。在第二阶段，两名患有小脑转移的患者（患者8和患者12）遇到明显的偏差（&gt; 10 mm）。这些偏差的主要原因是枕下肌群的厚度很大。为了暴露小脑，外科医生必须尽可能向前弯曲颈部。在此过程中，皮肤上描绘的病变的表面投影将被拉伸，因此与其原始位置大大偏离。其次，这种技术最适用于浅部病变，这些病变部分暴露在脑表面或距表面10毫米内。如果病变没有直接暴露在大脑表面，则最小病变直径应大于2厘米。第一阶段试验中80％的病变和第二阶段中90％的病变属于这种类型。我们在手术过程中发现这些病变没有遇到任何困难。对于非常小的实质内病变（最大直径&lt;1.5 cm，例如在第一阶段试验中的患者4和10），我们不得不在手术期间使用立体定向框架来帮助定位病变。对于非常深的病变，例如在第二阶段试验中的患者5中，必须使用完整的导航系统。该技术非常适用于深部血肿或脑脓肿的穿刺，插管和引流手术，例如第一阶段的患者6,12和14。根据皮肤上描绘的表面投影，可以直观地确定穿刺的部位，方向和深度。在手术期间也可以容易地调整和维持方向。这样可以准确地达到这三个病灶，即使它们是深层的（距离&gt; 2 cm）。</p>
+<p>这项研究有一些局限性。首先，这是一项小型样本的单中心研究; 需要更大样本量的多中心研究来评估这种新方法的可行性和临床影响。其次，我们确实在临床实践中遇到了不便的情况。一些患者最近在其他医院接受了MRI扫描，并使用他们的MRI胶片来到我们医院。我们没有要求他们重复MRI扫描，因为这些胶片质量很好; 因此，我们的PACS无法获得数字MRI图像。我们的替代方法是将带有所有矢状切片的MRI胶片放到胶片观察器上，然后用iPhone拍摄。为了减少照片的失真，我们使用LVL CAM使iPhone与MRI胶片保持平行。然后可以将这些MRI胶片的照片用于与患者的头部照片共同配准。这些患者（目前编号为3）未纳入研究，因为数量太少。拍摄MRI胶片的照片可能会在结果中引入新的误差; 因此，这种情况下的准确度仍需要进一步调查。</p>
+<p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4959690/" title="转到此页面的其他部分">去：</a></p>
+<h2 id="结论">结论</h2>
+<p>这种低成本，基于图像的iPhone辅助AR解决方案在技术上是可行的，并且有助于一些颅内病变的定位，尤其是中等大小的浅幕上颅内病变。</p>
+<p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4959690/" title="转到此页面的其他部分">去：</a></p>
+<h2 id="资金声明">资金声明</h2>
+<p>本研究得到解放军总医院种子基金会（第14KMM36号），海南省应用技术研究与示范项目（第ZDXM2015089号），三亚医疗卫生技术创新项目（第2014YW26号）的支持。</p>
+<p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4959690/" title="转到此页面的其他部分">去：</a></p>
+<h2 id="数据可用性">数据可用性</h2>
+<p>由于识别患者信息，可以根据请求向对应的作者提供数据。</p>
+
+            </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://blog.bioprinting.site/post/uNmMWdDR0">
+                  <h3 class="post-title">
+                    图像引导，微创脑内血肿清除：比较内镜和管状外显子系统的匹配队列研究
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script type="application/javascript">
+
+AOS.init();
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+
+  </body>
+</html>

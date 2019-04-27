@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>基于扩散加权磁共振成像的人丘脑核体内概率图谱 | Li Zhenzhu, Ph.D</title>
+<meta name="description" content="Binzhou Medical University Hospital, Email: timeanddoctor@gmail.com.">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://blog.bioprinting.site/favicon.ico?v=1556350835272">
+<link rel="stylesheet" href="https://blog.bioprinting.site/styles/main.css">
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://blog.bioprinting.site">
+        <img src="https://blog.bioprinting.site/images/avatar.png?v=1556350835272" class="site-logo">
+        <h1 class="site-title">Li Zhenzhu, Ph.D</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            Home
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            Archives
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            Tags
+          </a>
+        
+      
+        
+          <a href="/paper" class="site-nav">
+            Paper
+          </a>
+        
+      
+        
+          <a href="/3dprinting" class="site-nav">
+            3D printing
+          </a>
+        
+      
+        
+          <a href="/bigbridgerobot" class="site-nav">
+            BigBridgeRobot
+          </a>
+        
+      
+        
+          <a href="/business" class="site-nav">
+            Business
+          </a>
+        
+      
+        
+          <a href="https://blog.bioprinting.site/post/meeting/" class="site-nav">
+            Training
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      Binzhou Medical University Hospital, Email: timeanddoctor@gmail.com.
+    </div>
+    <div class="site-footer">
+      Powered by Li Zhenzhu
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">基于扩散加权磁共振成像的人丘脑核体内概率图谱</h2>
+            <div class="post-date">2019-02-13</div>
+            
+              <div class="feature-container" style="background-image: url('https://blog.bioprinting.site/post-images/J6tk2zmlK.jpg')">
+              </div>
+            
+            <div class="post-content">
+              <p>丘脑核参与许多神经退行性疾病，因此，它们的鉴定在许多临床治疗中至关重要。目前通过探索扩散加权磁共振成像（DW-MRI）来实现丘脑子部分的自动分割，但是在没有这样的数据的情况下，可以使用基于图谱的分割作为替代。目前，丘脑的可用数字地图集数量有限。此外，所有地图集仅使用少数受试者创建，因此由于丘脑形态的主体间可变性而易于出错。在这项工作中，我们提出了建立在相对较大的数据集上的丘脑解剖学子部分的概率图谱，其中通过采用最近提出的基于自动扩散的聚类方法来完成个体丘脑分割。我们的分析比较了基于图谱和聚类方法之间的分割性能，证明了当DW-MRI不可用时，所提供的图集能够替代单个空间中基于自动扩散的细分。</p>
+<p>**主题词：**脑成像，磁共振成像，脑</p>
+<p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6257045/" title="转到此页面的其他部分">去：</a></p>
+<h2 id="背景与摘要">背景与摘要</h2>
+<p>丘脑是中枢中继结构和马达的调节器以及由白质纤维传递的感觉冲动。尽管它的近似8大小相对较小_厘米_<sup>3</sup>每半球，丘脑表示从许多小核在两个组织学和功能在它们之间的不同建立了一个高度复杂的结构。每个细胞核都投射到皮层的不同部位，因此与不同的神经功能有关。由于这个原因，丘脑核涉及广泛的功能障碍，因此，在许多神经退行性研究和临床应用<sup><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6257045/#b1">1-4中具有重要意义</a></sup>。</p>
+<p>磁共振成像（MRI）作为一种非侵入性技术，可提供对软生物组织的增强描述，可实现脑结构的自动描绘和表征<sup><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6257045/#b5">5</a></sup>。然而，标准T1和T2加权（T1w和T2w）MRI提供的固有对比度太低而不能区分任何丘脑子部分，因此，这些图像在自动化框架中用于分割核的用途有限。</p>
+<p>到目前为止，扩散加权MRI（DW-MRI）是唯一能够通过描述其下方微观结构的几何形状来对人脑白质进行成像的非侵入性成像方法。更准确地说，DW-MRI捕获水分子的平均扩散，其以远小于成像分辨率的尺度探测生物组织的结构。因此，DW-MRI能够描绘代表每个丘脑核相对于其皮质投影的不同纤维特征。因此，自动丘脑分割领域的最先进方法主要基于DW-MRI提供的特征，并分为两组：第一组探索局部扩散特性<sup><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6257045/#b6">6-8</a></sup>，而第二组，全球丘脑连通性<sup><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6257045/#b9">9</a>，<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6257045/#b10">10</a></sup>。在结果方面的组之间的主要区别是，该纤维跟踪方法会导致强烈由丘脑的已知解剖发散分割图案<sup><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6257045/#b9"> 9</a>，<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6257045/#b10">10</a></sup>。</p>
+<p>最近的文献提出了一种稳健且可重复的方法，其在与解剖结构<sup><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6257045/#b11">11</a></sup>紧密匹配的七个区域中细分丘脑。所开发的分割框架基于丘脑体素的空间位置与来自3T MRI的局部扩散特性之间的权衡，所述3T MRI由在球谐函数（SH）基础上投射的扩散方向分布函数（ODF）表示<sup><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6257045/#b12">12-14</a></sup>。与迄今为止使用的其他DW-MRI特征不同，ODF允许在每个体素处使用全扩散信号和取向分布，因此，所提出的方法在探索局部扩散特性的基础上优于现有技术。</p>
+<p>然而，如果DW-MRI数据不可用，则不可能执行这样的分割。在这种情况下的一种替代方案是使用数字地图集。目前，没有发表的作品呈现丘脑地图集有限数量<sup><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6257045/#b9">9</a>，<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6257045/#b15">15-18</a></sup>，尤其是提供数字格式<sup><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6257045/#b9">9</a>，<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6257045/#b17">17</a>，<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6257045/#b19">19</a></sup>。一般而言，这些地图集仅使用少数受试者建立，因此，它们包含了丘脑形态的抑制主体间变异性。此外，虽然Morel的<sup><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6257045/#b16">16</a></sup>和Yelnik的<sup><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6257045/#b17">17张</a></sup>地图集正在描绘组织学，但Behrens的<sup><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6257045/#b9">9</a></sup> 一个人将丘脑细分为皮质连接，这不一定反映了潜在的解剖结构。</p>
+<p>本工作的目的是提供基于数字成像的解剖学丘脑子部分的概率图谱，其由相对大量的健康对照构建。为此，我们首先使用先前提出的基于ODF的丘脑聚类来分割人类连接项目数据的相当大的子集。从获得的分割中，我们然后构建每个核的图谱，最后，通过计算相应的相互模板，我们将结果转换为MNI（蒙特利尔神经学研究所）空间（参见<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6257045/figure/f1/">图1</a>）。</p>
+<p><a href="https://www.ncbi.nlm.nih.gov/core/lw/2.0/html/tileshop_pmc/tileshop_pmc_inline.html?title=Click%20on%20image%20to%20zoom&amp;p=PMC3&amp;id=6257045_sdata2018270-f1.jpg"><img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6257045/bin/sdata2018270-f1.jpg" alt="包含图片，插图等的外部文件。对象名称为sdata2018270-f1.jpg" title="点击图片放大"></a></p>
+<p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6257045/figure/f1/?report=objectonly">在另一个窗口打开</a></p>
+<p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6257045/figure/f1/">图1</a></p>
+<p><strong>处理流程图显示了构建丘脑核概率图谱的主要步骤。</strong></p>
+<p>此外，在一组健康受试者的分组结果方面，将图谱与基于ODF的聚类进行比较。我们的分析显示了基于图谱的方法和基于聚类的方法之间高度相似的分割模式，这证明了当DW-MRI不可用时，所提供的图集能够替代单个空间中基于自动ODF的细分。</p>
+<p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6257045/" title="转到此页面的其他部分">去：</a></p>
+<h2 id="方法">方法</h2>
+<p>为了创建十四个丘脑核的空间概率图谱图（SPAM），每个半球七个，执行基于标签的方法<sup><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6257045/#b20">20</a></sup>。首先，对于每个受试者，右侧和左侧丘脑被自动分割成七个不同的核。其次，将每个T1w图像登记到MNI空间，然后应用所获得的空间变换以将个体丘脑分割映射到立体定位空间。最后，通过确定在立体定位空间<sup><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6257045/#b20">20中</a></sup>在每个体素位置处分配给给定解剖标签的受试者的比例，为每个丘脑核构建概率图。<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6257045/figure/f1/">图1</a>中的<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6257045/figure/f1/">流程图</a>说明了整个处理流水线。</p>
+<h3 id="参与者">参与者</h3>
+<p>从Human Connectome Project中选择了70名不相关的健康受试者（年龄范围22-36岁，39名女性）（H C P.）数据库。使用这些数据的选择与其高质量和更好的空间分辨率有关，这使得更容易实现设计的程序。</p>
+<p>所有受试者在华盛顿大学（华盛顿大学）的同一3T Siemens Skyra平台上扫描，带有32通道头部线圈。扫描方案包括五种MRI模式，但在本研究中仅使用T1w，T2w和DW-MRI。</p>
+<p><em><strong>T1w</strong></em>：使用具有回波时间的3D反转恢复序列获取磁化准备的快速采集梯度回波（MPRAGE）矢状图像（T E.）= 2.14毫秒，重复时间（T R）= 2400毫秒，反转时间（我Ť）= 1000毫秒，翻转角（F A.）= 8 <sup>o</sup>，带宽（B W.）=每像素210 Hz，回波间隔（E S.）= 7.6 ms，梯度强度= 42 mT / m，视野（F O V.）= 180×224×224mm <sup>3</sup>，体素尺寸= 0.7×0.7×0.7mm <sup>3</sup>，采集时间7分40秒。</p>
+<p><em><strong>T2w</strong></em>：T2w矢状图像采用3D T2采样完美采用应用优化对比度，采用翻转角度演化（SPACE）序列和回波时间（T E.）= 565毫秒，重复时间（T R）= 3200 ms，带宽（B W.）=每像素744赫兹，回波间隔（E S.）= 3.53 ms，涡轮系数= 314，视野（F O V.）= 180×224×224mm <sup>3</sup>，体素尺寸= 0.7×0.7×0.7mm <sup>3</sup>，采集时间8分钟24秒。</p>
+<p><em><strong>DW-MRI</strong></em>：多层回波平面成像（E P I.）多频段（M B.）回波时间采集激励和多个接收器（T E.）= 289.5毫秒，重复时间（T R）= 5520毫秒，翻转角（F A.）= 78 <sup>o</sup>，重新聚焦翻转角（r F A.）= 160 <sup>o</sup>，带宽（B W.）=每像素1488赫兹，多频段因子= 3，回波间隔（E S.）= 0.78 ms，梯度强度= 100 mT / m，视野（F O V.）= 210×180×138mm <sup>3</sup>，体素尺寸= 1.25×1.25×1.25mm <sup>3</sup>，b值= 0,1000,2000和3000s / mm <sup>2</sup>。每个梯度表包括大约90个扩散加权方向加上每次运行散布的6个b0采集。收购时间约为63分钟。</p>
+<p>除了原始MR图像外，HCP数据库还提供了专门为此项目设计的定制FreeSurfer管道获得的处理结果（脑面罩，皮质表面，皮质图和体积/表面包裹等）。有关采集协议或处理流水线的更多详细信息，请参阅<sup><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6257045/#b21">21-23</a></sup>。</p>
+<h3 id="丘脑包裹">丘脑包裹</h3>
+<p>对于丘脑分割，我们遵循Battistella <em>等人_提出的框架</em>。_<sup><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6257045/#b11">11</a></sup>。贝娄我们简要总结了主要的处理步骤。</p>
+<h3 id="精制丘脑面具">精制丘脑面具</h3>
+<p>第一步是获得整个丘脑的准确面罩（见图<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6257045/figure/f1/">1a</a>）。</p>
+<p>简而言之，方法如下。首先，每个单独的头骨剥离T1w图像分为三个不同的类别：灰质（GM），白质（WM）和脑脊液（CSF），应用SPM8套件中包含的改进的高斯混合模型<sup><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6257045/#b24">24</a></sup>。使用这种方法，计算每个体素属于GM，WM或CSF的概率。其次，获得的DW-MRI的b值接近1000 s / mm <sup>2</sup>用于拟合扩散张量以获得分数各向异性图（FA）。第三，从Freesurfer皮层下分割获得的所有丘脑面罩都经过精制，以避免部分体积污染。更准确地说，一方面我们已经消除了比5％更高概率的体素来代表CSF，另一方面，那些更有可能成为内囊而不是丘脑的一部分，即FA值高于0.55的体素 - 一个经验确立的门槛。所有这些步骤都在主题空间中进行。</p>
+<h3 id="丘脑核聚集">丘脑核聚集</h3>
+<p>我们首先使用q-Ball成像和恒定立体角算法（Qball-CSA）<sup><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6257045/#b25">25</a></sup>从高角度分辨率扩散图像（HARDI）计算丘脑的方向分布函数（ODF）。Qball-CSA包含在整个Qboot功能的FSL（<a href="https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/FDT/UserGuide">https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/FDT/UserGuide</a>）图像处理套件中。通过使用50个样本将要检测的ODF峰的最大数量设置为2来应用Qball-CSA算法用于残余自举<sup><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6257045/#b1">1</a></sup>，与FSL中Qboot命令的默认设置一样。此外，为了获得具有单壳DWI数据的兼容ODF估计模型，如通常用于该丘脑分割的设置，我们使用单指数建模，考虑来自DWI数据的三个壳的平均信号。从Qboot算法所得的ODF在球谐的基础进行了表示（SH）功能<sup><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6257045/#b12">12</a>，<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6257045/#b13">13</a></sup>。最大SH基础顺序设置为6，总共给出28个SH系数。因此，用于聚类算法的平均系数被估计为由Qboot引导产生的每个体素中的ODF形状的样本的平均值。</p>
+<p>通过改进的k均值算法进行核分割，将SH基中的平均ODF系数和来自最终丘脑掩模的每个体素的位置坐标作为输入。决策度量分别表示空间位置与每个体素的ODF系数之间的欧几里德距离的加权线性组合。ODF系数之间的距离将对具有相似微观结构特性的体素进行分组，而经验证明的空间距离将限制它们是连续的。因此，空间术语将确保最终分割中的紧凑簇。从两个特征考虑了相等的贡献，即每个欧几里德距离的加权因子被设置为0.5。集群数量设置为7 <sup><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6257045/#b11">11</a></sup>。此外，由于两个使用的特征不是相同的值的比例，为了避免k均值聚类中的任何偏差，我们将ODF系数乘以一个比例因子，使它们之间的欧几里德距离在相同的范围内值作为空间距离。因此，根据经验我们已将此缩放因子设置为100.此外，为了排除初始化偏差，该方法以数据驱动方式初始化，将仅使用位置作为输入的5000个随机初始化k均值的平均值作为质心。特征。</p>
+<p>从每个丘脑中的聚类算法得到的最后七个分区相应地分别标记它们所代表的解剖学子部分。即，我们有：前组（一个），腹前组（V A.），中背组（M D.），腹侧后腹侧组（V L V.），腹侧后背组（V L D.），pulvinar（P ü）和包围中央外侧，外侧后侧和内侧丘脑的簇（C L- L P.- P u M）（见图<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6257045/figure/f2/">2</a>）。</p>
+<p><a href="https://www.ncbi.nlm.nih.gov/core/lw/2.0/html/tileshop_pmc/tileshop_pmc_inline.html?title=Click%20on%20image%20to%20zoom&amp;p=PMC3&amp;id=6257045_sdata2018270-f2.jpg"><img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6257045/bin/sdata2018270-f2.jpg" alt="包含图片，插图等的外部文件。对象名称为sdata2018270-f2.jpg" title="点击图片放大"></a></p>
+<p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6257045/figure/f2/?report=objectonly">在另一个窗口打开</a></p>
+<p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6257045/figure/f2/">图2</a></p>
+<p><strong>丘脑核寰椎。</strong></p>
+<p>每行显示在聚焦在丘脑区域的MNI空间中的T1152模板的不同切片，并且用空间概率图（第一和第二列）和最大概率图谱（第三列）覆盖。</p>
+<p>对于70个测试案例中的三个，我们观察到与预期的分割模式不同的聚类结果，因此它们不被考虑用于构建图谱。</p>
+<h3 id="自定义模板构造和空间规范化">自定义模板构造和空间规范化</h3>
+<p>所有颅骨剥离T1W和被雇用T2W成像生成使用在开源软件Advanced正常化工具（蚁）掺入的对称组间微分同胚正常化（SYN）方法定制的模板<sup><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6257045/#b26">26</a>，<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6257045/#b27">27</a></sup>。使用ANTs注册套件是因为在最近Klein <em>等人的_非线性注册评估文章中，它在准确性和精确度方面被选为排名最高的注册程序</em>。_<sup><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6257045/#b28">28</a></sup>。</p>
+<p>ANT通过查找给出数据集“最小”参数化的模板和变换集，将人口中的图像稳健地映射到公共空间。首先，T1w和T2w图像被独立地仿射登记并平均以创建两种模态的第一迭代模板。其次，使用互相关作为相似性度量将所有T1w和T2w图像登记到其对应的模板。指定了参数，因此SyN注册方法使用四分之一分辨率的30次迭代，半分辨率的20次迭代和全分辨率的4次迭代。在下一步中，对齐的图像被平均以创建新模板。然后将平均卷用作同一过程的另一次迭代的新模板。</p>
+<p>最终定制T1W模板终于不使用直线作为目标模板埃文斯介绍了ICBM152图谱的非线性版本注册到MNI空间<sup><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6257045/#b29">29</a>，<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6257045/#b30">30</a></sup>。还保存了两个模板之间的空间转换（自定义到MNI）。</p>
+<p>关于SyN方法的更多细节可以在<sup><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6257045/#b26">26中</a></sup>找到。</p>
+<h3 id="阿特拉斯建筑">阿特拉斯建筑</h3>
+<p>按照<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6257045/figure/f1/">图1b和c中</a>示意性显示的策略建立每个丘脑核的概率图谱。我们应用本地到自定义和定制到MNI的变换来将主题单个丘脑分割数据重新采样到MNI空间中。由于我们在主题之间进行平均，因此为了使用标签形成图像，我们应用最近邻作为插值方法。通过对受试者进行平均，我们然后计算了14个丘脑子部分的概率图（每个半球7个）。通过在每个体素处识别在核概率图中具有最大值的结构标签来确定最大似然标记。在多模式的情况下，其中多个核在体素处具有最大似然值，从该位置处的模式随机选择标记（参见<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6257045/figure/f2/">图2</a>）。</p>
+<h3 id="代码可用性">代码可用性</h3>
+<p>用于丘脑核聚类的自定义代码在Matlab中实现，并上传到Zenodo（数据引用1）。使用的和当前版本的软件是1.0。用于处理数据集的所有参数都在提供的文件中给出。</p>
+<p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6257045/" title="转到此页面的其他部分">去：</a></p>
+<h2 id="数据记录">数据记录</h2>
+<p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6257045/table/t1/">表1中</a>给出了与该研究相关的数据记录的摘要。</p>
+<h3 id="表格1">表格1</h3>
+<p><strong>与本研究相关的数据记录摘要。</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">数据集</th>
+<th style="text-align:left">人类连接项目（HCP）队列</th>
+<th style="text-align:left">测试队列</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">科目数量</td>
+<td style="text-align:left">70</td>
+<td style="text-align:left">34</td>
+</tr>
+<tr>
+<td style="text-align:left">出处</td>
+<td style="text-align:left">请参阅<a href="https://db.humanconnectome.org/">https://db.humanconnectome.org</a></td>
+<td style="text-align:left">Battistella <em>等人_提出的研究对照组</em>。_<sup><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6257045/#b31">31</a></sup></td>
+</tr>
+<tr>
+<td style="text-align:left">可从</td>
+<td style="text-align:left"><a href="https://db.humanconnectome.org/">https://db.humanconnectome.org</a></td>
+<td style="text-align:left">数据引用1中可用的子集</td>
+</tr>
+<tr>
+<td style="text-align:left">使用的方式</td>
+<td style="text-align:left">T1w和DW-MRI</td>
+<td style="text-align:left">T1w和DW-MRI</td>
+</tr>
+<tr>
+<td style="text-align:left">实验用法</td>
+<td style="text-align:left">建立地图集</td>
+<td style="text-align:left">地图集的技术验证</td>
+</tr>
+<tr>
+<td style="text-align:left">提供输出</td>
+<td style="text-align:left">丘脑核子SPAMs和最大可能性图谱</td>
+<td style="text-align:left">基于图集和基于聚类的丘脑分割</td>
+</tr>
+<tr>
+<td style="text-align:left">输出格式</td>
+<td style="text-align:left">NifTI-1（扩展名.nii.gz）</td>
+<td style="text-align:left">NifTI-1（扩展名.nii.gz）</td>
+</tr>
+</tbody>
+</table>
+<h3 id="数据记录作为贡献">数据记录作为贡献</h3>
+<p>所提出的工作的贡献是包含以压缩NIfTI-1格式（.nii.gz扩展名）给出的两个图像文件的单个数据记录。其中之一是4D体积文件，其包括丘脑核的所有14个构建的3D空间概率图，而第二个是表示最大似然图谱的3D体积，其中每个体素包含每个丘脑核的单个整数值。</p>
+<p>最大似然图谱提供标准颜色查找表（LUT，存储为.txt文件），其中每一行代表一个标记的丘脑区域，并提供有关相应标签代码，名称，RGB（红色，绿色，蓝色）的信息）颜色三重和不透明度。RGB和不透明度值是8位整数值。出于可视化目的，丘脑核的颜色在半球之间是对称的，但每个核具有唯一的标签代码和结构标题，以区分左半球和右半球。此文件以及最大似然图集可以使用一个主要的可视化工具（例如tkmedit，freeview或3D-Slicer）打开，以便在显示标签时为区域着色。还可以编辑此颜色查找表以自定义颜色或使用其他区域。</p>
+<p>从这项工作得出的数据记录可通过Zenodo（数据引用2）获得。</p>
+<h3 id="使用原始数据集">使用原始数据集</h3>
+<p>使用的HCP数据由人类连接项目，WU-Minn Consortium（首席研究员：David Van Essen和Kamil Ugurbil; 1U54MH091657）提供，由16个支持NIH神经科学研究蓝图的NIH研究所和中心资助; 以及华盛顿大学麦克唐纳系统神经科学中心。它可以在<a href="https://db.humanconnectome.org/">https://db.humanconnectome.org上找到</a>，而使用的主题的ID，它们的近似年龄和性别是在与atlas地图存储在同一Zenodo存储库中的文本文件中给出的（数据引用2）。</p>
+<p>此外，Zenodo还提供了五个健康受试者的数据，这些受试者参与了探索技术验证的数据集，并提供了前面提到的丘脑分割自定义代码（数据引用1）。</p>
+<p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6257045/" title="转到此页面的其他部分">去：</a></p>
+<h2 id="技术验证">技术验证</h2>
+<p>作为第一次验证，目视检查所有图像和结果。我们观察到应用图像配准的良好质量和聚类在空间分布方面的稳健性，除了前面提到的三个基于ODF的聚类未能提供预期分割的情况。</p>
+<h3 id="与组织学图谱比较">与组织学图谱比较</h3>
+<p>丘脑核缺乏黄金标准使得对基于图谱的分区的评估难以解决。然而，按照之前报道的Battistella <em>等人的_分析</em>。_<sup><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6257045/#b11">如图11所示</a></sup>，从对象空间中的丘脑子部分的基于图谱的分割获得的结果在视觉上与Morel的组织学图谱进行比较。该检查证明了获得的分割模式与莫雷尔图谱中呈现的丘脑解剖结构之间的相似性（请参考<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6257045/figure/f3/">图3</a>）。</p>
+<p><a href="https://www.ncbi.nlm.nih.gov/core/lw/2.0/html/tileshop_pmc/tileshop_pmc_inline.html?title=Click%20on%20image%20to%20zoom&amp;p=PMC3&amp;id=6257045_sdata2018270-f3.jpg"><img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6257045/bin/sdata2018270-f3.jpg" alt="包含图片，插图等的外部文件。对象名称为sdata2018270-f3.jpg" title="点击图片放大"></a></p>
+<p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6257045/figure/f3/">图3</a></p>
+<p><strong>单个受试者丘脑核用基于簇和基于图谱的分组方法分割。</strong></p>
+<h3 id="与基于受试者的dw-mri聚类比较">与基于受试者的DW-MRI聚类比较</h3>
+<p>为了表征使用基于图谱的分割方法分割丘脑核时可能出现的差异与使用扩散加权图像<sup><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6257045/#b11">11</a></sup>的基于聚类的分割相比较，我们分析了一个独立的大量其他健康受试者。</p>
+<h4 id="测试数据集">测试数据集</h4>
+<p>测试子集由34名健康受试者组成，他们没有神经系统疾病史，年龄在20至70岁之间，使用32通道头部线圈在3T Siemens Trio扫描仪（Siemens AG，​​Erlangen，Germany）中扫描。与HCP不同，该数据集是在标准临床环境中获得的。当地机构审查_委员会委员会委员会委员会（CER-VD）_批准了该研究，并且所有参与者都_签署_了书面知情同意书。所有提出的分析都是根据相关的道德规范进行的。</p>
+<p><strong><em>T1w</em></strong>：使用回波时间采集梯度回波（MPRAGE）图像（T E.）= 2.98毫秒，重复时间（T R）= 2300毫秒，翻转角（F A.）= 8 <sup>o</sup>，视野（F O V.）= 160×256×256mm <sup>3</sup>，体素尺寸= 1×1×1mm <sup>3</sup>，采集时间4分4秒。</p>
+<p><strong><em>DW-MRI</em></strong>：使用具有回波时间的自旋回波回波平面成像序列获取DW-MRI（T E.）= 89毫秒，重复时间（T R）= 6700毫秒，视野（F O V.）= 192×192×130mm <sup>3</sup>，体素尺寸= 2×2×2.5mm <sup>3</sup>，b值= 1000s / mm <sup>2</sup>。梯度表包括64个扩散加权方向加上1 b0采集。收购时间为8分钟。</p>
+<p>对于每个受试者，使用两种方法对丘疹进行分割：基于图谱的和基于簇的分割，分别利用T1w和扩散加权图像。单个受试者的两种方法提供的分割结果<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6257045/figure/f3/">如图3</a>所示。在空间分布和描绘的簇的范围方面，我们在视觉上观察到来自两种方法的类似的分割模式（参见<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6257045/figure/f3/">图3</a>）。</p>
+<h4 id="评估指标">评估指标</h4>
+<p>三个主要的量化指标用于评估两种分割方法之间的相似性，基于图谱的分割（Pa t l a s）和基于群集（PÇ 升ü 小号吨）。更精确地，我们计算：1）骰子相似性指数<sup><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6257045/#b32">32</a></sup>，其测量两个分割之间的空间重叠，2）相对于使用基于簇的方法获得的体积的体积归一化的差异和3）丘脑核质心之间的距离。</p>
+<p>通过平均属于相同丘脑核的体素的坐标来计算质心坐标。对于每个丘脑核和分组方法，还计算质心和核上最远点之间的距离。该度量可以被认为是每个丘脑核的半径的度量，并且用作评估从两种分割方法获得的核质心之间的距离的大小的参考值。</p>
+<p>Dice系数是两个二值图像之间空间重叠程度的度量之一。它通常用于报告分段性能，并为两个图像一致的实例提供更多权重。其值介于0（无重叠）和1（完全一致）之间。在这项工作中，使用以下表达式（1）]获得Dice值：</p>
+<p>D i c e （Pa t l a s，PÇ 升ü 小号吨）= 2 （P.a t l a s∩PÇ 升ü 小号吨）（P.a t l a s∩PÇ 升ü 小号吨+ P.a t l a s∪PÇ 升ü 小号吨）（1）</p>
+<p>两个分区之间的体积差异相对于使用基于群集的方法获得的体积的百分比计算如下：</p>
+<p>％Δ V= V.a t l a s- V.Ç 升ü 小号吨VÇ 升ü 小号吨× 100（2）</p>
+<p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6257045/figure/f4/">图4a和b分别</a>显示了所选主题的基于簇的分组的相应表面以及从两种分割方法，基于图谱和基于群集获得的质心。<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6257045/table/t2/">表2</a>和<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6257045/figure/f4/">图4</a>给出了所有结果的概述。</p>
+<p><a href="https://www.ncbi.nlm.nih.gov/core/lw/2.0/html/tileshop_pmc/tileshop_pmc_inline.html?title=Click%20on%20image%20to%20zoom&amp;p=PMC3&amp;id=6257045_sdata2018270-f4.jpg"><img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6257045/bin/sdata2018270-f4.jpg" alt="包含图片，插图等的外部文件。对象名称为sdata2018270-f4.jpg" title="点击图片放大"></a></p>
+<p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6257045/figure/f4/?report=objectonly">在另一个窗口打开</a></p>
+<p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6257045/figure/f4/">图4</a></p>
+<p><strong>每个受试者和每个丘脑的基于群集和基于图谱的丘脑分割方法之间的不同相似性度量。</strong></p>
+<p>（<strong>a</strong>）轴向视图和（<strong>b</strong>）单个受试者中基于聚类的右丘脑分割的矢状图。从两种方法获得的质心，基于簇和基于图谱，分别以白色和蓝色给出。（<strong>c</strong>）骰子相似性指数。（<strong>d</strong>）体积差异的相对百分比。（<strong>e</strong>）质心坐标之间的距离。在两种方法之间计算（<strong>c</strong> - <strong>e</strong>）中所示的度量。（<strong>f</strong>）通过基于簇的分组获得的每个核的最大半径。该值用作评估通过两种方法获得的原子核的质心之间的距离的参考。对于每个箱图，中值显示为置信区间（25％和75％百分位数）。</p>
+<h3 id="表2">表2</h3>
+<p><strong>两个丘脑分割算法之间的相似度量。</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Thalamus Nuclei</th>
+<th style="text-align:left">骰子</th>
+<th style="text-align:left">体积差异百分比_（％）_</th>
+<th style="text-align:left">质心距离_（mm）_</th>
+<th style="text-align:left">距质心的最大距离_（mm）_</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">*中央外侧，外侧后侧，内侧丘脑。</td>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">左半球</td>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<p>|   |   |   |   |
+|  <em>枕</em> | 0.74±0.08 | 11.45±15.94 | 1.80±0.59 | 8.99±0.76 |
+|  <em>前面的</em> | 0.65±0.12 | -21.44±17.49 | 2.85±1.01 | 8.19±0.88 |
+|  <em>内 - 背</em> | 0.66±0.11 | 0.10±13.25 | 3.08±1.23 | 8.78±0.62 |
+|  <em>腹侧后侧背侧</em> | 0.58±0.11 | 28.29±9.55 | 3.08±1.31 | 10.12±0.67 |
+|  <em>CL-LP-PUM *</em> | 0.57±0.12 | 13.26±18.30 | 3.14±1.42 | 10.14±0.90 |
+|  <em>腹前方</em> | 0.59±0.12 | 24.45±10.83 | 3.13±1.12 | 9.10±0.61 |
+|  <em>腹侧后腹</em> | 0.64±0.12 | -14.30±15.11 | 2.43±1.28 | 8.49±0.77 |
+| 右半球</p>
+<hr>
+<p>|   |   |   |   |
+|  <em>枕</em> | 0.69±0.09 | 22.69±11.47 | 2.48±0.93 | 9.24±0.58 |
+|  <em>前面的</em> | 0.66±0.09 | -19.76±19.33 | 2.41±0.70 | 8.60±0.71 |
+|  <em>内 - 背</em> | 0.56±0.10 | -2.17±12.37 | 3.81±1.02 | 8.67±0.64 |
+|  <em>腹侧后侧背侧</em> | 0.55±0.12 | 24.62±8.82 | 2.93±1.14 | 9.99±0.73 |
+|  <em>CL-LP-PUM *</em> | 0.46±0.09 | -3.58±16.99 | 4.12±1.09 | 8.60±0.65 |
+|  <em>腹前方</em> | 0.63±0.12 | 26.70±8.61 | 2.84±1.26 | 9.69±0.57 |
+|  <em>腹侧后腹</em> | 0.63±0.10 | -13.14±17.09 | 2.36±0.94 | 8.64±0.79 |</p>
+<p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6257045/table/t2/?report=objectonly">在另一个窗口打开</a></p>
+<p>骰子相似性指数（<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6257045/figure/f4/">图4c</a>）显示平均0.6的重叠，其中发现左侧的最大值（0.74）和Cl-LP-PuM右侧的最小值（0.46）。关于集群的规模，这些调查结果可视为公平匹配。与Dice互补，体积差异表明总体上从两种方法获得的簇之间仅存在20％的尺寸不匹配（参见<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6257045/figure/f4/">图4d</a>）。此外，基于图谱的分割的质心与基于直接聚类的分割之间的欧几里德距离在位置方面也反映了一个重要的一致程度（<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6257045/figure/f4/">图4e）</a>）。Pulvinar和腹侧腹侧显示质心之间的距离较低，而右半球的簇CL-LP-PuM出现最大变化。然而，从报告的结果我们看到，该聚类的平均质心差异比聚类的最大半径小三倍（见图<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6257045/figure/f4/">4c和f</a>）。对于其他簇，该距离对应于估计半径的甚至更小的比例。因此，可以认为从两种方法获得的各个簇的质心之间的变化相对较低。</p>
+<p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6257045/" title="转到此页面的其他部分">去：</a></p>
+<h2 id="附加信息">附加信息</h2>
+<p><strong>如何引用这篇文章</strong>：Najdenovska，E。<em>等。</em> 基于扩散加权磁共振成像的人丘脑核_体内_概率图谱。<em>科学。数据</em>。5：180270 doi：10.1038 / sdata.2018.270（2018）。</p>
+<p><strong>出版商的说明</strong>：Springer Nature对已发布的地图和机构隶属关系中的管辖权声明保持中立。</p>
+<p><a id="supplementary-material-sec"></a>
+<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6257045/" title="转到此页面的其他部分">去：</a></p>
+<h2 id="补充材料">补充材料</h2>
+<p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6257045/bin/sdata2018270-isa1.zip">点击这里查看。</a><sup>（3.8K，拉链）</sup></p>
+<p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6257045/" title="转到此页面的其他部分">去：</a></p>
+<h2 id="致谢">致谢</h2>
+<p>这项工作是由中心D'Imagerie BIOM支持_é_ dicale洛桑大学（UNIL）的（CIBM），技术洛桑，日内瓦大学（UniGe）的瑞士联邦理工学院（EPFL），该大学医学中心沃州（ CHUV），日内瓦大学（HUG），以及Leenaards和Jeantet基金会。EN由瑞士国家科学基金会SNSF-205321_157040提供支持。YAG由洛桑大学生物医学系的跨学科基金资助。</p>
+
+            </div>
+            
+              <div class="tag-container">
+                
+                  <a href="https://blog.bioprinting.site/tag/3d" class="tag">
+                    3D
+                  </a>
+                
+                  <a href="https://blog.bioprinting.site/tag/slicer" class="tag">
+                    slicer
+                  </a>
+                
+              </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://blog.bioprinting.site/post/7gestl">
+                  <h3 class="post-title">
+                    7个免费的STL编辑器+如何编辑和修复STL文件
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script type="application/javascript">
+
+AOS.init();
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+
+  </body>
+</html>
