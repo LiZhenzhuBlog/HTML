@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>UR机械臂运动学正逆解方法 | Li Zhenzhu, Ph.D</title>
+<meta name="description" content="Binzhou Medical University Hospital, Email: timeanddoctor@gmail.com.">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://blog.bioprinting.site/favicon.ico?v=1557492347033">
+<link rel="stylesheet" href="https://blog.bioprinting.site/styles/main.css">
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://blog.bioprinting.site">
+        <img src="https://blog.bioprinting.site/images/avatar.png?v=1557492347033" class="site-logo">
+        <h1 class="site-title">Li Zhenzhu, Ph.D</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            Home
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            Archives
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            Tags
+          </a>
+        
+      
+        
+          <a href="/paper" class="site-nav">
+            Paper
+          </a>
+        
+      
+        
+          <a href="/3dprinting" class="site-nav">
+            3D printing
+          </a>
+        
+      
+        
+          <a href="/bigbridgerobot" class="site-nav">
+            BigBridgeRobot
+          </a>
+        
+      
+        
+          <a href="/business" class="site-nav">
+            Business
+          </a>
+        
+      
+        
+          <a href="https://blog.bioprinting.site/post/meeting/" class="site-nav">
+            Training
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      Binzhou Medical University Hospital, Email: timeanddoctor@gmail.com.
+    </div>
+    <div class="site-footer">
+      Powered by Li Zhenzhu
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">UR机械臂运动学正逆解方法</h2>
+            <div class="post-date">2019-05-10</div>
+            
+              <div class="feature-container" style="background-image: url('https://images2018.cnblogs.com/blog/1095344/201805/1095344-20180527072933030-620074166.png')">
+              </div>
+            
+            <div class="post-content">
+              <p>最近几个月因为工作接触到了机械臂的项目，突然对机械臂运动方法产生了兴趣，也就是如何控制机械臂的位置和姿态。借用一张网上的图片，应该是ur5的尺寸。我用到的是ur3机械臂，除了尺寸不一样，各关节结构和初始位置和ur5是一样的。</p>
+<p><img src="https://images2018.cnblogs.com/blog/1095344/201805/1095344-20180527072933030-620074166.png" alt=""></p>
+<p>ur机械臂是六自由度机械臂，由D-H参数法确定它的运动学模型，连杆坐标系的建立如上图所示。我当时在这个地方的理解上走了不少弯路，后来找个一个视频，我觉得讲解地比较容易理解，可以参考一下<a href="http://v.youku.com/v_show/id_XMzIwNDg4MDA0.html">Denavit-Hartenberg参数视频详解</a>。ur机械臂DH参数表如下，</p>
+<p><img src="https://blog.bioprinting.site/post-images/1557492344029.jpg" alt=""></p>
+<p>由此可以建立坐标系i在坐标系i-1的齐次变换矩阵，注意每次不管平移还是旋转是相对于当前的运动坐标系变换，矩阵右乘</p>
+<p><img src="https://images2018.cnblogs.com/blog/1095344/201805/1095344-20180527074816023-1520605604.png" alt=""><img src="https://images2018.cnblogs.com/blog/1095344/201805/1095344-20180527074843571-1120839507.png" alt=""></p>
+<p>那么把DH参数代入就可以得到所有相邻坐标系的变换矩阵</p>
+<p><img src="https://images2018.cnblogs.com/blog/1095344/201805/1095344-20180527144154446-776504147.png" alt=""><img src="https://images2018.cnblogs.com/blog/1095344/201805/1095344-20180527144201988-926698801.png" alt=""><img src="https://images2018.cnblogs.com/blog/1095344/201805/1095344-20180527144208183-1283913775.png" alt=""></p>
+<p><img src="https://images2018.cnblogs.com/blog/1095344/201805/1095344-20180527144216324-2007686439.png" alt=""><img src="https://images2018.cnblogs.com/blog/1095344/201805/1095344-20180527144222807-1848807733.png" alt=""><img src="https://images2018.cnblogs.com/blog/1095344/201805/1095344-20180527144229274-1250526175.png" alt=""></p>
+<p>所以末端坐标系6到基座固定坐标系0的变换矩阵<img src="https://images2018.cnblogs.com/blog/1095344/201805/1095344-20180527074918840-716859445.png" alt="">。那么求正解就很简单了，只要输入六个关节角度θ<sub>i</sub>，就得到末端坐标在基坐标系的变换矩阵T。ur机械臂的视教板上末端点的坐标是用六个值[x, y, z, rx, ry, rz]表示的。前三个值[x, y, z]是三维笛卡尔坐标，表示空间位置，后三个值[rx, ry, rz]是坐标旋转向量，表示空间姿态。我们得到的变换矩阵T怎么变成六值坐标[x, y, z, rx, ry, rz]呢？设</p>
+<p><img src="https://images2018.cnblogs.com/blog/1095344/201805/1095344-20180527101025758-731072248.png" alt=""></p>
+<p>T的左上角的3x3矩阵是旋转矩阵，旋转矩阵和旋转向量之间可以通过罗德里格斯（Rodrigues）变换进行转换。opencv里有相应的函数调用。算法也比较简单，不用opencv的函数自己写代码也不难。T的右上角3x1就是空间位置[x, y, z]。这样有变换矩阵T得到六值坐标，完成了正解。</p>
+<p>逆解相对要复杂一些，由末端的空间位置和姿态，计算可能的关节角度。逆解的方法有解析法，迭代法和几何法。其中解析法用数学推导，可以得到全部根，但是计算复杂。有的机械臂可以得到无穷解，比如7轴机械臂。而ur的6轴机械臂是有有限解的。这里推导一下ur的逆解。</p>
+<p>首先计算求变换矩阵T过程其中的一些中间矩阵。</p>
+<p><img src="https://images2018.cnblogs.com/blog/1095344/201805/1095344-20180527075100349-1228823736.png" alt="">，其中c<sub>23</sub>=cos(θ<sub>2</sub>+θ<sub>3</sub>)，s<sub>23</sub>=sin(θ<sub>2</sub>+θ<sub>3</sub>)。</p>
+<p><img src="https://images2018.cnblogs.com/blog/1095344/201805/1095344-20180527075112036-542481994.png" alt=""></p>
+<p><img src="https://images2018.cnblogs.com/blog/1095344/201805/1095344-20180527075122415-1330412513.png" alt=""></p>
+<p>由<img src="https://images2018.cnblogs.com/blog/1095344/201805/1095344-20180527074918840-716859445.png" alt="">得到<img src="https://images2018.cnblogs.com/blog/1095344/201805/1095344-20180527103709077-1951572752.png" alt="">。计算</p>
+<p><img src="https://images2018.cnblogs.com/blog/1095344/201805/1095344-20180527103734056-649296405.png" alt="">，<img src="https://images2018.cnblogs.com/blog/1095344/201805/1095344-20180527103755560-1796142198.png" alt="">，得到</p>
+<p><img src="https://images2018.cnblogs.com/blog/1095344/201805/1095344-20180527103843392-60682071.png" alt=""></p>
+<p>等式两边矩阵的行列应该分别相等，由第三行第四列得到<img src="https://images2018.cnblogs.com/blog/1095344/201805/1095344-20180527104011790-1934345364.png" alt="">，可解得<img src="https://images2018.cnblogs.com/blog/1095344/201805/1095344-20180527104135222-239033524.png" alt="">，有两个解。这里注意写程序的时候，求解这里的反正切是用atan2()这类的函数，返回之在(-π,+π]。而反余弦的返回值在[0,π]，从而保证在2π范围每个解是唯一的。</p>
+<p>由第三行第三列得<img src="https://images2018.cnblogs.com/blog/1095344/201805/1095344-20180527104310579-69361694.png" alt="">，可解得<img src="https://images2018.cnblogs.com/blog/1095344/201805/1095344-20180527104407262-1490785602.png" alt="">，两个解。由第三行第二列得到<img src="https://images2018.cnblogs.com/blog/1095344/201805/1095344-20180527104524002-339481378.png" alt="">，可解得<img src="https://images2018.cnblogs.com/blog/1095344/201805/1095344-20180527104537576-1226429631.png" alt="">。</p>
+<p>接着由</p>
+<p><img src="https://images2018.cnblogs.com/blog/1095344/201805/1095344-20180527105730267-1783435906.png" alt="">，</p>
+<p>计算</p>
+<p><img src="https://images2018.cnblogs.com/blog/1095344/201805/1095344-20180527104721998-1489358485.png" alt="">，得出等式左边等于</p>
+<p><img src="https://images2018.cnblogs.com/blog/1095344/201805/1095344-20180527110916911-1640633834.png" alt="">。</p>
+<p>由<img src="https://images2018.cnblogs.com/blog/1095344/201805/1095344-20180527105035307-1992381215.png" alt="">，两边平方，令<img src="https://images2018.cnblogs.com/blog/1095344/201805/1095344-20180527105109353-2076276978.png" alt="">，<img src="https://images2018.cnblogs.com/blog/1095344/201805/1095344-20180527105136636-532380401.png" alt="">。</p>
+<p>同样由<img src="https://images2018.cnblogs.com/blog/1095344/201805/1095344-20180527105159632-1867985633.png" alt="">，令<img src="https://images2018.cnblogs.com/blog/1095344/201805/1095344-20180527105212250-1939136089.png" alt="">，<img src="https://images2018.cnblogs.com/blog/1095344/201805/1095344-20180527105228874-2044756350.png" alt="">。</p>
+<p>两式相加得到<img src="https://images2018.cnblogs.com/blog/1095344/201805/1095344-20180527105303715-763704756.png" alt="">，则<img src="https://images2018.cnblogs.com/blog/1095344/201805/1095344-20180527105325825-263636398.png" alt="">，有两个解。</p>
+<p>把θ<sub>3</sub>带入<img src="https://images2018.cnblogs.com/blog/1095344/201805/1095344-20180527105430393-47325808.png" alt="">和<img src="https://images2018.cnblogs.com/blog/1095344/201805/1095344-20180527105440038-1776404602.png" alt="">，得<img src="https://images2018.cnblogs.com/blog/1095344/201805/1095344-20180527105510239-957405523.png" alt="">，<img src="https://images2018.cnblogs.com/blog/1095344/201805/1095344-20180527105522558-2130327615.png" alt="">，其中t<sub>2</sub>=tanθ<sub>2</sub>。两式消去c<sub>2</sub>，得到<img src="https://images2018.cnblogs.com/blog/1095344/201805/1095344-20180527105608722-1428977705.png" alt="">。</p>
+<p>最后得到<img src="https://images2018.cnblogs.com/blog/1095344/201805/1095344-20180527110033957-1768711475.png" alt="">，从而得到θ<sub>4</sub>。</p>
+<p>综合有两个解的情况，ur机械臂逆解总共由2x2x2=8组解。</p>
+<p>按照上面的算法，用python写了两个程序，一个正解一个逆解验证一下。工作手边是ur3的机械臂，上面的图和表都是ur5的，换成ur3的参数。正解算出来都没有问题，可以和实际机械臂的空间位姿对应。可是逆解算出来8组值，好像只有四组值是对的。一直还没理解到底是怎么回事，仔细检查了算法和程序好像都没有错阿，不知道是哪里出了问题。网上也没有找到答案，如果哪位大神知道，望不吝赐教！</p>
+
+            </div>
+            
+              <div class="tag-container">
+                
+                  <a href="https://blog.bioprinting.site/tag/blog" class="tag">
+                    Blog
+                  </a>
+                
+              </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://blog.bioprinting.site/post/RlGmbU_Jn">
+                  <h3 class="post-title">
+                    内镜手术套筒的制作和内镜吸引器的制作
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script type="application/javascript">
+
+AOS.init();
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+
+  </body>
+</html>
