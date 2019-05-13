@@ -1,0 +1,1508 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://blog.bioprinting.site</id>
+    <title>Li Zhenzhu, Ph.D</title>
+    <updated>2019-05-13T11:01:17.998Z</updated>
+    <generator>https://github.com/jpmonette/feed</generator>
+    <link rel="alternate" href="https://blog.bioprinting.site"/>
+    <link rel="self" href="https://blog.bioprinting.site/atom.xml"/>
+    <subtitle>Binzhou Medical University Hospital, Email: timeanddoctor@gmail.com.</subtitle>
+    <logo>https://blog.bioprinting.site/images/avatar.png</logo>
+    <icon>https://blog.bioprinting.site/favicon.ico</icon>
+    <rights>All rights reserved 2019, Li Zhenzhu, Ph.D</rights>
+    <entry>
+        <title type="html"><![CDATA[Maddux机器人库]]></title>
+        <id>https://blog.bioprinting.site/post/z21-pFg7m</id>
+        <link href="https://blog.bioprinting.site/post/z21-pFg7m">
+        </link>
+        <updated>2019-05-13T10:46:16.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="maddux文档">Maddux文档</h1>
+<p>Maddux是一个用于创建机器人手臂模拟和实验的python库。</p>
+<p>Maddux支持：</p>
+<ul>
+<li>任意长度的武器</li>
+<li>正向运动学</li>
+<li>反向运动学</li>
+<li>模拟环境（包括球，目标，障碍物等对象）</li>
+<li>3D环境动画</li>
+<li>3D手臂动画</li>
+<li>末端效应器位置和速度</li>
+<li>碰撞检测（武器和物体）</li>
+</ul>
+<colgroup><col class="field-name"><col class="field-body"></colgroup>
+| 发布： | 0.1 |
+| 日期： | 2016年4月24日 |
+<ul>
+<li><a href="http://bencaine.me/maddux/overview.html">概观</a>
+<ul>
+<li><a href="http://bencaine.me/maddux/overview.html#goal">目标</a></li>
+<li><a href="http://bencaine.me/maddux/overview.html#why-the-name">为什么这个名字？</a></li>
+</ul>
+</li>
+<li><a href="http://bencaine.me/maddux/tutorial.html">教程</a>
+<ul>
+<li><a href="http://bencaine.me/maddux/tutorial.html#creating-arms">创造武器</a></li>
+<li><a href="http://bencaine.me/maddux/tutorial.html#setting-up-and-plotting-an-environment">设置和绘制环境</a></li>
+<li><a href="http://bencaine.me/maddux/tutorial.html#inverse-kinematics-and-animations">反向运动学和动画</a></li>
+<li><a href="http://bencaine.me/maddux/tutorial.html#saving-paths-and-creating-videos">保存路径和创建视频</a></li>
+<li><a href="http://bencaine.me/maddux/tutorial.html#conclusion">结论</a></li>
+</ul>
+</li>
+<li><a href="http://bencaine.me/maddux/maddux.html">maddux包</a>
+<ul>
+<li><a href="http://bencaine.me/maddux/maddux.html#submodules">子模块</a></li>
+<li><a href="http://bencaine.me/maddux/maddux.html#module-maddux.environment">maddux.environment模块</a></li>
+<li><a href="http://bencaine.me/maddux/maddux.html#module-maddux.plot">maddux.plot模块</a></li>
+<li><a href="http://bencaine.me/maddux/maddux.html#module-maddux.predefined_environments">maddux.predefined_environments模块</a></li>
+<li><a href="http://bencaine.me/maddux/maddux.html#module-maddux">模块内容</a></li>
+</ul>
+</li>
+<li><a href="http://bencaine.me/maddux/maddux.robots.html">maddux.robots包</a>
+<ul>
+<li><a href="http://bencaine.me/maddux/maddux.robots.html#submodules">子模块</a></li>
+<li><a href="http://bencaine.me/maddux/maddux.robots.html#module-maddux.robots.arm">maddux.robots.arm模块</a></li>
+<li><a href="http://bencaine.me/maddux/maddux.robots.html#module-maddux.robots.link">maddux.robots.link模块</a></li>
+<li><a href="http://bencaine.me/maddux/maddux.robots.html#module-maddux.robots.predefined_robots">maddux.robots.predefined_robots模块</a></li>
+<li><a href="http://bencaine.me/maddux/maddux.robots.html#module-maddux.robots.utils">maddux.robots.utils模块</a></li>
+<li><a href="http://bencaine.me/maddux/maddux.robots.html#module-maddux.robots">模块内容</a></li>
+</ul>
+</li>
+<li><a href="http://bencaine.me/maddux/maddux.objects.html">maddux.objects包</a>
+<ul>
+<li><a href="http://bencaine.me/maddux/maddux.objects.html#submodules">子模块</a></li>
+<li><a href="http://bencaine.me/maddux/maddux.objects.html#module-maddux.objects.ball">maddux.objects.ball模块</a></li>
+<li><a href="http://bencaine.me/maddux/maddux.objects.html#module-maddux.objects.dynamic">maddux.objects.dynamic模块</a></li>
+<li><a href="http://bencaine.me/maddux/maddux.objects.html#module-maddux.objects.obstacle">maddux.objects.obstacle模块</a></li>
+<li><a href="http://bencaine.me/maddux/maddux.objects.html#module-maddux.objects.static">maddux.objects.static模块</a></li>
+<li><a href="http://bencaine.me/maddux/maddux.objects.html#module-maddux.objects.target">maddux.objects.target模块</a></li>
+<li><a href="http://bencaine.me/maddux/maddux.objects.html#module-maddux.objects.throwable">maddux.objects.throwable模块</a></li>
+<li><a href="http://bencaine.me/maddux/maddux.objects.html#module-maddux.objects">模块内容</a></li>
+</ul>
+</li>
+<li><a href="http://bencaine.me/maddux/maddux.examples.html">maddux.examples包</a>
+<ul>
+<li><a href="http://bencaine.me/maddux/maddux.examples.html#submodules">子模块</a></li>
+<li><a href="http://bencaine.me/maddux/maddux.examples.html#module-maddux.examples.arm_animation">maddux.examples.arm_animation模块</a></li>
+<li><a href="http://bencaine.me/maddux/maddux.examples.html#module-maddux.examples.arm_ball_animation">maddux.examples.arm_ball_animation模块</a></li>
+<li><a href="http://bencaine.me/maddux/maddux.examples.html#module-maddux.examples.ball_animation">maddux.examples.ball_animation模块</a></li>
+<li><a href="http://bencaine.me/maddux/maddux.examples.html#module-maddux.examples.find_jacob0">maddux.examples.find_jacob0模块</a></li>
+<li><a href="http://bencaine.me/maddux/maddux.examples.html#module-maddux.examples.obstacle_collision">maddux.examples.obstacle_collision模块</a></li>
+<li><a href="http://bencaine.me/maddux/maddux.examples.html#module-maddux.examples.plot">maddux.examples.plot模块</a></li>
+<li><a href="http://bencaine.me/maddux/maddux.examples.html#module-maddux.examples.plot_arm">maddux.examples.plot_arm模块</a></li>
+<li><a href="http://bencaine.me/maddux/maddux.examples.html#module-maddux.examples.plot_obstacle">maddux.examples.plot_obstacle模块</a></li>
+<li><a href="http://bencaine.me/maddux/maddux.examples.html#module-maddux.examples.tutorial">maddux.examples.tutorial模块</a></li>
+<li><a href="http://bencaine.me/maddux/maddux.examples.html#module-maddux.examples">模块内容</a></li>
+</ul>
+</li>
+<li><a href="http://bencaine.me/maddux/maddux.utils.html">maddux.utils包</a>
+<ul>
+<li><a href="http://bencaine.me/maddux/maddux.utils.html#submodules">子模块</a></li>
+<li><a href="http://bencaine.me/maddux/maddux.utils.html#module-maddux.utils.animate_path">maddux.utils.animate_path模块</a></li>
+<li><a href="http://bencaine.me/maddux/maddux.utils.html#module-maddux.utils">模块内容</a></li>
+</ul>
+</li>
+</ul>
+<h1 id="指数和表格">指数和表格</h1>
+<ul>
+<li>
+<p><a href="http://bencaine.me/maddux/genindex.html">指数</a></p>
+</li>
+<li>
+<p><a href="http://bencaine.me/maddux/py-modindex.html">模块索引</a></p>
+</li>
+<li>
+<p><a href="http://bencaine.me/maddux/search.html">搜索页面</a></p>
+</li>
+<li>
+<h1 id="概观">概观</h1>
+<p>Maddux是一个Python语言软件包，用于与模拟环境交互的机器人操纵器的创建，实验和可视化。</p>
+<p>使用Maddux，您可以创建任意机器人操纵器，其中包含由DH参数定义的一组链接，并在自定义环境中使用这些操纵器。设计易于修改，非常适合设置实验，让武器学习执行新任务。</p>
+<h2 id="目标">目标</h2>
+<p>Maddux的创建是为了拥有一个简单，易于理解的工具，可以快速实验教授机器人手臂来执行不同的任务。模拟环境并不是真实的，或者具有现实世界的约束。相反，重点是快速建立一个实验来测试一个想法。</p>
+<h2 id="为什么这个名字">为什么这个名字？</h2>
+<p>Maddux以Greg Maddux命名，Greg Maddux是一位退役的MLB投手，被广泛认为是有史以来最好的控球投手。他以其强大的机械，命令，沉着和机智而闻名，他是机器人手臂所希望的一切。</p>
+<h1 id="教程">教程</h1>
+<p>在本教程中，我们将简要介绍创建手臂，设置模拟环境，绘制和动画这些环境，保存机器人移动路径以及创建动画视频。</p>
+<h2 id="创造武器">创造武器</h2>
+<p>Maddux中的Arms由一系列Link对象组成，这些对象由<a href="https://en.wikipedia.org/wiki/Denavit%E2%80%93Hartenberg_parameters">DH参数</a>定义。每个链接都有θ（角度），偏移，长度和扭曲参数。每个链接还可以具有约束θ，最大速度和关节尺寸（用于可视化和碰撞）。</p>
+<p>如果您不熟悉DH参数，我建议您先阅读它们，因为它们可能有点令人困惑。例如，从一个关节到另一个关节的距离可以由偏移或长度来定义。</p>
+<p>以下是我们在maddux.robots.predefined_arms中为您定义的“简单人类手臂”的定义。</p>
+<p>从 链接 导入 链接
+从 手臂 进口 臂
+进口 numpy的 为 NP</p>
+<p>seg1_len  =  1.0
+seg2_len  =  2.0</p>
+<p>＃我们的七个“链接”。其中只有两个具有长度或偏移量。
+L1  =  链接（0 ， 0 ， 0 ， 1.571 ）
+L2  =  链接（0 ， 0 ， 0 ， - 1.571 ）
+L3  =  链接（0 ， seg1_len ， 0 ， - 1.571 ）
+L4  =  链接（0 ， 0 ， seg2_len ， - 1.571 ）
+L5 =  链接（0 ， 0 ， 0 ， 1.571 ）
+L6  =  链接（0 ， 0 ， 0 ， 1.571 ）
+L7  =  链接（0 ， 0 ， 0 ， 0 ）</p>
+<p>＃创建一个数组
+links  =  np 。阵列（[ L1 ， L2 ， L3 ， L4 ， L5 ， L6 ， L7 ]）</p>
+<p>＃为每个链接创建一个初始联合配置。
+＃q0 [0]是Link1的theta
+＃q0 [1]是Link2
+＃
+的theta ，依此类推。q0  =  np 。阵列（[ 0 ， 0 ， 0 ， - 2.0 ， 0 ， 0 ， 0 ]）</p>
+<p>＃然后用这些链接创建一个arm，初始配置q0，名称
+robot  =  Arm （links ， q0 ， 'simple_human_arm' ）</p>
+<p>值得注意的是，只有两个链接具有偏移或长度，为我们提供了两个链接臂。L7根本不是必需的，只是替换可能的末端执行器。</p>
+<h2 id="设置和绘制环境">设置和绘制环境</h2>
+<p>环境是Maddux中所有模拟的核心。它们允许您将动态（可移动）和静态（静止）对象组以及机器人组合成各种类型的“房间”，以允许所有这些对象的交互。</p>
+<p>要定义一个环境，我们将首先定义一些对象，然后我们将创建一个机器人（来自我们预定义的机器人），然后我们将这些添加到环境中。</p>
+<p>导入 numpy的 是 NP
+从 maddux.robots.predefined_robots  导入 simple_human_arm
+从 maddux.objects  导入已 球， 目标， 障碍
+来自 maddux.environment  进口 环境</p>
+<p>＃创建一个具有特定配置和基准位置的臂
+q0  =  np 。阵列（[ 0.5 ， 0.2 ， 0 ， 0.5 ， 0 ， 0 ， 0 ]）
+base_pos  =  NP 。阵列（[ 2.0 ， 2.0 ， 0.0 ]）</p>
+<p>长度2.0的＃和链路段
+臂 =  simple_human_arm （2.0 ， 2.0 ， Q0 ， base_pos ）</p>
+<p>＃然后，我们创造了一个球，目标，和障碍物
+球 =  球（位置= [ 2.0 ， 0.0 ， 2.0 ]， 半径= 0.15 ）
+目标 =  目标（位置= [ 5.0 ， 8.0 ， 2.0 ]， 半径= 0.5 ）
+障碍物 =  障碍（[ 4 ， 4 ， 0 ]， [ 5 ， 5 ， 2 ]）</p>
+<p>＃并使用这些以产生具有尺寸的环境10x10x10
+ENV  =  环境（尺寸= [ 10 ， 10 ， 10 ]，
+dynamic_objects = [ 球]，
+static_objects = [ 障碍， 靶]，
+机器人= 臂）</p>
+<p>然后，我们可以与这些对象进行交互，绘制它们，为它们的交互设置动画等。</p>
+<p>如果我们想要绘制这个环境，我们所要做的就是</p>
+<p>ENV 。情节（）</p>
+<p>哪个会生成如下所示的环境：</p>
+<p><img src="http://bencaine.me/maddux/_images/tutorial_1.png" alt="_images / tutorial_1.png"></p>
+<h2 id="反向运动学和动画">反向运动学和动画</h2>
+<p>鉴于上述环境，假设我们想让手臂找到一个关节配置，让手臂的末端效应器接触球。给定球的位置，我们可以使用Arm类中内置的迭代反向运动学求解器来找到可能的关节配置。</p>
+<p>手臂。ikine （球。位置）</p>
+<p>我们的反向运动求解器自动将构成其路径的每组配置缓存到臂上的变量中。保存此路径后，我们可以通过调用指定持续时间的动画来设置此过程的动画。</p>
+<p>ENV 。动画（3.0 ）</p>
+<h2 id="保存路径和创建视频">保存路径和创建视频</h2>
+<p>在上面的反向运动学示例中，ikine将其生成的路径保存到臂上的变量中。在调用一些修改联合配置（update_angles，update_link_angle，ikine）并让它缓存其更改的函数之后，我们可以将该路径写入文件。</p>
+<p>手臂。save_path （'filename_to_save_to' ）</p>
+<p>通过将一系列关节配置保存到文件中，我们以后可以使用它来重新运行动画，或者将动画保存为MP4视频。为此，我们只需在arm上调用save_path。我们假设我们的环境是在maddux.predefined_environments.py中定义的。</p>
+<p>要简单地重新运行动画，我们就可以运行了</p>
+<p>python maddux / utils / animate_path.py --input tutorial_path.npy --environment tutorial</p>
+<p>如果我们想创建一个名为tutorial.mp4的视频，我们会将上述命令更改为此</p>
+<p>python maddux / utils / animate_path.py --input tutorial_path.npy --environment tutorial --output tutorial.mp4</p>
+<p>哪个会创建一个视频然后我变成这个GIF。</p>
+<p><img src="http://bencaine.me/maddux/_images/tutorial.gif" alt="_images / tutorial.gif"></p>
+<h2 id="结论">结论</h2>
+<p>这是为了快速介绍工具包的不同方面。还有许多其他潜在有用的功能，例如动态物体具有速度和运动，让手臂握住并用其末端执行器移动物体，提供臂关节速度，以及根据关节速度计算末端执行器速度。希望这提供了一个轻量级和灵活的工具包，可以根据您的需求进行构建和修改，并让您尽快启动并运行疯狂的想法。</p>
+<h1 id="maddux包">maddux包</h1>
+<h2 id="子模块">子模块</h2>
+<h2 id="madduxenvironment模块">maddux.environment模块</h2>
+<p>我们的实验环境。</p>
+<dt id="maddux.environment.Environment">_class_`maddux.environment.``Environment`（_dimension = None_，_dynamic_objects = None_，_static_objects = None_，_robot = None _）[[来源]](http://bencaine.me/maddux/_modules/maddux/environment.html#Environment)</dt>
+<dt id="maddux.environment.Environment.animate">`animate`（_duration = None_，_save_path = None _）[[来源]](http://bencaine.me/maddux/_modules/maddux/environment.html#Environment.animate)</dt>
+<p>动画程序的运行</p>
+<colgroup><col class="field-name"><col class="field-body"></colgroup>
+| 参数： | 
+<ul>
+<li><strong>duration</strong>（<em>int或None</em>） - （可选）动画的持续时间（以秒为单位）</li>
+<li><strong>save_path</strong>（<em>String或None</em>） - （可选）保存mp4而不是显示的路径</li>
+</ul>
+<p>|
+| 返回类型： |</p>
+<p><a href="https://docs.python.org/library/constants.html#None" title="（在Python v2.7中）">没有</a></p>
+<p>|</p>
+<dt id="maddux.environment.Environment.collision">`collision`（）[[来源]](http://bencaine.me/maddux/_modules/maddux/environment.html#Environment.collision)</dt>
+<p>检查是否有任何动态对象与任何静态对象或墙壁发生碰撞。</p>
+<colgroup><col class="field-name"><col class="field-body"></colgroup>
+| 返回值： | 是否有碰撞 |
+| 返回类型： | [布尔](https://docs.python.org/library/functions.html#bool "（在Python v2.7中）") |
+<dt id="maddux.environment.Environment.hypothetical_landing_position">`hypothetical_landing_position`（）[[来源]](http://bencaine.me/maddux/_modules/maddux/environment.html#Environment.hypothetical_landing_position)</dt>
+<p>找到球落地（或击中墙壁）的位置</p>
+<colgroup><col class="field-name"><col class="field-body"></colgroup>
+| 返回值： | 基于末端执行器速度的投掷物体的假设着陆位置的位置（x，y，z）。 |
+| 返回类型： | numpy.ndarray或无 |
+<dt id="maddux.environment.Environment.plot">`plot`（_ax = None_，_show = True _）[[来源]](http://bencaine.me/maddux/_modules/maddux/environment.html#Environment.plot)</dt>
+<p>绘制投掷轨迹和球</p>
+<colgroup><col class="field-name"><col class="field-body"></colgroup>
+| 参数： | 
+<ul>
+<li><strong>ax</strong>（<em>matplotlib.axes</em>） - 如果数字已经存在，则为当前轴</li>
+<li><strong>show</strong>（<a href="https://docs.python.org/library/functions.html#bool" title="（在Python v2.7中）"><em>bool</em></a>） - （默认值：True）是否显示数字</li>
+</ul>
+<p>|
+| 返回类型： |</p>
+<p><a href="https://docs.python.org/library/constants.html#None" title="（在Python v2.7中）">没有</a></p>
+<p>|</p>
+<dt id="maddux.environment.Environment.run">`run`（_持续时间_）[[来源]](http://bencaine.me/maddux/_modules/maddux/environment.html#Environment.run)</dt>
+<p>运行一段时间</p>
+<colgroup><col class="field-name"><col class="field-body"></colgroup>
+| 参数： | **duration**（_整数_） - 以秒为单位运行环境的持续时间 |
+| 返回类型： | [没有](https://docs.python.org/library/constants.html#None "（在Python v2.7中）") |
+<h2 id="madduxplot模块">maddux.plot模块</h2>
+<dt id="maddux.plot.plot_sphere">`maddux.plot.``plot_sphere`（_位置_，_半径_，_轴_，_颜色='g'_，_线宽= 0 _）[[来源]](http://bencaine.me/maddux/_modules/maddux/plot.html#plot_sphere)</dt>
+<p>绘制球体。</p>
+<colgroup><col class="field-name"><col class="field-body"></colgroup>
+| 参数： | 
+<ul>
+<li><strong>position</strong>（<em>numpy.ndarray</em>） - 在球体的（x，y，z）中的位置</li>
+<li><strong>radius</strong>（<a href="https://docs.python.org/library/functions.html#int" title="（在Python v2.7中）"><em>int</em></a>） - 球体半径</li>
+<li><strong>ax</strong>（<em>matplotlib.axes</em>） - 要绘制的轴</li>
+<li><strong>color</strong>（<a href="https://docs.python.org/library/functions.html#str" title="（在Python v2.7中）"><em>str</em></a>） - （可选）球体颜色</li>
+<li><strong>linewidth</strong>（<a href="https://docs.python.org/library/functions.html#int" title="（在Python v2.7中）"><em>int</em></a>） - （可选）球网格线的宽度</li>
+</ul>
+<p>|
+| 返回类型： |</p>
+<p>matplotlib.axes</p>
+<p>|</p>
+<dt id="maddux.plot.plot_sphere_data">`maddux.plot.``plot_sphere_data`（_位置_，_半径_）[[来源]](http://bencaine.me/maddux/_modules/maddux/plot.html#plot_sphere_data)</dt>
+<p>给定位置和半径，获取绘图所需的数据。</p>
+<colgroup><col class="field-name"><col class="field-body"></colgroup>
+| 参数： | 
+<ul>
+<li><strong>position</strong>（<em>numpy.ndarray</em>） - 在球体的（x，y，z）中的位置</li>
+<li><strong>radius</strong>（<a href="https://docs.python.org/library/functions.html#int" title="（在Python v2.7中）"><em>int</em></a>） - 球体半径</li>
+</ul>
+<p>|
+| 返回值： |</p>
+<p>（x，y，z）用于创建曲面的球体数据元组</p>
+<p>|
+| 返回类型： |</p>
+<p>（np.ndarray，np.ndarray，np.ndarray）</p>
+<p>|</p>
+<h2 id="madduxpredefined_environments模块">maddux.predefined_environments模块</h2>
+<dt id="maddux.predefined_environments.get_easy_environment">`maddux.predefined_environments.``get_easy_environment`（）[[来源]](http://bencaine.me/maddux/_modules/maddux/predefined_environments.html#get_easy_environment)</dt>
+<p>一个简单的难度环境，用于规划具有两个障碍的测试，一个球作为目标，一个简单的人类手臂。</p>
+<dt id="maddux.predefined_environments.get_hard_environment">`maddux.predefined_environments.``get_hard_environment`（）[[来源]](http://bencaine.me/maddux/_modules/maddux/predefined_environments.html#get_hard_environment)</dt>
+<p>一个艰难的难度环境，用于规划具有五个障碍的测试，一个球作为目标，一个简单的人类手臂。</p>
+<dt id="maddux.predefined_environments.get_medium_environment">`maddux.predefined_environments.``get_medium_environment`（）[[来源]](http://bencaine.me/maddux/_modules/maddux/predefined_environments.html#get_medium_environment)</dt>
+<p>一个中等难度的环境，用于规划具有两个障碍的测试，一个球作为目标，一个简单的人类手臂。</p>
+<dt id="maddux.predefined_environments.get_noodle_environment">`maddux.predefined_environments.``get_noodle_environment`（）[[来源]](http://bencaine.me/maddux/_modules/maddux/predefined_environments.html#get_noodle_environment)</dt>
+<p>我们的面条臂进行规划测试的荒谬环境。它有五个障碍，一个球作为目标，我们的10个链接面条臂</p>
+<dt id="maddux.predefined_environments.get_tutorial_environment">`maddux.predefined_environments.``get_tutorial_environment`（）[[来源]](http://bencaine.me/maddux/_modules/maddux/predefined_environments.html#get_tutorial_environment)</dt>
+<p>我们的环境来自文档教程</p>
+<dt id="maddux.predefined_environments.get_very_hard_environment">`maddux.predefined_environments.``get_very_hard_environment`（）[[来源]](http://bencaine.me/maddux/_modules/maddux/predefined_environments.html#get_very_hard_environment)</dt>
+<p>一个非常困难的难度环境，用于规划具有三个障碍的测试，一个球作为目标，一个简单的人类手臂。</p>
+<h2 id="模块内容">模块内容</h2>
+<h1 id="madduxrobots包">maddux.robots包</h1>
+<h2 id="子模块-2">子模块</h2>
+<h2 id="madduxrobotsarm模块">maddux.robots.arm模块</h2>
+<p>由一系列DH链接定义的机器人手臂</p>
+<dt id="maddux.robots.arm.Arm">_class_`maddux.robots.arm.``Arm`（_links_，_q0_，_name_，_active_links = None_，_base = None_，_tool = None _）[[来源]](http://bencaine.me/maddux/_modules/maddux/robots/arm.html#Arm)</dt>
+<dt id="maddux.robots.arm.Arm.end_effector_position">`end_effector_position`（_q =无_）[[来源]](http://bencaine.me/maddux/_modules/maddux/robots/arm.html#Arm.end_effector_position)</dt>
+<p>返回末端执行器位置</p>
+<colgroup><col class="field-name"><col class="field-body"></colgroup>
+| 参数： | **q**（_numpy.ndarray或None_） - 配置计算给定1xN q向量的末端效应器位置 |
+| 返回值： | 末端执行器的位置（x，y，z） |
+| 返回类型： | numpy.ndarray |
+<dt id="maddux.robots.arm.Arm.end_effector_velocity">`end_effector_velocity`（）[[来源]](http://bencaine.me/maddux/_modules/maddux/robots/arm.html#Arm.end_effector_velocity)</dt>
+<p>给出其当前角速度，计算手臂的末端执行器速度。</p>
+<colgroup><col class="field-name"><col class="field-body"></colgroup>
+| 返回值： | 返回每个维度（vx，vy，vz，wx，wy，wz）的线性和角速度。 |
+| 返回类型： | np.ndarray |
+<dt id="maddux.robots.arm.Arm.fkine">`fkine`（_q =无_，_链接=无_）[[来源]](http://bencaine.me/maddux/_modules/maddux/robots/arm.html#Arm.fkine)</dt>
+<p>使用当前关节配置或给定的关节配置计算手臂的正向运动</p>
+<colgroup><col class="field-name"><col class="field-body"></colgroup>
+| 参数： | 
+<ul>
+<li><strong>q</strong>（<em>numpy.ndarray或None</em>） - （可选）用于计算FK的联合配置的1xN向量</li>
+<li><strong>links</strong>（<em>int或None</em>） - （可选）指定要在其上运行fkine的链接。例如：links = [1,2,3]。</li>
+</ul>
+<p>|
+| 返回值： |</p>
+<p>指定的链接列表或末端效应器末尾的同源坐标点</p>
+<p>|
+| 返回类型： |</p>
+<p>4x4 numpy.array</p>
+<p>|</p>
+<dt id="maddux.robots.arm.Arm.get_current_joint_config">`get_current_joint_config`（）[[来源]](http://bencaine.me/maddux/_modules/maddux/robots/arm.html#Arm.get_current_joint_config)</dt>
+<p>从链接获取当前联合配置</p>
+<colgroup><col class="field-name"><col class="field-body"></colgroup>
+| 返回值： | 当前联合配置的1xN向量 |
+| 返回类型： | numpy.ndarray |
+<dt id="maddux.robots.arm.Arm.hold">`hold`（_obj _）[[来源]](http://bencaine.me/maddux/_modules/maddux/robots/arm.html#Arm.hold)</dt>
+<p>持有一个特定的对象</p>
+<colgroup><col class="field-name"><col class="field-body"></colgroup>
+| 参数： | **obj**（_maddux.objects.DynamicObject_） - 要保留的对象 |
+| 返回类型： | [没有](https://docs.python.org/library/constants.html#None "（在Python v2.7中）") |
+<dt id="maddux.robots.arm.Arm.ikine">`ikine`（_p_，_num_iterations = 1000_，_alpha = 0.1 _）[[来源]](http://bencaine.me/maddux/_modules/maddux/robots/arm.html#Arm.ikine)</dt>
+<p>计算反向运动学以找到到达给定点的正确关节配置</p>
+<colgroup><col class="field-name"><col class="field-body"></colgroup>
+| 参数： | 
+<ul>
+<li><strong>p</strong>（<em>numpy.ndarray</em>） - 解决逆运动学的点（x，y，z）</li>
+<li><strong>num_iterations</strong>（<a href="https://docs.python.org/library/functions.html#int" title="（在Python v2.7中）"><em>int</em></a>） - 放弃之前要尝试的迭代次数</li>
+<li><strong>alpha</strong>（<a href="https://docs.python.org/library/functions.html#int" title="（在Python v2.7中）"><em>int</em></a>） - ikine求解器的步长（0.0 - 1.0）</li>
+</ul>
+<p>|
+| 返回值： |</p>
+<p>给定点p的关节配置的1xN向量。</p>
+<p>|
+| 返回类型： |</p>
+<p>numpy.ndarray</p>
+<p>|</p>
+<dt id="maddux.robots.arm.Arm.is_in_collision">`is_in_collision`（_env_object _）[[来源]](http://bencaine.me/maddux/_modules/maddux/robots/arm.html#Arm.is_in_collision)</dt>
+<p>检查手臂是否与给定物体发生碰撞</p>
+<colgroup><col class="field-name"><col class="field-body"></colgroup>
+| 参数： | **env_object**（_maddux.Objects.StaticObject_） - 检查与之冲突的对象 |
+| 返回值： | 你是否点击了env_object |
+| 返回类型： | [布尔](https://docs.python.org/library/functions.html#bool "（在Python v2.7中）") |
+<dt id="maddux.robots.arm.Arm.jacob0">`jacob0`（_q =无_）[[来源]](http://bencaine.me/maddux/_modules/maddux/robots/arm.html#Arm.jacob0)</dt>
+<p>通过在工具框架中找到它然后转换为世界框架来计算世界框架中的雅可比。</p>
+<colgroup><col class="field-name"><col class="field-body"></colgroup>
+| 参数： | **q**（_numpy.ndarray_） - （可选）1xN联合配置来计算jacobian |
+| 返回值： | 世界框架中的6xN雅可比行列式 |
+| 返回类型： | numpy.matrix |
+<dt id="maddux.robots.arm.Arm.jacobn">`jacobn`（_q =无_）[[来源]](http://bencaine.me/maddux/_modules/maddux/robots/arm.html#Arm.jacobn)</dt>
+<p>计算工具框架中的雅可比</p>
+<colgroup><col class="field-name"><col class="field-body"></colgroup>
+| 参数： | **q**（_1xN numpy.ndarray_） - （可选）1xN联合配置来计算jacobian |
+| 返回值： | 工具框架中的6xN雅可比行列式 |
+| 返回类型： | numpy.matrix |
+<dt id="maddux.robots.arm.Arm.plot">`plot`（_ax _）[[来源]](http://bencaine.me/maddux/_modules/maddux/robots/arm.html#Arm.plot)</dt>
+<p>将我们的机器人绘制到给定的轴上</p>
+<colgroup><col class="field-name"><col class="field-body"></colgroup>
+| 参数： | **ax**（_matplotlib.axes_） - 情节轴 |
+| 返回类型： | [没有](https://docs.python.org/library/constants.html#None "（在Python v2.7中）") |
+<dt id="maddux.robots.arm.Arm.release">`release`（_object_idx =无_）[[来源]](http://bencaine.me/maddux/_modules/maddux/robots/arm.html#Arm.release)</dt>
+<p>释放一个或所有当前保留的对象</p>
+<colgroup><col class="field-name"><col class="field-body"></colgroup>
+| 参数： | **object_idx** - （可选）要释放的对象的索引 |
+<p>：type object_idx = int或None</p>
+<colgroup><col class="field-name"><col class="field-body"></colgroup>
+| 返回类型： | [没有](https://docs.python.org/library/constants.html#None "（在Python v2.7中）") |
+<dt id="maddux.robots.arm.Arm.reset">`reset`（）[[来源]](http://bencaine.me/maddux/_modules/maddux/robots/arm.html#Arm.reset)</dt>
+<p>将手臂重置回其静止状态，即q0</p>
+<colgroup><col class="field-name"><col class="field-body"></colgroup>
+| 返回类型： | [没有](https://docs.python.org/library/constants.html#None "（在Python v2.7中）") |
+<dt id="maddux.robots.arm.Arm.save_path">`save_path`（_文件名_）[[来源]](http://bencaine.me/maddux/_modules/maddux/robots/arm.html#Arm.save_path)</dt>
+<p>将当前路径保存到文件：param filename：保存联合配置路径的文件名：键入filename：str</p>
+<dt id="maddux.robots.arm.Arm.update_angles">`update_angles`（_new_angles_，_save = False _）[[来源]](http://bencaine.me/maddux/_modules/maddux/robots/arm.html#Arm.update_angles)</dt>
+<p>更新所有链接的角度</p>
+<colgroup><col class="field-name"><col class="field-body"></colgroup>
+| 参数： | 
+<ul>
+<li><strong>new_angles</strong>（<em>numpy.ndarray</em>） - 新链接角度的1xN向量</li>
+<li><strong>save</strong> - 确定是否缓存更新的标志</li>
+<li><strong>保存</strong> - 布尔</li>
+</ul>
+<p>|
+| 返回类型： |</p>
+<p><a href="https://docs.python.org/library/constants.html#None" title="（在Python v2.7中）">没有</a></p>
+<p>|</p>
+<dt id="maddux.robots.arm.Arm.update_link_angle">`update_link_angle`（_link_，_new_angle_，_save = False _）[[来源]](http://bencaine.me/maddux/_modules/maddux/robots/arm.html#Arm.update_link_angle)</dt>
+<p>使用给定角度更新给定链接的角度</p>
+<colgroup><col class="field-name"><col class="field-body"></colgroup>
+| 参数： | 
+<ul>
+<li><strong>link</strong>（<a href="https://docs.python.org/library/functions.html#int" title="（在Python v2.7中）"><em>int</em></a>） - 要更新的链接</li>
+<li><strong>new_angle</strong>（<a href="https://docs.python.org/library/functions.html#int" title="（在Python v2.7中）"><em>int</em></a>） - 链接的新角度</li>
+<li><strong>save</strong>（<a href="https://docs.python.org/library/functions.html#bool" title="（在Python v2.7中）"><em>bool</em></a>） - 确定是否缓存更新的标志</li>
+</ul>
+<p>|
+| 返回类型： |</p>
+<p><a href="https://docs.python.org/library/constants.html#None" title="（在Python v2.7中）">没有</a></p>
+<p>|</p>
+<dt id="maddux.robots.arm.Arm.update_link_positions">`update_link_positions`（）[[来源]](http://bencaine.me/maddux/_modules/maddux/robots/arm.html#Arm.update_link_positions)</dt>
+<p>浏览所有链接并更新其位置。</p>
+<colgroup><col class="field-name"><col class="field-body"></colgroup>
+| 返回类型： | [没有](https://docs.python.org/library/constants.html#None "（在Python v2.7中）") |
+<dt id="maddux.robots.arm.Arm.update_link_velocity">`update_link_velocity`（_链接_，_加速_，_时间_）[[来源]](http://bencaine.me/maddux/_modules/maddux/robots/arm.html#Arm.update_link_velocity)</dt>
+<p>在给定时间内以给定加速度更新给定链接的速度</p>
+<colgroup><col class="field-name"><col class="field-body"></colgroup>
+| 参数： | 
+<ul>
+<li><strong>link</strong>（<a href="https://docs.python.org/library/functions.html#int" title="（在Python v2.7中）"><em>int</em></a>） - 要更新的链接</li>
+<li><strong>accel</strong>（<a href="https://docs.python.org/library/functions.html#int" title="（在Python v2.7中）"><em>int</em></a>） - 加速度（每秒弧度^ 2）</li>
+<li><strong>time</strong>（<a href="https://docs.python.org/library/functions.html#int" title="（在Python v2.7中）"><em>int</em></a>） - 时间（秒）</li>
+</ul>
+<p>|
+| 返回类型： |</p>
+<p><a href="https://docs.python.org/library/constants.html#None" title="（在Python v2.7中）">没有</a></p>
+<p>|</p>
+<h2 id="madduxrobotslink模块">maddux.robots.link模块</h2>
+<p>Link对象包含与机器人链接相关的所有信息，例如DH参数和与世界相关的位置。</p>
+<dt id="maddux.robots.link.Link">_class_`maddux.robots.link.``Link`（_theta_，_offset_，_length_，_twist_，_q_lim = None_，_max_velocity = 30.0_，_link_size = 0.1_，_connector_size = 0.1 _）[[来源]](http://bencaine.me/maddux/_modules/maddux/robots/link.html#Link)</dt>
+<dt id="maddux.robots.link.Link.compute_transformation_matrix">`compute_transformation_matrix`（_q _）[[来源]](http://bencaine.me/maddux/_modules/maddux/robots/link.html#Link.compute_transformation_matrix)</dt>
+<p>从当前theta到新theta的变换矩阵</p>
+<colgroup><col class="field-name"><col class="field-body"></colgroup>
+| 参数： | **q**（[_int_](https://docs.python.org/library/functions.html#int "（在Python v2.7中）")） - 新的theta |
+| 返回值： | 从当前q到提供q的变换矩阵 |
+| 返回类型： | 4x4 numpy矩阵 |
+<dt id="maddux.robots.link.Link.display">`display`（）[[来源]](http://bencaine.me/maddux/_modules/maddux/robots/link.html#Link.display)</dt>
+<p>很好地显示链接的属性</p>
+<colgroup><col class="field-name"><col class="field-body"></colgroup>
+| 返回类型： | [没有](https://docs.python.org/library/constants.html#None "（在Python v2.7中）") |
+<dt id="maddux.robots.link.Link.is_in_collision">`is_in_collision`（_env_object _）[[来源]](http://bencaine.me/maddux/_modules/maddux/robots/link.html#Link.is_in_collision)</dt>
+<p>检查手臂是否与给定的静态物体发生碰撞</p>
+<colgroup><col class="field-name"><col class="field-body"></colgroup>
+| 参数： | **env_object**（_maddux.objects.StaticObject_） - 检查与之冲突的对象 |
+| 返回值： | 链接是否命中提供的env_object |
+| 返回类型： | [布尔](https://docs.python.org/library/functions.html#bool "（在Python v2.7中）") |
+<dt id="maddux.robots.link.Link.plot">`plot`（_ax _）[[来源]](http://bencaine.me/maddux/_modules/maddux/robots/link.html#Link.plot)</dt>
+<p>绘制给定matplotlib图上的链接</p>
+<colgroup><col class="field-name"><col class="field-body"></colgroup>
+| 参数： | **ax**（_matplotlib.axes_） - 用于绘制链接的图 |
+| 返回类型： | [没有](https://docs.python.org/library/constants.html#None "（在Python v2.7中）") |
+<dt id="maddux.robots.link.Link.set_theta">`set_theta`（_theta _）[[来源]](http://bencaine.me/maddux/_modules/maddux/robots/link.html#Link.set_theta)</dt>
+<p>将theta设置为新的theta并计算新的变换矩阵</p>
+<colgroup><col class="field-name"><col class="field-body"></colgroup>
+| 参数： | **theta**（[_int_](https://docs.python.org/library/functions.html#int "（在Python v2.7中）")） - 链接的新theta |
+| 返回类型： | [没有](https://docs.python.org/library/constants.html#None "（在Python v2.7中）") |
+<dt id="maddux.robots.link.Link.update_velocity">`update_velocity`（_加速_，_时间_）[[来源]](http://bencaine.me/maddux/_modules/maddux/robots/link.html#Link.update_velocity)</dt>
+<p>在一段时间内通过某种加速作用时，更新链路的当前速度</p>
+<colgroup><col class="field-name"><col class="field-body"></colgroup>
+| 参数： | 
+<ul>
+<li><strong>accel</strong>（<a href="https://docs.python.org/library/functions.html#int" title="（在Python v2.7中）"><em>int</em></a>） - 作用于链路的加速度（每秒弧度^ 2）</li>
+<li><strong>time</strong>（<a href="https://docs.python.org/library/functions.html#int" title="（在Python v2.7中）"><em>int</em></a>） - 应用加速度的时间（秒）</li>
+</ul>
+<p>|
+| 返回类型： |</p>
+<p><a href="https://docs.python.org/library/constants.html#None" title="（在Python v2.7中）">没有</a></p>
+<p>|</p>
+<h2 id="madduxrobotspredefined_robots模块">maddux.robots.predefined_robots模块</h2>
+<dt id="maddux.robots.predefined_robots.noodle_arm">`maddux.robots.predefined_robots.``noodle_arm`（_seg_lens_，_q0_，_base = None _）[[来源]](http://bencaine.me/maddux/_modules/maddux/robots/predefined_robots.html#noodle_arm)</dt>
+<p>创建一个包含10个段的复杂臂</p>
+<colgroup><col class="field-name"><col class="field-body"></colgroup>
+| 参数： | 
+<ul>
+<li><strong>seg_lens</strong>（<em>numpy.ndarray</em>） - 每个部分长度的1x10向量</li>
+<li><strong>q0</strong>（<em>numpy.ndarray</em>） - 起始关节配置的1xN向量</li>
+<li><strong>base</strong>（<em>numpy.ndarray或None</em>） - （可选）arm的可选（x，y，z）基本位置</li>
+</ul>
+<p>|
+| 返回值： |</p>
+<p>“面条”的手臂</p>
+<p>|
+| 返回类型： |</p>
+<p>maddux.robot.Arm</p>
+<p>|</p>
+<dt id="maddux.robots.predefined_robots.simple_human_arm">`maddux.robots.predefined_robots.``simple_human_arm`（_seg1_len_，_seg2_len_，_q0_，_base = None _）[[来源]](http://bencaine.me/maddux/_modules/maddux/robots/predefined_robots.html#simple_human_arm)</dt>
+<p>创建一个简单的类似人类的机器人手臂，具有7个链接和2个具有所需长度和起始关节配置的段</p>
+<colgroup><col class="field-name"><col class="field-body"></colgroup>
+| 参数： | 
+<ul>
+<li><strong>seg1_len</strong>（<a href="https://docs.python.org/library/functions.html#int" title="（在Python v2.7中）"><em>int</em></a>） - 手臂第一段的长度</li>
+<li><strong>seg2_len</strong>（<a href="https://docs.python.org/library/functions.html#int" title="（在Python v2.7中）"><em>int</em></a>） - 手臂第二段的长度</li>
+<li><strong>q0</strong>（<em>numpy.ndarray</em>） - 起始关节配置的1xN向量</li>
+<li><strong>base</strong>（<em>numpy.ndarray或None</em>） - （可选）（x，y，z）手臂基座的位置</li>
+</ul>
+<p>|
+| 返回值： |</p>
+<p>7个链接，2段“人”手臂。</p>
+<p>|
+| 返回类型： |</p>
+<p>maddux.robot.Arm</p>
+<p>|</p>
+<h2 id="madduxrobotsutils模块">maddux.robots.utils模块</h2>
+<p>随机收集机器人使用的实用程序</p>
+<dt id="maddux.robots.utils.create_homogeneous_transform_from_point">`maddux.robots.utils.``create_homogeneous_transform_from_point`（_p _）[[来源]](http://bencaine.me/maddux/_modules/maddux/robots/utils.html#create_homogeneous_transform_from_point)</dt>
+<p>创建一个齐次变换以移动到给定点</p>
+<colgroup><col class="field-name"><col class="field-body"></colgroup>
+| 参数： | **p**（_numpy.ndarray_） - 我们希望我们的均匀变换移动到的（x，y，z）点 |
+| 返回值： | 4x4点的均匀变换 |
+| 返回类型： | numpy.matrix |
+<dt id="maddux.robots.utils.create_point_from_homogeneous_transform">`maddux.robots.utils.``create_point_from_homogeneous_transform`（_T _）[[来源]](http://bencaine.me/maddux/_modules/maddux/robots/utils.html#create_point_from_homogeneous_transform)</dt>
+<p>从齐次变换创建一个点</p>
+<colgroup><col class="field-name"><col class="field-body"></colgroup>
+| 参数： | **T**（_numpy矩阵_） - 4x4齐次变换 |
+| 返回值： | 变换点的（x，y，z）坐标 |
+| 返回类型： | np.ndarray |
+<dt id="maddux.robots.utils.get_rotation_from_homogeneous_transform">`maddux.robots.utils.``get_rotation_from_homogeneous_transform`（_变换_）[[来源]](http://bencaine.me/maddux/_modules/maddux/robots/utils.html#get_rotation_from_homogeneous_transform)</dt>
+<p>提取均匀变换的旋转部分</p>
+<colgroup><col class="field-name"><col class="field-body"></colgroup>
+| 参数： | **transform**（_numpy.ndarray_） - 4x4齐次变换从中提取旋转矩阵。 |
+| 返回值： | 3x3旋转矩阵 |
+| 返回类型： | numpy.matrix |
+</li>
+<li>
+<h1 id="madduxobjects包">maddux.objects包</h1>
+<h2 id="子模块-3">子模块</h2>
+<h2 id="madduxobjectsball模块">maddux.objects.ball模块</h2>
+<p>投掷的球对象。</p>
+<dt id="maddux.objects.ball.Ball">_class_`maddux.objects.ball.``Ball`（_position_，_radius_，_target = False _）[[来源]](http://bencaine.me/maddux/_modules/maddux/objects/ball.html#Ball)</dt>
+<p>基地： <a href="http://bencaine.me/maddux/maddux.objects.html#maddux.objects.throwable.ThrowableObject" title="maddux.objects.throwable.ThrowableObject"><code>maddux.objects.throwable.ThrowableObject</code></a></p>
+<dt id="maddux.objects.ball.Ball.plot">`plot`（_ax _）[[来源]](http://bencaine.me/maddux/_modules/maddux/objects/ball.html#Ball.plot)</dt>
+<p>在当前位置绘制球。</p>
+<colgroup><col class="field-name"><col class="field-body"></colgroup>
+| 参数： | **ax**（_matplotlib.axes_） - 图上绘图。 |
+| 返回值： | Matplotlib图 |
+| 返回类型： | matplotlib.axes |
+<h2 id="madduxobjectsdynamic模块">maddux.objects.dynamic模块</h2>
+<p>动态对象的抽象基类。</p>
+<dt id="maddux.objects.dynamic.DynamicObject">_class_`maddux.objects.dynamic.``DynamicObject`（_position_，_target = False _）[[来源]](http://bencaine.me/maddux/_modules/maddux/objects/dynamic.html#DynamicObject)</dt>
+<p>基地： <a href="https://docs.python.org/library/functions.html#object" title="（在Python v2.7中）"><code>object</code></a></p>
+<dt id="maddux.objects.dynamic.DynamicObject.attach">`attach`（）[[来源]](http://bencaine.me/maddux/_modules/maddux/objects/dynamic.html#DynamicObject.attach)</dt>
+<p>附加到对象（停止移动）</p>
+<dt id="maddux.objects.dynamic.DynamicObject.display">`display`（）[[来源]](http://bencaine.me/maddux/_modules/maddux/objects/dynamic.html#DynamicObject.display)</dt>
+<p>显示信息</p>
+<dt id="maddux.objects.dynamic.DynamicObject.plot">`plot`（_ax _）[[来源]](http://bencaine.me/maddux/_modules/maddux/objects/dynamic.html#DynamicObject.plot)</dt>
+<p>在当前位置绘制动态对象</p>
+<dt id="maddux.objects.dynamic.DynamicObject.step">`step`（）[[来源]](http://bencaine.me/maddux/_modules/maddux/objects/dynamic.html#DynamicObject.step)</dt>
+<p>及时前进（一毫秒）</p>
+<h2 id="madduxobjectsobstacle模块">maddux.objects.obstacle模块</h2>
+<p>一种固定的长方形固体，可能会碰撞</p>
+<dt id="maddux.objects.obstacle.Obstacle">_class_`maddux.objects.obstacle.``Obstacle`（_pt1_，_pt2_，_color ='r' _）[[来源]](http://bencaine.me/maddux/_modules/maddux/objects/obstacle.html#Obstacle)</dt>
+<p>基地： <a href="http://bencaine.me/maddux/maddux.objects.html#maddux.objects.static.StaticObject" title="maddux.objects.static.StaticObject"><code>maddux.objects.static.StaticObject</code></a></p>
+<dt id="maddux.objects.obstacle.Obstacle.display">`display`（）[[来源]](http://bencaine.me/maddux/_modules/maddux/objects/obstacle.html#Obstacle.display)</dt>
+<p>显示障碍物属性</p>
+<colgroup><col class="field-name"><col class="field-body"></colgroup>
+| 返回类型： | [没有](https://docs.python.org/library/constants.html#None "（在Python v2.7中）") |
+<dt id="maddux.objects.obstacle.Obstacle.get_paths">`get_paths`（）[[来源]](http://bencaine.me/maddux/_modules/maddux/objects/obstacle.html#Obstacle.get_paths)</dt>
+<p>返回矩形的每个曲面的路径以进行绘图。</p>
+<p>：返回（底部，顶部，前部，后部，左侧，右侧）：rtype：6个4x3 numpy.ndarrays的列表</p>
+<dt id="maddux.objects.obstacle.Obstacle.is_hit">`is_hit`（_位置_）[[来源]](http://bencaine.me/maddux/_modules/maddux/objects/obstacle.html#Obstacle.is_hit)</dt>
+<p>检查矩形是否被点或路径击中</p>
+<colgroup><col class="field-name"><col class="field-body"></colgroup>
+| 参数： | **position**（_numpy.ndarray或numpy.matrix_） - 一个对象位置（x，y，z）或位置，如果它是一个路径（[x1，x2，..]，[y1，y2，..]，[z1， z2，..] |
+| 返回值： | 障碍物是否被点或路径击中 |
+| 返回类型： | [布尔](https://docs.python.org/library/functions.html#bool "（在Python v2.7中）") |
+<dt id="maddux.objects.obstacle.Obstacle.is_hit_by_sphere">`is_hit_by_sphere`（_中心_，_半径_）[[来源]](http://bencaine.me/maddux/_modules/maddux/objects/obstacle.html#Obstacle.is_hit_by_sphere)</dt>
+<p>检查矩形是否被球体击中</p>
+<colgroup><col class="field-name"><col class="field-body"></colgroup>
+| 参数： | 
+<ul>
+<li><strong>中心</strong>（<em>numpy.ndarray</em>） - 球体的中心（x，y，z）</li>
+<li><strong>radius</strong>（<a href="https://docs.python.org/library/functions.html#int" title="（在Python v2.7中）"><em>int</em></a>） - 球体的半径</li>
+</ul>
+<p>|
+| 返回值： |</p>
+<p>障碍物是否被球体击中</p>
+<p>|
+| 返回类型： |</p>
+<p><a href="https://docs.python.org/library/functions.html#bool" title="（在Python v2.7中）">布尔</a></p>
+<p>|</p>
+<dt id="maddux.objects.obstacle.Obstacle.plot">`plot`（_ax _）[[来源]](http://bencaine.me/maddux/_modules/maddux/objects/obstacle.html#Obstacle.plot)</dt>
+<p>在其位置绘制障碍物</p>
+<colgroup><col class="field-name"><col class="field-body"></colgroup>
+| 参数： | **ax**（_matplotlib.axes_） - 图上绘图 |
+| Rtpye： | 没有 |
+<h2 id="madduxobjectsstatic模块">maddux.objects.static模块</h2>
+<p>静态对象的抽象基类。</p>
+<dt id="maddux.objects.static.StaticObject">_班_`maddux.objects.static.``StaticObject`[[来源]](http://bencaine.me/maddux/_modules/maddux/objects/static.html#StaticObject)</dt>
+<p>基地： <a href="https://docs.python.org/library/functions.html#object" title="（在Python v2.7中）"><code>object</code></a></p>
+<dt id="maddux.objects.static.StaticObject.display">`display`（）[[来源]](http://bencaine.me/maddux/_modules/maddux/objects/static.html#StaticObject.display)</dt>
+<p>显示有关静态对象的相关数据。</p>
+<dt id="maddux.objects.static.StaticObject.is_hit">`is_hit`（_位置_）[[来源]](http://bencaine.me/maddux/_modules/maddux/objects/static.html#StaticObject.is_hit)</dt>
+<p>判断另一个对象是否命中静态对象</p>
+<dt id="maddux.objects.static.StaticObject.plot">`plot`（_ax _）[[来源]](http://bencaine.me/maddux/_modules/maddux/objects/static.html#StaticObject.plot)</dt>
+<p>绘制静态对象。</p>
+<h2 id="madduxobjectstarget模块">maddux.objects.target模块</h2>
+<p>某物可能与之碰撞的静止物体。</p>
+<dt id="maddux.objects.target.Target">_class_`maddux.objects.target.``Target`（_position_，_radius _）[[来源]](http://bencaine.me/maddux/_modules/maddux/objects/target.html#Target)</dt>
+<p>基地： <a href="http://bencaine.me/maddux/maddux.objects.html#maddux.objects.static.StaticObject" title="maddux.objects.static.StaticObject"><code>maddux.objects.static.StaticObject</code></a></p>
+<dt id="maddux.objects.target.Target.display">`display`（）[[来源]](http://bencaine.me/maddux/_modules/maddux/objects/target.html#Target.display)</dt>
+<p>显示目标属性：rtpye：无</p>
+<dt id="maddux.objects.target.Target.is_hit">`is_hit`（_位置_）[[来源]](http://bencaine.me/maddux/_modules/maddux/objects/target.html#Target.is_hit)</dt>
+<p>检查目标是否被击中。</p>
+<colgroup><col class="field-name"><col class="field-body"></colgroup>
+| 参数： | **position**（_numpy.array_） - 对象的位置 |
+| 返回类型： | 布尔 |
+<dt id="maddux.objects.target.Target.plot">`plot`（_ax _）[[来源]](http://bencaine.me/maddux/_modules/maddux/objects/target.html#Target.plot)</dt>
+<p>在目标位置绘制目标。：param ax：图上的情节。：type ax：matplotlib图：rtype：matplotlib图</p>
+<dt id="maddux.objects.target.Target.plot_data">`plot_data`（）[[来源]](http://bencaine.me/maddux/_modules/maddux/objects/target.html#Target.plot_data)</dt>
+<p>获取目标位置的绘图数据：rtype：整数的3元组</p>
+<h2 id="madduxobjectsthrowable模块">maddux.objects.throwable模块</h2>
+<p>一个基本可抛出的对象类，它对重力，速度等特征进行编码。</p>
+<dt id="maddux.objects.throwable.ThrowableObject">_class_`maddux.objects.throwable.``ThrowableObject`（_position_，_target = False _）[[来源]](http://bencaine.me/maddux/_modules/maddux/objects/throwable.html#ThrowableObject)</dt>
+<p>基地： <a href="http://bencaine.me/maddux/maddux.objects.html#maddux.objects.dynamic.DynamicObject" title="maddux.objects.dynamic.DynamicObject"><code>maddux.objects.dynamic.DynamicObject</code></a></p>
+<dt id="maddux.objects.throwable.ThrowableObject.attach">`attach`（）[[来源]](http://bencaine.me/maddux/_modules/maddux/objects/throwable.html#ThrowableObject.attach)</dt>
+<p>将对象附加到其当前位置</p>
+<dt id="maddux.objects.throwable.ThrowableObject.display">`display`（）[[来源]](http://bencaine.me/maddux/_modules/maddux/objects/throwable.html#ThrowableObject.display)</dt>
+<p>显示有关对象的信息</p>
+<dt id="maddux.objects.throwable.ThrowableObject.step">`step`（）[[来源]](http://bencaine.me/maddux/_modules/maddux/objects/throwable.html#ThrowableObject.step)</dt>
+<p>更新一个时间步（1毫秒）</p>
+<dt id="maddux.objects.throwable.ThrowableObject.throw">`throw`（_速度_）[[来源]](http://bencaine.me/maddux/_modules/maddux/objects/throwable.html#ThrowableObject.throw)</dt>
+<p>扔一个物体。</p>
+<colgroup><col class="field-name"><col class="field-body"></colgroup>
+| 参数： | **速度**（_np.ndarray_） - 投掷速度（vx，vy，vz） |
+| 返回类型： | [没有](https://docs.python.org/library/constants.html#None "（在Python v2.7中）") |
+</li>
+<li>
+<h1 id="madduxobjects包-2">maddux.objects包</h1>
+<h2 id="子模块-4">子模块</h2>
+<h2 id="madduxobjectsball模块-2">maddux.objects.ball模块</h2>
+<p>投掷的球对象。</p>
+<dt id="maddux.objects.ball.Ball">_class_`maddux.objects.ball.``Ball`（_position_，_radius_，_target = False _）[[来源]](http://bencaine.me/maddux/_modules/maddux/objects/ball.html#Ball)</dt>
+<p>基地： <a href="http://bencaine.me/maddux/maddux.objects.html#maddux.objects.throwable.ThrowableObject" title="maddux.objects.throwable.ThrowableObject"><code>maddux.objects.throwable.ThrowableObject</code></a></p>
+<dt id="maddux.objects.ball.Ball.plot">`plot`（_ax _）[[来源]](http://bencaine.me/maddux/_modules/maddux/objects/ball.html#Ball.plot)</dt>
+<p>在当前位置绘制球。</p>
+<colgroup><col class="field-name"><col class="field-body"></colgroup>
+| 参数： | **ax**（_matplotlib.axes_） - 图上绘图。 |
+| 返回值： | Matplotlib图 |
+| 返回类型： | matplotlib.axes |
+<h2 id="madduxobjectsdynamic模块-2">maddux.objects.dynamic模块</h2>
+<p>动态对象的抽象基类。</p>
+<dt id="maddux.objects.dynamic.DynamicObject">_class_`maddux.objects.dynamic.``DynamicObject`（_position_，_target = False _）[[来源]](http://bencaine.me/maddux/_modules/maddux/objects/dynamic.html#DynamicObject)</dt>
+<p>基地： <a href="https://docs.python.org/library/functions.html#object" title="（在Python v2.7中）"><code>object</code></a></p>
+<dt id="maddux.objects.dynamic.DynamicObject.attach">`attach`（）[[来源]](http://bencaine.me/maddux/_modules/maddux/objects/dynamic.html#DynamicObject.attach)</dt>
+<p>附加到对象（停止移动）</p>
+<dt id="maddux.objects.dynamic.DynamicObject.display">`display`（）[[来源]](http://bencaine.me/maddux/_modules/maddux/objects/dynamic.html#DynamicObject.display)</dt>
+<p>显示信息</p>
+<dt id="maddux.objects.dynamic.DynamicObject.plot">`plot`（_ax _）[[来源]](http://bencaine.me/maddux/_modules/maddux/objects/dynamic.html#DynamicObject.plot)</dt>
+<p>在当前位置绘制动态对象</p>
+<dt id="maddux.objects.dynamic.DynamicObject.step">`step`（）[[来源]](http://bencaine.me/maddux/_modules/maddux/objects/dynamic.html#DynamicObject.step)</dt>
+<p>及时前进（一毫秒）</p>
+<h2 id="madduxobjectsobstacle模块-2">maddux.objects.obstacle模块</h2>
+<p>一种固定的长方形固体，可能会碰撞</p>
+<dt id="maddux.objects.obstacle.Obstacle">_class_`maddux.objects.obstacle.``Obstacle`（_pt1_，_pt2_，_color ='r' _）[[来源]](http://bencaine.me/maddux/_modules/maddux/objects/obstacle.html#Obstacle)</dt>
+<p>基地： <a href="http://bencaine.me/maddux/maddux.objects.html#maddux.objects.static.StaticObject" title="maddux.objects.static.StaticObject"><code>maddux.objects.static.StaticObject</code></a></p>
+<dt id="maddux.objects.obstacle.Obstacle.display">`display`（）[[来源]](http://bencaine.me/maddux/_modules/maddux/objects/obstacle.html#Obstacle.display)</dt>
+<p>显示障碍物属性</p>
+<colgroup><col class="field-name"><col class="field-body"></colgroup>
+| 返回类型： | [没有](https://docs.python.org/library/constants.html#None "（在Python v2.7中）") |
+<dt id="maddux.objects.obstacle.Obstacle.get_paths">`get_paths`（）[[来源]](http://bencaine.me/maddux/_modules/maddux/objects/obstacle.html#Obstacle.get_paths)</dt>
+<p>返回矩形的每个曲面的路径以进行绘图。</p>
+<p>：返回（底部，顶部，前部，后部，左侧，右侧）：rtype：6个4x3 numpy.ndarrays的列表</p>
+<dt id="maddux.objects.obstacle.Obstacle.is_hit">`is_hit`（_位置_）[[来源]](http://bencaine.me/maddux/_modules/maddux/objects/obstacle.html#Obstacle.is_hit)</dt>
+<p>检查矩形是否被点或路径击中</p>
+<colgroup><col class="field-name"><col class="field-body"></colgroup>
+| 参数： | **position**（_numpy.ndarray或numpy.matrix_） - 一个对象位置（x，y，z）或位置，如果它是一个路径（[x1，x2，..]，[y1，y2，..]，[z1， z2，..] |
+| 返回值： | 障碍物是否被点或路径击中 |
+| 返回类型： | [布尔](https://docs.python.org/library/functions.html#bool "（在Python v2.7中）") |
+<dt id="maddux.objects.obstacle.Obstacle.is_hit_by_sphere">`is_hit_by_sphere`（_中心_，_半径_）[[来源]](http://bencaine.me/maddux/_modules/maddux/objects/obstacle.html#Obstacle.is_hit_by_sphere)</dt>
+<p>检查矩形是否被球体击中</p>
+<colgroup><col class="field-name"><col class="field-body"></colgroup>
+| 参数： | 
+<ul>
+<li><strong>中心</strong>（<em>numpy.ndarray</em>） - 球体的中心（x，y，z）</li>
+<li><strong>radius</strong>（<a href="https://docs.python.org/library/functions.html#int" title="（在Python v2.7中）"><em>int</em></a>） - 球体的半径</li>
+</ul>
+<p>|
+| 返回值： |</p>
+<p>障碍物是否被球体击中</p>
+<p>|
+| 返回类型： |</p>
+<p><a href="https://docs.python.org/library/functions.html#bool" title="（在Python v2.7中）">布尔</a></p>
+<p>|</p>
+<dt id="maddux.objects.obstacle.Obstacle.plot">`plot`（_ax _）[[来源]](http://bencaine.me/maddux/_modules/maddux/objects/obstacle.html#Obstacle.plot)</dt>
+<p>在其位置绘制障碍物</p>
+<colgroup><col class="field-name"><col class="field-body"></colgroup>
+| 参数： | **ax**（_matplotlib.axes_） - 图上绘图 |
+| Rtpye： | 没有 |
+<h2 id="madduxobjectsstatic模块-2">maddux.objects.static模块</h2>
+<p>静态对象的抽象基类。</p>
+<dt id="maddux.objects.static.StaticObject">_班_`maddux.objects.static.``StaticObject`[[来源]](http://bencaine.me/maddux/_modules/maddux/objects/static.html#StaticObject)</dt>
+<p>基地： <a href="https://docs.python.org/library/functions.html#object" title="（在Python v2.7中）"><code>object</code></a></p>
+<dt id="maddux.objects.static.StaticObject.display">`display`（）[[来源]](http://bencaine.me/maddux/_modules/maddux/objects/static.html#StaticObject.display)</dt>
+<p>显示有关静态对象的相关数据。</p>
+<dt id="maddux.objects.static.StaticObject.is_hit">`is_hit`（_位置_）[[来源]](http://bencaine.me/maddux/_modules/maddux/objects/static.html#StaticObject.is_hit)</dt>
+<p>判断另一个对象是否命中静态对象</p>
+<dt id="maddux.objects.static.StaticObject.plot">`plot`（_ax _）[[来源]](http://bencaine.me/maddux/_modules/maddux/objects/static.html#StaticObject.plot)</dt>
+<p>绘制静态对象。</p>
+<h2 id="madduxobjectstarget模块-2">maddux.objects.target模块</h2>
+<p>某物可能与之碰撞的静止物体。</p>
+<dt id="maddux.objects.target.Target">_class_`maddux.objects.target.``Target`（_position_，_radius _）[[来源]](http://bencaine.me/maddux/_modules/maddux/objects/target.html#Target)</dt>
+<p>基地： <a href="http://bencaine.me/maddux/maddux.objects.html#maddux.objects.static.StaticObject" title="maddux.objects.static.StaticObject"><code>maddux.objects.static.StaticObject</code></a></p>
+<dt id="maddux.objects.target.Target.display">`display`（）[[来源]](http://bencaine.me/maddux/_modules/maddux/objects/target.html#Target.display)</dt>
+<p>显示目标属性：rtpye：无</p>
+<dt id="maddux.objects.target.Target.is_hit">`is_hit`（_位置_）[[来源]](http://bencaine.me/maddux/_modules/maddux/objects/target.html#Target.is_hit)</dt>
+<p>检查目标是否被击中。</p>
+<colgroup><col class="field-name"><col class="field-body"></colgroup>
+| 参数： | **position**（_numpy.array_） - 对象的位置 |
+| 返回类型： | 布尔 |
+<dt id="maddux.objects.target.Target.plot">`plot`（_ax _）[[来源]](http://bencaine.me/maddux/_modules/maddux/objects/target.html#Target.plot)</dt>
+<p>在目标位置绘制目标。：param ax：图上的情节。：type ax：matplotlib图：rtype：matplotlib图</p>
+<dt id="maddux.objects.target.Target.plot_data">`plot_data`（）[[来源]](http://bencaine.me/maddux/_modules/maddux/objects/target.html#Target.plot_data)</dt>
+<p>获取目标位置的绘图数据：rtype：整数的3元组</p>
+<h2 id="madduxobjectsthrowable模块-2">maddux.objects.throwable模块</h2>
+<p>一个基本可抛出的对象类，它对重力，速度等特征进行编码。</p>
+<dt id="maddux.objects.throwable.ThrowableObject">_class_`maddux.objects.throwable.``ThrowableObject`（_position_，_target = False _）[[来源]](http://bencaine.me/maddux/_modules/maddux/objects/throwable.html#ThrowableObject)</dt>
+<p>基地： <a href="http://bencaine.me/maddux/maddux.objects.html#maddux.objects.dynamic.DynamicObject" title="maddux.objects.dynamic.DynamicObject"><code>maddux.objects.dynamic.DynamicObject</code></a></p>
+<dt id="maddux.objects.throwable.ThrowableObject.attach">`attach`（）[[来源]](http://bencaine.me/maddux/_modules/maddux/objects/throwable.html#ThrowableObject.attach)</dt>
+<p>将对象附加到其当前位置</p>
+<dt id="maddux.objects.throwable.ThrowableObject.display">`display`（）[[来源]](http://bencaine.me/maddux/_modules/maddux/objects/throwable.html#ThrowableObject.display)</dt>
+<p>显示有关对象的信息</p>
+<dt id="maddux.objects.throwable.ThrowableObject.step">`step`（）[[来源]](http://bencaine.me/maddux/_modules/maddux/objects/throwable.html#ThrowableObject.step)</dt>
+<p>更新一个时间步（1毫秒）</p>
+<dt id="maddux.objects.throwable.ThrowableObject.throw">`throw`（_速度_）[[来源]](http://bencaine.me/maddux/_modules/maddux/objects/throwable.html#ThrowableObject.throw)</dt>
+<p>扔一个物体。</p>
+<colgroup><col class="field-name"><col class="field-body"></colgroup>
+| 参数： | **速度**（_np.ndarray_） - 投掷速度（vx，vy，vz） |
+| 返回类型： | [没有](https://docs.python.org/library/constants.html#None "（在Python v2.7中）") |
+<hr>
+<h1 id="madduxexamples包">maddux.examples包</h1>
+<h2 id="子模块-5">子模块</h2>
+<h2 id="madduxexamplesarm_animation模块">maddux.examples.arm_animation模块</h2>
+<dt id="maddux.examples.arm_animation.arm_animation">`maddux.examples.arm_animation.``arm_animation`（）[[来源]](http://bencaine.me/maddux/_modules/maddux/examples/arm_animation.html#arm_animation)</dt>
+<p>动画手臂移动触摸球</p>
+<h2 id="madduxexamplesarm_ball_animation模块">maddux.examples.arm_ball_animation模块</h2>
+<dt id="maddux.examples.arm_ball_animation.arm_ball_animation">`maddux.examples.arm_ball_animation.``arm_ball_animation`（）[[来源]](http://bencaine.me/maddux/_modules/maddux/examples/arm_ball_animation.html#arm_ball_animation)</dt>
+<p>为拿着球的手臂设置动画，移动到任意位置。</p>
+<h2 id="madduxexamplesball_animation模块">maddux.examples.ball_animation模块</h2>
+<dt id="maddux.examples.ball_animation.ball_animation">`maddux.examples.ball_animation.``ball_animation`（）[[来源]](http://bencaine.me/maddux/_modules/maddux/examples/ball_animation.html#ball_animation)</dt>
+<p>制作几个球并让它们以不同的速度在环境中移动。</p>
+<h2 id="madduxexamplesfind_jacob0模块">maddux.examples.find_jacob0模块</h2>
+<dt id="maddux.examples.find_jacob0.find_jacob0">`maddux.examples.find_jacob0.``find_jacob0`（）[[来源]](http://bencaine.me/maddux/_modules/maddux/examples/find_jacob0.html#find_jacob0)</dt>
+<p>展示如何计算am arm的jacobian。</p>
+<h2 id="madduxexamplesobstacle_collision模块">maddux.examples.obstacle_collision模块</h2>
+<dt id="maddux.examples.obstacle_collision.obstacle_collision">`maddux.examples.obstacle_collision.``obstacle_collision`（）[[来源]](http://bencaine.me/maddux/_modules/maddux/examples/obstacle_collision.html#obstacle_collision)</dt>
+<p>测试最终配置的手臂是否与我们的任何一个障碍物接触。</p>
+<h2 id="madduxexamplesplot模块">maddux.examples.plot模块</h2>
+<dt id="maddux.examples.plot.plot">`maddux.examples.plot.``plot`（）[[来源]](http://bencaine.me/maddux/_modules/maddux/examples/plot.html#plot)</dt>
+<p>给出一个包含一些对象和机器人的环境的通用绘图示例。</p>
+<h2 id="madduxexamplesplot_arm模块">maddux.examples.plot_arm模块</h2>
+<dt id="maddux.examples.plot_arm.plot_arm">`maddux.examples.plot_arm.``plot_arm`（）[[来源]](http://bencaine.me/maddux/_modules/maddux/examples/plot_arm.html#plot_arm)</dt>
+<p>显示如何绘制手臂。</p>
+<h2 id="madduxexamplesplot_obstacle模块">maddux.examples.plot_obstacle模块</h2>
+<dt id="maddux.examples.plot_obstacle.plot_obstacle">`maddux.examples.plot_obstacle.``plot_obstacle`（）[[来源]](http://bencaine.me/maddux/_modules/maddux/examples/plot_obstacle.html#plot_obstacle)</dt>
+<p>在环境中创建并绘制障碍物。</p>
+<h2 id="madduxexamplestutorial模块">maddux.examples.tutorial模块</h2>
+<dt id="maddux.examples.tutorial.tutorial">`maddux.examples.tutorial.``tutorial`（）[[来源]](http://bencaine.me/maddux/_modules/maddux/examples/tutorial.html#tutorial)</dt>
+<p>我们的文档教程中的代码</p>
+<h1 id="madduxutils包">maddux.utils包</h1>
+<h2 id="子模块-6">子模块</h2>
+<h2 id="madduxutilsanimate_path模块">maddux.utils.animate_path模块</h2>
+<dt id="maddux.utils.animate_path.animate_path">`maddux.utils.animate_path.``animate_path`（_environment_，_input_file_，_output_file = None _）[[来源]](http://bencaine.me/maddux/_modules/maddux/utils/animate_path.html#animate_path)</dt>
+<p>加载已保存的路径并为其设置动画</p>
+<colgroup><col class="field-name"><col class="field-body"></colgroup>
+| 参数： | 
+<ul>
+<li><strong>environment</strong>（<a href="https://docs.python.org/library/functions.html#str" title="（在Python v2.7中）"><em>str</em></a>） - 发生路径的环境</li>
+<li><strong>input_file</strong>（<a href="https://docs.python.org/library/functions.html#str" title="（在Python v2.7中）"><em>str</em></a>） - 保存联合配置的文件</li>
+<li><strong>output_file</strong>（<em>str或None</em>） - 将动画保存为.mp4的文件</li>
+</ul>
+<p>|
+| Rtpye： |</p>
+<p>没有</p>
+<p>|</p>
+<dt id="maddux.utils.animate_path.main">`maddux.utils.animate_path.``main`（）[[来源]](http://bencaine.me/maddux/_modules/maddux/utils/animate_path.html#main)</dt>
+<p>运行CLI以获取动画参数</p>
+</li>
+</ul>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[RoboND-Kinematics-Project 为Kuka R210机器人手臂提供逆运动学分析]]></title>
+        <id>https://blog.bioprinting.site/post/KQATQGv4O</id>
+        <link href="https://blog.bioprinting.site/post/KQATQGv4O">
+        </link>
+        <updated>2019-05-12T14:23:16.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="项目运动学拾取和放置">项目：运动学拾取和放置</h2>
+<h4 id=""><a href="https://github.com/zenetio/RoboND-Kinematics-Project#carlos-r-lacerda"></a>Carlos R. Lacerda</h4>
+<hr>
+<p><strong>概述：</strong></p>
+<p>该项目的目标是为Kuka R210机器人手臂提供运动学分析。在模拟中，我们处理一个任务来挑选，移动和放下一个对象到一个盒子里。在这个项目中，我将使用ROS系统和Gazebo + Rviz作为模拟环境。使用反向运动学（IK），我们可以找到正确的轨迹来驱动手臂将物体放在所需的位置。可以在此<a href="https://github.com/zenetio/RoboND-Kinematics-Project.git">存储库中</a>找到完整的项目，这是<a href="https://youtu.be/Zh5tTvKKrH4">视频</a>。</p>
+<p><a href="https://github.com/zenetio/RoboND-Kinematics-Project/blob/master/misc_images/first_try.png"><img src="https://github.com/zenetio/RoboND-Kinematics-Project/raw/master/misc_images/first_try.png" alt="替代文字"></a></p>
+<p>图1。</p>
+<h3 id="-2"><a href="https://github.com/zenetio/RoboND-Kinematics-Project#kinematic-analysis-model-of-6-dof-kuka-r210-robot"></a>6自由度Kuka R210机器人运动分析模型</h3>
+<h4 id="-3"><a href="https://github.com/zenetio/RoboND-Kinematics-Project#1-forward-kinematic"></a>1.前进运动学</h4>
+<p>运动学分析主要包括两个方面，即正向运动学分析（FK）和反向运动学分析（IK）。正向运动学分析意味着Kuka的末端执行器的姿态可以用链接的给定几何参数和关节的变量来计算。机器人具有平移或旋转关节。平移沿着给定的矢量方向在空间中移动有限距离，并且可以通过相邻链路之间的以下均匀变换矩阵来描述，如图2所示。</p>
+<p><a href="https://github.com/zenetio/RoboND-Kinematics-Project/blob/master/misc_images/homo.png"><img src="https://github.com/zenetio/RoboND-Kinematics-Project/raw/master/misc_images/homo.png" alt="替代文字"></a></p>
+<p>图2。</p>
+<p>正向运动（FK）问题的解决方案是直线计算，其中我们可以使用关节角度并找到机器人手臂的末端执行器姿势（位置+方向）。下面的图3显示了FK和IK之间的分析模型。</p>
+<p><a href="https://github.com/zenetio/RoboND-Kinematics-Project/blob/master/misc_images/fk_ik.png"><img src="https://github.com/zenetio/RoboND-Kinematics-Project/raw/master/misc_images/fk_ik.png" alt="替代文字"></a></p>
+<p>图3。</p>
+<p>但是什么是联系或联合角度？我们将在下一节中看到。可以使用Denavit-Hartenberg（DH）惯例导出机器人的链接和关节角度之间的关系。</p>
+<h3 id="-4"><a href="https://github.com/zenetio/RoboND-Kinematics-Project#2-dh-parameters"></a>2. DH参数</h3>
+<p>读取kr210.urdf.xacro文件以执行Kuka KR210机器人的运动学分析并得出其DH参数，得到下表1。</p>
+<p><em>表格1。</em></p>
+<table>
+<thead>
+<tr>
+<th>链接</th>
+<th>α（I-1）</th>
+<th>一个第（i-1）</th>
+<th>d（I-1）</th>
+<th>THETA（ⅰ）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0-&gt; 1</td>
+<td>0</td>
+<td>0</td>
+<td>0.75</td>
+<td>0</td>
+</tr>
+<tr>
+<td>1-&gt; 2</td>
+<td>-pi / 2</td>
+<td>0.35</td>
+<td>0</td>
+<td>-pi / 2 + q2</td>
+</tr>
+<tr>
+<td>2-&gt; 3</td>
+<td>0</td>
+<td>1.25</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>3-&gt; 4</td>
+<td>-pi / 2</td>
+<td>-0.054</td>
+<td>1.50</td>
+<td>0</td>
+</tr>
+<tr>
+<td>4-&gt; 5</td>
+<td>Pi / 2相</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>5-&gt; 6</td>
+<td>-pi / 2</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>6-&gt; EE</td>
+<td>0</td>
+<td>0</td>
+<td>0.303</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<p>DH参数由坐标系i-1到i的变换通过表1中给出的旋转和平移变换给出。注意，这是DH惯例的修改惯例。图4显示了表1中描述的每个变量的位置。</p>
+<p><a href="https://github.com/zenetio/RoboND-Kinematics-Project/blob/master/misc_images/kr210_schematic.png"><img src="https://github.com/zenetio/RoboND-Kinematics-Project/raw/master/misc_images/kr210_schematic.png" alt="替代文字"></a></p>
+<p>图4。</p>
+<p>在Gazebo中，DH参数表由URDF文件描述。URDF文件中详细描述了所有关节和链接。下面的图5显示了Kuka R210 URDF文件的一部分。</p>
+<p><a href="https://github.com/zenetio/RoboND-Kinematics-Project/blob/master/misc_images/urdf.png"><img src="https://github.com/zenetio/RoboND-Kinematics-Project/raw/master/misc_images/urdf.png" alt="替代文字"></a></p>
+<p>图5。</p>
+<p>例如，请注意，joint_3与父link_2和子link_3链接。</p>
+<h3 id="-5"><a href="https://github.com/zenetio/RoboND-Kinematics-Project#3-implementation-of-forward-kinematics"></a>3.正向运动学的实现</h3>
+<p>因此，使用表1中的值和图2中描述的均匀变换公式，我们可以创建关于每个关节的各个变换矩阵。此外，我们还可以仅使用末端效应器（抓取器）姿势在base_link和gripper_link之间生成广义齐次变换。</p>
+<p>例如，base_link和link_1（T0_1）的同构变换可以写成如下：</p>
+<p>def  Tn_m（th，alpha，a，d）：
+t =矩阵（[[cos（th），             - sin（th），             0，a]，
+[sin（th）* cos（alpha），cos（th）* cos（alpha），- sin（alpha），- sin（alpha）* d]，
+[sin（th）* sin（alpha），cos（th）* sin（alpha），cos（alpha），cos（alpha）* d]，
+[                    0，                    0，            0，                1 ]]）
+＃从base_link到LINK_1转化
+T0_1 = Tn_m（Q1，alpha0，A0，D1）.subs（S）</p>
+<p>我们对所有其他链接重复相同的方法</p>
+<p>＃从link_1到Link_2的转换
+T1_2 = Tn_m（q2，alpha1，a1，d2）.subs（s）
+＃从link_2到Link_3的
+转换T2_3 = Tn_m（q3，alpha2，a2，d3）.subs（s）
+＃来自link_3的转换到Link_4
+T3_4 = Tn_m（q4，alpha3，a3，d4）.subs（s）
+＃从link_4到Link_5的
+转换T4_5 = Tn_m（q5，alpha4，a4，d5）.subs（s）
+＃从link_5到Link_6的
+转换T5_6 = Tn_m（q6，alpha5，a5，d6）.subs（s）
+＃从link_6到夹子的转换G
+T6_G  = Tn_m（q7，alpha6，a6，d7）.subs（s）</p>
+<p>然后使用上面的等式，对于从base_link到gripper_link的每个同构变换，我们有：</p>
+<p>T0_1 =矩阵（[[COS（Q1），-罪（Q1），0，     0 ]，
+[罪（Q1），COS（Q1），0，     0 ]，
+[       0，         0，1，0.75 ]，
+[       0，         0，0，     1 ]]）</p>
+<p>T1_2 =矩阵（[[罪（Q2），COS（Q2），0，0.35 ]，
+[       0，         0，1，     0 ]，
+[COS（Q2），-罪（Q2），0，     0 ]，
+[       0，         0，0，     1 ]]）</p>
+<p>T2_3 =矩阵（[[COS（Q3），-罪（Q3），0，1.25 ]，
+[罪（Q3），COS（Q3），0，     0 ]，
+[       0，         0，1，     0 ]，
+[       0，        0，0，     1 ]]）</p>
+<p>T3_4 =矩阵（[[COS（Q4），-罪（Q4），0，- 0.054 ]，
+[        0，         0，1，     1.5 ]，
+[ -罪（Q4），- COS （Q4），0，       0 ]，
+[        0，         0，0，       1 ]]）</p>
+<p>T4_5 =矩阵（[[COS（Q5），-罪（Q5），   0，0 ]，
+[       0，         0，- 1，0 ]，
+[罪（Q5），COS（Q5），   0，0 ]，
+[       0，         0，   0，1 ]]）</p>
+<p>T5_6 =矩阵（[[COS（Q6），- SIN（Q6），0，0 ]，
+[        0，         0，1，0 ]，
+[ - SIN（Q6），- COS（Q6），0，0 ]，
+[        0，         0，0，1 ]]）T6_G =矩阵（[[ 1，0，0，      0 ]，
+[ 0，1，0，      0 ]，
+[ 0，0，1，0.303 ]，
+[ 0，</p>
+<p>0，0，      1 ]]）</p>
+<p>因此，我们可以计算抓手姿势的完整FK。</p>
+<p>注意，均匀变换具有平移和旋转部分。使用此属性，我们可以重新排列同构变换并编写以下内容：</p>
+<p><a href="https://github.com/zenetio/RoboND-Kinematics-Project/blob/master/misc_images/wc.png"><img src="https://github.com/zenetio/RoboND-Kinematics-Project/raw/master/misc_images/wc.png" alt="替代文字"></a></p>
+<p>图6。</p>
+<p>它会导致手腕中心姿势。</p>
+<h3 id="-6"><a href="https://github.com/zenetio/RoboND-Kinematics-Project#4-implementation-of-inverse-kinematics"></a>4.反向运动学的实现</h3>
+<p>逆运动学分析与正向运动学分析相反。现在情况有点复杂了。给定期望的末端效应器姿势，我们需要找到将实现到目标位置的正确轨迹的关节角度的值。利用反向运动学解决方案，可以确定每个关节角度的值，以便将臂放置在期望的位置和方向。</p>
+<p>也就是说，我们需要找到q1，q2，q3，q4，q5和q6的值，这些值会将手臂移动到所需的姿势。</p>
+<p><a href="https://github.com/zenetio/RoboND-Kinematics-Project/blob/master/misc_images/geometry.png"><img src="https://github.com/zenetio/RoboND-Kinematics-Project/raw/master/misc_images/geometry.png" alt="替代文字"></a></p>
+<p>图7。</p>
+<p>使用臂的一些几何特性，q1，q2和q3的值非常严格，如图7所示</p>
+<p>q1角度可以从手臂在平面X0-Y0上的投影中找到，我们得到：</p>
+<p>theta1 = atan2（Wc [ 1 ]，Wc [ 0 ]）</p>
+<p>我们可以从下面的图7和图8得到theta2和theta3。</p>
+<p><a href="https://github.com/zenetio/RoboND-Kinematics-Project/blob/master/misc_images/misc3.png"><img src="https://github.com/zenetio/RoboND-Kinematics-Project/raw/master/misc_images/misc3.png" alt="替代文字"></a></p>
+<p>图8。</p>
+<p>＃使用几何计算三角形边
+side_a = 1.501
+side_b = sqrt（ pow（（sqrt（Wc [ 0 ] * Wc [ 0 ] + Wc [ 1 ] * Wc [ 1 ]） - 0.35）， 2） + pow（（ Wc [ 2 ] - 0.75）， 2））
+side_c = 1.25
+＃使用几何来计算三角形角度
+angle_a = acos（（side_b）* side_b + side_c * side_c - side_a * side_a）/（2  * side_b * side_c））
+angle_b = acos（（side_a * side_a + side_c * side_c - side_b * side_b）/（2  * side_a * side_c））
+＃ calculate theta2
+theta2 = np.pi /  2。- angle_a - atan2（Wc [2 ] -  0.75，SQRT（WC [ 0 ] * Wc中[ 0 ] + Wc中[ 1 ] * Wc中[ 1 ]）-  0.35）
+＃计算theta3
+theta3 = np.pi /  2。-（angle_b +  0.036）</p>
+<p>最后，使用旋转矩阵R3_6和更多几何属性，我们可以找到剩余角度q4，q5和q6。</p>
+<p>＃使用旋转矩阵来计算剩余的关节角度
+＃从变换矩阵我们可以提取的旋转矩阵
+R0_3 = oClass.T0_3 [ 0： 3， 0： 3 ]
+R0_3 = R0_3.evalf（潜艇= {Q1：theta1，Q2：theta2， Q3：theta3}）
+R3_6 = R0_3.T * Rot_G＃现在得到欧拉从旋转矩阵角度＃计算theta4
+theta4 = ATAN2（R3_6 [ 2， 2 ]， - R3_6 [ 0</p>
+<p>，2 ]）
+＃计算theta5
+theta5 = ATAN2（SQRT（R3_6 [ 0，2 ] * R3_6 [ 0，2 ] + R3_6 [ 2，2 ] * R3_6 [ 2，2 ]），R3_6 [ 1，2 ]）
+＃计算theta6
+theta6 = ATAN2（- R3_6 [ 1，1 ]，R3_6 [ 1，0 ]）
+＃因为该模型具有某些奇点，我们可以考虑
+如果（SIN（theta5）&lt;  0）：
+theta4 = ATAN2（- R3_6 [ 2，2 ]，R3_6 [ 0，2 ]）
+theta6 = ATAN2（R3_6 [ 1，1 ]，- R3_6 [ 1，0 ]）</p>
+<h3 id="-7"><a href="https://github.com/zenetio/RoboND-Kinematics-Project#5-project-implementation"></a>5.项目实施</h3>
+<ul>
+<li>模拟环境：ROS运行Gazebo + Rviz</li>
+<li>语言：Python和C ++</li>
+<li>操作系统：在VMware Pro上运行的Ubuntu 16.04</li>
+</ul>
+<p>为了运行这个项目，我在<code>IK_server.py</code>脚本文件中实现了FK和IK的代码。python代码接收末端效应器姿势，处理运动学分析并返回具有关节角度的阵列列表，该关节角度将允许手臂移动到新的期望姿势。</p>
+<h3 id="-8"><a href="https://github.com/zenetio/RoboND-Kinematics-Project#6-improvements"></a>6.改进</h3>
+<p>我不得不优化Kuka手臂未能挑选物体的一些问题。IK正在从开始到结束放置位置正确地移动手臂但是该过程没有成功，因为夹子未能拾取对象。然后我在<code>trajectory_sampler.cpp</code>代码中做了两处更改：</p>
+<ul>
+<li>在抓手处理功能之前增加了4秒</li>
+<li>夹持器角度从0.02增加到0.025</li>
+</ul>
+<p>然后这两个变化降低了抓手未能保持对象的概率。</p>
+<p>另一个挑战是找到一个解决方案，以避免在循环内运行符号代码来管理从手臂接收到的姿势。符号变量的计算需要很长时间，主要是因为我们有很多矩阵运算。因此，例如，考虑完成符号操作60秒，然后乘以50,60,100个迭代，您将获得大量的计算时间。在最后，这将是每个周期无法接受的时间。</p>
+<p>为了解决这个问题，我创建了一个类来管理所有符号变量和计算的创建。然后我执行了一次类代码，创建了一个被序列化并保存到磁盘的对象。所以，在项目中我<code>IK_server.py</code>只需要加载（反序列化）对象代码。这种方法只需几分之一秒，这意味着在循环中管理FK和IK分析的快速计算时间。</p>
+<p><a href="https://github.com/zenetio/RoboND-Kinematics-Project/blob/master/misc_images/last_try.png"><img src="https://github.com/zenetio/RoboND-Kinematics-Project/raw/master/misc_images/last_try.png" alt="替代文字"></a></p>
+<p>图9。</p>
+<p>图9显示了10次尝试后的最终过程。请注意，框中有3个引脚，下拉框中有8个引脚。一个是第11周期，不得考虑。但是其他2个都在盒子里，因为即使夹子姿势是正确的，它也不能将物体保持在夹子中。</p>
+<p>因此，我们可以得出结论，FK和IK计算中的误差非常低，如果我们有更好的抓手操作，我们可以在10次尝试中达到100％。</p>
+<h3 id="-9"><a href="https://github.com/zenetio/RoboND-Kinematics-Project#future-improvements"></a>未来的改进</h3>
+<p>改进夹具操作以避免即使夹具处于正确姿势时也会失败。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[ROS-IGTL-Bridge：使用ROS环境进行图像引导治疗的开放式网络接口]]></title>
+        <id>https://blog.bioprinting.site/post/AKuuLRT2E</id>
+        <link href="https://blog.bioprinting.site/post/AKuuLRT2E">
+        </link>
+        <updated>2019-05-12T13:59:18.000Z</updated>
+        <content type="html"><![CDATA[<h3 id="目的">目的</h3>
+<p>随着人们对手术机器人系统先进图像引导的兴趣日益增加，机器人设备和医学图像计算软件的快速集成和测试在研究和开发中变得至关重要。最大限度地利用在不同领域广泛接受的平台上构建的现有工程资源，例如机器人中的机器人操作系统（ROS）和医学图像计算中的3D切片器可以简化这些任务。我们提出了一个集成在ROS中的新的开放式网桥接口，以确保无缝的跨平台数据共享。</p>
+<h3 id="方法">方法</h3>
+<p>实现了名为ROS-IGTL-Bridge的ROS节点。它使用OpenIGTLink协议在ROS环境和外部医学图像计算软件之间建立TCP / IP网络连接。该节点同时通过网络将ROS消息输出到外部软件，反之亦然，从而允许基于ROS的设备和医学图像计算平台之间的无缝和透明数据共享。</p>
+<h3 id="结果">结果</h3>
+<p>性能测试表明，网桥可以成功地在两个方向上以30 fps流式传输变换，字符串，点和图像。变换，字符串和点的数据传输延迟小于1.2 ms，而rrom VGA图像的数据传输延迟小于1.2 ms。另外一项测试还表明，该桥可以实现900 fps的变换。此外，该桥在两个具有代表性的系统中进行了演示：模拟图像引导的手术机器人设置，包括3D切片机，以及带有ROS的Lego Mindstorms，作为IGT研究的原型和教育平台; 和智能组织自主机器人（STAR）手术设置与3D切片机。</p>
+<h3 id="结论">结论</h3>
+<p>该研究表明，该桥实现了ROS与医学图像计算软件之间的跨平台数据共享。这将允许由诸如3D切片器的医学图像计算软件提供的基于图像的高级计划/导航快速且无缝地集成到基于ROS的手术机器人系统中。</p>
+<p>**关键词：**ROS，OpenIGTLink，界面，手术机器人，图像引导治疗</p>
+<p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/" title="转到此页面的其他部分">去：</a></p>
+<h2 id="1简介">1简介</h2>
+<p>机器人系统在图像引导治疗（IGT）中的应用已经在许多医学领域得到扩展，导致现代医学技术的不断发展[ <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/#R1">1</a> ]。机器人辅助腹腔镜手术在美国和其他发达国家的根治性前列腺切除术中已经很常见[ <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/#R2">2</a> ]并且在其他手术中扩大了其用途。机器人导管系统已被用于各种血管内手术[ <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/#R3">3</a> ]和心律失常手术[ <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/#R4">4</a> ]。机器人放射外科系统已被用于治疗肺，肝，胰腺，脊柱，肾，头部和颈部以及前列腺的肿瘤[ <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/#R5">5</a> ]。</p>
+<p>虽然今天的大多数临床机器人系统都是为了通过遵循他们的命令和计划来帮助外科医生，但人们越来越关注自动化辅助，其中机器人系统接管一些外科医生的常规任务，例如切割和缝合，让外科医生集中于高级别外科决策[ <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/#R6">6</a>，<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/#R7">7</a> ]。随着对自主技术的兴趣日益增加，研究人员和外科医生在手术室中面临着各种各样的技术。这种不断增长的兴趣促使医疗机器人社区利用机器人操作系统（ROS）中的各种功能<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/#R8"> [8]</a>]，例如计算机视觉，传感，运动学，模拟和运动规划。机器人研究系统包括医疗机器人Raven II [ <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/#R9">9</a> ]和达芬奇研究套件（dVRK）[ <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/#R10">10</a> ]以及KUKA轻量重型机器人（LWR）[ <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/#R11">11</a> ]已经使用ROS作为软件平台。</p>
+<p>但是，ROS平台不是执行某些临床任务的理想环境。具体而言，现代手术计划和指导严重依赖于医学图像来识别和定位患病区域和关键结构。此外，必须将这种导航信息映射到物理空间，以实现安全和准确的处理。虽然ROS的多功能性允许研究人员自己实现这些功能，但其中许多已经在一些专门为医学图像计算和图像引导治疗开发的研究平台上可用，例如3D Slicer [ <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/#R12">12</a> ]，IGSTK [ <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/#R13">13</a> ]， MITK [ <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/#R14">14</a> ]或NifTK [ <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/#R15">15</a> ]，OsiriX [ <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/#R16">16</a> ]，XIP-Builder <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/#R17"> [17]</a>]和MeVisLab [ <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/#R18">18</a> ]。因此，将ROS等机器人研究平台与医学图像计算平台连接起来对于先进医疗机器人系统的开发正变得越来越重要。通过将两个研究领域广泛开发的流行平台结合在一起，研究人员可以利用这两个领域丰富的工程资源。</p>
+<p>将ROS等流行平台与医学图像计算平台连接起来，将进一步有益于医学机器人研究。由于ROS支持的机器人硬件种类繁多，从爱好导向产品到工业级高灵敏度机器人，人们可以轻松切换硬件，或者将系统从概念验证原型扩展到完全 - 用于动物和人类研究的功能系统，无需显着改变软件架构。因此，该桥将使原型设计和测试的迭代变得更加容易和快速。</p>
+<p>这项研究的目标是开发一个新的软件界面，连接ROS和流行的医学图像计算软件3D Slicer，并提供支持图像引导和机器人辅助手术系统开发的研究和工程工具。这两个软件平台使用开放式网络通信协议OpenIGTLink [ <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/#R19">19</a> ] 通过TCP / IP网络无缝共享数据和命令。</p>
+<p>在本文中，我们描述了系统架构及其实现，以及概念验证场景。ROS中实现的桥接结构以及ROS和OpenIGTLink消息之间的转换在“方法”部分中进行了解释。随后，网络通信性能测试的结果显示在实验部分，然后是用例部分，其中提供了网桥功能的展望。实验结果和用例在讨论部分讨论。</p>
+<p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/" title="转到此页面的其他部分">去：</a></p>
+<h2 id="2方法">2方法</h2>
+<h3 id="21-ros-igtl-bridge节点">2.1 ROS-IGTL-Bridge节点</h3>
+<p>我们软件界面的核心组件是名为ROS-IGTL-Bridge的ROS节点。ROS-IGTL-Bridge作为基于ROS的系统中的节点之一，与3D Slicer或配备有套接字接口的其他外部医学图像计算软件建立TCP / IP套接字连接。它可以配置为作为TCP / IP服务器或客户端运行。ROS提供了由多个节点组成的图形架构，这些节点通过对等网络连接并将数据一起处理。节点可以将ROS消息发布到给定_主题_，以及其他节点可以通过订阅主题来接收消息。ROS-IGTL-Bridge节点将ROS消息转换为OpenIGTLink消息，并通过TCP / IP连接将其发送到外部软件。它还接收OpenIGTLink消息，将其转换为ROS消息，并将其发布到ROS网络中（<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/figure/F1/">图1</a>）。</p>
+<p><a href="https://www.ncbi.nlm.nih.gov/core/lw/2.0/html/tileshop_pmc/tileshop_pmc_inline.html?title=Click%20on%20image%20to%20zoom&amp;p=PMC3&amp;id=5543207_nihms883782f1.jpg"><img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/bin/nihms883782f1.jpg" alt="包含图片，插图等的外部文件。对象名称为nihms883782f1.jpg" title="点击图片放大"></a></p>
+<p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/figure/F1/">图。1</a></p>
+<p>ROS-IGTL-Bridge作为支持图像导入，图像处理，手术计划和手术导航的医学图像计算软件（左）之间的消息接口，以及提供运动学计算，传感，模拟，运动规划和计算机的ROS环境。愿景（右）。</p>
+<p>该界面支持在图像引导和机器人辅助治疗的背景下常用的数据类型。支持的数据类型将在下一节中列出。</p>
+<p>ROS-IGTL-Bridge节点进程由两个独立的POSIX线程组成，允许同时发送和接收数据（<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/figure/F2/">图2</a>）。每个消息类型实现了用于OpenIGTLink通信的消息序列化和反序列化的方法作为回调函数，并由两个线程调用。通过OpenIGTLink连接接收的传入消息由消息的头信息评估，并发布到ROS网络中相应的ROS-Topic。</p>
+<p><a href="https://www.ncbi.nlm.nih.gov/core/lw/2.0/html/tileshop_pmc/tileshop_pmc_inline.html?title=Click%20on%20image%20to%20zoom&amp;p=PMC3&amp;id=5543207_nihms883782f2.jpg"><img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/bin/nihms883782f2.jpg" alt="包含图片，插图等的外部文件。对象名称为nihms883782f2.jpg" title="点击图片放大"></a></p>
+<p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/figure/F2/">图2</a></p>
+<p>桥接数据处理由两个独立的POSIX线程组成。线程“接收”（左）通过评估头信息并执行消息转换来处理传入的Open-IGTLink消息，随后将数据发布到相应的ROS主题。同时，线程“发送”在订阅的ROS主题上的先前触发的回调之后发送传出消息（右）。</p>
+<p>ROS网络中创建的主题标记为OUT表示传出数据，IN表示传入数据。通过使用启动文件并设置参数服务器IP，端口和客户端/服务器标志，可以轻松配置ROS-IGTL-Bridge节点。此外，自主测试节点ROS-IGTL-Test可用于通过发送虚拟数据并在订阅的ROS主题上可视化接收的数据来评估功能。在测试例程期间，发送随机变换，点，包含20个点的点云，字符串和样本vtkPolyData模型。</p>
+<h3 id="22-ros-igtl-bridge支持的消息类型">2.2 ROS-IGTL-Bridge支持的消息类型</h3>
+<p>ROS-IGTL-Bridge支持IGT应用中经常使用的各种类型的数据。支持的类型包括字符串，变换，图像，多边形数据和点。以下段落详细介绍了支持的OpenIGT-Link消息以及ROS中的相应主题。为了确定从OpenIGTLink消息到相应ROS消息的转换方法，ROS-IGTL-Bridge使用OpenIGTLink消息的标题部分，该消息提供元数据，包括类型名称，设备名称，时间戳，正文大小和包状态（<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/figure/F3/">图3</a>）。</p>
+<p><a href="https://www.ncbi.nlm.nih.gov/core/lw/2.0/html/tileshop_pmc/tileshop_pmc_inline.html?title=Click%20on%20image%20to%20zoom&amp;p=PMC3&amp;id=5543207_nihms883782f3.jpg"><img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/bin/nihms883782f3.jpg" alt="包含图片，插图等的外部文件。对象名称为nihms883782f3.jpg" title="点击图片放大"></a></p>
+<p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/figure/F3/">图3</a></p>
+<p>OpenIGTLink消息的基本结构由通用头信息组成，包括数据类型，名称，时间戳，大小和包状态以及特定于数据类型的主体部分。</p>
+<h4 id="221字符串">2.2.1字符串</h4>
+<p>设备和外部图像计算软件之间的字符串消息交换允许发送和接收命令或状态更新。因此，外部软件的图形用户界面可以扩展为显示诸如关于接收数据的确认之类的信息，或者提供用于控制所用设备的指令（<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/figure/F4/">图4</a>）。</p>
+<p><a href="https://www.ncbi.nlm.nih.gov/core/lw/2.0/html/tileshop_pmc/tileshop_pmc_inline.html?title=Click%20on%20image%20to%20zoom&amp;p=PMC3&amp;id=5543207_nihms883782f4.jpg"><img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/bin/nihms883782f4.jpg" alt="包含图片，插图等的外部文件。对象名称为nihms883782f4.jpg" title="点击图片放大"></a></p>
+<p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/figure/F4/">图4</a></p>
+<p>OpenIGTLink和ROS-IGTL-Bridge的字符串消息中的相应数据字段。</p>
+<h4 id="222变换">2.2.2变换</h4>
+<p>变换消息可以包含表示设备，兴趣对象等的位置和方向的线性变换，由连接到ROS的传感器测量，或者在外部图像计算软件上生成。消息可用于监视工具，设备和对象的位置和方向，或向设备提供规划数据。OpenIGTLink igtlTransformMessage由4 <em>×</em> 4矩阵表示，并转换为ROS消息类型几何msgs / Transform，包含用于平移的向量和用于方向的四元数（<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/figure/F5/">图5</a>）。</p>
+<p><a href="https://www.ncbi.nlm.nih.gov/core/lw/2.0/html/tileshop_pmc/tileshop_pmc_inline.html?title=Click%20on%20image%20to%20zoom&amp;p=PMC3&amp;id=5543207_nihms883782f5.jpg"><img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/bin/nihms883782f5.jpg" alt="包含图片，插图等的外部文件。对象名称为nihms883782f5.jpg" title="点击图片放大"></a></p>
+<p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/figure/F5/">图5</a></p>
+<p>Open-IGTLink和ROS-IGTL-Bridge的转换消息中的相应数据字段。ROS标准数据类型_几何msgs / Transform_包含作为3元素向量的转换和作为四元数的旋转。</p>
+<h4 id="223图像">2.2.3图像</h4>
+<p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/figure/F6/">图6</a>显示了相应图像消息的属性。图像由3D空间中每个维度的大小和间距参数组成。数据存储在具有图像尺寸大小的8位数组中。可以使用IGTL VIDEO OUT主题从ROS发送2D视频流，该主题支持常见的ROS消息类型传感器msgs / Image。因此，摄像机数据可以直接转发到网桥，不需要额外的消息转换。</p>
+<p><a href="https://www.ncbi.nlm.nih.gov/core/lw/2.0/html/tileshop_pmc/tileshop_pmc_inline.html?title=Click%20on%20image%20to%20zoom&amp;p=PMC3&amp;id=5543207_nihms883782f6.jpg"><img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/bin/nihms883782f6.jpg" alt="包含图片，插图等的外部文件。对象名称为nihms883782f6.jpg" title="点击图片放大"></a></p>
+<p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/figure/F6/">图6</a></p>
+<p>OpenIGTLink和ROS-IGTL-Bridge图像消息中的相应数据字段。消息包含卷的元信息，包括大小和间距以及像素数据。</p>
+<h4 id="224多边形数据">2.2.4多边形数据</h4>
+<p>多边形数据消息允许传输由点和附加表面信息组成的3D模型。多边形，三角形条带，线条或顶点表示网格的结构。由于缺少ROS中的vtkPolyData消息的显式等价物，因此提供了将vtkPolyData转换为ros igtl bridge :: igtlpolydata消息的方法。</p>
+<h4 id="225点">2.2.5点</h4>
+<p>点消息包括3D点数据，允许发送和获取目标点作为机器人的移动目的地，操纵器的位置或地标坐标用于登记目的或者还有点云和点列表形式的传感器数据（<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/figure/F8/">图8</a>）。此外，网桥能够以IGTL POINTCLOUD OUT主题上发布的几何msgs / Point形式发送点云。</p>
+<p><a href="https://www.ncbi.nlm.nih.gov/core/lw/2.0/html/tileshop_pmc/tileshop_pmc_inline.html?title=Click%20on%20image%20to%20zoom&amp;p=PMC3&amp;id=5543207_nihms883782f8.jpg"><img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/bin/nihms883782f8.jpg" alt="包含图片，插图等的外部文件。对象名称为nihms883782f8.jpg" title="点击图片放大"></a></p>
+<p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/figure/F8/">图8</a></p>
+<p>OpenIGTLink和ROS-IGTL-Bridge的点消息中的相应数据字段。_geometry msgs / Point_包含_点_的x，y和z坐标。</p>
+<h3 id="23系统配置和消息方案">2.3系统配置和消息方案</h3>
+<p>使用不同的消息类型取决于系统配置和操作IGT设置所需的消息方案。<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/figure/F10/">图10</a>显示了两个代表性的系统配置，作为使用ROS-IGTL-Bridge的示例应用程序。</p>
+<p><a href="https://www.ncbi.nlm.nih.gov/core/lw/2.0/html/tileshop_pmc/tileshop_pmc_inline.html?title=Click%20on%20image%20to%20zoom&amp;p=PMC3&amp;id=5543207_nihms883782f10.jpg"><img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/bin/nihms883782f10.jpg" alt="包含图片，插图等的外部文件。对象名称为nihms883782f10.jpg" title="点击图片放大"></a></p>
+<p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/figure/F10/">图10</a></p>
+<p>显示ROS-IGTL-Bridge功能的示例设置。（a）机器人和跟踪系统连接到ROS，并由3D Slicer通过ROS-IGTL-Bridge控制。使用OpenIGTLink接口将成像设备直接连接到3D Slicer。（b）机器人和成像设备（超声波）连接到由ROS操作的机器人，并由3D切片机通过ROS-IGTL桥控制。</p>
+<p>第一个示例IGT设置包括机器人和跟踪系统，这两个系统都由ROS使用已经存在的ROS节点来操作。跟踪系统用于跟踪机器人的末端执行器。外部成像装置，例如光学相干断层扫描（OCT），超声或MRI，连接到医学图像计算平台，如3D切片器，其提供用于处理和可视化这种医学数据的方法（<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/figure/F10/">图10a）。</a>）。通过桥接ROS消息环境和医学图像计算平台，功能集可以有效地相互补充。使用桥的字符串消息转换来交换命令和状态更新，因此可以使用外科手术规划工具的用户界面来操作系统。转换消息允许获得连续刷新的跟踪数据或在六个自由度中命令某个位置。机器人模型数据可以作为多边形数据模型传输，以在3D切片机中可视化。可以将跟踪设备的原始点云或图像数据转发到图像处理平台，以便定位机器人位置或执行路径规划。</p>
+<p>第二示例表示机器人引导的成像装置，其可能是附接到机器人末端执行器的超声探头（<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/figure/F10/">图10b）</a>）。机器人和成像设备由可下载的标准ROS节点控制，允许在所需设置中进行简单集成。为了在生成的ROS消息环境中访问或发布数据，使用ROS-IGTL-Bridge节点建立与诸如3D Slicer之类的外部手术计划平台的通信。因此，机器人控制以及图像设备命令和响应可以通过网桥作为字符串消息传输。另外，可以将作为点或转换消息的定位命令发送到ROS环境。获取的图像数据被转发到控制机器人的计划软件作为图像或点云消息，因此，图像处理和可视化方法可用于比较术中与术前数据。<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/figure/F9/">图9</a> 示出了ROS环境和手术计划平台之间可能的通信协议，同时在被命令到特定点位置之后执行图像采集。</p>
+<p><a href="https://www.ncbi.nlm.nih.gov/core/lw/2.0/html/tileshop_pmc/tileshop_pmc_inline.html?title=Click%20on%20image%20to%20zoom&amp;p=PMC3&amp;id=5543207_nihms883782f9.jpg"><img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/bin/nihms883782f9.jpg" alt="包含图片，插图等的外部文件。对象名称为nihms883782f9.jpg" title="点击图片放大"></a></p>
+<p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/figure/F9/">图9</a></p>
+<p>使用ROS IGTL桥作为网络接口的手术计划软件和ROS操作机器人之间可能的通信协议。初始化机器人，命令移动到一个点并获取具有附加变换信息的图像数据。最后，机器人关闭了。</p>
+<p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/" title="转到此页面的其他部分">去：</a></p>
+<h2 id="3实验">3实验</h2>
+<p>我们使用模拟图像引导的手术机器人系统评估了ROS和3D切片机之间的网络通信性能。此外，我们在两个有代表性的用例场景中展示了该软件的可行性：基于Lego Mindstorms的教育/快速原型图像引导手术导航系统和自主缝合机器人。</p>
+<h3 id="31实验设置">3.1实验设置</h3>
+<p>模拟图像引导的手术机器人系统由两台计算机组成：基于Linux的计算机（Precision M3800，四核Intel Core i7-4712HQ 2.3 GHz，16 GB 1600MHz DDR3内存，Ubuntu Linux 14.04LTS，Dell Inc.，Round Rock ，TX）模仿机器人控制器和基于Mac的工作站（Mac Pro，双6核Intel Xeon 2.66 GHz和40 GB 1333 MHz DDR3内存，Mac OS X 10.10，Apple Inc.，Cupertino，CA）模仿用于手术计划和导航界面的工作站。这两台计算机通过Cat 5e电缆连接到8端口千兆以太网交换机（SG100D-08，Cisco Systems Inc.，San Jose，CA）。ROS Indigo安装在基于Linux的计算机上，带有ROS-IGTL-Bridge节点。在Mac工作站上，安装了3D Slicer 4.6，用于可视化从ROS传输的数据。</p>
+<p>为了评估延迟，发送方根据发送方的内部时钟将数据生成时间嵌入到消息头中。一旦接收器接收到消息，接收器就会提取数据生成的时间，并将其与接收器的内部时钟进行比较，以计算两个模拟器之间数据传输所花费的时间。为了准确确定延迟，使用PTPd [ <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/#R20">20</a> ] 同步两台计算机的内部时钟。PTPd使用IEEE 1588-2008标准中定义的精确时间协议（PTP）通过网络将内部时钟与主时钟同步。与广泛使用的网络时间协议（NTP）不同[ <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/#R21">21</a>]，PTP旨在实现连接到局域网（LAN）的计算机之间更精确的时钟同步。</p>
+<h3 id="32数据传输性能评估">3.2数据传输性能评估</h3>
+<p>使用此设置，我们评估了变换，字符串，点和图像的数据传输性能。这些数据类型通常用于实时数据共享，例如工具跟踪，视频流和状态监控，因此确保以适当的帧速率和延迟进行数据传输至关重要。</p>
+<p>我们分别在Linux计算机和Mac工作站上部署了两个自定义软件模拟器，即_ROS测试节点_和_IGTL测试服务器_。ROS测试节点是ROS节点，通过ROS网络与ROS-IGTL-Bridge通信，而IGT测试服务器是TCP / IP服务器，使用OpenIGTLink协议通过LAN与ROS-IGTL-Bridge通信。IGTL测试服务器模拟3D切片机或任何其他手术计划和导航软件的行为。两个模拟器都可以作为_发送者_或_接收者_; 当发送者角色分配给一个模拟器时，接收者角色被分配给另一个。发送方生成具有给定类型和消息大小的随机消息，并通过ROS-IGTL-Bridge节点将其发送到接收方。进行了两组测试：</p>
+<ul>
+<li>
+<p>数据传输延迟的定性评估。我们测量了数据传输延迟，同时以每秒30帧（fps）的速度将消息从发送器流式传输到接收器。每个变换消息包含一个表示位置和方向的线性变换。每个字符串消息的大小固定为100个字节，这对于设备的命令就足够了。对于点消息，使用多个数据大小，从每个消息1个点到每个消息10000个点，考虑不同的用例场景，包括工具跟踪，地标跟踪和点云传输。对于图像信息，我们考虑五种图像格式的二维彩色图像（RGB）：VGA（640 <em>×</em> 480像素），SVGA（800 <em>×</em> 600像素），XGA（1024 <em>×</em> 768像素），HD（1280）<em>×</em> 720像素）和全高清（1920 <em>×</em> 1080像素）。</p>
+</li>
+<li>
+<p>高帧率数据传输的演示。此外，我们使用变换数据类型测试高帧速率数据传输，高速率为1000 fps，考虑到感应数据（例如跟踪传感器，编码器）通过局域网在两台计算机之间传输的应用。</p>
+</li>
+</ul>
+<p>在两个测试中，数据都从ROS测试节点传输到IGTL测试服务器，反之亦然。</p>
+<h3 id="33多边形数据共享的演示">3.3多边形数据共享的演示</h3>
+<p>此外，使用设置演示了多边形数据的传输。对于这种定性评估，称为ROS-IGTL-Test节点的模拟器程序用作ROS节点，而3D Slicer用作外部软件，其基于MRI数据生成3D多边形数据模型。ROS-IGTL-Test节点附带ROS-IGTL-Bridge软件，用于测试人体头部的3D模型。在文件_test.launch中_设置连接参数后，ROS-IGTL-Bridge和3D Slicer中的集成Open-IGTLinkIF模块建立连接，然后交换poly数据消息。</p>
+<h3 id="34结果">3.4结果</h3>
+<p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/table/T1/">表1</a>中显示了1000帧的平均和标准差延迟。有些情况下，由于数据传输延迟大于消息传输的间隔，因此未传递某些消息。在测量期间，两台计算机之间的时钟偏移保持在0.00 <em>±</em> 0.28毫秒（平均值_±_SD）。</p>
+<h3 id="表格1">表格1</h3>
+<p>基于1000个消息传输中的测量的变换，点，字符串和图像消息的消息传送等待时间的均值和标准偏差（SD）。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">消息类型</th>
+<th style="text-align:center">从ROS测试节点到IGTL测试服务器（毫秒）</th>
+<th style="text-align:center">从IGTL测试服务器到ROS测试节点（毫秒）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">转变</td>
+<td style="text-align:center">1.1 <em>±</em> 0.5</td>
+<td style="text-align:center">1.1 <em>±</em> 0.4</td>
+</tr>
+<tr>
+<td style="text-align:left">字符串（100字节）</td>
+<td style="text-align:center">1.1 <em>±</em> 0.5</td>
+<td style="text-align:center">1.2 <em>±</em> 0.4</td>
+</tr>
+<tr>
+<td style="text-align:left">点（1分）</td>
+<td style="text-align:center">1.2 <em>±</em> 0.5</td>
+<td style="text-align:center">1.2 <em>±</em> 0.4</td>
+</tr>
+<tr>
+<td style="text-align:left">点（10分）</td>
+<td style="text-align:center">1.2 <em>±</em> 0.5</td>
+<td style="text-align:center">1.4 <em>±</em> 0.5</td>
+</tr>
+<tr>
+<td style="text-align:left">点（100分）</td>
+<td style="text-align:center">17.2 <em>±</em> 12.6</td>
+<td style="text-align:center">3.8 <em>±</em> 5.4</td>
+</tr>
+<tr>
+<td style="text-align:left">点（1000分）</td>
+<td style="text-align:center">24.8 <em>±</em> 12.3</td>
+<td style="text-align:center">20.9 <em>±</em> 26.7</td>
+</tr>
+<tr>
+<td style="text-align:left">图像（VGA）</td>
+<td style="text-align:center">25.2 <em>±</em> 4.3</td>
+<td style="text-align:center">23.6 <em>±</em> 3.5</td>
+</tr>
+<tr>
+<td style="text-align:left">图像（SVGA）</td>
+<td style="text-align:center">33.6 <em>±</em> 4.6 *</td>
+<td style="text-align:center">33.6 <em>±</em> 3.7 *</td>
+</tr>
+<tr>
+<td style="text-align:left">图像（XGA）</td>
+<td style="text-align:center">58.8 <em>±</em> 10.6 *</td>
+<td style="text-align:center">58.5 <em>±</em> 6.0 *</td>
+</tr>
+<tr>
+<td style="text-align:left">图像（HD）</td>
+<td style="text-align:center">76.3 <em>±</em> 10.5 *</td>
+<td style="text-align:center">67.2 <em>±</em> 6.1 *</td>
+</tr>
+<tr>
+<td style="text-align:left">图像（全高清）</td>
+<td style="text-align:center">NA *</td>
+<td style="text-align:center">144.5 <em>±</em> 12.2 *</td>
+</tr>
+</tbody>
+</table>
+<p>星号（*）表示某些消息未传递给收件人。</p>
+<p>为了演示高帧率数据传输，转换消息成功地以1000 fps从ROS测试节点传输到IGTL测试服务器。当消息以另一个方向传输时，数据传输成功达到900 fps。</p>
+<p>在多数据传输的附加演示中，由超过60万个点和23万个面组成的多边形数据模型成功地从ROS转移到3D切片器，反之亦然。转移的多边形数据在两种环境中都成功可视化（<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/figure/F11/">图11</a>）。</p>
+<p><a href="https://www.ncbi.nlm.nih.gov/core/lw/2.0/html/tileshop_pmc/tileshop_pmc_inline.html?title=Click%20on%20image%20to%20zoom&amp;p=PMC3&amp;id=5543207_nihms883782f11.jpg"><img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/bin/nihms883782f11.jpg" alt="包含图片，插图等的外部文件。对象名称为nihms883782f11.jpg" title="点击图片放大"></a></p>
+<p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/figure/F11/">图11</a></p>
+<p>交换的vtkPolyData模型从样本数据生成，该样本数据在ROS侧（左侧）的vtkRenderWindow中可视化，并在3D Slicer场景（右侧）中进行比较。</p>
+<p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/" title="转到此页面的其他部分">去：</a></p>
+<h2 id="4个用例">4个用例</h2>
+<h3 id="41-igt快速原型教育平台">4.1 IGT快速原型/教育平台</h3>
+<p>使用3D Slicer，ROS和Lego Mindstorms EV3对概念验证图像引导机械手系统进行了原型设计。Lego Mindstorms已被用于教育背景下的IGT相关项目[ <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/#R22">22</a> ]以及硬件/软件测试平台[ <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/#R23">23</a> ]。该项目的目标有两个：（1）利用可扩展的软件系统为医疗机器人创建头脑风暴工具，促进从原型到研究和商业级系统的无缝转换; （2）为学生，工程师和科学家创建一个教育工具，以学习图像引导和医疗机器人。</p>
+<p>该系统模仿手术机器人，其致动其末端执行器以跟随在手术导航软件上的3D医学图像（例如，CT，MRI）上定义的物理空间中的轨迹。可以通过3D图形监控该过程。该系统由一个主动的三自由度（DoF）并行链接机械手，控制砖，ROS主计算机和运行ROS主服务器和导航软件3D Slicer的导航计算机组成。控制计算机模块（Lego EV3可编程砖块）通过无线网络上的ROS主服务器与导航软件通信。我们使用大脑的MR图像和从图像创建的2D体模执行模拟程序。通过用其末端执行器物理地触摸它们来记录预定义地标的坐标，将操纵器登记到模型中，<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/figure/F12/">图12</a>）。</p>
+<p><a href="https://www.ncbi.nlm.nih.gov/core/lw/2.0/html/tileshop_pmc/tileshop_pmc_inline.html?title=Click%20on%20image%20to%20zoom&amp;p=PMC3&amp;id=5543207_nihms883782f12.jpg"><img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/bin/nihms883782f12.jpg" alt="包含图片，插图等的外部文件。对象名称为nihms883782f12.jpg" title="点击图片放大"></a></p>
+<p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/figure/F12/">图12</a></p>
+<p>使用3D切片器中的点配准算法在2D样本数据上匹配定义的和物理的界标。</p>
+<p>然后，使用先前定义的从3D切片机传送到控制砖的轨迹点，执行2D体模上的绘制过程（<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/figure/F13/">图13a</a>）（<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/figure/F13/">图13b</a>）。这个模拟程序表明，这个基于乐高的系统可用于构建具有研究或商业级架构的机器人系统，并模拟真实的临床工作流程，使其成为快速原型设计和教育的理想工具。</p>
+<p><a href="https://www.ncbi.nlm.nih.gov/core/lw/2.0/html/tileshop_pmc/tileshop_pmc_inline.html?title=Click%20on%20image%20to%20zoom&amp;p=PMC3&amp;id=5543207_nihms883782f13.jpg"><img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/bin/nihms883782f13.jpg" alt="包含图片，插图等的外部文件。对象名称为nihms883782f13.jpg" title="点击图片放大"></a></p>
+<p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/figure/F13/">图13</a></p>
+<p>使用Lego Mindstorms构建的机器人手臂遵循2D体模（a）上的轨迹，该轨迹先前在3D切片器（b）中成功进行了图像到患者注册后的计划。</p>
+<h3 id="42使用kuka-lwr进行自主缝合">4.2使用KUKA LWR进行自主缝合</h3>
+<p>目的是测试ROS-IGTL-Bridge在规划和引导自主手术机器人方面的可行性。使用开发的ROS-IGTL-Bridge，我们开始改进智能组织自主机器人（STAR）的软件系统，该机器人使用KUKA LWR机器人。STAR包括基于商用腹腔镜Endo360°（EndoEvolution，Raynham）工具的机器人缝合工具，使用ROS实现图形用户界面（GUI）和相机集成的自定义控制，以及实时开放式机器人控制软件（OROCOS）控制[ <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/#R11">11</a>，<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/#R24">24</a> ]。虽然我们使用STAR证明了卓越的一致性和爆破压力，但是42.2％的缝线需要手动操作员调整，与手动和远程操作机器人手术相比，手术时间更长[<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/#R7">7</a> ]。需要操作员调整的大多数错过的缝线放置是由全光相机的噪声点云数据引起的，特别是沿着深度轴，这在ROS提供的二维缝线计划中是不明显的。通过使用ROS-IGTL-Bridge升级STAR，我们能够将3D点云从STAR转移到Slicer进行点云可视化（<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/figure/F14/">图14</a>）。这可以改善缝合位置的3D规划工作流程，更大的自主性和更短的手术时间。</p>
+<p><a href="https://www.ncbi.nlm.nih.gov/core/lw/2.0/html/tileshop_pmc/tileshop_pmc_inline.html?title=Click%20on%20image%20to%20zoom&amp;p=PMC3&amp;id=5543207_nihms883782f14.jpg"><img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/bin/nihms883782f14.jpg" alt="包含图片，插图等的外部文件。对象名称为nihms883782f14.jpg" title="点击图片放大"></a></p>
+<p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/figure/F14/">图14</a></p>
+<p>图为猪肠道吻合术（左），当前STAR缝合计划（中），以及使用3D切片机实现3D调整的缝合计划（右图）。</p>
+<p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/" title="转到此页面的其他部分">去：</a></p>
+<h2 id="5讨论">5讨论</h2>
+<p>在这项工作中，ROS-IGTL-Bridge节点被实现为通过基于OpenIGTLink协议的通用开放网络接口来扩展ROS。该接口支持在基于ROS的系统和外部医学图像计算平台之间无缝共享IGT应用中经常使用的数据，包括字符串，变换，点，多边形数据和图像。生成匹配消息类型的转换方法以确保兼容性。虽然OpenIGTLink协议为传输线性变换提供了两种不同的消息类型，即TRANSFORM和TDATA，但由于其简单性和通用性，我们选择在当前实现中使用TRANSFORM。TRANSFORM消息表示仿射变换矩阵，可以很容易地将其转换为ROS _几何msgs / Transform_消息，可用于多种用途，从工具跟踪到坐标转换。未来可以支持TDATA，因为它为工具跟踪提供了便利的功能，例如多通道跟踪的传输。可以轻松调整创建的消息和转换，或者可以另外包含新的消息类型以满足特定于任务的需求。</p>
+<p>使用ROS-IGTL-Bridge进行数据传输的性能足以满足许多实时IGT应用的需求。我们的测试表明，对于字符串，点和转换消息，每秒30帧的传入和传出消息的数据传输延迟小于1.2毫秒，对于图像（VGA），小于25毫秒。另外，对于变换消息，实现了高达900fps的高帧速率数据传输。此外，成功交换了超过60万点和23万面的大型多边形数据模型。传输大于XGA格式的图像无法达到完整的30 fps。我们目前正致力于扩展OpenIGTLink协议，以提供视频压缩，以获得更好的流媒体性能。</p>
+<p>使用3D Slicer和Lego Mind-storm的模拟IGT系统证明了ROS-IGTL-Bridge允许构建原型系统并在有限时间内在模拟IGT程序中验证其功能。我们能够在2016年第22届NA-MIC冬季项目周期间建立这个演示设置，这是为期一周的黑客马拉松活动，重点关注开源医学图像计算软件基础设施[ <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/#R25">25</a> ]。ROS-IGTL-Bridge也在高档IGT设置中得到了验证，该设置由具有自主控制系统的工业级高灵巧度机器人组成。ROS-IGTL-Bridge能够传输点云数据，并将3D Slicer提供的缝合定位的高级可视化和3D规划纳入系统。</p>
+<p>该研究表明，ROS-IGTL-Bridge支持ROS和图像引导软件之间的跨平台数据共享，具有足够的数据传输性能。通过将ROS中的机器人控制，运动规划和感知等特定方法与3D切片机等手术规划工具的图像处理和可视化功能组合，该桥接器有益于IGT设置。这将允许快速无缝地将图像引导软件（如3D Slicer）提供的基于图像的高级计划/导航集成到基于ROS的手术机器人系统中。通过桥接两个不同的软件平台，研究人员可以从不同研究领域开发的最先进的工程资源中受益，包括机器人和医学图像计算，以开发先进的图像引导手术机器人系统。</p>
+<p>一些研究已经证明了使用OpenIGTLink桥接两个研究平台的想法。特别是，OpenIGTLink已被广泛用于桥接数据抓取软件和可视化/用户交互软件，用于医学图像计算研究。Papademetris，Tokuda _等人_使用OpenIGTLink将商业导航系统与外部研究平台（包括3D Slicer [ <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/#R19">19</a> ]和BioImage Suite [ <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/#R26">26</a> ]）联系起来。图像引导外科工具包（IGSTK）[ <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/#R27">27</a> ]，一个开放的软件平台提供与跟踪和成像设备的连接，支承OpenIGTLink跟踪和成像数据输出到其它平台，比如3D切片机和MITK [ <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/#R28">28</a>，<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/#R29">29</a>]。最近，Lasso _等人_使用OpenIGTLink将其数据抓取软件PLUS与外部可视化软件桥接，以流式跟踪和超声图像数据[ <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/#R30">30</a> ]。Clarkson _等人_开发了一个基于OpenIGTLink的消息库NiftyLink，用于集成数据抓取软件和用于可视化/用户交互的最终用户应用程序[ <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/#R15">15</a> ]。其他开源软件包，例如CustusX [ <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/#R31">31</a> ]，IBIS [ <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/#R32">32</a> ]和MeVisLab [ <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/#R18">18</a> ]，也适用于OpenIGTLink，以利用社区中现有的现有软件基础架构。</p>
+<p>OpenIGTLink还被用于桥接医学图像计算领域之外的平台。医疗机器人平台CISST库提供了一个OpenIGTLink桥，可将图像可视化软件集成到医疗机器人应用中[ <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/#R33">33</a> ]。OpenIGTLink还与基于ROS的机器人系统一起用于腹腔镜介入治疗[ <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/#R34">34</a> ]。ROS-IGTL-Bridge是对那些旨在扩展医学图像计算领域中的成功模型的先前工作的概括，并且具有促进医学机器人和医学图像计算之间的工程资源共享的潜力。</p>
+<p>ROS-IGTL-Bridge的源代码，指令和测试程序在GitHub [ <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/#R35">35</a> ]中作为开源软件提供。可以使用基于CMake的构建系统Catkin编译和安装代码。</p>
+<p><a href="https://www.ncbi.nlm.nih.gov/core/lw/2.0/html/tileshop_pmc/tileshop_pmc_inline.html?title=Click%20on%20image%20to%20zoom&amp;p=PMC3&amp;id=5543207_nihms883782f7.jpg"><img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/bin/nihms883782f7.jpg" alt="包含图片，插图等的外部文件。对象名称为nihms883782f7.jpg" title="点击图片放大"></a></p>
+<p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/figure/F7/">图7</a></p>
+<p>OpenIGT-Link和ROS-IGTL-Bridge的poly数据消息中的相应数据字段。考虑的属性包括_名称，点，多边形，条带，线_和_顶点_。</p>
+<p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/" title="转到此页面的其他部分">去：</a></p>
+<h2 id="致谢">致谢</h2>
+<p>该研究部分得到了美国国立卫生研究院（R01EB020667，R01CA111288，R01EB020610，P41EB015898）的支持。材料的内容完全由作者负责，并不一定代表这些机构的官方观点。作者感谢布莱根妇女医院的陈龙泉先生的技术支持。作者还感谢Christina Choi女士用Lego Mindstorms评估快速原型制作平台。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[青岛参加全国第三次数字医学会议山东省第四次数字医学会]]></title>
+        <id>https://blog.bioprinting.site/post/euxBg5taN</id>
+        <link href="https://blog.bioprinting.site/post/euxBg5taN">
+        </link>
+        <updated>2019-05-11T23:40:29.000Z</updated>
+        <content type="html"><![CDATA[<p>青岛参加全国第三次数字医学会议山东省第四次数字医学会
+<img src="https://blog.bioprinting.site/post-images/1557618060095.jpg" alt="">
+<img src="https://blog.bioprinting.site/post-images/1557618066949.jpg" alt="">
+<img src="https://blog.bioprinting.site/post-images/1557618070147.jpg" alt="">
+<img src="https://blog.bioprinting.site/post-images/1557618073115.jpg" alt="">
+<img src="https://blog.bioprinting.site/post-images/1557618075946.jpg" alt="">
+<img src="https://blog.bioprinting.site/post-images/1557618078264.jpg" alt=""></p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[UR机械臂运动学正逆解方法]]></title>
+        <id>https://blog.bioprinting.site/post/IaZRC0R5i</id>
+        <link href="https://blog.bioprinting.site/post/IaZRC0R5i">
+        </link>
+        <updated>2019-05-10T12:43:56.000Z</updated>
+        <content type="html"><![CDATA[<p>最近几个月因为工作接触到了机械臂的项目，突然对机械臂运动方法产生了兴趣，也就是如何控制机械臂的位置和姿态。借用一张网上的图片，应该是ur5的尺寸。我用到的是ur3机械臂，除了尺寸不一样，各关节结构和初始位置和ur5是一样的。</p>
+<p><img src="https://images2018.cnblogs.com/blog/1095344/201805/1095344-20180527072933030-620074166.png" alt=""></p>
+<p>ur机械臂是六自由度机械臂，由D-H参数法确定它的运动学模型，连杆坐标系的建立如上图所示。我当时在这个地方的理解上走了不少弯路，后来找个一个视频，我觉得讲解地比较容易理解，可以参考一下<a href="http://v.youku.com/v_show/id_XMzIwNDg4MDA0.html">Denavit-Hartenberg参数视频详解</a>。ur机械臂DH参数表如下，</p>
+<p><img src="https://blog.bioprinting.site/post-images/1557492344029.jpg" alt=""></p>
+<p>由此可以建立坐标系i在坐标系i-1的齐次变换矩阵，注意每次不管平移还是旋转是相对于当前的运动坐标系变换，矩阵右乘</p>
+<p><img src="https://images2018.cnblogs.com/blog/1095344/201805/1095344-20180527074816023-1520605604.png" alt=""><img src="https://images2018.cnblogs.com/blog/1095344/201805/1095344-20180527074843571-1120839507.png" alt=""></p>
+<p>那么把DH参数代入就可以得到所有相邻坐标系的变换矩阵</p>
+<p><img src="https://images2018.cnblogs.com/blog/1095344/201805/1095344-20180527144154446-776504147.png" alt=""><img src="https://images2018.cnblogs.com/blog/1095344/201805/1095344-20180527144201988-926698801.png" alt=""><img src="https://images2018.cnblogs.com/blog/1095344/201805/1095344-20180527144208183-1283913775.png" alt=""></p>
+<p><img src="https://images2018.cnblogs.com/blog/1095344/201805/1095344-20180527144216324-2007686439.png" alt=""><img src="https://images2018.cnblogs.com/blog/1095344/201805/1095344-20180527144222807-1848807733.png" alt=""><img src="https://images2018.cnblogs.com/blog/1095344/201805/1095344-20180527144229274-1250526175.png" alt=""></p>
+<p>所以末端坐标系6到基座固定坐标系0的变换矩阵<img src="https://images2018.cnblogs.com/blog/1095344/201805/1095344-20180527074918840-716859445.png" alt="">。那么求正解就很简单了，只要输入六个关节角度θ<sub>i</sub>，就得到末端坐标在基坐标系的变换矩阵T。ur机械臂的视教板上末端点的坐标是用六个值[x, y, z, rx, ry, rz]表示的。前三个值[x, y, z]是三维笛卡尔坐标，表示空间位置，后三个值[rx, ry, rz]是坐标旋转向量，表示空间姿态。我们得到的变换矩阵T怎么变成六值坐标[x, y, z, rx, ry, rz]呢？设</p>
+<p><img src="https://images2018.cnblogs.com/blog/1095344/201805/1095344-20180527101025758-731072248.png" alt=""></p>
+<p>T的左上角的3x3矩阵是旋转矩阵，旋转矩阵和旋转向量之间可以通过罗德里格斯（Rodrigues）变换进行转换。opencv里有相应的函数调用。算法也比较简单，不用opencv的函数自己写代码也不难。T的右上角3x1就是空间位置[x, y, z]。这样有变换矩阵T得到六值坐标，完成了正解。</p>
+<p>逆解相对要复杂一些，由末端的空间位置和姿态，计算可能的关节角度。逆解的方法有解析法，迭代法和几何法。其中解析法用数学推导，可以得到全部根，但是计算复杂。有的机械臂可以得到无穷解，比如7轴机械臂。而ur的6轴机械臂是有有限解的。这里推导一下ur的逆解。</p>
+<p>首先计算求变换矩阵T过程其中的一些中间矩阵。</p>
+<p><img src="https://images2018.cnblogs.com/blog/1095344/201805/1095344-20180527075100349-1228823736.png" alt="">，其中c<sub>23</sub>=cos(θ<sub>2</sub>+θ<sub>3</sub>)，s<sub>23</sub>=sin(θ<sub>2</sub>+θ<sub>3</sub>)。</p>
+<p><img src="https://images2018.cnblogs.com/blog/1095344/201805/1095344-20180527075112036-542481994.png" alt=""></p>
+<p><img src="https://images2018.cnblogs.com/blog/1095344/201805/1095344-20180527075122415-1330412513.png" alt=""></p>
+<p>由<img src="https://images2018.cnblogs.com/blog/1095344/201805/1095344-20180527074918840-716859445.png" alt="">得到<img src="https://images2018.cnblogs.com/blog/1095344/201805/1095344-20180527103709077-1951572752.png" alt="">。计算</p>
+<p><img src="https://images2018.cnblogs.com/blog/1095344/201805/1095344-20180527103734056-649296405.png" alt="">，<img src="https://images2018.cnblogs.com/blog/1095344/201805/1095344-20180527103755560-1796142198.png" alt="">，得到</p>
+<p><img src="https://images2018.cnblogs.com/blog/1095344/201805/1095344-20180527103843392-60682071.png" alt=""></p>
+<p>等式两边矩阵的行列应该分别相等，由第三行第四列得到<img src="https://images2018.cnblogs.com/blog/1095344/201805/1095344-20180527104011790-1934345364.png" alt="">，可解得<img src="https://images2018.cnblogs.com/blog/1095344/201805/1095344-20180527104135222-239033524.png" alt="">，有两个解。这里注意写程序的时候，求解这里的反正切是用atan2()这类的函数，返回之在(-π,+π]。而反余弦的返回值在[0,π]，从而保证在2π范围每个解是唯一的。</p>
+<p>由第三行第三列得<img src="https://images2018.cnblogs.com/blog/1095344/201805/1095344-20180527104310579-69361694.png" alt="">，可解得<img src="https://images2018.cnblogs.com/blog/1095344/201805/1095344-20180527104407262-1490785602.png" alt="">，两个解。由第三行第二列得到<img src="https://images2018.cnblogs.com/blog/1095344/201805/1095344-20180527104524002-339481378.png" alt="">，可解得<img src="https://images2018.cnblogs.com/blog/1095344/201805/1095344-20180527104537576-1226429631.png" alt="">。</p>
+<p>接着由</p>
+<p><img src="https://images2018.cnblogs.com/blog/1095344/201805/1095344-20180527105730267-1783435906.png" alt="">，</p>
+<p>计算</p>
+<p><img src="https://images2018.cnblogs.com/blog/1095344/201805/1095344-20180527104721998-1489358485.png" alt="">，得出等式左边等于</p>
+<p><img src="https://images2018.cnblogs.com/blog/1095344/201805/1095344-20180527110916911-1640633834.png" alt="">。</p>
+<p>由<img src="https://images2018.cnblogs.com/blog/1095344/201805/1095344-20180527105035307-1992381215.png" alt="">，两边平方，令<img src="https://images2018.cnblogs.com/blog/1095344/201805/1095344-20180527105109353-2076276978.png" alt="">，<img src="https://images2018.cnblogs.com/blog/1095344/201805/1095344-20180527105136636-532380401.png" alt="">。</p>
+<p>同样由<img src="https://images2018.cnblogs.com/blog/1095344/201805/1095344-20180527105159632-1867985633.png" alt="">，令<img src="https://images2018.cnblogs.com/blog/1095344/201805/1095344-20180527105212250-1939136089.png" alt="">，<img src="https://images2018.cnblogs.com/blog/1095344/201805/1095344-20180527105228874-2044756350.png" alt="">。</p>
+<p>两式相加得到<img src="https://images2018.cnblogs.com/blog/1095344/201805/1095344-20180527105303715-763704756.png" alt="">，则<img src="https://images2018.cnblogs.com/blog/1095344/201805/1095344-20180527105325825-263636398.png" alt="">，有两个解。</p>
+<p>把θ<sub>3</sub>带入<img src="https://images2018.cnblogs.com/blog/1095344/201805/1095344-20180527105430393-47325808.png" alt="">和<img src="https://images2018.cnblogs.com/blog/1095344/201805/1095344-20180527105440038-1776404602.png" alt="">，得<img src="https://images2018.cnblogs.com/blog/1095344/201805/1095344-20180527105510239-957405523.png" alt="">，<img src="https://images2018.cnblogs.com/blog/1095344/201805/1095344-20180527105522558-2130327615.png" alt="">，其中t<sub>2</sub>=tanθ<sub>2</sub>。两式消去c<sub>2</sub>，得到<img src="https://images2018.cnblogs.com/blog/1095344/201805/1095344-20180527105608722-1428977705.png" alt="">。</p>
+<p>最后得到<img src="https://images2018.cnblogs.com/blog/1095344/201805/1095344-20180527110033957-1768711475.png" alt="">，从而得到θ<sub>4</sub>。</p>
+<p>综合有两个解的情况，ur机械臂逆解总共由2x2x2=8组解。</p>
+<p>按照上面的算法，用python写了两个程序，一个正解一个逆解验证一下。工作手边是ur3的机械臂，上面的图和表都是ur5的，换成ur3的参数。正解算出来都没有问题，可以和实际机械臂的空间位姿对应。可是逆解算出来8组值，好像只有四组值是对的。一直还没理解到底是怎么回事，仔细检查了算法和程序好像都没有错阿，不知道是哪里出了问题。网上也没有找到答案，如果哪位大神知道，望不吝赐教！</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[内镜手术套筒的制作和内镜吸引器的制作]]></title>
+        <id>https://blog.bioprinting.site/post/RlGmbU_Jn</id>
+        <link href="https://blog.bioprinting.site/post/RlGmbU_Jn">
+        </link>
+        <updated>2019-04-30T13:38:26.000Z</updated>
+        <content type="html"><![CDATA[<p>http://my.polyv.net/front/video/view?vid=f0d038bc9b1feb7593a02e6a079ab440_f</p>
+<p>链接: https://pan.baidu.com/s/1bXYRlQ86KGa63Snx08MnxQ 提取码: 7xfe</p>
+  <iframe 
+    src="http://my.polyv.net/front/video/view?vid=f0d038bc9b1feb7593a02e6a079ab440_f"
+    frameborder="0" 
+    allowfullscreen>
+</iframe>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[我做的手术外侧裂的分离和血肿清除]]></title>
+        <id>https://blog.bioprinting.site/post/XX8LudPX2</id>
+        <link href="https://blog.bioprinting.site/post/XX8LudPX2">
+        </link>
+        <updated>2019-04-30T13:15:37.000Z</updated>
+        <content type="html"><![CDATA[  <iframe 
+    src="http://my.polyv.net/front/video/view?vid=f0d038bc9b2fa6f2267ae762fe10834a_f"
+    frameborder="0" 
+    allowfullscreen>
+</iframe>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[BigBridgeRobot——神外机械臂定位机器人仿真系统]]></title>
+        <id>https://blog.bioprinting.site/post/wqKx9IwcR</id>
+        <link href="https://blog.bioprinting.site/post/wqKx9IwcR">
+        </link>
+        <updated>2019-04-29T10:32:49.000Z</updated>
+        <content type="html"><![CDATA[  <iframe 
+    src="http://my.polyv.net/front/video/view?vid=f0d038bc9b69f13e90652559aa54f1a4_f"
+    frameborder="0" 
+    allowfullscreen>
+</iframe>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[转载+笔记|分离蛛网膜下腔策略与技巧]]></title>
+        <id>https://blog.bioprinting.site/post/IAWru2VMa</id>
+        <link href="https://blog.bioprinting.site/post/IAWru2VMa">
+        </link>
+        <updated>2019-04-29T10:27:04.000Z</updated>
+        <content type="html"><![CDATA[<p>今天为大家分享的是由吉林大学第一医院<strong>侯坤</strong>医师编译，上海长征医院神经外科<strong>徐涛</strong>博士审校的：<strong>分离蛛网膜下腔****策略与技巧</strong>，欢迎观看、阅读！</p>
+<p><strong>MCA aneurysm-Sylvian fissure dissection-2D</strong></p>
+<p><img src="http://res.medtion.com/uploads/1/image/public/201810/20181011142443_3ub0go3aeg.png" alt=""></p>
+<p><strong>图1：动脉瘤手术中分离侧裂蛛网膜下腔</strong></p>
+<p><strong>蛛网膜下腔</strong></p>
+<p>蛛网膜下腔内含有脑脊液（CSF），位于两层膜结构之间，即外层蛛网膜，内层软脑膜。软脑膜紧贴脑实质表面，即使在脑回、沟处也与脑实质紧贴。硬脑膜层包绕蛛网膜形成一潜在腔隙，即硬膜下腔。</p>
+<p>蛛网膜下腔的解剖学特点高度依赖脑皮质形态。在某些特定部位，当脑回侵占蛛网膜时，将会打破正常蛛网膜下腔结构，形成脑池。</p>
+<p>脑池结构是动脉瘤手术的解剖基础，因为每个脑池均容纳特定的神经和血管结构。比如，外侧裂池内有大脑中动脉，终板池内有前交通动脉复合体。在动脉瘤手术中，大多数血管结构位于有良好解剖界限的脑池内。因为动脉瘤和载瘤动脉在蛛网膜下腔，动脉瘤手术从某种意义上就是蛛网膜下腔的显微手术。</p>
+<p>虽然通常认为CSF在蛛网膜下腔内自由流动，上述脑池之间的膜和分隔可形成CSF自由流动的自然屏障。然而，这些膜结构有孔和梁，在健康人，CSF的流动可不受限制。</p>
+<p>这种解剖构造在动脉瘤性蛛网膜下腔出血(aSAH)中有重要的病理生理意义。因为脑池间的孔可被出血阻塞，导致CSF积聚并形成脑积水。再者，脑池的构造在动脉瘤的显微分离中有重要的技术意义。</p>
+<p><img src="http://res.medtion.com/uploads/1/image/public/201810/20181011142443_ogrhcfhv5h.png" alt=""></p>
+<p><strong>图2：包含Willis环的基底池全景。通过广泛分离蛛网膜可到达对侧（左中）。切除床突扩大视神经颈内动脉间隙（右中）。沿颈内动脉通向基底动脉的另一个蛛网膜通道（下排）（由AL Rhoton, Jr提供）。</strong></p>
+<p><strong>显微器械</strong></p>
+<p>对于脑血管外科医生，有大量的手术工具和显微器械。然而，一位成功的外科医生并不需要用到所有工具。在大多数情况下，仅用一小部分特殊器械反而更能事半功倍。当然，这一小部分特殊器械必须满足其术中需要。</p>
+<p>外科医生的经验可使有限的器械物尽其用。这一原则可缓解尝试新器械过程中的学习曲线，提高手术效率，避免给手术室人员带来困惑。事实上，随着术者的经验积累，其器械会越来越精炼。</p>
+<p>必须的显微器械包括包含不同大小头端的双极电凝镊，锐性蛛网膜刀，精细剥离子，显微剪刀和弯形可塑性吸引器。还有脑自动牵开器，在放置永久动脉瘤夹时可临时作为第三只手。</p>
+<p><img src="http://res.medtion.com/uploads/1/image/public/201810/20181011142444_dw1w7bg832.png" alt=""></p>
+<p><strong>图3：血管显微手术时典型的显微器械。圆形蛛网膜刀（右下）可用于撕开表浅的蛛网膜层。</strong></p>
+<p><strong>分离规划</strong></p>
+<p>手术之前，规划一个手术路径或到达动脉瘤的蛛网膜下腔通道很重要。通往动脉瘤的路径应当是自一个脑池到另一个脑池，但不应侵犯软膜或者在看到动脉瘤前过度牵拉脑组织。</p>
+<p>动脉瘤的具体部位决定手术路径，因为不论小血管或者大血管，均有其最优的分离和暴露路径。不应直接达到动脉脉，因为这样可诱发动脉瘤提前破裂。</p>
+<p>最优手术路径应是沿着目标动脉的最安全路径，通常由目标动脉的平滑轮廓（即最少分支和穿支动脉）决定。一般来说，动脉瘤顶不应位于分离路径的正前方，这会增加动脉瘤破裂的风险。穿支动脉会比较麻烦，因为其可能阻碍分离平面。</p>
+<p>比如，MCA的下面和前面是较理想的分离路径，因为此路径MCA最为平滑，很少碰到穿支血管。相反，MCA上部有豆纹动脉发出。损伤这些豆纹动脉将导致术后神经功能缺损，因而应尽可能避免。</p>
+<p>一般说来，大部分动脉仅供应一个脑叶。当确定了动脉与脑叶的供应关系，应当将该动脉与该脑叶紧贴，这样在牵拉脑叶时就不用担心牵拉动脉。比如，在分离外侧裂时，M3分支可能供应额叶和颞叶脑组织，但是显微分离后发现动脉环附着在额叶但是供应颞叶。此时，动脉环可向颞叶侧移动，以扩大侧裂通道。</p>
+<p><strong>血流控制</strong></p>
+<p>不论术者的手术方案和专业技术如何，动脉瘤破裂随时可以发生。术前应合理规划预案。另外，有些动脉瘤在接近前应当临时阻断载瘤动脉。</p>
+<p>近端控制血供是血管手术的必要条件，不能忽视。血供控制的部位应当有清晰的术前规划。血供控制的定义是临时阻断一支或多支血管以终止或减少瘤囊血流量的能力。在近端临时阻断以达到局部循环停止的目的。</p>
+<p>理想状态下，血供控制应当紧邻动脉瘤颈，以减少对其余脑组织的影响。最终，局部的解剖特点决定了临时阻断的合理部位，应当满足对穿支血管最小的骚扰，对正常血供的最小阻断。</p>
+<p>有时会有多支血管自瘤囊发出（比如前交通或后交通动脉复合体）。在这种情况，笔者仅临时阻断优势供血动脉（优势A1和ICA），允许其他血管（非优势A1和后交通动脉）给远端区域供应一些血流。然而，所有供血动脉都应当分离且在必要情况下随时可以临时阻断。这种略显保守的临时阻断策略或者低流量局部循环停止可减少远端发生缺血的风险。</p>
+<p>动脉瘤提前破裂或者实际解剖条件的限制可能会改变事先规划的或者最佳的血流控制。在这种情况，血流控制的部位应当调整到更近端，这一策略会导致更加广泛的血流控制，同时也会增加远端缺血的风险。因此，当做必要的脑组织移动和CSF释放后，显微分离的首要目标是获得近端血流控制，而不是直奔动脉瘤。</p>
+<p>暴露远端血管是必须的，但是常规进行血流阻断却不是必要的。在近端血流控制后，通常不需要再行远端临时血流阻断，除非某些特殊情况，如：1）破裂动脉瘤持续大量出血，2）动脉瘤持续充盈影响必要的瘤囊减压，3）需要孤立动脉瘤以利于行瘤囊抽吸减压，4）需要打开瘤囊以利于清除血栓或弹簧圈后完成夹闭。</p>
+<p>在分离动脉瘤时，应当可轻易阻断远端血流。比如，在最后夹闭前应当找出所有动脉分支。</p>
+<p>如果因为术中情况或解剖特点不能确实地控制近端血供，术中应当采取其他方式控制血流。比如，在施行近端床突旁动脉瘤手术时，可能需要提前准备颈部ICA。有时需要自股动脉入路，以球囊临时阻断载瘤动脉，如在低位基底动脉尖动脉瘤手术时阻断基底动脉。</p>
+<p>最后，在某些特殊病例可能需要临时心搏停顿。在分离巨大动脉瘤前，还不能从近端控制血流时，动脉瘤突发破裂，此时腺苷诱发的短暂心搏停顿是有效和安全的。此种血流控制可提供短暂的（30-60秒）的血流停滞。</p>
+<p><strong>分离</strong></p>
+<p>术前规划和具体实施有时不能完全吻合。SAH破坏了原先清晰的蛛网膜下腔空间和平面，严重影响对血管结构的判断。清除血肿时应当自一个清晰的血管标志开始，然后向外扩展。血肿清除时应当采取大冲洗和微吸引。</p>
+<p>当已经清晰辨别出相关解剖结构，可以脑牵开器动态移动脑组织，不应采取强力持续牵拉。动态牵拉基于对脑池蛛网膜的轻柔分离（通过锐性分离和双极的轻微弹簧效应）。遇到致密的蛛网膜下腔时，应当以纤细钝性的剥离子探查。</p>
+<p>一旦扩张了蛛网膜平面，对脑组织施加轻微的应力却不导致其明显变形时，可以显微剪刀剪开其余的蛛网膜组织。释放CSF可以极大帮助移动脑组织。</p>
+<p>笔者经常用显微剪刀尖端自血管结构分离蛛网膜。然后用刀片剪断孤立的蛛网膜带。这种在器械使用中的极简主义可以增加手术效率。在剪开蛛网膜前，用显微剪刀的下刃挑起蛛网膜带，以保证不会损伤其他结构。</p>
+<p>笔者利用双极电凝闭合时的回弹力，其弹簧效应可打开纤弱的蛛网膜，尤其是侧裂的蛛网膜。双极与血管和侧裂平行，而不是垂直。双极分离蛛网膜时，其开口力应与相应面积的蛛网膜匹配，以免损伤软膜。用双极回弹力分离较厚的蛛网膜时可损伤软膜，此时需要锐性分离。</p>
+<p>然后，可沿皮层或侧裂内的动脉往下追踪到基底池和Willis环，此处是动脉瘤的最常见部位。追踪动脉血管应遵循以上的策略，也就是先找到一个主要动脉，其安全平面指引术者探查动脉瘤。Willis环的解剖结构是外科医生治疗动脉瘤决定性路图。</p>
+<p><strong>点睛之笔</strong></p>
+<ul>
+<li>谙熟蛛网膜下腔和相关神经血管结构的解剖是动脉瘤手术成功的必要因素。</li>
+</ul>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[转载+笔记|Keyhole手术入路--眶上入路之外侧型]]></title>
+        <id>https://blog.bioprinting.site/post/xRbKmHZH7</id>
+        <link href="https://blog.bioprinting.site/post/xRbKmHZH7">
+        </link>
+        <updated>2019-04-29T10:20:18.000Z</updated>
+        <content type="html"><![CDATA[<p>眶上入路外侧型的本质不仅仅是开颅的位置更靠外，而且还需要部分切除蝶骨小翼，同时需要显露额和颞的硬膜。这种翼点手术通道可以显露颞叶的前内侧、额底的外侧面、外侧裂和鞍上神经血管结构的外侧部。因而，通过这种眶上入路的外侧型可以安全的分离海绵窦前部和床突旁区。在切除前床突后，还可显露ICA的床突旁段，而无需打开海绵窦的静脉腔。</p>
+<p><img src="http://www.medtion.com/uploads/1/image/public/201608/20160823145151_9l28qcyxyc.jpg" alt="" title="2.webp.jpg"></p>
+<p><strong>图示眶上入路向外侧挪移的手术目的。切除蝶骨小翼后可提供同翼点入路同样的手术通道，额颞部显露充分。</strong></p>
+<p><strong>手术技术</strong></p>
+<p><strong>1. 体位</strong></p>
+<p>仰卧位。Mayfield头架单钉置于术区对侧，有利于手术操作。头架固定钉应避免置于颞肌内，否则固定不稳且术后容易出现颞部血肿。</p>
+<p><img src="http://www.medtion.com/uploads/1/image/public/201608/20160823145224_fbcp4r9gk2.jpg" alt="" title="3.webp.jpg"></p>
+<p>Step 1：仰卧位，头部抬高15°，高于胸骨。这有利于颈部静脉引流，避免压迫颈部主要血管、喉部和气道。</p>
+<p><img src="http://www.medtion.com/uploads/1/image/public/201608/20160823145233_en23j02rpa.jpg" alt="" title="4.webp.jpg"></p>
+<p>Step 2：头部过伸20°，有利于依靠重力作用牵拉额叶。如果要显露鞍上外侧和海绵窦，过伸角度通常小于标准的眶上入路。</p>
+<p><img src="http://www.medtion.com/uploads/1/image/public/201608/20160823145241_fh70c0hcgs.jpg" alt="" title="5.webp.jpg"></p>
+<p>Step 3：随后，将头部向对侧旋转30°-75°。需根据病变的具体位置决定旋转角度。如需显露海绵窦外侧，旋转角度为40°；若是显露嗅沟，则需旋转80°。注意：右利手术者如使用左侧开颅，那需要旋转的角度应更大，这样有利于手术操作。</p>
+<p><img src="http://www.medtion.com/uploads/1/image/public/201608/20160823145250_r2n2d83ap6.jpg" alt="" title="6.webp.jpg"></p>
+<p>Step 4：与标准的眶上入路相似，头部向对侧侧屈10°，这样术者操作起来比较方便。</p>
+<p><strong>2. 关键解剖标志和定位</strong></p>
+<p>为了确保手术切口达到美观的目的，必须精确标记关键的解剖结构：眉间、额窦、眶上孔、颞线、额底、蝶骨小翼压迹和颧弓。注意：眶上神经和血管的走行以及面神经额支的走行。</p>
+<p><img src="http://www.medtion.com/uploads/1/image/public/201608/20160823145304_304y4eof7q.jpg" alt="" title="7.webp.jpg"></p>
+<p>依据额颞的关键解剖标记图示开颅范围。皮肤切口应当置于眉毛内，超过眉毛的外缘数毫米。如眉毛稀疏，则可将切口置于发髻内。</p>
+<p><img src="http://www.medtion.com/uploads/1/image/public/201608/20160823145324_8k18e1i73l.jpg" alt="" title="8.webp.jpg"></p>
+<p>切口从眶上孔外侧5-10mm开始，依眉毛走形，止于眉毛外侧缘外数毫米。皮肤切口的中点通常对应于颞线。如眉毛稀疏，皮肤切口可置于额颞发髻内或是皮肤皱褶处。仔细保护眼睑，用酒精皮肤切口消毒。</p>
+<p><strong>3. 开颅</strong></p>
+<p><img src="http://www.medtion.com/uploads/1/image/public/201608/20160823145357_xmlc6mbqlo.jpg" alt="" title="9.webp.jpg"></p>
+<p>Step 1：右侧。皮肤切口起于眶上切迹外5-10mm，依眉毛走形，止于眉毛外侧缘外数毫米，进入额颧区。向额侧及额外侧方向游离皮下组织。</p>
+<p><img src="http://www.medtion.com/uploads/1/image/public/201608/20160823145409_gq60yea1vb.jpg" alt="" title="10.webp.jpg"></p>
+<p>Step 2：随后，牵拉皮瓣。向眶侧方向牵拉应轻柔，而向额侧牵拉则可暴力一些无妨，目的是为了充分显露枕额肌、眶肌及颞肌。与标准的眶上入路相比，这种外侧型入路可提供更为宽敞的颞肌显露。</p>
+<p><img src="http://www.medtion.com/uploads/1/image/public/201608/20160823145420_ix7ku4y9hj.jpg" alt="" title="11.webp.jpg"></p>
+<p>Step 3：平行于眶缘，切开枕额肌的额腹，从内向外切开。单极电刀切开并剥离颞肌。与标准的眶上入路相比，剥离颞肌的范围应更广，目的是为了显露翼点。此步骤止血应迅速、精确。</p>
+<p><img src="http://www.medtion.com/uploads/1/image/public/201608/20160823145431_4bxprpw8ec.jpg" alt="" title="12.webp.jpg"></p>
+<p>Step 4：剥离颞肌，于额颞颅底之间显露蝶骨小翼。于额底颞线后方钻孔一个。</p>
+<p><img src="http://www.medtion.com/uploads/1/image/public/201608/20160823145441_ys4xrar66r.jpg" alt="" title="13.webp.jpg"></p>
+<p>Step 5：椎板咬骨钳适当扩大骨孔。铣刀平行于眶缘、从外向内铣开约1cm。</p>
+<p><img src="http://www.medtion.com/uploads/1/image/public/201608/20160823145452_jqjv2jc5oa.jpg" alt="" title="14.webp.jpg"></p>
+<p>Step 6：然后从骨孔弧形向上、从外向内，铣开骨瓣。骨瓣宽度约15-25mm，长度约20-30mm。</p>
+<p><img src="http://www.medtion.com/uploads/1/image/public/201608/20160823145503_wgmooc7rkm.jpg" alt="" title="15.webp.jpg"></p>
+<p>Step 7：去除骨瓣后，还有一个重要步骤：小磨钻磨除眶缘骨窗的内板和蝶骨小翼的外侧部，以显露额颞交界的硬脑膜。眶顶的小骨性突起，应从硬膜外磨除以获得最佳的硬膜下视角。</p>
+<p><img src="http://www.medtion.com/uploads/1/image/public/201608/20160823145515_14njwiwpho.jpg" alt="" title="16.webp.jpg"></p>
+<p>Step 8：弧形切开硬膜，基底朝向眶上缘，显露外侧裂。</p>
+<p><img src="http://www.medtion.com/uploads/1/image/public/201608/20160823145532_dq5n8pr68a.jpg" alt="" title="17.webp.jpg"></p>
+<p>Step 9：打开硬脑膜，显露额颞叶。</p>
+<p><strong>4. 硬膜下操作</strong></p>
+<p><img src="http://www.medtion.com/uploads/1/image/public/201608/20160823145600_dwjjqmyygb.jpg" alt="" title="18.webp.jpg"></p>
+<p>Step 1：右侧。新鲜尸体。去除骨瓣后，小磨钻磨除蝶骨小翼。在彻底去除前床突后，即可显露视神经和ICA床突旁段。覆盖于前床突的硬膜应保持完整，这样才可保证ICA近环和远环的完整。ICA近环将海绵窦静脉腔与床突旁区（覆盖于动眼神经上）分隔开。ICA远环的硬膜鞘环绕着ICA和视神经，同时也形成视神经的镰状韧带。</p>
+<p><img src="http://www.medtion.com/uploads/1/image/public/201608/20160823145610_t1g5tlsfce.jpg" alt="" title="19.webp.jpg"></p>
+<p>Step 2：打开硬脑膜，打开颈动脉池及外侧裂池内侧，释放脑脊液，额颞叶张力下降，有利于降低牵拉脑组织的程度。注意：需用显微剪刀打开颈动脉-视神经池。用脑压板轻轻牵拉额叶。</p>
+<p><img src="http://www.medtion.com/uploads/1/image/public/201608/20160823145621_km8boo17vy.jpg" alt="" title="20.webp.jpg"></p>
+<p>Step 3：和标准的眶上入路相比，这种外侧型的入路可以更好的观察到鞍上外侧结构；注意观察视神经、视束、ICA和动眼神经。实际上通过这种翼点外侧通道，牵开颞叶即可很好的显露鞍上区。</p>
+<p><img src="http://www.medtion.com/uploads/1/image/public/201608/20160823145634_6d1set445s.jpg" alt="" title="21.webp.jpg"></p>
+<p>Step 4：向内侧分离，即可见双侧视神经和视交叉。注意观察对侧视神经；剥离子所指向的是ACoA和对侧的A1段。</p>
+<p><img src="http://www.medtion.com/uploads/1/image/public/201608/20160823145648_ed4l0x9v6t.jpg" alt="" title="22.webp.jpg"></p>
+<p>Step 5：观察对侧ICA分叉部。经翼点外侧入路，必须牵开视交叉和对侧视神经——这就是缺点（与额下眶上入路相比）。注意观察：ICA后方为对侧颞叶；MCA消失于对侧外侧裂中。注意观察终板。</p>
+<p><img src="http://www.medtion.com/uploads/1/image/public/201608/20160823145700_rn9yol0i3v.jpg" alt="" title="23.webp.jpg"></p>
+<p>Step 6：再次回到右侧。先前磨除前床突后被覆的硬脑膜——切开之，然后用显微镊分开。这样就可清楚地观察到ICA的远环。注意观察ICA的床突上和床突旁段以及动眼神经。</p>
+<p><img src="http://www.medtion.com/uploads/1/image/public/201608/20160823145714_vji3kv4f2f.jpg" alt="" title="24.webp.jpg"></p>
+<p>Step 7：打开海绵窦顶，用显微镊向内侧牵开。ICA近环（即所谓的颈内动脉-床突韧带）位于动眼神经的内侧、靠近海绵窦的静脉腔。注意观察：ICA床突旁段和ICA分叉。</p>
+<p><img src="http://www.medtion.com/uploads/1/image/public/201608/20160823145728_rb5idpwl0q.jpg" alt="" title="25.webp.jpg"></p>
+<p>Step 8：在切除海绵窦的整个顶和ICA近环后，打开海绵窦腔。注意观察ICA的床突上、床突旁和海绵窦段。动眼神经和滑车神经走形于眶上裂内。从动眼神经内侧可以观察到后颅窝的BA。</p>
+<p><img src="http://www.medtion.com/uploads/1/image/public/201608/20160823145739_kpd424r97t.jpg" alt="" title="26.webp.jpg"></p>
+<p>Step 9：在部分切除海绵窦外侧壁后，即可显露ICA后膝部。轻轻牵开脆弱的滑车神经，即可显露海绵窦后部的静脉腔。注意观察：动眼神经位于PCA后方，向前走行至眶上裂。</p>
+<p><img src="http://www.medtion.com/uploads/1/image/public/201608/20160823145750_b8fay3hg3s.jpg" alt="" title="27.webp.jpg"></p>
+<p>Step10：打开海绵窦后，观察动眼神经的蛛网膜下腔段和海绵窦段。注意观察：SCA和PCA的P1段和P2段，PCoA连接ICA和PCA。图示中可见P1段较PCoA更接近近端。注意观察：后颅窝内BA向外侧移位。图示ICA床突上段用吸引器轻轻牵开。</p>
+<p><img src="http://www.medtion.com/uploads/1/image/public/201608/20160823145802_jldw63py8e.jpg" alt="" title="28.webp.jpg"></p>
+<p>Step 11：观察海绵窦后部。注意观察：外展神经走形于Dorello管内（位于斜坡和Gruber岩斜韧带之间）。斜坡后方可见桥脑的前侧面。</p>
+<p><img src="http://www.medtion.com/uploads/1/image/public/201608/20160823145812_x20f00qj79.jpg" alt="" title="29.webp.jpg"></p>
+<p>Step 12：继续切除剩余的海绵窦外侧壁，即可通过外侧型的眶上入路观察到整个海绵窦。注意观察：海绵窦段ICA、动眼神经、滑车神经、三叉神经和外展神经。从海绵窦方向观察桥脑腹侧面、SCA和PCA。注意观察：近滑车神经处SCA的分叉部。</p>
+<p><strong>5. 关颅</strong></p>
+<p>完成颅内操作后，硬脑膜水密缝合以防脑脊液漏。如硬脑膜张力较高，可取肌肉缝合修补。硬膜外放置明胶海绵，骨瓣还纳，钛片固定。注意：骨瓣应紧靠额侧和内侧，以获得最佳美容效果。因蝶骨小翼磨除，故所残留的骨质缺损间隙，可用大片的钛片固定封堵，以避免术后局部出现塌陷，影响美观。彻底止血后，间断缝合肌肉及皮下组织，皮内连续缝合关闭切口。无需放置引流。</p>
+<p><strong>手术风险</strong></p>
+<ul>
+<li>
+<p>术前计划不充分，手术体位摆放不恰当，都可能造成术野显露欠佳，显著降低病变的切除效率。手术计划和手术体位是术者当仁不让的责任。</p>
+</li>
+<li>
+<p>如果手术切口不遵循眶缘走行，则会导致美观问题。</p>
+</li>
+<li>
+<p>颅骨钻孔时穿透眶壁，术后则会出现眼眶血肿、肿胀。</p>
+</li>
+<li>
+<p>蝶骨小翼磨除不充分，则会妨碍颞侧和外侧裂的显露。</p>
+</li>
+<li>
+<p>开颅时损伤硬脑膜有时难以避免，可取人工材料进行修补。</p>
+</li>
+<li>
+<p>在磨除蝶骨小翼和眶顶骨性隆起时，可能会穿透眶壁，造成术后眼眶血肿和肿胀。</p>
+</li>
+<li>
+<p>脑脊液释放不充分，则需脑压板牵拉过度，导致额颞叶脑组织挫伤。</p>
+</li>
+<li>
+<p>鞍旁神经血管损伤，术后出现相应功能障碍。</p>
+</li>
+<li>
+<p>颅内止血不彻底，术后术野再出血。</p>
+</li>
+<li>
+<p>硬脑膜缝合不严密，术后出现脑脊液漏。</p>
+</li>
+<li>
+<p>骨瓣固定不确实、不恰当，则会影响美观。</p>
+</li>
+<li>
+<p>切口软组织止血不彻底，术后出现软组织血肿。</p>
+</li>
+</ul>
+<p><strong>小窍门</strong></p>
+<ul>
+<li>
+<p>手术医生术前花时间设定详细的手术计划和亲自摆放体位，这会给术者带来一个良好的视野显露和非常舒适的工作体位。</p>
+</li>
+<li>
+<p>开颅前三步骤：1.标记关键骨性结构和神经；2.开颅位置；3、皮肤切口位置。</p>
+</li>
+</ul>
+<p><img src="http://www.medtion.com/uploads/1/image/public/201608/20160823145855_xovt15f5on.jpg" alt="" title="30.webp.jpg"></p>
+<ul>
+<li>与标准的眶上入路相比，眶上入路外侧型需要头部旋转的角度更大。</li>
+</ul>
+<p><img src="http://www.medtion.com/uploads/1/image/public/201608/20160823145905_v663e5338l.jpg" alt="" title="31.webp.jpg"></p>
+<ul>
+<li>假如眉毛稀疏，皮肤切口可置于额颞发迹后或是置于皮肤皱褶处，以获得最佳的美观。</li>
+</ul>
+<p><img src="http://www.medtion.com/uploads/1/image/public/201608/20160823145915_28o5s5qcu5.jpg" alt="" title="32.webp.jpg"></p>
+<ul>
+<li>分离软组织时，额肌向额侧方向牵拉，可以暴力一些，以提供充分的额部显露。向上剥离额肌和眶部肌肉需小心谨慎，以避免术后出现眶周血肿。与标准的眶上入路相比，颞肌需向外侧牵拉，必须暴露出蝶骨小翼。但是，牵拉时需注意避免软组织坏死。</li>
+</ul>
+<p><img src="http://www.medtion.com/uploads/1/image/public/201608/20160823145931_x6d2s00suy.jpg" alt="" title="33.webp.jpg"></p>
+<ul>
+<li>为避免穿透眶壁，骨孔位置及朝向需谨慎注意。</li>
+</ul>
+<p><img src="http://www.medtion.com/uploads/1/image/public/201608/20160823145944_t9ngpuri21.jpg" alt="" title="34.webp.jpg"></p>
+<ul>
+<li>开颅步骤：1.钻孔；2.沿额底并与眶缘平行铣刀切开颅骨；3.从骨孔处先向外，然后半弧形向上。</li>
+</ul>
+<p><img src="http://www.medtion.com/uploads/1/image/public/201608/20160823145954_wjqu9f0evp.jpg" alt="" title="35.webp.jpg"></p>
+<ul>
+<li>磨除蝶骨小翼可使眶上入路向颞侧延伸。</li>
+</ul>
+<p><img src="http://www.medtion.com/uploads/1/image/public/201608/20160823150005_jq5isb5n04.jpg" alt="" title="36.webp.jpg"></p>
+<ul>
+<li>磨除骨窗内板及眶顶骨性隆起，可增加手术视角。</li>
+</ul>
+<p><img src="http://www.medtion.com/uploads/1/image/public/201608/20160823150017_4884lcd1mx.jpg" alt="" title="37.webp.jpg"></p>
+<ul>
+<li>弧形切开硬脑膜。</li>
+</ul>
+<p><img src="http://www.medtion.com/uploads/1/image/public/201608/20160823150103_8hkmvdx2v8.jpg" alt="" title="00.webp.jpg"></p>
+<p><img src="http://www.medtion.com/uploads/1/image/public/201608/20160823150114_qjasfbgp8x.jpg" alt="" title="000.webp.jpg"></p>
+<ul>
+<li>
+<p>关颅时，骨瓣应当尽可能的靠紧内侧和额侧，以获得最好的美观。因需磨除蝶骨小翼，骨质缺损较大，可使用较大的钛片固定骨瓣（A）。此外，还可使用骨水泥（B）。</p>
+</li>
+<li>
+<p>眉毛的切口需皮内连续缝合。</p>
+</li>
+<li>
+<p>无需放置引流管</p>
+</li>
+</ul>
+]]></content>
+    </entry>
+</feed>
