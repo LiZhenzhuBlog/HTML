@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>Maddux机器人库 | Li Zhenzhu, Ph.D</title>
+<meta name="description" content="Binzhou Medical University Hospital, Email: timeanddoctor@gmail.com.">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://blog.bioprinting.site/favicon.ico?v=1557744764685">
+<link rel="stylesheet" href="https://blog.bioprinting.site/styles/main.css">
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://blog.bioprinting.site">
+        <img src="https://blog.bioprinting.site/images/avatar.png?v=1557744764685" class="site-logo">
+        <h1 class="site-title">Li Zhenzhu, Ph.D</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            Home
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            Archives
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            Tags
+          </a>
+        
+      
+        
+          <a href="/paper" class="site-nav">
+            Paper
+          </a>
+        
+      
+        
+          <a href="/3dprinting" class="site-nav">
+            3D printing
+          </a>
+        
+      
+        
+          <a href="/bigbridgerobot" class="site-nav">
+            BigBridgeRobot
+          </a>
+        
+      
+        
+          <a href="/business" class="site-nav">
+            Business
+          </a>
+        
+      
+        
+          <a href="https://blog.bioprinting.site/post/meeting/" class="site-nav">
+            Training
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      Binzhou Medical University Hospital, Email: timeanddoctor@gmail.com.
+    </div>
+    <div class="site-footer">
+      Powered by Li Zhenzhu
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">Maddux机器人库</h2>
+            <div class="post-date">2019-05-13</div>
+            
+              <div class="feature-container" style="background-image: url('http://bencaine.me/maddux/_images/tutorial_1.png')">
+              </div>
+            
+            <div class="post-content">
+              <h1 id="maddux文档">Maddux文档</h1>
+<p>Maddux是一个用于创建机器人手臂模拟和实验的python库。</p>
+<p>Maddux支持：</p>
+<ul>
+<li>任意长度的武器</li>
+<li>正向运动学</li>
+<li>反向运动学</li>
+<li>模拟环境（包括球，目标，障碍物等对象）</li>
+<li>3D环境动画</li>
+<li>3D手臂动画</li>
+<li>末端效应器位置和速度</li>
+<li>碰撞检测（武器和物体）</li>
+</ul>
+<colgroup><col class="field-name"><col class="field-body"></colgroup>
+| 发布： | 0.1 |
+| 日期： | 2016年4月24日 |
+<ul>
+<li><a href="http://bencaine.me/maddux/overview.html">概观</a>
+<ul>
+<li><a href="http://bencaine.me/maddux/overview.html#goal">目标</a></li>
+<li><a href="http://bencaine.me/maddux/overview.html#why-the-name">为什么这个名字？</a></li>
+</ul>
+</li>
+<li><a href="http://bencaine.me/maddux/tutorial.html">教程</a>
+<ul>
+<li><a href="http://bencaine.me/maddux/tutorial.html#creating-arms">创造武器</a></li>
+<li><a href="http://bencaine.me/maddux/tutorial.html#setting-up-and-plotting-an-environment">设置和绘制环境</a></li>
+<li><a href="http://bencaine.me/maddux/tutorial.html#inverse-kinematics-and-animations">反向运动学和动画</a></li>
+<li><a href="http://bencaine.me/maddux/tutorial.html#saving-paths-and-creating-videos">保存路径和创建视频</a></li>
+<li><a href="http://bencaine.me/maddux/tutorial.html#conclusion">结论</a></li>
+</ul>
+</li>
+<li><a href="http://bencaine.me/maddux/maddux.html">maddux包</a>
+<ul>
+<li><a href="http://bencaine.me/maddux/maddux.html#submodules">子模块</a></li>
+<li><a href="http://bencaine.me/maddux/maddux.html#module-maddux.environment">maddux.environment模块</a></li>
+<li><a href="http://bencaine.me/maddux/maddux.html#module-maddux.plot">maddux.plot模块</a></li>
+<li><a href="http://bencaine.me/maddux/maddux.html#module-maddux.predefined_environments">maddux.predefined_environments模块</a></li>
+<li><a href="http://bencaine.me/maddux/maddux.html#module-maddux">模块内容</a></li>
+</ul>
+</li>
+<li><a href="http://bencaine.me/maddux/maddux.robots.html">maddux.robots包</a>
+<ul>
+<li><a href="http://bencaine.me/maddux/maddux.robots.html#submodules">子模块</a></li>
+<li><a href="http://bencaine.me/maddux/maddux.robots.html#module-maddux.robots.arm">maddux.robots.arm模块</a></li>
+<li><a href="http://bencaine.me/maddux/maddux.robots.html#module-maddux.robots.link">maddux.robots.link模块</a></li>
+<li><a href="http://bencaine.me/maddux/maddux.robots.html#module-maddux.robots.predefined_robots">maddux.robots.predefined_robots模块</a></li>
+<li><a href="http://bencaine.me/maddux/maddux.robots.html#module-maddux.robots.utils">maddux.robots.utils模块</a></li>
+<li><a href="http://bencaine.me/maddux/maddux.robots.html#module-maddux.robots">模块内容</a></li>
+</ul>
+</li>
+<li><a href="http://bencaine.me/maddux/maddux.objects.html">maddux.objects包</a>
+<ul>
+<li><a href="http://bencaine.me/maddux/maddux.objects.html#submodules">子模块</a></li>
+<li><a href="http://bencaine.me/maddux/maddux.objects.html#module-maddux.objects.ball">maddux.objects.ball模块</a></li>
+<li><a href="http://bencaine.me/maddux/maddux.objects.html#module-maddux.objects.dynamic">maddux.objects.dynamic模块</a></li>
+<li><a href="http://bencaine.me/maddux/maddux.objects.html#module-maddux.objects.obstacle">maddux.objects.obstacle模块</a></li>
+<li><a href="http://bencaine.me/maddux/maddux.objects.html#module-maddux.objects.static">maddux.objects.static模块</a></li>
+<li><a href="http://bencaine.me/maddux/maddux.objects.html#module-maddux.objects.target">maddux.objects.target模块</a></li>
+<li><a href="http://bencaine.me/maddux/maddux.objects.html#module-maddux.objects.throwable">maddux.objects.throwable模块</a></li>
+<li><a href="http://bencaine.me/maddux/maddux.objects.html#module-maddux.objects">模块内容</a></li>
+</ul>
+</li>
+<li><a href="http://bencaine.me/maddux/maddux.examples.html">maddux.examples包</a>
+<ul>
+<li><a href="http://bencaine.me/maddux/maddux.examples.html#submodules">子模块</a></li>
+<li><a href="http://bencaine.me/maddux/maddux.examples.html#module-maddux.examples.arm_animation">maddux.examples.arm_animation模块</a></li>
+<li><a href="http://bencaine.me/maddux/maddux.examples.html#module-maddux.examples.arm_ball_animation">maddux.examples.arm_ball_animation模块</a></li>
+<li><a href="http://bencaine.me/maddux/maddux.examples.html#module-maddux.examples.ball_animation">maddux.examples.ball_animation模块</a></li>
+<li><a href="http://bencaine.me/maddux/maddux.examples.html#module-maddux.examples.find_jacob0">maddux.examples.find_jacob0模块</a></li>
+<li><a href="http://bencaine.me/maddux/maddux.examples.html#module-maddux.examples.obstacle_collision">maddux.examples.obstacle_collision模块</a></li>
+<li><a href="http://bencaine.me/maddux/maddux.examples.html#module-maddux.examples.plot">maddux.examples.plot模块</a></li>
+<li><a href="http://bencaine.me/maddux/maddux.examples.html#module-maddux.examples.plot_arm">maddux.examples.plot_arm模块</a></li>
+<li><a href="http://bencaine.me/maddux/maddux.examples.html#module-maddux.examples.plot_obstacle">maddux.examples.plot_obstacle模块</a></li>
+<li><a href="http://bencaine.me/maddux/maddux.examples.html#module-maddux.examples.tutorial">maddux.examples.tutorial模块</a></li>
+<li><a href="http://bencaine.me/maddux/maddux.examples.html#module-maddux.examples">模块内容</a></li>
+</ul>
+</li>
+<li><a href="http://bencaine.me/maddux/maddux.utils.html">maddux.utils包</a>
+<ul>
+<li><a href="http://bencaine.me/maddux/maddux.utils.html#submodules">子模块</a></li>
+<li><a href="http://bencaine.me/maddux/maddux.utils.html#module-maddux.utils.animate_path">maddux.utils.animate_path模块</a></li>
+<li><a href="http://bencaine.me/maddux/maddux.utils.html#module-maddux.utils">模块内容</a></li>
+</ul>
+</li>
+</ul>
+<h1 id="指数和表格">指数和表格</h1>
+<ul>
+<li>
+<p><a href="http://bencaine.me/maddux/genindex.html">指数</a></p>
+</li>
+<li>
+<p><a href="http://bencaine.me/maddux/py-modindex.html">模块索引</a></p>
+</li>
+<li>
+<p><a href="http://bencaine.me/maddux/search.html">搜索页面</a></p>
+</li>
+<li>
+<h1 id="概观">概观</h1>
+<p>Maddux是一个Python语言软件包，用于与模拟环境交互的机器人操纵器的创建，实验和可视化。</p>
+<p>使用Maddux，您可以创建任意机器人操纵器，其中包含由DH参数定义的一组链接，并在自定义环境中使用这些操纵器。设计易于修改，非常适合设置实验，让武器学习执行新任务。</p>
+<h2 id="目标">目标</h2>
+<p>Maddux的创建是为了拥有一个简单，易于理解的工具，可以快速实验教授机器人手臂来执行不同的任务。模拟环境并不是真实的，或者具有现实世界的约束。相反，重点是快速建立一个实验来测试一个想法。</p>
+<h2 id="为什么这个名字">为什么这个名字？</h2>
+<p>Maddux以Greg Maddux命名，Greg Maddux是一位退役的MLB投手，被广泛认为是有史以来最好的控球投手。他以其强大的机械，命令，沉着和机智而闻名，他是机器人手臂所希望的一切。</p>
+<h1 id="教程">教程</h1>
+<p>在本教程中，我们将简要介绍创建手臂，设置模拟环境，绘制和动画这些环境，保存机器人移动路径以及创建动画视频。</p>
+<h2 id="创造武器">创造武器</h2>
+<p>Maddux中的Arms由一系列Link对象组成，这些对象由<a href="https://en.wikipedia.org/wiki/Denavit%E2%80%93Hartenberg_parameters">DH参数</a>定义。每个链接都有θ（角度），偏移，长度和扭曲参数。每个链接还可以具有约束θ，最大速度和关节尺寸（用于可视化和碰撞）。</p>
+<p>如果您不熟悉DH参数，我建议您先阅读它们，因为它们可能有点令人困惑。例如，从一个关节到另一个关节的距离可以由偏移或长度来定义。</p>
+<p>以下是我们在maddux.robots.predefined_arms中为您定义的“简单人类手臂”的定义。</p>
+<p>从 链接 导入 链接
+从 手臂 进口 臂
+进口 numpy的 为 NP</p>
+<p>seg1_len  =  1.0
+seg2_len  =  2.0</p>
+<p>＃我们的七个“链接”。其中只有两个具有长度或偏移量。
+L1  =  链接（0 ， 0 ， 0 ， 1.571 ）
+L2  =  链接（0 ， 0 ， 0 ， - 1.571 ）
+L3  =  链接（0 ， seg1_len ， 0 ， - 1.571 ）
+L4  =  链接（0 ， 0 ， seg2_len ， - 1.571 ）
+L5 =  链接（0 ， 0 ， 0 ， 1.571 ）
+L6  =  链接（0 ， 0 ， 0 ， 1.571 ）
+L7  =  链接（0 ， 0 ， 0 ， 0 ）</p>
+<p>＃创建一个数组
+links  =  np 。阵列（[ L1 ， L2 ， L3 ， L4 ， L5 ， L6 ， L7 ]）</p>
+<p>＃为每个链接创建一个初始联合配置。
+＃q0 [0]是Link1的theta
+＃q0 [1]是Link2
+＃
+的theta ，依此类推。q0  =  np 。阵列（[ 0 ， 0 ， 0 ， - 2.0 ， 0 ， 0 ， 0 ]）</p>
+<p>＃然后用这些链接创建一个arm，初始配置q0，名称
+robot  =  Arm （links ， q0 ， 'simple_human_arm' ）</p>
+<p>值得注意的是，只有两个链接具有偏移或长度，为我们提供了两个链接臂。L7根本不是必需的，只是替换可能的末端执行器。</p>
+<h2 id="设置和绘制环境">设置和绘制环境</h2>
+<p>环境是Maddux中所有模拟的核心。它们允许您将动态（可移动）和静态（静止）对象组以及机器人组合成各种类型的“房间”，以允许所有这些对象的交互。</p>
+<p>要定义一个环境，我们将首先定义一些对象，然后我们将创建一个机器人（来自我们预定义的机器人），然后我们将这些添加到环境中。</p>
+<p>导入 numpy的 是 NP
+从 maddux.robots.predefined_robots  导入 simple_human_arm
+从 maddux.objects  导入已 球， 目标， 障碍
+来自 maddux.environment  进口 环境</p>
+<p>＃创建一个具有特定配置和基准位置的臂
+q0  =  np 。阵列（[ 0.5 ， 0.2 ， 0 ， 0.5 ， 0 ， 0 ， 0 ]）
+base_pos  =  NP 。阵列（[ 2.0 ， 2.0 ， 0.0 ]）</p>
+<p>长度2.0的＃和链路段
+臂 =  simple_human_arm （2.0 ， 2.0 ， Q0 ， base_pos ）</p>
+<p>＃然后，我们创造了一个球，目标，和障碍物
+球 =  球（位置= [ 2.0 ， 0.0 ， 2.0 ]， 半径= 0.15 ）
+目标 =  目标（位置= [ 5.0 ， 8.0 ， 2.0 ]， 半径= 0.5 ）
+障碍物 =  障碍（[ 4 ， 4 ， 0 ]， [ 5 ， 5 ， 2 ]）</p>
+<p>＃并使用这些以产生具有尺寸的环境10x10x10
+ENV  =  环境（尺寸= [ 10 ， 10 ， 10 ]，
+dynamic_objects = [ 球]，
+static_objects = [ 障碍， 靶]，
+机器人= 臂）</p>
+<p>然后，我们可以与这些对象进行交互，绘制它们，为它们的交互设置动画等。</p>
+<p>如果我们想要绘制这个环境，我们所要做的就是</p>
+<p>ENV 。情节（）</p>
+<p>哪个会生成如下所示的环境：</p>
+<p><img src="http://bencaine.me/maddux/_images/tutorial_1.png" alt="_images / tutorial_1.png"></p>
+<h2 id="反向运动学和动画">反向运动学和动画</h2>
+<p>鉴于上述环境，假设我们想让手臂找到一个关节配置，让手臂的末端效应器接触球。给定球的位置，我们可以使用Arm类中内置的迭代反向运动学求解器来找到可能的关节配置。</p>
+<p>手臂。ikine （球。位置）</p>
+<p>我们的反向运动求解器自动将构成其路径的每组配置缓存到臂上的变量中。保存此路径后，我们可以通过调用指定持续时间的动画来设置此过程的动画。</p>
+<p>ENV 。动画（3.0 ）</p>
+<h2 id="保存路径和创建视频">保存路径和创建视频</h2>
+<p>在上面的反向运动学示例中，ikine将其生成的路径保存到臂上的变量中。在调用一些修改联合配置（update_angles，update_link_angle，ikine）并让它缓存其更改的函数之后，我们可以将该路径写入文件。</p>
+<p>手臂。save_path （'filename_to_save_to' ）</p>
+<p>通过将一系列关节配置保存到文件中，我们以后可以使用它来重新运行动画，或者将动画保存为MP4视频。为此，我们只需在arm上调用save_path。我们假设我们的环境是在maddux.predefined_environments.py中定义的。</p>
+<p>要简单地重新运行动画，我们就可以运行了</p>
+<p>python maddux / utils / animate_path.py --input tutorial_path.npy --environment tutorial</p>
+<p>如果我们想创建一个名为tutorial.mp4的视频，我们会将上述命令更改为此</p>
+<p>python maddux / utils / animate_path.py --input tutorial_path.npy --environment tutorial --output tutorial.mp4</p>
+<p>哪个会创建一个视频然后我变成这个GIF。</p>
+<p><img src="http://bencaine.me/maddux/_images/tutorial.gif" alt="_images / tutorial.gif"></p>
+<h2 id="结论">结论</h2>
+<p>这是为了快速介绍工具包的不同方面。还有许多其他潜在有用的功能，例如动态物体具有速度和运动，让手臂握住并用其末端执行器移动物体，提供臂关节速度，以及根据关节速度计算末端执行器速度。希望这提供了一个轻量级和灵活的工具包，可以根据您的需求进行构建和修改，并让您尽快启动并运行疯狂的想法。</p>
+<h1 id="maddux包">maddux包</h1>
+<h2 id="子模块">子模块</h2>
+<h2 id="madduxenvironment模块">maddux.environment模块</h2>
+<p>我们的实验环境。</p>
+<dt id="maddux.environment.Environment">_class_`maddux.environment.``Environment`（_dimension = None_，_dynamic_objects = None_，_static_objects = None_，_robot = None _）[[来源]](http://bencaine.me/maddux/_modules/maddux/environment.html#Environment)</dt>
+<dt id="maddux.environment.Environment.animate">`animate`（_duration = None_，_save_path = None _）[[来源]](http://bencaine.me/maddux/_modules/maddux/environment.html#Environment.animate)</dt>
+<p>动画程序的运行</p>
+<colgroup><col class="field-name"><col class="field-body"></colgroup>
+| 参数： | 
+<ul>
+<li><strong>duration</strong>（<em>int或None</em>） - （可选）动画的持续时间（以秒为单位）</li>
+<li><strong>save_path</strong>（<em>String或None</em>） - （可选）保存mp4而不是显示的路径</li>
+</ul>
+<p>|
+| 返回类型： |</p>
+<p><a href="https://docs.python.org/library/constants.html#None" title="（在Python v2.7中）">没有</a></p>
+<p>|</p>
+<dt id="maddux.environment.Environment.collision">`collision`（）[[来源]](http://bencaine.me/maddux/_modules/maddux/environment.html#Environment.collision)</dt>
+<p>检查是否有任何动态对象与任何静态对象或墙壁发生碰撞。</p>
+<colgroup><col class="field-name"><col class="field-body"></colgroup>
+| 返回值： | 是否有碰撞 |
+| 返回类型： | [布尔](https://docs.python.org/library/functions.html#bool "（在Python v2.7中）") |
+<dt id="maddux.environment.Environment.hypothetical_landing_position">`hypothetical_landing_position`（）[[来源]](http://bencaine.me/maddux/_modules/maddux/environment.html#Environment.hypothetical_landing_position)</dt>
+<p>找到球落地（或击中墙壁）的位置</p>
+<colgroup><col class="field-name"><col class="field-body"></colgroup>
+| 返回值： | 基于末端执行器速度的投掷物体的假设着陆位置的位置（x，y，z）。 |
+| 返回类型： | numpy.ndarray或无 |
+<dt id="maddux.environment.Environment.plot">`plot`（_ax = None_，_show = True _）[[来源]](http://bencaine.me/maddux/_modules/maddux/environment.html#Environment.plot)</dt>
+<p>绘制投掷轨迹和球</p>
+<colgroup><col class="field-name"><col class="field-body"></colgroup>
+| 参数： | 
+<ul>
+<li><strong>ax</strong>（<em>matplotlib.axes</em>） - 如果数字已经存在，则为当前轴</li>
+<li><strong>show</strong>（<a href="https://docs.python.org/library/functions.html#bool" title="（在Python v2.7中）"><em>bool</em></a>） - （默认值：True）是否显示数字</li>
+</ul>
+<p>|
+| 返回类型： |</p>
+<p><a href="https://docs.python.org/library/constants.html#None" title="（在Python v2.7中）">没有</a></p>
+<p>|</p>
+<dt id="maddux.environment.Environment.run">`run`（_持续时间_）[[来源]](http://bencaine.me/maddux/_modules/maddux/environment.html#Environment.run)</dt>
+<p>运行一段时间</p>
+<colgroup><col class="field-name"><col class="field-body"></colgroup>
+| 参数： | **duration**（_整数_） - 以秒为单位运行环境的持续时间 |
+| 返回类型： | [没有](https://docs.python.org/library/constants.html#None "（在Python v2.7中）") |
+<h2 id="madduxplot模块">maddux.plot模块</h2>
+<dt id="maddux.plot.plot_sphere">`maddux.plot.``plot_sphere`（_位置_，_半径_，_轴_，_颜色='g'_，_线宽= 0 _）[[来源]](http://bencaine.me/maddux/_modules/maddux/plot.html#plot_sphere)</dt>
+<p>绘制球体。</p>
+<colgroup><col class="field-name"><col class="field-body"></colgroup>
+| 参数： | 
+<ul>
+<li><strong>position</strong>（<em>numpy.ndarray</em>） - 在球体的（x，y，z）中的位置</li>
+<li><strong>radius</strong>（<a href="https://docs.python.org/library/functions.html#int" title="（在Python v2.7中）"><em>int</em></a>） - 球体半径</li>
+<li><strong>ax</strong>（<em>matplotlib.axes</em>） - 要绘制的轴</li>
+<li><strong>color</strong>（<a href="https://docs.python.org/library/functions.html#str" title="（在Python v2.7中）"><em>str</em></a>） - （可选）球体颜色</li>
+<li><strong>linewidth</strong>（<a href="https://docs.python.org/library/functions.html#int" title="（在Python v2.7中）"><em>int</em></a>） - （可选）球网格线的宽度</li>
+</ul>
+<p>|
+| 返回类型： |</p>
+<p>matplotlib.axes</p>
+<p>|</p>
+<dt id="maddux.plot.plot_sphere_data">`maddux.plot.``plot_sphere_data`（_位置_，_半径_）[[来源]](http://bencaine.me/maddux/_modules/maddux/plot.html#plot_sphere_data)</dt>
+<p>给定位置和半径，获取绘图所需的数据。</p>
+<colgroup><col class="field-name"><col class="field-body"></colgroup>
+| 参数： | 
+<ul>
+<li><strong>position</strong>（<em>numpy.ndarray</em>） - 在球体的（x，y，z）中的位置</li>
+<li><strong>radius</strong>（<a href="https://docs.python.org/library/functions.html#int" title="（在Python v2.7中）"><em>int</em></a>） - 球体半径</li>
+</ul>
+<p>|
+| 返回值： |</p>
+<p>（x，y，z）用于创建曲面的球体数据元组</p>
+<p>|
+| 返回类型： |</p>
+<p>（np.ndarray，np.ndarray，np.ndarray）</p>
+<p>|</p>
+<h2 id="madduxpredefined_environments模块">maddux.predefined_environments模块</h2>
+<dt id="maddux.predefined_environments.get_easy_environment">`maddux.predefined_environments.``get_easy_environment`（）[[来源]](http://bencaine.me/maddux/_modules/maddux/predefined_environments.html#get_easy_environment)</dt>
+<p>一个简单的难度环境，用于规划具有两个障碍的测试，一个球作为目标，一个简单的人类手臂。</p>
+<dt id="maddux.predefined_environments.get_hard_environment">`maddux.predefined_environments.``get_hard_environment`（）[[来源]](http://bencaine.me/maddux/_modules/maddux/predefined_environments.html#get_hard_environment)</dt>
+<p>一个艰难的难度环境，用于规划具有五个障碍的测试，一个球作为目标，一个简单的人类手臂。</p>
+<dt id="maddux.predefined_environments.get_medium_environment">`maddux.predefined_environments.``get_medium_environment`（）[[来源]](http://bencaine.me/maddux/_modules/maddux/predefined_environments.html#get_medium_environment)</dt>
+<p>一个中等难度的环境，用于规划具有两个障碍的测试，一个球作为目标，一个简单的人类手臂。</p>
+<dt id="maddux.predefined_environments.get_noodle_environment">`maddux.predefined_environments.``get_noodle_environment`（）[[来源]](http://bencaine.me/maddux/_modules/maddux/predefined_environments.html#get_noodle_environment)</dt>
+<p>我们的面条臂进行规划测试的荒谬环境。它有五个障碍，一个球作为目标，我们的10个链接面条臂</p>
+<dt id="maddux.predefined_environments.get_tutorial_environment">`maddux.predefined_environments.``get_tutorial_environment`（）[[来源]](http://bencaine.me/maddux/_modules/maddux/predefined_environments.html#get_tutorial_environment)</dt>
+<p>我们的环境来自文档教程</p>
+<dt id="maddux.predefined_environments.get_very_hard_environment">`maddux.predefined_environments.``get_very_hard_environment`（）[[来源]](http://bencaine.me/maddux/_modules/maddux/predefined_environments.html#get_very_hard_environment)</dt>
+<p>一个非常困难的难度环境，用于规划具有三个障碍的测试，一个球作为目标，一个简单的人类手臂。</p>
+<h2 id="模块内容">模块内容</h2>
+<h1 id="madduxrobots包">maddux.robots包</h1>
+<h2 id="子模块-2">子模块</h2>
+<h2 id="madduxrobotsarm模块">maddux.robots.arm模块</h2>
+<p>由一系列DH链接定义的机器人手臂</p>
+<dt id="maddux.robots.arm.Arm">_class_`maddux.robots.arm.``Arm`（_links_，_q0_，_name_，_active_links = None_，_base = None_，_tool = None _）[[来源]](http://bencaine.me/maddux/_modules/maddux/robots/arm.html#Arm)</dt>
+<dt id="maddux.robots.arm.Arm.end_effector_position">`end_effector_position`（_q =无_）[[来源]](http://bencaine.me/maddux/_modules/maddux/robots/arm.html#Arm.end_effector_position)</dt>
+<p>返回末端执行器位置</p>
+<colgroup><col class="field-name"><col class="field-body"></colgroup>
+| 参数： | **q**（_numpy.ndarray或None_） - 配置计算给定1xN q向量的末端效应器位置 |
+| 返回值： | 末端执行器的位置（x，y，z） |
+| 返回类型： | numpy.ndarray |
+<dt id="maddux.robots.arm.Arm.end_effector_velocity">`end_effector_velocity`（）[[来源]](http://bencaine.me/maddux/_modules/maddux/robots/arm.html#Arm.end_effector_velocity)</dt>
+<p>给出其当前角速度，计算手臂的末端执行器速度。</p>
+<colgroup><col class="field-name"><col class="field-body"></colgroup>
+| 返回值： | 返回每个维度（vx，vy，vz，wx，wy，wz）的线性和角速度。 |
+| 返回类型： | np.ndarray |
+<dt id="maddux.robots.arm.Arm.fkine">`fkine`（_q =无_，_链接=无_）[[来源]](http://bencaine.me/maddux/_modules/maddux/robots/arm.html#Arm.fkine)</dt>
+<p>使用当前关节配置或给定的关节配置计算手臂的正向运动</p>
+<colgroup><col class="field-name"><col class="field-body"></colgroup>
+| 参数： | 
+<ul>
+<li><strong>q</strong>（<em>numpy.ndarray或None</em>） - （可选）用于计算FK的联合配置的1xN向量</li>
+<li><strong>links</strong>（<em>int或None</em>） - （可选）指定要在其上运行fkine的链接。例如：links = [1,2,3]。</li>
+</ul>
+<p>|
+| 返回值： |</p>
+<p>指定的链接列表或末端效应器末尾的同源坐标点</p>
+<p>|
+| 返回类型： |</p>
+<p>4x4 numpy.array</p>
+<p>|</p>
+<dt id="maddux.robots.arm.Arm.get_current_joint_config">`get_current_joint_config`（）[[来源]](http://bencaine.me/maddux/_modules/maddux/robots/arm.html#Arm.get_current_joint_config)</dt>
+<p>从链接获取当前联合配置</p>
+<colgroup><col class="field-name"><col class="field-body"></colgroup>
+| 返回值： | 当前联合配置的1xN向量 |
+| 返回类型： | numpy.ndarray |
+<dt id="maddux.robots.arm.Arm.hold">`hold`（_obj _）[[来源]](http://bencaine.me/maddux/_modules/maddux/robots/arm.html#Arm.hold)</dt>
+<p>持有一个特定的对象</p>
+<colgroup><col class="field-name"><col class="field-body"></colgroup>
+| 参数： | **obj**（_maddux.objects.DynamicObject_） - 要保留的对象 |
+| 返回类型： | [没有](https://docs.python.org/library/constants.html#None "（在Python v2.7中）") |
+<dt id="maddux.robots.arm.Arm.ikine">`ikine`（_p_，_num_iterations = 1000_，_alpha = 0.1 _）[[来源]](http://bencaine.me/maddux/_modules/maddux/robots/arm.html#Arm.ikine)</dt>
+<p>计算反向运动学以找到到达给定点的正确关节配置</p>
+<colgroup><col class="field-name"><col class="field-body"></colgroup>
+| 参数： | 
+<ul>
+<li><strong>p</strong>（<em>numpy.ndarray</em>） - 解决逆运动学的点（x，y，z）</li>
+<li><strong>num_iterations</strong>（<a href="https://docs.python.org/library/functions.html#int" title="（在Python v2.7中）"><em>int</em></a>） - 放弃之前要尝试的迭代次数</li>
+<li><strong>alpha</strong>（<a href="https://docs.python.org/library/functions.html#int" title="（在Python v2.7中）"><em>int</em></a>） - ikine求解器的步长（0.0 - 1.0）</li>
+</ul>
+<p>|
+| 返回值： |</p>
+<p>给定点p的关节配置的1xN向量。</p>
+<p>|
+| 返回类型： |</p>
+<p>numpy.ndarray</p>
+<p>|</p>
+<dt id="maddux.robots.arm.Arm.is_in_collision">`is_in_collision`（_env_object _）[[来源]](http://bencaine.me/maddux/_modules/maddux/robots/arm.html#Arm.is_in_collision)</dt>
+<p>检查手臂是否与给定物体发生碰撞</p>
+<colgroup><col class="field-name"><col class="field-body"></colgroup>
+| 参数： | **env_object**（_maddux.Objects.StaticObject_） - 检查与之冲突的对象 |
+| 返回值： | 你是否点击了env_object |
+| 返回类型： | [布尔](https://docs.python.org/library/functions.html#bool "（在Python v2.7中）") |
+<dt id="maddux.robots.arm.Arm.jacob0">`jacob0`（_q =无_）[[来源]](http://bencaine.me/maddux/_modules/maddux/robots/arm.html#Arm.jacob0)</dt>
+<p>通过在工具框架中找到它然后转换为世界框架来计算世界框架中的雅可比。</p>
+<colgroup><col class="field-name"><col class="field-body"></colgroup>
+| 参数： | **q**（_numpy.ndarray_） - （可选）1xN联合配置来计算jacobian |
+| 返回值： | 世界框架中的6xN雅可比行列式 |
+| 返回类型： | numpy.matrix |
+<dt id="maddux.robots.arm.Arm.jacobn">`jacobn`（_q =无_）[[来源]](http://bencaine.me/maddux/_modules/maddux/robots/arm.html#Arm.jacobn)</dt>
+<p>计算工具框架中的雅可比</p>
+<colgroup><col class="field-name"><col class="field-body"></colgroup>
+| 参数： | **q**（_1xN numpy.ndarray_） - （可选）1xN联合配置来计算jacobian |
+| 返回值： | 工具框架中的6xN雅可比行列式 |
+| 返回类型： | numpy.matrix |
+<dt id="maddux.robots.arm.Arm.plot">`plot`（_ax _）[[来源]](http://bencaine.me/maddux/_modules/maddux/robots/arm.html#Arm.plot)</dt>
+<p>将我们的机器人绘制到给定的轴上</p>
+<colgroup><col class="field-name"><col class="field-body"></colgroup>
+| 参数： | **ax**（_matplotlib.axes_） - 情节轴 |
+| 返回类型： | [没有](https://docs.python.org/library/constants.html#None "（在Python v2.7中）") |
+<dt id="maddux.robots.arm.Arm.release">`release`（_object_idx =无_）[[来源]](http://bencaine.me/maddux/_modules/maddux/robots/arm.html#Arm.release)</dt>
+<p>释放一个或所有当前保留的对象</p>
+<colgroup><col class="field-name"><col class="field-body"></colgroup>
+| 参数： | **object_idx** - （可选）要释放的对象的索引 |
+<p>：type object_idx = int或None</p>
+<colgroup><col class="field-name"><col class="field-body"></colgroup>
+| 返回类型： | [没有](https://docs.python.org/library/constants.html#None "（在Python v2.7中）") |
+<dt id="maddux.robots.arm.Arm.reset">`reset`（）[[来源]](http://bencaine.me/maddux/_modules/maddux/robots/arm.html#Arm.reset)</dt>
+<p>将手臂重置回其静止状态，即q0</p>
+<colgroup><col class="field-name"><col class="field-body"></colgroup>
+| 返回类型： | [没有](https://docs.python.org/library/constants.html#None "（在Python v2.7中）") |
+<dt id="maddux.robots.arm.Arm.save_path">`save_path`（_文件名_）[[来源]](http://bencaine.me/maddux/_modules/maddux/robots/arm.html#Arm.save_path)</dt>
+<p>将当前路径保存到文件：param filename：保存联合配置路径的文件名：键入filename：str</p>
+<dt id="maddux.robots.arm.Arm.update_angles">`update_angles`（_new_angles_，_save = False _）[[来源]](http://bencaine.me/maddux/_modules/maddux/robots/arm.html#Arm.update_angles)</dt>
+<p>更新所有链接的角度</p>
+<colgroup><col class="field-name"><col class="field-body"></colgroup>
+| 参数： | 
+<ul>
+<li><strong>new_angles</strong>（<em>numpy.ndarray</em>） - 新链接角度的1xN向量</li>
+<li><strong>save</strong> - 确定是否缓存更新的标志</li>
+<li><strong>保存</strong> - 布尔</li>
+</ul>
+<p>|
+| 返回类型： |</p>
+<p><a href="https://docs.python.org/library/constants.html#None" title="（在Python v2.7中）">没有</a></p>
+<p>|</p>
+<dt id="maddux.robots.arm.Arm.update_link_angle">`update_link_angle`（_link_，_new_angle_，_save = False _）[[来源]](http://bencaine.me/maddux/_modules/maddux/robots/arm.html#Arm.update_link_angle)</dt>
+<p>使用给定角度更新给定链接的角度</p>
+<colgroup><col class="field-name"><col class="field-body"></colgroup>
+| 参数： | 
+<ul>
+<li><strong>link</strong>（<a href="https://docs.python.org/library/functions.html#int" title="（在Python v2.7中）"><em>int</em></a>） - 要更新的链接</li>
+<li><strong>new_angle</strong>（<a href="https://docs.python.org/library/functions.html#int" title="（在Python v2.7中）"><em>int</em></a>） - 链接的新角度</li>
+<li><strong>save</strong>（<a href="https://docs.python.org/library/functions.html#bool" title="（在Python v2.7中）"><em>bool</em></a>） - 确定是否缓存更新的标志</li>
+</ul>
+<p>|
+| 返回类型： |</p>
+<p><a href="https://docs.python.org/library/constants.html#None" title="（在Python v2.7中）">没有</a></p>
+<p>|</p>
+<dt id="maddux.robots.arm.Arm.update_link_positions">`update_link_positions`（）[[来源]](http://bencaine.me/maddux/_modules/maddux/robots/arm.html#Arm.update_link_positions)</dt>
+<p>浏览所有链接并更新其位置。</p>
+<colgroup><col class="field-name"><col class="field-body"></colgroup>
+| 返回类型： | [没有](https://docs.python.org/library/constants.html#None "（在Python v2.7中）") |
+<dt id="maddux.robots.arm.Arm.update_link_velocity">`update_link_velocity`（_链接_，_加速_，_时间_）[[来源]](http://bencaine.me/maddux/_modules/maddux/robots/arm.html#Arm.update_link_velocity)</dt>
+<p>在给定时间内以给定加速度更新给定链接的速度</p>
+<colgroup><col class="field-name"><col class="field-body"></colgroup>
+| 参数： | 
+<ul>
+<li><strong>link</strong>（<a href="https://docs.python.org/library/functions.html#int" title="（在Python v2.7中）"><em>int</em></a>） - 要更新的链接</li>
+<li><strong>accel</strong>（<a href="https://docs.python.org/library/functions.html#int" title="（在Python v2.7中）"><em>int</em></a>） - 加速度（每秒弧度^ 2）</li>
+<li><strong>time</strong>（<a href="https://docs.python.org/library/functions.html#int" title="（在Python v2.7中）"><em>int</em></a>） - 时间（秒）</li>
+</ul>
+<p>|
+| 返回类型： |</p>
+<p><a href="https://docs.python.org/library/constants.html#None" title="（在Python v2.7中）">没有</a></p>
+<p>|</p>
+<h2 id="madduxrobotslink模块">maddux.robots.link模块</h2>
+<p>Link对象包含与机器人链接相关的所有信息，例如DH参数和与世界相关的位置。</p>
+<dt id="maddux.robots.link.Link">_class_`maddux.robots.link.``Link`（_theta_，_offset_，_length_，_twist_，_q_lim = None_，_max_velocity = 30.0_，_link_size = 0.1_，_connector_size = 0.1 _）[[来源]](http://bencaine.me/maddux/_modules/maddux/robots/link.html#Link)</dt>
+<dt id="maddux.robots.link.Link.compute_transformation_matrix">`compute_transformation_matrix`（_q _）[[来源]](http://bencaine.me/maddux/_modules/maddux/robots/link.html#Link.compute_transformation_matrix)</dt>
+<p>从当前theta到新theta的变换矩阵</p>
+<colgroup><col class="field-name"><col class="field-body"></colgroup>
+| 参数： | **q**（[_int_](https://docs.python.org/library/functions.html#int "（在Python v2.7中）")） - 新的theta |
+| 返回值： | 从当前q到提供q的变换矩阵 |
+| 返回类型： | 4x4 numpy矩阵 |
+<dt id="maddux.robots.link.Link.display">`display`（）[[来源]](http://bencaine.me/maddux/_modules/maddux/robots/link.html#Link.display)</dt>
+<p>很好地显示链接的属性</p>
+<colgroup><col class="field-name"><col class="field-body"></colgroup>
+| 返回类型： | [没有](https://docs.python.org/library/constants.html#None "（在Python v2.7中）") |
+<dt id="maddux.robots.link.Link.is_in_collision">`is_in_collision`（_env_object _）[[来源]](http://bencaine.me/maddux/_modules/maddux/robots/link.html#Link.is_in_collision)</dt>
+<p>检查手臂是否与给定的静态物体发生碰撞</p>
+<colgroup><col class="field-name"><col class="field-body"></colgroup>
+| 参数： | **env_object**（_maddux.objects.StaticObject_） - 检查与之冲突的对象 |
+| 返回值： | 链接是否命中提供的env_object |
+| 返回类型： | [布尔](https://docs.python.org/library/functions.html#bool "（在Python v2.7中）") |
+<dt id="maddux.robots.link.Link.plot">`plot`（_ax _）[[来源]](http://bencaine.me/maddux/_modules/maddux/robots/link.html#Link.plot)</dt>
+<p>绘制给定matplotlib图上的链接</p>
+<colgroup><col class="field-name"><col class="field-body"></colgroup>
+| 参数： | **ax**（_matplotlib.axes_） - 用于绘制链接的图 |
+| 返回类型： | [没有](https://docs.python.org/library/constants.html#None "（在Python v2.7中）") |
+<dt id="maddux.robots.link.Link.set_theta">`set_theta`（_theta _）[[来源]](http://bencaine.me/maddux/_modules/maddux/robots/link.html#Link.set_theta)</dt>
+<p>将theta设置为新的theta并计算新的变换矩阵</p>
+<colgroup><col class="field-name"><col class="field-body"></colgroup>
+| 参数： | **theta**（[_int_](https://docs.python.org/library/functions.html#int "（在Python v2.7中）")） - 链接的新theta |
+| 返回类型： | [没有](https://docs.python.org/library/constants.html#None "（在Python v2.7中）") |
+<dt id="maddux.robots.link.Link.update_velocity">`update_velocity`（_加速_，_时间_）[[来源]](http://bencaine.me/maddux/_modules/maddux/robots/link.html#Link.update_velocity)</dt>
+<p>在一段时间内通过某种加速作用时，更新链路的当前速度</p>
+<colgroup><col class="field-name"><col class="field-body"></colgroup>
+| 参数： | 
+<ul>
+<li><strong>accel</strong>（<a href="https://docs.python.org/library/functions.html#int" title="（在Python v2.7中）"><em>int</em></a>） - 作用于链路的加速度（每秒弧度^ 2）</li>
+<li><strong>time</strong>（<a href="https://docs.python.org/library/functions.html#int" title="（在Python v2.7中）"><em>int</em></a>） - 应用加速度的时间（秒）</li>
+</ul>
+<p>|
+| 返回类型： |</p>
+<p><a href="https://docs.python.org/library/constants.html#None" title="（在Python v2.7中）">没有</a></p>
+<p>|</p>
+<h2 id="madduxrobotspredefined_robots模块">maddux.robots.predefined_robots模块</h2>
+<dt id="maddux.robots.predefined_robots.noodle_arm">`maddux.robots.predefined_robots.``noodle_arm`（_seg_lens_，_q0_，_base = None _）[[来源]](http://bencaine.me/maddux/_modules/maddux/robots/predefined_robots.html#noodle_arm)</dt>
+<p>创建一个包含10个段的复杂臂</p>
+<colgroup><col class="field-name"><col class="field-body"></colgroup>
+| 参数： | 
+<ul>
+<li><strong>seg_lens</strong>（<em>numpy.ndarray</em>） - 每个部分长度的1x10向量</li>
+<li><strong>q0</strong>（<em>numpy.ndarray</em>） - 起始关节配置的1xN向量</li>
+<li><strong>base</strong>（<em>numpy.ndarray或None</em>） - （可选）arm的可选（x，y，z）基本位置</li>
+</ul>
+<p>|
+| 返回值： |</p>
+<p>“面条”的手臂</p>
+<p>|
+| 返回类型： |</p>
+<p>maddux.robot.Arm</p>
+<p>|</p>
+<dt id="maddux.robots.predefined_robots.simple_human_arm">`maddux.robots.predefined_robots.``simple_human_arm`（_seg1_len_，_seg2_len_，_q0_，_base = None _）[[来源]](http://bencaine.me/maddux/_modules/maddux/robots/predefined_robots.html#simple_human_arm)</dt>
+<p>创建一个简单的类似人类的机器人手臂，具有7个链接和2个具有所需长度和起始关节配置的段</p>
+<colgroup><col class="field-name"><col class="field-body"></colgroup>
+| 参数： | 
+<ul>
+<li><strong>seg1_len</strong>（<a href="https://docs.python.org/library/functions.html#int" title="（在Python v2.7中）"><em>int</em></a>） - 手臂第一段的长度</li>
+<li><strong>seg2_len</strong>（<a href="https://docs.python.org/library/functions.html#int" title="（在Python v2.7中）"><em>int</em></a>） - 手臂第二段的长度</li>
+<li><strong>q0</strong>（<em>numpy.ndarray</em>） - 起始关节配置的1xN向量</li>
+<li><strong>base</strong>（<em>numpy.ndarray或None</em>） - （可选）（x，y，z）手臂基座的位置</li>
+</ul>
+<p>|
+| 返回值： |</p>
+<p>7个链接，2段“人”手臂。</p>
+<p>|
+| 返回类型： |</p>
+<p>maddux.robot.Arm</p>
+<p>|</p>
+<h2 id="madduxrobotsutils模块">maddux.robots.utils模块</h2>
+<p>随机收集机器人使用的实用程序</p>
+<dt id="maddux.robots.utils.create_homogeneous_transform_from_point">`maddux.robots.utils.``create_homogeneous_transform_from_point`（_p _）[[来源]](http://bencaine.me/maddux/_modules/maddux/robots/utils.html#create_homogeneous_transform_from_point)</dt>
+<p>创建一个齐次变换以移动到给定点</p>
+<colgroup><col class="field-name"><col class="field-body"></colgroup>
+| 参数： | **p**（_numpy.ndarray_） - 我们希望我们的均匀变换移动到的（x，y，z）点 |
+| 返回值： | 4x4点的均匀变换 |
+| 返回类型： | numpy.matrix |
+<dt id="maddux.robots.utils.create_point_from_homogeneous_transform">`maddux.robots.utils.``create_point_from_homogeneous_transform`（_T _）[[来源]](http://bencaine.me/maddux/_modules/maddux/robots/utils.html#create_point_from_homogeneous_transform)</dt>
+<p>从齐次变换创建一个点</p>
+<colgroup><col class="field-name"><col class="field-body"></colgroup>
+| 参数： | **T**（_numpy矩阵_） - 4x4齐次变换 |
+| 返回值： | 变换点的（x，y，z）坐标 |
+| 返回类型： | np.ndarray |
+<dt id="maddux.robots.utils.get_rotation_from_homogeneous_transform">`maddux.robots.utils.``get_rotation_from_homogeneous_transform`（_变换_）[[来源]](http://bencaine.me/maddux/_modules/maddux/robots/utils.html#get_rotation_from_homogeneous_transform)</dt>
+<p>提取均匀变换的旋转部分</p>
+<colgroup><col class="field-name"><col class="field-body"></colgroup>
+| 参数： | **transform**（_numpy.ndarray_） - 4x4齐次变换从中提取旋转矩阵。 |
+| 返回值： | 3x3旋转矩阵 |
+| 返回类型： | numpy.matrix |
+</li>
+<li>
+<h1 id="madduxobjects包">maddux.objects包</h1>
+<h2 id="子模块-3">子模块</h2>
+<h2 id="madduxobjectsball模块">maddux.objects.ball模块</h2>
+<p>投掷的球对象。</p>
+<dt id="maddux.objects.ball.Ball">_class_`maddux.objects.ball.``Ball`（_position_，_radius_，_target = False _）[[来源]](http://bencaine.me/maddux/_modules/maddux/objects/ball.html#Ball)</dt>
+<p>基地： <a href="http://bencaine.me/maddux/maddux.objects.html#maddux.objects.throwable.ThrowableObject" title="maddux.objects.throwable.ThrowableObject"><code>maddux.objects.throwable.ThrowableObject</code></a></p>
+<dt id="maddux.objects.ball.Ball.plot">`plot`（_ax _）[[来源]](http://bencaine.me/maddux/_modules/maddux/objects/ball.html#Ball.plot)</dt>
+<p>在当前位置绘制球。</p>
+<colgroup><col class="field-name"><col class="field-body"></colgroup>
+| 参数： | **ax**（_matplotlib.axes_） - 图上绘图。 |
+| 返回值： | Matplotlib图 |
+| 返回类型： | matplotlib.axes |
+<h2 id="madduxobjectsdynamic模块">maddux.objects.dynamic模块</h2>
+<p>动态对象的抽象基类。</p>
+<dt id="maddux.objects.dynamic.DynamicObject">_class_`maddux.objects.dynamic.``DynamicObject`（_position_，_target = False _）[[来源]](http://bencaine.me/maddux/_modules/maddux/objects/dynamic.html#DynamicObject)</dt>
+<p>基地： <a href="https://docs.python.org/library/functions.html#object" title="（在Python v2.7中）"><code>object</code></a></p>
+<dt id="maddux.objects.dynamic.DynamicObject.attach">`attach`（）[[来源]](http://bencaine.me/maddux/_modules/maddux/objects/dynamic.html#DynamicObject.attach)</dt>
+<p>附加到对象（停止移动）</p>
+<dt id="maddux.objects.dynamic.DynamicObject.display">`display`（）[[来源]](http://bencaine.me/maddux/_modules/maddux/objects/dynamic.html#DynamicObject.display)</dt>
+<p>显示信息</p>
+<dt id="maddux.objects.dynamic.DynamicObject.plot">`plot`（_ax _）[[来源]](http://bencaine.me/maddux/_modules/maddux/objects/dynamic.html#DynamicObject.plot)</dt>
+<p>在当前位置绘制动态对象</p>
+<dt id="maddux.objects.dynamic.DynamicObject.step">`step`（）[[来源]](http://bencaine.me/maddux/_modules/maddux/objects/dynamic.html#DynamicObject.step)</dt>
+<p>及时前进（一毫秒）</p>
+<h2 id="madduxobjectsobstacle模块">maddux.objects.obstacle模块</h2>
+<p>一种固定的长方形固体，可能会碰撞</p>
+<dt id="maddux.objects.obstacle.Obstacle">_class_`maddux.objects.obstacle.``Obstacle`（_pt1_，_pt2_，_color ='r' _）[[来源]](http://bencaine.me/maddux/_modules/maddux/objects/obstacle.html#Obstacle)</dt>
+<p>基地： <a href="http://bencaine.me/maddux/maddux.objects.html#maddux.objects.static.StaticObject" title="maddux.objects.static.StaticObject"><code>maddux.objects.static.StaticObject</code></a></p>
+<dt id="maddux.objects.obstacle.Obstacle.display">`display`（）[[来源]](http://bencaine.me/maddux/_modules/maddux/objects/obstacle.html#Obstacle.display)</dt>
+<p>显示障碍物属性</p>
+<colgroup><col class="field-name"><col class="field-body"></colgroup>
+| 返回类型： | [没有](https://docs.python.org/library/constants.html#None "（在Python v2.7中）") |
+<dt id="maddux.objects.obstacle.Obstacle.get_paths">`get_paths`（）[[来源]](http://bencaine.me/maddux/_modules/maddux/objects/obstacle.html#Obstacle.get_paths)</dt>
+<p>返回矩形的每个曲面的路径以进行绘图。</p>
+<p>：返回（底部，顶部，前部，后部，左侧，右侧）：rtype：6个4x3 numpy.ndarrays的列表</p>
+<dt id="maddux.objects.obstacle.Obstacle.is_hit">`is_hit`（_位置_）[[来源]](http://bencaine.me/maddux/_modules/maddux/objects/obstacle.html#Obstacle.is_hit)</dt>
+<p>检查矩形是否被点或路径击中</p>
+<colgroup><col class="field-name"><col class="field-body"></colgroup>
+| 参数： | **position**（_numpy.ndarray或numpy.matrix_） - 一个对象位置（x，y，z）或位置，如果它是一个路径（[x1，x2，..]，[y1，y2，..]，[z1， z2，..] |
+| 返回值： | 障碍物是否被点或路径击中 |
+| 返回类型： | [布尔](https://docs.python.org/library/functions.html#bool "（在Python v2.7中）") |
+<dt id="maddux.objects.obstacle.Obstacle.is_hit_by_sphere">`is_hit_by_sphere`（_中心_，_半径_）[[来源]](http://bencaine.me/maddux/_modules/maddux/objects/obstacle.html#Obstacle.is_hit_by_sphere)</dt>
+<p>检查矩形是否被球体击中</p>
+<colgroup><col class="field-name"><col class="field-body"></colgroup>
+| 参数： | 
+<ul>
+<li><strong>中心</strong>（<em>numpy.ndarray</em>） - 球体的中心（x，y，z）</li>
+<li><strong>radius</strong>（<a href="https://docs.python.org/library/functions.html#int" title="（在Python v2.7中）"><em>int</em></a>） - 球体的半径</li>
+</ul>
+<p>|
+| 返回值： |</p>
+<p>障碍物是否被球体击中</p>
+<p>|
+| 返回类型： |</p>
+<p><a href="https://docs.python.org/library/functions.html#bool" title="（在Python v2.7中）">布尔</a></p>
+<p>|</p>
+<dt id="maddux.objects.obstacle.Obstacle.plot">`plot`（_ax _）[[来源]](http://bencaine.me/maddux/_modules/maddux/objects/obstacle.html#Obstacle.plot)</dt>
+<p>在其位置绘制障碍物</p>
+<colgroup><col class="field-name"><col class="field-body"></colgroup>
+| 参数： | **ax**（_matplotlib.axes_） - 图上绘图 |
+| Rtpye： | 没有 |
+<h2 id="madduxobjectsstatic模块">maddux.objects.static模块</h2>
+<p>静态对象的抽象基类。</p>
+<dt id="maddux.objects.static.StaticObject">_班_`maddux.objects.static.``StaticObject`[[来源]](http://bencaine.me/maddux/_modules/maddux/objects/static.html#StaticObject)</dt>
+<p>基地： <a href="https://docs.python.org/library/functions.html#object" title="（在Python v2.7中）"><code>object</code></a></p>
+<dt id="maddux.objects.static.StaticObject.display">`display`（）[[来源]](http://bencaine.me/maddux/_modules/maddux/objects/static.html#StaticObject.display)</dt>
+<p>显示有关静态对象的相关数据。</p>
+<dt id="maddux.objects.static.StaticObject.is_hit">`is_hit`（_位置_）[[来源]](http://bencaine.me/maddux/_modules/maddux/objects/static.html#StaticObject.is_hit)</dt>
+<p>判断另一个对象是否命中静态对象</p>
+<dt id="maddux.objects.static.StaticObject.plot">`plot`（_ax _）[[来源]](http://bencaine.me/maddux/_modules/maddux/objects/static.html#StaticObject.plot)</dt>
+<p>绘制静态对象。</p>
+<h2 id="madduxobjectstarget模块">maddux.objects.target模块</h2>
+<p>某物可能与之碰撞的静止物体。</p>
+<dt id="maddux.objects.target.Target">_class_`maddux.objects.target.``Target`（_position_，_radius _）[[来源]](http://bencaine.me/maddux/_modules/maddux/objects/target.html#Target)</dt>
+<p>基地： <a href="http://bencaine.me/maddux/maddux.objects.html#maddux.objects.static.StaticObject" title="maddux.objects.static.StaticObject"><code>maddux.objects.static.StaticObject</code></a></p>
+<dt id="maddux.objects.target.Target.display">`display`（）[[来源]](http://bencaine.me/maddux/_modules/maddux/objects/target.html#Target.display)</dt>
+<p>显示目标属性：rtpye：无</p>
+<dt id="maddux.objects.target.Target.is_hit">`is_hit`（_位置_）[[来源]](http://bencaine.me/maddux/_modules/maddux/objects/target.html#Target.is_hit)</dt>
+<p>检查目标是否被击中。</p>
+<colgroup><col class="field-name"><col class="field-body"></colgroup>
+| 参数： | **position**（_numpy.array_） - 对象的位置 |
+| 返回类型： | 布尔 |
+<dt id="maddux.objects.target.Target.plot">`plot`（_ax _）[[来源]](http://bencaine.me/maddux/_modules/maddux/objects/target.html#Target.plot)</dt>
+<p>在目标位置绘制目标。：param ax：图上的情节。：type ax：matplotlib图：rtype：matplotlib图</p>
+<dt id="maddux.objects.target.Target.plot_data">`plot_data`（）[[来源]](http://bencaine.me/maddux/_modules/maddux/objects/target.html#Target.plot_data)</dt>
+<p>获取目标位置的绘图数据：rtype：整数的3元组</p>
+<h2 id="madduxobjectsthrowable模块">maddux.objects.throwable模块</h2>
+<p>一个基本可抛出的对象类，它对重力，速度等特征进行编码。</p>
+<dt id="maddux.objects.throwable.ThrowableObject">_class_`maddux.objects.throwable.``ThrowableObject`（_position_，_target = False _）[[来源]](http://bencaine.me/maddux/_modules/maddux/objects/throwable.html#ThrowableObject)</dt>
+<p>基地： <a href="http://bencaine.me/maddux/maddux.objects.html#maddux.objects.dynamic.DynamicObject" title="maddux.objects.dynamic.DynamicObject"><code>maddux.objects.dynamic.DynamicObject</code></a></p>
+<dt id="maddux.objects.throwable.ThrowableObject.attach">`attach`（）[[来源]](http://bencaine.me/maddux/_modules/maddux/objects/throwable.html#ThrowableObject.attach)</dt>
+<p>将对象附加到其当前位置</p>
+<dt id="maddux.objects.throwable.ThrowableObject.display">`display`（）[[来源]](http://bencaine.me/maddux/_modules/maddux/objects/throwable.html#ThrowableObject.display)</dt>
+<p>显示有关对象的信息</p>
+<dt id="maddux.objects.throwable.ThrowableObject.step">`step`（）[[来源]](http://bencaine.me/maddux/_modules/maddux/objects/throwable.html#ThrowableObject.step)</dt>
+<p>更新一个时间步（1毫秒）</p>
+<dt id="maddux.objects.throwable.ThrowableObject.throw">`throw`（_速度_）[[来源]](http://bencaine.me/maddux/_modules/maddux/objects/throwable.html#ThrowableObject.throw)</dt>
+<p>扔一个物体。</p>
+<colgroup><col class="field-name"><col class="field-body"></colgroup>
+| 参数： | **速度**（_np.ndarray_） - 投掷速度（vx，vy，vz） |
+| 返回类型： | [没有](https://docs.python.org/library/constants.html#None "（在Python v2.7中）") |
+</li>
+<li>
+<h1 id="madduxobjects包-2">maddux.objects包</h1>
+<h2 id="子模块-4">子模块</h2>
+<h2 id="madduxobjectsball模块-2">maddux.objects.ball模块</h2>
+<p>投掷的球对象。</p>
+<dt id="maddux.objects.ball.Ball">_class_`maddux.objects.ball.``Ball`（_position_，_radius_，_target = False _）[[来源]](http://bencaine.me/maddux/_modules/maddux/objects/ball.html#Ball)</dt>
+<p>基地： <a href="http://bencaine.me/maddux/maddux.objects.html#maddux.objects.throwable.ThrowableObject" title="maddux.objects.throwable.ThrowableObject"><code>maddux.objects.throwable.ThrowableObject</code></a></p>
+<dt id="maddux.objects.ball.Ball.plot">`plot`（_ax _）[[来源]](http://bencaine.me/maddux/_modules/maddux/objects/ball.html#Ball.plot)</dt>
+<p>在当前位置绘制球。</p>
+<colgroup><col class="field-name"><col class="field-body"></colgroup>
+| 参数： | **ax**（_matplotlib.axes_） - 图上绘图。 |
+| 返回值： | Matplotlib图 |
+| 返回类型： | matplotlib.axes |
+<h2 id="madduxobjectsdynamic模块-2">maddux.objects.dynamic模块</h2>
+<p>动态对象的抽象基类。</p>
+<dt id="maddux.objects.dynamic.DynamicObject">_class_`maddux.objects.dynamic.``DynamicObject`（_position_，_target = False _）[[来源]](http://bencaine.me/maddux/_modules/maddux/objects/dynamic.html#DynamicObject)</dt>
+<p>基地： <a href="https://docs.python.org/library/functions.html#object" title="（在Python v2.7中）"><code>object</code></a></p>
+<dt id="maddux.objects.dynamic.DynamicObject.attach">`attach`（）[[来源]](http://bencaine.me/maddux/_modules/maddux/objects/dynamic.html#DynamicObject.attach)</dt>
+<p>附加到对象（停止移动）</p>
+<dt id="maddux.objects.dynamic.DynamicObject.display">`display`（）[[来源]](http://bencaine.me/maddux/_modules/maddux/objects/dynamic.html#DynamicObject.display)</dt>
+<p>显示信息</p>
+<dt id="maddux.objects.dynamic.DynamicObject.plot">`plot`（_ax _）[[来源]](http://bencaine.me/maddux/_modules/maddux/objects/dynamic.html#DynamicObject.plot)</dt>
+<p>在当前位置绘制动态对象</p>
+<dt id="maddux.objects.dynamic.DynamicObject.step">`step`（）[[来源]](http://bencaine.me/maddux/_modules/maddux/objects/dynamic.html#DynamicObject.step)</dt>
+<p>及时前进（一毫秒）</p>
+<h2 id="madduxobjectsobstacle模块-2">maddux.objects.obstacle模块</h2>
+<p>一种固定的长方形固体，可能会碰撞</p>
+<dt id="maddux.objects.obstacle.Obstacle">_class_`maddux.objects.obstacle.``Obstacle`（_pt1_，_pt2_，_color ='r' _）[[来源]](http://bencaine.me/maddux/_modules/maddux/objects/obstacle.html#Obstacle)</dt>
+<p>基地： <a href="http://bencaine.me/maddux/maddux.objects.html#maddux.objects.static.StaticObject" title="maddux.objects.static.StaticObject"><code>maddux.objects.static.StaticObject</code></a></p>
+<dt id="maddux.objects.obstacle.Obstacle.display">`display`（）[[来源]](http://bencaine.me/maddux/_modules/maddux/objects/obstacle.html#Obstacle.display)</dt>
+<p>显示障碍物属性</p>
+<colgroup><col class="field-name"><col class="field-body"></colgroup>
+| 返回类型： | [没有](https://docs.python.org/library/constants.html#None "（在Python v2.7中）") |
+<dt id="maddux.objects.obstacle.Obstacle.get_paths">`get_paths`（）[[来源]](http://bencaine.me/maddux/_modules/maddux/objects/obstacle.html#Obstacle.get_paths)</dt>
+<p>返回矩形的每个曲面的路径以进行绘图。</p>
+<p>：返回（底部，顶部，前部，后部，左侧，右侧）：rtype：6个4x3 numpy.ndarrays的列表</p>
+<dt id="maddux.objects.obstacle.Obstacle.is_hit">`is_hit`（_位置_）[[来源]](http://bencaine.me/maddux/_modules/maddux/objects/obstacle.html#Obstacle.is_hit)</dt>
+<p>检查矩形是否被点或路径击中</p>
+<colgroup><col class="field-name"><col class="field-body"></colgroup>
+| 参数： | **position**（_numpy.ndarray或numpy.matrix_） - 一个对象位置（x，y，z）或位置，如果它是一个路径（[x1，x2，..]，[y1，y2，..]，[z1， z2，..] |
+| 返回值： | 障碍物是否被点或路径击中 |
+| 返回类型： | [布尔](https://docs.python.org/library/functions.html#bool "（在Python v2.7中）") |
+<dt id="maddux.objects.obstacle.Obstacle.is_hit_by_sphere">`is_hit_by_sphere`（_中心_，_半径_）[[来源]](http://bencaine.me/maddux/_modules/maddux/objects/obstacle.html#Obstacle.is_hit_by_sphere)</dt>
+<p>检查矩形是否被球体击中</p>
+<colgroup><col class="field-name"><col class="field-body"></colgroup>
+| 参数： | 
+<ul>
+<li><strong>中心</strong>（<em>numpy.ndarray</em>） - 球体的中心（x，y，z）</li>
+<li><strong>radius</strong>（<a href="https://docs.python.org/library/functions.html#int" title="（在Python v2.7中）"><em>int</em></a>） - 球体的半径</li>
+</ul>
+<p>|
+| 返回值： |</p>
+<p>障碍物是否被球体击中</p>
+<p>|
+| 返回类型： |</p>
+<p><a href="https://docs.python.org/library/functions.html#bool" title="（在Python v2.7中）">布尔</a></p>
+<p>|</p>
+<dt id="maddux.objects.obstacle.Obstacle.plot">`plot`（_ax _）[[来源]](http://bencaine.me/maddux/_modules/maddux/objects/obstacle.html#Obstacle.plot)</dt>
+<p>在其位置绘制障碍物</p>
+<colgroup><col class="field-name"><col class="field-body"></colgroup>
+| 参数： | **ax**（_matplotlib.axes_） - 图上绘图 |
+| Rtpye： | 没有 |
+<h2 id="madduxobjectsstatic模块-2">maddux.objects.static模块</h2>
+<p>静态对象的抽象基类。</p>
+<dt id="maddux.objects.static.StaticObject">_班_`maddux.objects.static.``StaticObject`[[来源]](http://bencaine.me/maddux/_modules/maddux/objects/static.html#StaticObject)</dt>
+<p>基地： <a href="https://docs.python.org/library/functions.html#object" title="（在Python v2.7中）"><code>object</code></a></p>
+<dt id="maddux.objects.static.StaticObject.display">`display`（）[[来源]](http://bencaine.me/maddux/_modules/maddux/objects/static.html#StaticObject.display)</dt>
+<p>显示有关静态对象的相关数据。</p>
+<dt id="maddux.objects.static.StaticObject.is_hit">`is_hit`（_位置_）[[来源]](http://bencaine.me/maddux/_modules/maddux/objects/static.html#StaticObject.is_hit)</dt>
+<p>判断另一个对象是否命中静态对象</p>
+<dt id="maddux.objects.static.StaticObject.plot">`plot`（_ax _）[[来源]](http://bencaine.me/maddux/_modules/maddux/objects/static.html#StaticObject.plot)</dt>
+<p>绘制静态对象。</p>
+<h2 id="madduxobjectstarget模块-2">maddux.objects.target模块</h2>
+<p>某物可能与之碰撞的静止物体。</p>
+<dt id="maddux.objects.target.Target">_class_`maddux.objects.target.``Target`（_position_，_radius _）[[来源]](http://bencaine.me/maddux/_modules/maddux/objects/target.html#Target)</dt>
+<p>基地： <a href="http://bencaine.me/maddux/maddux.objects.html#maddux.objects.static.StaticObject" title="maddux.objects.static.StaticObject"><code>maddux.objects.static.StaticObject</code></a></p>
+<dt id="maddux.objects.target.Target.display">`display`（）[[来源]](http://bencaine.me/maddux/_modules/maddux/objects/target.html#Target.display)</dt>
+<p>显示目标属性：rtpye：无</p>
+<dt id="maddux.objects.target.Target.is_hit">`is_hit`（_位置_）[[来源]](http://bencaine.me/maddux/_modules/maddux/objects/target.html#Target.is_hit)</dt>
+<p>检查目标是否被击中。</p>
+<colgroup><col class="field-name"><col class="field-body"></colgroup>
+| 参数： | **position**（_numpy.array_） - 对象的位置 |
+| 返回类型： | 布尔 |
+<dt id="maddux.objects.target.Target.plot">`plot`（_ax _）[[来源]](http://bencaine.me/maddux/_modules/maddux/objects/target.html#Target.plot)</dt>
+<p>在目标位置绘制目标。：param ax：图上的情节。：type ax：matplotlib图：rtype：matplotlib图</p>
+<dt id="maddux.objects.target.Target.plot_data">`plot_data`（）[[来源]](http://bencaine.me/maddux/_modules/maddux/objects/target.html#Target.plot_data)</dt>
+<p>获取目标位置的绘图数据：rtype：整数的3元组</p>
+<h2 id="madduxobjectsthrowable模块-2">maddux.objects.throwable模块</h2>
+<p>一个基本可抛出的对象类，它对重力，速度等特征进行编码。</p>
+<dt id="maddux.objects.throwable.ThrowableObject">_class_`maddux.objects.throwable.``ThrowableObject`（_position_，_target = False _）[[来源]](http://bencaine.me/maddux/_modules/maddux/objects/throwable.html#ThrowableObject)</dt>
+<p>基地： <a href="http://bencaine.me/maddux/maddux.objects.html#maddux.objects.dynamic.DynamicObject" title="maddux.objects.dynamic.DynamicObject"><code>maddux.objects.dynamic.DynamicObject</code></a></p>
+<dt id="maddux.objects.throwable.ThrowableObject.attach">`attach`（）[[来源]](http://bencaine.me/maddux/_modules/maddux/objects/throwable.html#ThrowableObject.attach)</dt>
+<p>将对象附加到其当前位置</p>
+<dt id="maddux.objects.throwable.ThrowableObject.display">`display`（）[[来源]](http://bencaine.me/maddux/_modules/maddux/objects/throwable.html#ThrowableObject.display)</dt>
+<p>显示有关对象的信息</p>
+<dt id="maddux.objects.throwable.ThrowableObject.step">`step`（）[[来源]](http://bencaine.me/maddux/_modules/maddux/objects/throwable.html#ThrowableObject.step)</dt>
+<p>更新一个时间步（1毫秒）</p>
+<dt id="maddux.objects.throwable.ThrowableObject.throw">`throw`（_速度_）[[来源]](http://bencaine.me/maddux/_modules/maddux/objects/throwable.html#ThrowableObject.throw)</dt>
+<p>扔一个物体。</p>
+<colgroup><col class="field-name"><col class="field-body"></colgroup>
+| 参数： | **速度**（_np.ndarray_） - 投掷速度（vx，vy，vz） |
+| 返回类型： | [没有](https://docs.python.org/library/constants.html#None "（在Python v2.7中）") |
+<hr>
+<h1 id="madduxexamples包">maddux.examples包</h1>
+<h2 id="子模块-5">子模块</h2>
+<h2 id="madduxexamplesarm_animation模块">maddux.examples.arm_animation模块</h2>
+<dt id="maddux.examples.arm_animation.arm_animation">`maddux.examples.arm_animation.``arm_animation`（）[[来源]](http://bencaine.me/maddux/_modules/maddux/examples/arm_animation.html#arm_animation)</dt>
+<p>动画手臂移动触摸球</p>
+<h2 id="madduxexamplesarm_ball_animation模块">maddux.examples.arm_ball_animation模块</h2>
+<dt id="maddux.examples.arm_ball_animation.arm_ball_animation">`maddux.examples.arm_ball_animation.``arm_ball_animation`（）[[来源]](http://bencaine.me/maddux/_modules/maddux/examples/arm_ball_animation.html#arm_ball_animation)</dt>
+<p>为拿着球的手臂设置动画，移动到任意位置。</p>
+<h2 id="madduxexamplesball_animation模块">maddux.examples.ball_animation模块</h2>
+<dt id="maddux.examples.ball_animation.ball_animation">`maddux.examples.ball_animation.``ball_animation`（）[[来源]](http://bencaine.me/maddux/_modules/maddux/examples/ball_animation.html#ball_animation)</dt>
+<p>制作几个球并让它们以不同的速度在环境中移动。</p>
+<h2 id="madduxexamplesfind_jacob0模块">maddux.examples.find_jacob0模块</h2>
+<dt id="maddux.examples.find_jacob0.find_jacob0">`maddux.examples.find_jacob0.``find_jacob0`（）[[来源]](http://bencaine.me/maddux/_modules/maddux/examples/find_jacob0.html#find_jacob0)</dt>
+<p>展示如何计算am arm的jacobian。</p>
+<h2 id="madduxexamplesobstacle_collision模块">maddux.examples.obstacle_collision模块</h2>
+<dt id="maddux.examples.obstacle_collision.obstacle_collision">`maddux.examples.obstacle_collision.``obstacle_collision`（）[[来源]](http://bencaine.me/maddux/_modules/maddux/examples/obstacle_collision.html#obstacle_collision)</dt>
+<p>测试最终配置的手臂是否与我们的任何一个障碍物接触。</p>
+<h2 id="madduxexamplesplot模块">maddux.examples.plot模块</h2>
+<dt id="maddux.examples.plot.plot">`maddux.examples.plot.``plot`（）[[来源]](http://bencaine.me/maddux/_modules/maddux/examples/plot.html#plot)</dt>
+<p>给出一个包含一些对象和机器人的环境的通用绘图示例。</p>
+<h2 id="madduxexamplesplot_arm模块">maddux.examples.plot_arm模块</h2>
+<dt id="maddux.examples.plot_arm.plot_arm">`maddux.examples.plot_arm.``plot_arm`（）[[来源]](http://bencaine.me/maddux/_modules/maddux/examples/plot_arm.html#plot_arm)</dt>
+<p>显示如何绘制手臂。</p>
+<h2 id="madduxexamplesplot_obstacle模块">maddux.examples.plot_obstacle模块</h2>
+<dt id="maddux.examples.plot_obstacle.plot_obstacle">`maddux.examples.plot_obstacle.``plot_obstacle`（）[[来源]](http://bencaine.me/maddux/_modules/maddux/examples/plot_obstacle.html#plot_obstacle)</dt>
+<p>在环境中创建并绘制障碍物。</p>
+<h2 id="madduxexamplestutorial模块">maddux.examples.tutorial模块</h2>
+<dt id="maddux.examples.tutorial.tutorial">`maddux.examples.tutorial.``tutorial`（）[[来源]](http://bencaine.me/maddux/_modules/maddux/examples/tutorial.html#tutorial)</dt>
+<p>我们的文档教程中的代码</p>
+<h1 id="madduxutils包">maddux.utils包</h1>
+<h2 id="子模块-6">子模块</h2>
+<h2 id="madduxutilsanimate_path模块">maddux.utils.animate_path模块</h2>
+<dt id="maddux.utils.animate_path.animate_path">`maddux.utils.animate_path.``animate_path`（_environment_，_input_file_，_output_file = None _）[[来源]](http://bencaine.me/maddux/_modules/maddux/utils/animate_path.html#animate_path)</dt>
+<p>加载已保存的路径并为其设置动画</p>
+<colgroup><col class="field-name"><col class="field-body"></colgroup>
+| 参数： | 
+<ul>
+<li><strong>environment</strong>（<a href="https://docs.python.org/library/functions.html#str" title="（在Python v2.7中）"><em>str</em></a>） - 发生路径的环境</li>
+<li><strong>input_file</strong>（<a href="https://docs.python.org/library/functions.html#str" title="（在Python v2.7中）"><em>str</em></a>） - 保存联合配置的文件</li>
+<li><strong>output_file</strong>（<em>str或None</em>） - 将动画保存为.mp4的文件</li>
+</ul>
+<p>|
+| Rtpye： |</p>
+<p>没有</p>
+<p>|</p>
+<dt id="maddux.utils.animate_path.main">`maddux.utils.animate_path.``main`（）[[来源]](http://bencaine.me/maddux/_modules/maddux/utils/animate_path.html#main)</dt>
+<p>运行CLI以获取动画参数</p>
+</li>
+</ul>
+
+            </div>
+            
+              <div class="tag-container">
+                
+                  <a href="https://blog.bioprinting.site/tag/bigbridgerobot" class="tag">
+                    BigBridgeRobot
+                  </a>
+                
+              </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://blog.bioprinting.site/post/KQATQGv4O">
+                  <h3 class="post-title">
+                    RoboND-Kinematics-Project 为Kuka R210机器人手臂提供逆运动学分析
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script type="application/javascript">
+
+AOS.init();
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+
+  </body>
+</html>
