@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" >
 
-<title>Boolean Operation in Blender | Li Zhenzhu, Ph.D</title>
+<title>Li Zhenzhu, Ph.D</title>
 <meta name="description" content="Binzhou Medical University Hospital, Email: timeanddoctor@gmail.com.">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -114,69 +114,34 @@
 
       <div class="main-container">
         <div class="content-container" data-aos="fade-up">
-          <div class="post-detail">
-            <h2 class="post-title">Boolean Operation in Blender</h2>
-            <div class="post-date">2019-02-24</div>
-            
-              <div class="feature-container" style="background-image: url('https://blog.bioprinting.site/post-images/L1PrwRRb_.jpg')">
-              </div>
-            
-            <div class="post-content">
-              <pre><code>import bpy
-from bpy.types import Operator
-from bpy.props import BoolProperty, StringProperty
-
-#   need to spend more time on bpy: types, props,data,ops, context
-xx = 15
-while (xx &lt; 16):
-yy = 15
-    while (yy &lt; 16):    
-        #  set the 'cutter' in location
-        bpy.data.objects['Cylinder.002'].location=(xx,yy,0)
-
-        #  make sure that the base object is selected 
-        bpy.data.objects['Cylinder.005'].select = False
-        bpy.data.objects['Cylinder.005'].select = True
-
-        #  set the modifier
-        bpy.ops.object.modifier_add(type='BOOLEAN')
-        bpy.context.object.modifiers['Boolean'].operation = 'DIFFERENCE'
-        bpy.context.object.modifiers['Boolean'].object = bpy.data.objects['Cylinder.002']
-
-        #  execute
-        bpy.ops.object.modifier_apply(apply_as='DATA', modifier='Boolean')
-    yy += 3
-xx += 3
-</code></pre>
-
-            </div>
-            
-              <div class="tag-container">
-                
-                  <a href="https://blog.bioprinting.site/tag/blog" class="tag">
-                    Blog
-                  </a>
-                
-                  <a href="https://blog.bioprinting.site/tag/3d" class="tag">
-                    3D
-                  </a>
-                
-              </div>
-            
-            
-              <div class="next-post">
-                <div class="next">下一篇</div>
-                <a href="https://blog.bioprinting.site/post/meeting">
-                  <h3 class="post-title">
-                    3D printing techology in Neurosrugery-Training
-                  </h3>
+          
+            <article class="post-item">
+              <div class="left">
+                <a href="https://blog.bioprinting.site/post/7gestl">
+                  <h2 class="post-title">7个免费的STL编辑器+如何编辑和修复STL文件</h2>
                 </a>
+                <div class="post-date">
+                  2019-02-13
+                </div>
+                <div class="post-abstract">
+                  
+                </div>
               </div>
-            
+              
+                <a class="right" href="https://blog.bioprinting.site/post/7gestl">
+                  <div class="feature-container" style="background-image: url('https://blog.bioprinting.site/post-images/7gestl.jpg')">
+                  </div>
+                </a>
+              
+            </article>
+          
 
-            
-
-          </div>
+          <div class="pagination-container">
+  
+    <a href="https://blog.bioprinting.site/page/4/" class="prev"><i class="icon-arrow-ios-back-outline"></i> 上一页</a>
+  
+  
+</div>
 
         </div>
       </div>
