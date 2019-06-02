@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>3D slicer 机械臂（ROS） | Li Zhenzhu, Ph.D</title>
+<meta name="description" content="Binzhou Medical University Hospital, Email: timeanddoctor@gmail.com.">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://blog.bioprinting.site/favicon.ico?v=1559466808544">
+<link rel="stylesheet" href="https://blog.bioprinting.site/styles/main.css">
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://blog.bioprinting.site">
+        <img src="https://blog.bioprinting.site/images/avatar.png?v=1559466808544" class="site-logo">
+        <h1 class="site-title">Li Zhenzhu, Ph.D</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            Home
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            Archives
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            Tags
+          </a>
+        
+      
+        
+          <a href="/paper" class="site-nav">
+            Paper
+          </a>
+        
+      
+        
+          <a href="/3dprinting" class="site-nav">
+            3D printing
+          </a>
+        
+      
+        
+          <a href="/bigbridgerobot" class="site-nav">
+            BigBridgeRobot
+          </a>
+        
+      
+        
+          <a href="/business" class="site-nav">
+            Business
+          </a>
+        
+      
+        
+          <a href="https://blog.bioprinting.site/post/meeting/" class="site-nav">
+            Training
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      Binzhou Medical University Hospital, Email: timeanddoctor@gmail.com.
+    </div>
+    <div class="site-footer">
+      Powered by Li Zhenzhu
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">3D slicer 机械臂（ROS）</h2>
+            <div class="post-date">2019-06-02</div>
+            
+              <div class="feature-container" style="background-image: url('https://ps.ssl.qhmsg.com/sdr/400__/t010980cf7770ce9c59.jpg')">
+              </div>
+            
+            <div class="post-content">
+              <h1 id="ismr-2019规划">ISMR 2019规划</h1>
+<h2 id=""><a href="https://github.com/rosmed/rosmed.github.io/wiki/ISMR2019#organizers"></a>主办单位</h2>
+<ul>
+<li>Junichi Tokuda，布莱根妇女医院和哈佛医学院（<a href="mailto:tokuda@bwh.harvard.edu">tokuda@bwh.harvard.edu</a>）</li>
+<li>女王大学Tamas Ungi（<a href="mailto:ungi@queensu.ca">ungi@queensu.ca</a>）</li>
+<li>马里兰大学Axel Krieger（<a href="mailto:axel@umd.edu">axel@umd.edu</a>）</li>
+<li>约翰霍普金斯大学Simon Leonard（<a href="mailto:sleonard@jhu.edu">sleonard@jhu.edu</a>）</li>
+</ul>
+<h2 id="-2"><a href="https://github.com/rosmed/rosmed.github.io/wiki/ISMR2019#invited-talk"></a>特邀演讲</h2>
+<ul>
+<li>Junichi Tokuda，博士，布莱根妇女医院</li>
+<li>Tamas Ungi，医学博士，女王大学博士，图像引导治疗原型软件</li>
+<li>Axel Krieger，马里兰大学自主外科软件系统博士</li>
+<li>伍斯特理工学院Gregory Fischer博士</li>
+<li>范德比尔特大学博士罗伯特韦伯斯特
+<ul>
+<li>（演讲者变更）范德比尔特大学Stanley D. Herrell博士</li>
+</ul>
+</li>
+<li>Niguhiko Hata，博士，布莱根妇女医院</li>
+</ul>
+<h2 id="-3"><a href="https://github.com/rosmed/rosmed.github.io/wiki/ISMR2019#time-table-draft"></a>时间表（草案）</h2>
+<ul>
+<li>下午1:30 - 1：40：开场白和介绍（Junichi Tokuda）</li>
+<li>下午1:40至下午2:30：特邀演讲
+<ul>
+<li>下午1:40 :( Stanley Herrel）</li>
+<li>下午1:50 :( Nobuhiko Hata）</li>
+<li>下午2:00 :( Axel Krieger）</li>
+<li>下午2:10 :(格雷戈里菲舍尔）</li>
+<li>下午2:20 :( Tamas Ungi）</li>
+</ul>
+</li>
+<li>下午2:30 - 下午3:00：教程第1节</li>
+<li>下午3:00 - 下午3:30：喝咖啡休息时间</li>
+<li>下午3:30 - 下午5:00：教程第2节</li>
+</ul>
+<h2 id="-4"><a href="https://github.com/rosmed/rosmed.github.io/wiki/ISMR2019#tutorial---workflow"></a>教程 - 工作流程</h2>
+<p>请参见<a href="https://dl.dropboxusercontent.com/s/kamqj85tdhrgbgc/ROSIGTLTutorial-ISMR2019.pptx">教程幻灯片</a>。</p>
+<p>以下工作流程是草稿。</p>
+<ul>
+<li>条件
+<ul>
+<li>切片机工作站
+<ul>
+<li>请参阅<a href="https://www.slicer.org/wiki/Documentation/4.8/SlicerApplication/HardwareConfiguration">www.slicer.org上的切片机4.8的硬件要求</a></li>
+</ul>
+</li>
+<li>ROS计算机
+<ul>
+<li>[选项1]原生Linux机器 - 请参考[安装页面]）<a href="http://wiki.ros.org/kinetic/Installation">http://wiki.ros.org/kinetic/Installation</a>）</li>
+<li>[选项2] Docker - 在这种情况下，不需要专用的ROS计算机。Docker容器可以在Slicer工作站上运行。</li>
+<li>[选项3]可以使用其他虚拟化环境（VMWare，VirtualBox等）。VirtualBox在3D图形方面存在一些性能问题（rviz需要），此时不建议使用。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="https://github.com/rosmed/rosmed.github.io/wiki/ROS_Environment">设置ROS环境</a>
+<ul>
+<li>安装ROS
+<ul>
+<li>[选项1/3]使用原生Linux或虚拟盒（不推荐）</li>
+<li>[选项2]使用Docker</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="https://github.com/rosmed/rosmed.github.io/wiki/Slicer">设置3D切片器</a>
+<ul>
+<li>安装扩展（插件）</li>
+<li>使用ROS-IGTL-Bridge测试3D Slicer-ROS通信</li>
+</ul>
+</li>
+<li><a href="https://github.com/rosmed/rosmed.github.io/wiki/ROS_Robot">在ROS上设置通用机器人手臂</a>
+<ul>
+<li>使用rviz在ROS场景中加载机器人和患者模型</li>
+<li>使用rviz上的指针功能将患者模型移动到机器人的工作空间中</li>
+</ul>
+</li>
+<li><a href="https://github.com/rosmed/rosmed.github.io/wiki/Slicer_Planning">规划3D切片机</a>
+<ul>
+<li>加载患者模型</li>
+<li>定义目标针轨迹（插入前和插入后）</li>
+<li>加载机器人模型</li>
+</ul>
+</li>
+<li><a href="https://github.com/rosmed/rosmed.github.io/wiki/Connecting_Slicer_and_ROS">在Slicer和ROS之间建立连接</a>
+<ul>
+<li>使用ROS-IGTL-Bridge将3D切片机与ROS连接</li>
+<li>检查3D Slicer和ROS上的机器人模型的同步</li>
+</ul>
+</li>
+<li><a href="https://github.com/rosmed/rosmed.github.io/wiki/Registration">注册</a>
+<ul>
+<li>（切片器）启动Fiducial Registration Wizard</li>
+<li>（rviz）手动将末端执行器移动到头骨上的第一个界标</li>
+<li>（切片器）记录尖端的当前位置，然后单击ull模型上的相应点</li>
+<li>重复前两个步骤</li>
+<li>运行地标注册。</li>
+<li>将变换应用于机器人</li>
+</ul>
+</li>
+<li><a href="https://github.com/rosmed/rosmed.github.io/wiki/Slicer_Visualization">规划针位置</a>
+<ul>
+<li>（切片器）设置音量Reslice驱动程序</li>
+<li>（切片器）将插入前的末端效应器位置发送到ROS</li>
+</ul>
+</li>
+<li><a href="https://github.com/rosmed/rosmed.github.io/wiki/Execution">执行计划</a>
+<ul>
+<li>（ROS）将手臂移至原位</li>
+<li>（ROS）将手臂移动到插入前的位置</li>
+<li>（ROS）将手臂移动到插入后位置</li>
+</ul>
+</li>
+</ul>
+<h2 id="-5"><a href="https://github.com/rosmed/rosmed.github.io/wiki/ISMR2019#memos"></a>备忘录</h2>
+<ul>
+<li>3D切片机教程
+<ul>
+<li><a href="https://www.slicer.org/wiki/Documentation/4.8/Training">入门教程</a></li>
+<li><a href="https://onedrive.live.com/view.aspx?resid=7230D4DEC6058018!29379&amp;ithint=file%2cpptx&amp;authkey=!AL2fpr9tHQTEWNA">脑外科教程</a></li>
+</ul>
+</li>
+<li><a href="https://github.com/rosmed/rosmed.github.io/wiki/VirtualEnvironments">虚拟环境解决方案</a></li>
+<li><a href="https://github.com/rosmed/rosmed.github.io/wiki/DockerROS">设置Docker镜像</a></li>
+</ul>
+<p>关注<a href="https://github.com/openigtlink/ROS-IGTL-Bridge">https://github.com/openigtlink/ROS-IGTL-Bridge</a></p>
+<h1 id="ros-igtl桥">ROS-IGTL桥</h1>
+<p>作者：Tobias Frank，Junichi Tokuda（布莱根妇女医院）</p>
+<p>该ROS-Node提供了一个OpenIGTLink桥，用于与ROS交换数据。它支持发送和接收转换，图像，字符串，PolyData，Points和Pointcloud。有关OpenIGTLink协议的更多信息，请参阅：</p>
+<ul>
+<li><a href="http://openigtlink.org/">http://openigtlink.org/</a></li>
+</ul>
+<hr>
+<h2 id="-6"><a href="https://github.com/openigtlink/ROS-IGTL-Bridge#build-instruction"></a>构建指令</h2>
+<p>测试了以下步骤：</p>
+<ul>
+<li>Ubuntu 14.04 + ROS Indigo</li>
+<li>Ubuntu 16.04 + ROS Kinetic Kame</li>
+</ul>
+<p>首先，在本地计算机中安装OpenIGTLink。有关详细说明，请访问<a href="http://openigtlink.org/">http://openigtlink.org/</a>。在以下指令中，我们假设OpenIGTLink库的构建目录位于：〜/ igtl / OpenIGTLink-build</p>
+<p><code>$ cd <your OpenIGTLink directory>
+$ git clone https://github.com/openigtlink/OpenIGTLink.git
+$ mkdir OpenIGTLink-build
+$ cd OpenIGTLink-build
+$ cmake -DBUILD_SHARED_LIBS:BOOL=ON ../OpenIGTLink
+$ make</code></p>
+<p>安装<a href="http://wiki.ros.org/">ROS</a>并按照标准<a href="http://wiki.ros.org/catkin/Tutorials/create_a_workspace">ROS说明</a>创建ROS工作区（如有必要）。</p>
+<p><code>$ mkdir -p ~/catkin_ws/src
+$ cd ~/catkin_ws
+$ catkin_make
+$ source devel/setup.bash</code></p>
+<p>ROS-IGTL-Bridge需要VTK。您可以使用apt-get安装它：</p>
+<p><code>$ sudo apt-get install libvtk6-dev</code></p>
+<p>然后从GitHub下载ros_igtl_bridge包：</p>
+<p><code>$ cd ~/catkin_ws/src
+$ git clone https://github.com/openigtlink/ROS-IGTL-Bridge</code></p>
+<p>并在工作区目录中执行catkin_make：</p>
+<p><code>$ cd ~/catkin_ws/
+$ catkin_make --cmake-args -DOpenIGTLink_DIR:PATH=<your OpenIGTLink directory>/OpenIGTLink-build</code></p>
+<p>要运行网桥，请键入：</p>
+<p><code>$ roslaunch ros_igtl_bridge bridge.launch</code></p>
+<p>如果已设置桥接，则可以启动与[3D Slicer]（<a href="https://www.slicer.org/">https://www.slicer.org/</a>）进行通信的测试程序：</p>
+<p><code>$ roslaunch ros_igtl_bridge test.launch</code></p>
+<p>可以编辑启动文件并在文件中设置IP和端口。通过调整参数RIB_type将节点作为服务器或客户端运行。打开文件并取消注释行：</p>
+<p><code>$ <!--param name="RIB_server_ip" value="111.111.111.111" type="str"/-->
+$ <!--param name="RIB_port" value="18944" type="int"/-->
+$ <!--param name="RIB_type" value="client" type="str"/--></code></p>
+<p>该节点可以作为服务器或客户端运行。如果您执行了测试程序，该节点将发送带有随机翻译的“ROS_IGTL_Test_Transform”，随机的“ROS_IGTL_Test_Point”，包含20个点的随机“ROS_IGTL_Test_Pointcloud”，“ROS_IGTL_Test_String”和“ROS_IGTL_Test_PolyData”，这是一个渲染模型。 3D Slicer MRHead样本数据。从3D切片器接收的任何数据都由桥节点发布到ROS主题并由测试节点显示。</p>
+<h2 id="-7"><a href="https://github.com/openigtlink/ROS-IGTL-Bridge#references"></a>参考</h2>
+<ol>
+<li>Frank T，Krieger A，Leonard S，Patel NA，Tokuda J. ROS-IGTL-Bridge：一种开放式网络接口，用于使用ROS环境进行图像引导治疗。Int J Comput Assist Radiol Surg。2017年5月31日doi：10.1007 / s11548-017-1618-1。PubMed PMID：<a href="https://www.ncbi.nlm.nih.gov/pubmed/?term=28567563">28567563</a>。</li>
+</ol>
+<h2 id="docker-image">Docker Image</h2>
+<p>由Christian Henkel开发的基础Docker映像（vnc-ros-kinetic-full）源自<a href="https://hub.docker.com/r/ct2034/vnc-ros-kinetic-full/">Docker Hub存储库</a>。此Docker镜像附带：</p>
+<ul>
+<li>Ubuntu 16.04</li>
+<li>ROS动力学</li>
+<li>HTML5 VNC服务器</li>
+</ul>
+<p>我们的Docker镜像包含以下附加包：</p>
+<ul>
+<li>ROS-工业</li>
+<li>ROS通用机器人包</li>
+<li>ROS MoveIt！包</li>
+<li>OpenIGTLink</li>
+<li>ROS-IGTL桥</li>
+</ul>
+<p>我们的Dockerfile可以在<a href="https://github.com/rosmed/docker-ros-igtl">GitHub上获得</a>，它的图像在<a href="https://cloud.docker.com/u/rosmed/repository/docker/rosmed/docker-ros-igtl">Docker Hub上发布</a>。</p>
+<h2 id="-8"><a href="https://github.com/rosmed/rosmed.github.io/wiki/DockerROS#building-docker-image-not-needed"></a>构建Docker镜像（不需要）</h2>
+<p>要使用修改后的Dockerfile构建Docker镜像，请运行以下命令：</p>
+<p><code>$ cd <working directory>
+$ git clone https://github.com/rosmed/docker-ros-igtl
+$ cd docker-ros-igtl
+$ docker build -t docker-ros-igtl .</code></p>
+<h2 id="-9"><a href="https://github.com/rosmed/rosmed.github.io/wiki/DockerROS#running-docker-image"></a>运行Docker镜像</h2>
+<p>要执行docker镜像，请调用以下命令：</p>
+<p><code>$ docker pull docker pull rosmed/docker-ros-igtl
+$ docker run -it --rm -p 6080:80 rosmed/docker-ros-igtl</code></p>
+<p>在此示例中，docker容器上的Web端口将映射到主机上的端口6080。' - rm'选项将在终止时删除容器。</p>
+<h1 id="connecting_slicer_and_ros">Connecting_Slicer_and_ROS</h1>
+<p>Junichi Tokuda编辑了这个页面 on 21 Mar · <a href="https://github.com/rosmed/rosmed.github.io/wiki/Connecting_Slicer_and_ROS/_history">3次修订</a></p>
+<h1 id="-10"><a href="https://github.com/rosmed/rosmed.github.io/wiki/Connecting_Slicer_and_ROS#connecting-3d-slicer-with-ros"></a>连接3D切片机与ROS</h1>
+<p>确保以下组件正在运行：</p>
+<ul>
+<li>ROS计算机
+<ul>
+<li>rviz上的通用机器人</li>
+<li>IGTL出口商</li>
+<li>ROS-IGTL桥</li>
+</ul>
+</li>
+<li>切片机工作站
+<ul>
+<li>3D切片机</li>
+</ul>
+</li>
+</ul>
+<p>现在我们连接3D Slicer和来自OpenIGTLinkIF模块的ROS，正如我们在<a href="https://github.com/rosmed/rosmed.github.io/wiki/Slicer">上一步中</a>测试<a href="https://github.com/rosmed/rosmed.github.io/wiki/Slicer">的那样</a>。打开OpenIGTLinkIF模块（模块菜单 - &gt;“IGT” - &gt;“OpenIGTLinkIF”）。然后单击“连接器”列表下的“+”按钮创建一个新节点，并从“属性”部分进行配置，如下所示：</p>
+<ul>
+<li>名称：“IGTLConnector”（默认）</li>
+<li>键入：“客户端”（默认）</li>
+<li>状态：未选中（默认）</li>
+<li>MRMLNodeAlgorithm：保持未选中状态</li>
+<li>主机名：localhost（如果使用Docker）或ROS机器的IP（用于非Docker环境）</li>
+<li>端口：28944（如果Docker与“-p 28944：18944”选项一起使用）或18944（非Docker环境的默认值）</li>
+</ul>
+<p>配置连接器后，单击“活动”复选框。如果3D Slicer成功连接到ROS-IGTL-Bridge，则OpenIGTLinkIF的连接器列表上的状态字段将显示为“ON”。</p>
+<h1 id="加载mr图像和患者模型">加载MR图像和患者模型</h1>
+<p>首先，下载<a href="http://bit.ly/2UZ8OaR">ISMR19的切片器场景</a>。这个场景包含：</p>
+<ul>
+<li>场景描述文件（Scene-ISMR19.mrml）</li>
+<li>患者的MR图像（MRI.nrrd）</li>
+<li>患者的3D模型（SkullDrilled1.stl）</li>
+<li>机器人链接的3D模型（* .stl除了SkullDrilled1.stl）</li>
+<li>链接的转换矩阵（* .h5）</li>
+</ul>
+<p>解压缩zip文件。在Linux / Mac上的终端上，可以通过以下方式完成：</p>
+<p><code>$ unzip SlicerScene-ISMR19.zip
+Archive:  SlicerScene-ISMR19.zip
+inflating: SlicerScene/MRI.nrrd<br>
+inflating: SlicerScene/Scene-ISMR19.mrml<br>
+inflating: SlicerScene/Scene-ISMR19.png<br>
+inflating: SlicerScene/SkullDrilled1_mm.stl<br>
+inflating: SlicerScene/base_mm.stl<br>
+inflating: SlicerScene/forearm_link.h5<br>
+inflating: SlicerScene/forearm_mm.stl<br>
+inflating: SlicerScene/needle.h5<br>
+inflating: SlicerScene/needle_holder.h5<br>
+inflating: SlicerScene/needle_holder_mm.stl<br>
+inflating: SlicerScene/shoulder_link.h5<br>
+inflating: SlicerScene/shoulder_mm.stl<br>
+inflating: SlicerScene/tool0.h5<br>
+inflating: SlicerScene/upper_arm_link.h5<br>
+inflating: SlicerScene/upperarm_mm.stl<br>
+inflating: SlicerScene/wrist1_mm.stl<br>
+inflating: SlicerScene/wrist2_mm.stl<br>
+inflating: SlicerScene/wrist3_mm.stl<br>
+inflating: SlicerScene/wrist_1_link.h5<br>
+inflating: SlicerScene/wrist_2_link.h5<br>
+inflating: SlicerScene/wrist_3_link.h5</code></p>
+<p>请注意，STL格式不包含单位信息。虽然文件应该以适当的比例加载到3D Slicer上，但它们可能无法在其他环境中运行。</p>
+<p>提取完所有文件后，我们从3D Slicer加载场景，如下所示：</p>
+<ul>
+<li>打开“添加数据”对话框（“文件” - &gt;“添加数据”）。</li>
+<li>单击“选择要添加的文件”按钮。</li>
+<li>从“打开”对话框中选择“Scene-ISMR19.mrml”。</li>
+<li>单击“打开”。文件名应出现在“选择要添加的文件”对话框中。单击“确定”后，3D切片器开始将文件加载到场景中。</li>
+</ul>
+<p>如果文件成功加载，您应该能够在红色/黄色/绿色查看器上看到MR图像，并在3D查看器上看到头骨和机器人的模型。头骨相对于机器人的位置是不现实的，但这是因为它们尚未注册（或校准）。我们将在本教程的后面注册它们。</p>
+<h1 id="-11"><a href="https://github.com/rosmed/rosmed.github.io/wiki/Slicer_Planning#planning-needle-placement"></a>规划针位置</h1>
+<p>我们通过定义1）目标点和2）皮肤上的针入口点来计划针放置轨迹。</p>
+<p>首先，我们使头骨模型的部分在3轴平面上可见，如下所示：</p>
+<ul>
+<li>打开“模型”模块（“模块”菜单 - &gt;“模型”）</li>
+<li>从模型列表中选择“SkullDrilled1_mm”。</li>
+<li>在“切片显示”框中，选中“可见”。现在您应该看到头骨模型的部分覆盖在MR图像上。</li>
+</ul>
+<p>要定义条目和目标点：</p>
+<ul>
+<li>单击工具栏中的“创建并放置基准”按钮。</li>
+<li>单击肿瘤中心作为目标点。（基准“F-1”应出现在MR图像上）</li>
+<li>单击头骨上的孔的中心作为入口点。（基准“F-2”应出现在MR图像上）</li>
+<li>从模块菜单中打开“Markups”模块。</li>
+<li>下拉列表菜单，然后选择“重命名当前MarkupsFiducials”。</li>
+<li>在弹出窗口中，键入“Plan”（区分大小写）作为新名称，然后单击“确定”。</li>
+<li>通过单击名称（即“F-1”和“F-2”）将点的名称从“F-1”和“F-2”更改为“目标”和“条目”，然后输入新的名称名。名称区分大小写，因为它们将被转移到ROS并用于识别点。</li>
+</ul>
+<h1 id="ros_robot">ROS_Robot</h1>
+<p>Simon Leonard编辑了此页面 on 29 Mar · <a href="https://github.com/rosmed/rosmed.github.io/wiki/ROS_Robot/_history">19次修订</a></p>
+<h1 id="-12"><a href="https://github.com/rosmed/rosmed.github.io/wiki/ROS_Robot#installing-ros-packages"></a>安装ROS包</h1>
+<p>（如果使用本教程中提供的Docker镜像设置ROS环境，则可以跳过此步骤。）</p>
+<p>在ROS计算机上，我们打开一个终端并将两个ROS包复制到katkin工作区：</p>
+<p><code>cd ~/catkin_ws/src
+git clone https://github.com/rosmed/ismr19_description
+git clone https://github.com/rosmed/ismr19_moveit
+git clone https://github.com/rosmed/ismr19_control</code></p>
+<p>此外，我们还复制了IGTL Exporter，它通过ROS-IGTL-Bridge将机器人链接的转换流式传输到3D Slicer。</p>
+<p><code>cd ~/catkin_ws/src
+git clone https://github.com/tokjun/ros_bx_robot_bridge</code></p>
+<p>然后，运行catkin_make</p>
+<p><code>cd ~/catkin_ws
+catkin_make
+source devel/setup.bash</code></p>
+<h1 id="-13"><a href="https://github.com/rosmed/rosmed.github.io/wiki/ROS_Robot#launching-the-ros-packages"></a>启动ROS包</h1>
+<p>！以下步骤将被修改 - 不确定我们是否将使用demo.launch !!</p>
+<p>我们使用以下命令在rviz上使用自定义针头hodler启动通用机器人：</p>
+<p><code>roslaunch ismr19_moveit demo.launch</code></p>
+<h1 id="-14"><a href="https://github.com/rosmed/rosmed.github.io/wiki/ROS_Robot#launching-igtl-exporter"></a>启动IGTL Exporter</h1>
+<p>要启动IGTL导出器，请打开另一个终端并运行以下命令：</p>
+<p><code>cd ~/catkin_ws
+source devel/setup.bash
+rosrun bx_robot_bridge igtl_exporter.py</code></p>
+<h1 id="-15"><a href="https://github.com/rosmed/rosmed.github.io/wiki/ROS_Robot#loading-patient-model"></a>加载患者模型</h1>
+<p>我们将加载患者的表面模型。首先，我们下载模型：</p>
+<p><code>cd ~
+mkdir models
+cd models
+wget -O ismr19.scene https://bit.ly/2OpSdKM</code></p>
+<p>从rviz中，打开“MotionPlanning”框中的“Scene Objects”选项卡，单击“Current Scene Objects”部分右下方区域的“Import From Text”按钮，选择下载的文件（“ismr19.scene”） ）在“导入场景几何体”对话框中，单击“打开”按钮。头骨模型出现在3D查看器上。</p>
+<p>看到头骨后，单击“发布场景”按钮。</p>
+<h1 id="切片机">切片机</h1>
+<p>Simon Leonard编辑了此页面 on 29 Mar · <a href="https://github.com/rosmed/rosmed.github.io/wiki/Slicer/_history">19次修订</a></p>
+<h1 id="-16"><a href="https://github.com/rosmed/rosmed.github.io/wiki/Slicer#installing-3d-slicer-and-extensions"></a>安装3D切片器和扩展</h1>
+<p>在本教程中，我们将使用3D Slicer版本4.8.1二进制文件可从以下链接获得：</p>
+<ul>
+<li><a href="http://slicer.kitware.com/midas3/download/item/330417/Slicer-4.8.1-linux-amd64.tar.gz">适用于Linux的切片器4.8.1（Intel 64位）</a></li>
+<li><a href="http://slicer.kitware.com/midas3/download/item/330418/Slicer-4.8.1-macosx-amd64.dmg">用于macOS的切片器4.8.1（Intel 64位）</a></li>
+<li><a href="http://slicer.kitware.com/midas3/download/item/329467/Slicer-4.8.1-win-amd64.exe">适用于Windows的切片器4.8.1（Intel 64位）</a></li>
+</ul>
+<p>**Mac用户注意事项：**如果首次启动3D Slicer时系统弹出一个窗口警告“Slicer.app无法打开，因为它来自一位身份不明的开发人员”，请点击图标启动Slicer应用程序用鼠标右键（或用Ctrl键单击），然后从下拉菜单中选择“打开”。然后，系统将提示您确认是否正在打开该应用程序。单击“打开”按钮后将启动切片器。</p>
+<p>在本教程中，我们不会使用最新版本的3D Slicer（自2019年3月起为4.10.1），因为它仍然存在一些与ROS-IGTL-Bridge之间传输点和多边形数据的问题。</p>
+<p>安装并启动3D Slicer后，打开Extension Manager（“查看” - &gt;“Extension Manager”），并安装以下扩展名：</p>
+<ul>
+<li><strong>SlicerIGT</strong></li>
+</ul>
+<p>重新启动3D切片器后，您应该会在模块菜单的“IGT”部分下看到扩展中包含的插件模块。</p>
+<h1 id="-17"><a href="https://github.com/rosmed/rosmed.github.io/wiki/Slicer#testing-communication-with-ros-using-ros-igtl-bridge"></a>使用ROS-IGTL-Bridge测试与ROS的通信</h1>
+<p>首先，我们从Linux上的终端（使用ROS）启动roscore：</p>
+<p><code>roscore</code></p>
+<p>然后我们启动了ROS-IGTL-Bridge。打开另一个终端，然后运行以下命令：</p>
+<p><code>cd ~/catkin_ws
+source devel/setup.bash
+roslaunch ros_igtl_bridge bridge.launch
+..
+[ROS-IGTL-Bridge] Please type &lt;1&gt; or &lt;2&gt; to run node as OpenIGTLink client or server
+1 : Server
+2 : Client</code></p>
+<p>终端将提示选择类型（服务器或客户端），然后选择主机信息（两种情况下的端口号，如果网桥作为服务器启动，则为IP）。在本教程中，我们将桥接器作为服务器运行并使用端口18944.还可以编辑启动文件并在文件中设置IP和端口。通过调整参数RIB_type将节点作为服务器或客户端运行。打开文件并取消注释行：</p>
+<p><code>$ <!--param name="RIB_server_ip" value="111.111.111.111" type="str"/-->
+$ <!--param name="RIB_port" value="18944" type="int"/-->
+$ <!--param name="RIB_type" value="client" type="str"/--></code></p>
+<p>桥接器准备就绪后，打开3D Slicer（如果尚未打开），打开OpenIGTLinkIF模块（模块菜单 - &gt;“IGT” - &gt;“OpenIGTLinkIF”）。然后单击“连接器”列表下的“+”按钮创建一个新节点，并从“属性”部分进行配置，如下所示：</p>
+<ul>
+<li>名称：“IGTLConnector”（默认）</li>
+<li>键入：“客户端”（默认）</li>
+<li>状态：未选中（默认）</li>
+<li>MRMLNodeAlgorithm：保持未选中状态</li>
+<li>主机名：localhost（如果使用Docker）或ROS机器的IP（用于非Docker环境）</li>
+<li>端口：28944（如果Docker与“-p 28944：18944”选项一起使用）或18944（非Docker环境的默认值）</li>
+</ul>
+<p>配置连接器后，单击“活动”复选框。如果3D Slicer成功连接到ROS-IGTL-Bridge，则OpenIGTLinkIF的连接器列表上的状态字段将显示为“ON”。</p>
+<p>在Linux（使用ROS）上打开一个新终端，然后运行以下命令：</p>
+<p><code>cd ~/catkin_ws
+source devel/setup.bash
+roslaunch ros_igtl_bridge test.launch</code></p>
+<p>测试节点发送带有随机翻译的“ROS_IGTL_Test_Transform”，随机的“ROS_IGTL_Test_Point”，包括20个点的随机“ROS_IGTL_Test_Pointcloud”，“ROS_IGTL_Test_String”和“ROS_IGTL_Test_PolyData”。您可以在OpenIGTLinkIF模块的“I / O配置”中确认它们。（确保展开“场景” - &gt;“IGTLConnector1” - &gt;“IN”）。</p>
+<p>这些数据将显示在3D Slicer上。在3D Slicer显示患者的表面模型之前，可能需要几秒到一分钟。</p>
+<p>确认桥接器正常工作后，通过取消选中“Active”复选框来断开3D Slicer。在3D Slicer上连接状态变为“OFF”后，按终端上的Ctrl-C停止桥接和测试节点。关闭3D切片器上的场景（“文件” - &gt;“关闭场景”）或关闭3D切片器应用程序。</p>
+<h1 id="ros_environment">ROS_Environment</h1>
+<p>Simon Leonard编辑了此页面 3月29日 · <a href="https://github.com/rosmed/rosmed.github.io/wiki/ROS_Environment/_history">16次修订</a></p>
+<h1 id="-18"><a href="https://github.com/rosmed/rosmed.github.io/wiki/ROS_Environment#setting-up-ros-environment-for-tutorial"></a>为教程设置ROS环境</h1>
+<h2 id="-19"><a href="https://github.com/rosmed/rosmed.github.io/wiki/ROS_Environment#prerequisite"></a>条件</h2>
+<p>在本教程中，我们将使用ROS Kinetic，它支持Wily（Ubuntu 15.10），Xenial（Ubuntu 16.04）和Jessie（Debian 8）用于Debian。请参阅<a href="http://wiki.ros.org/kinetic/Installation/Ubuntu">安装页面</a>了解详细信</p>
+<h2 id="-20"><a href="https://github.com/rosmed/rosmed.github.io/wiki/ROS_Environment#option-1-installing-ros-on-dedicated-ros-computer"></a>[选项1]在专用ROS计算机上安装ROS</h2>
+<p>请按照<a href="http://wiki.ros.org/kinetic/Installation/Ubuntu">安装页面</a>。</p>
+<h3 id="-21"><a href="https://github.com/rosmed/rosmed.github.io/wiki/ROS_Environment#installing-ros-kinetic"></a>安装ROS Kinetic</h3>
+<p>然后我们安装其他软件包，包括ROS-Industrial，MoveIt！，Universal Robot和libvtk6-dev。从终端，</p>
+<p><code>sudo rosdep update -y
+sudo apt-get update -y
+sudo apt-get dist-upgrade -y
+sudo apt-get install -y ros-kinetic-industrial-core
+sudo apt-get install -y ros-kinetic-universal-robot
+sudo apt-get install -y ros-kinetic-moveit
+sudo apt-get install -y ros-kinetic-moveit-visual-tools
+sudo apt-get install libvtk6-dev</code></p>
+<h3 id="-22"><a href="https://github.com/rosmed/rosmed.github.io/wiki/ROS_Environment#building-openigtlink"></a>构建OpenIGTLink</h3>
+<p>ROS-IGTL-Bridge依赖于OpenIGTLink库。我们在〜/ igtl / OpenIGTLink下安装libary的源文件，并在〜/ igtl / OpenIGTLink-build下构建文件</p>
+<p><code>cd ~
+mkdir igtl
+cd igtl
+git clone https://github.com/openigtlink/OpenIGTLink.git
+mkdir OpenIGTLink-build
+cd OpenIGTLink-build
+cmake -DBUILD_SHARED_LIBS:BOOL=ON ../OpenIGTLink
+make</code></p>
+<h3 id="-23"><a href="https://github.com/rosmed/rosmed.github.io/wiki/ROS_Environment#installing-ros-igtl-bridge"></a>安装ROS-IGTL-Bridge</h3>
+<p>首先，设置catkin工作目录（如果尚未设置）。我们将使用标准的ROS工作区“catkin_ws”。如果您已有现有的，我们建议您在本教程的持续时间内将其移至其他位置</p>
+<p><code>mv ~/catkin_ws ~/catkin_ws_old</code></p>
+<p>然后，继续创建一个干净的工作区</p>
+<p><code>mkdir -p ~/catkin_ws/src
+cd ~/catkin_ws
+catkin_make
+source devel/setup.bash</code></p>
+<p>然后从github存储库中获取代码：</p>
+<p><code>cd ~/catkin_ws/src
+git clone https://github.com/openigtlink/ROS-IGTL-Bridge</code></p>
+<p>要构建ROS-IGTL-Bridge，请运行</p>
+<p><code>cd ~/catkin_ws/
+catkin_make --cmake-args -DOpenIGTLink_DIR:PATH=~/igtl/OpenIGTLink-build</code></p>
+<h2 id="-24"><a href="https://github.com/rosmed/rosmed.github.io/wiki/ROS_Environment#option-2-installing-ros-using-docker"></a>[选项2]使用Docker安装ROS</h2>
+<p>必须在安装之前安装<a href="https://www.docker.com/">Docker</a>。要安装教程的Docker镜像，请打开终端并运行以下命令：</p>
+<p><code>sudo docker pull rosmed/docker-ros-igtl
+sudo docker run -it --rm -p 6080:80 -p 28944:18944 rosmed/docker-ros-igtl</code></p>
+<p>在此示例中，docker容器上的HTTP端口（端口80）和OpenIGTLink端口（端口18944）分别映射到主机上的端口6080和28944。' - rm'选项将在终止时删除容器。</p>
+<p>要访问桌面，请在同一台计算机上打开Web浏览器（与HTML5兼容），然后在地址栏中键入以下地址：</p>
+<p><code>http://localhost:6080</code></p>
+<p>如果Docker镜像容器成功运行，则浏览器应显示桌面屏幕。</p>
+<p>此docker镜像包含本教程所需的所有软件，无需安装其他软件包（即OpenIGTLink和ROS-IGTL-Bridge）</p>
+
+            </div>
+            
+              <div class="tag-container">
+                
+                  <a href="https://blog.bioprinting.site/tag/bigbridgerobot" class="tag">
+                    BigBridgeRobot
+                  </a>
+                
+              </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://blog.bioprinting.site/post/9WyZd7kxa">
+                  <h3 class="post-title">
+                    机械臂类似UR5
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script type="application/javascript">
+
+AOS.init();
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+
+  </body>
+</html>
