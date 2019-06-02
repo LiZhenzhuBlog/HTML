@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>机械臂类似UR5 | Li Zhenzhu, Ph.D</title>
+<meta name="description" content="Binzhou Medical University Hospital, Email: timeanddoctor@gmail.com.">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://blog.bioprinting.site/favicon.ico?v=1559466031458">
+<link rel="stylesheet" href="https://blog.bioprinting.site/styles/main.css">
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://blog.bioprinting.site">
+        <img src="https://blog.bioprinting.site/images/avatar.png?v=1559466031458" class="site-logo">
+        <h1 class="site-title">Li Zhenzhu, Ph.D</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            Home
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            Archives
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            Tags
+          </a>
+        
+      
+        
+          <a href="/paper" class="site-nav">
+            Paper
+          </a>
+        
+      
+        
+          <a href="/3dprinting" class="site-nav">
+            3D printing
+          </a>
+        
+      
+        
+          <a href="/bigbridgerobot" class="site-nav">
+            BigBridgeRobot
+          </a>
+        
+      
+        
+          <a href="/business" class="site-nav">
+            Business
+          </a>
+        
+      
+        
+          <a href="https://blog.bioprinting.site/post/meeting/" class="site-nav">
+            Training
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      Binzhou Medical University Hospital, Email: timeanddoctor@gmail.com.
+    </div>
+    <div class="site-footer">
+      Powered by Li Zhenzhu
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">机械臂类似UR5</h2>
+            <div class="post-date">2019-06-02</div>
+            
+              <div class="feature-container" style="background-image: url('https://gds-storage-prd.s3.amazonaws.com/unified-gallery/190305/9697/af117a80/thumbnails/sharetofusion360hub-3500-3500.jpg')">
+              </div>
+            
+            <div class="post-content">
+              <p>This is part 2 of my 3D printed robot arm. You can watch part 1 at <a href="https://www.youtube.com/watch?v=tEbJV32GyYU">https://www.youtube.com/watch?v=tEbJV...</a> in case you missed it. The CAD design of the extended wrist cap with the electronics inside is available at <a href="https://www.youtube.com/redirect?q=https%3A%2F%2Fgallery.autodesk.com%2Ffusion360%2Fprojects%2Frobot-arm-esp32-drv8825-actuator-controller&amp;event=video_description&amp;v=RdmdFIhCo4M&amp;redir_token=ii2yaoab_KuAW516O-i_OhpUBRh8MTU1OTU1MDI3OEAxNTU5NDYzODc4">https://gallery.autodesk.com/fusion36...</a> The PCB Eagle Board design is available at <a href="https://www.youtube.com/redirect?q=https%3A%2F%2Fgithub.com%2Fchilipeppr%2Frobot-actuator-controller-v1&amp;event=video_description&amp;v=RdmdFIhCo4M&amp;redir_token=ii2yaoab_KuAW516O-i_OhpUBRh8MTU1OTU1MDI3OEAxNTU5NDYzODc4">https://github.com/chilipeppr/robot-a...</a> as well as the Lua code that I used to test the actuators in this video. The NodeMCU.bin firmware is there too. This has the latest release of the firmware plus the stepper library built in. Just flash NodeMCU.bin via esptool to your ESP32 board. The ChiliPeppr ESP32 for Lua Workspace was used to program the board and is available at <a href="https://www.youtube.com/redirect?q=http%3A%2F%2Fchilipeppr.com%2Fesp32&amp;event=video_description&amp;v=RdmdFIhCo4M&amp;redir_token=ii2yaoab_KuAW516O-i_OhpUBRh8MTU1OTU1MDI3OEAxNTU5NDYzODc4">http://chilipeppr.com/esp32</a> Video on how to use the ESP32 for Lua workspace to upload firmware and Lua code on your ESP32. <a href="https://www.youtube.com/watch?v=njAeHfoVIoY">https://www.youtube.com/watch?v=njAeH...</a> Jeff Kerr's (LoboCNC) original 3D printed robot arm design is on Thingiverse at <a href="https://www.youtube.com/redirect?q=https%3A%2F%2Fwww.thingiverse.com%2Fthing%3A3327968%2F&amp;event=video_description&amp;v=RdmdFIhCo4M&amp;redir_token=ii2yaoab_KuAW516O-i_OhpUBRh8MTU1OTU1MDI3OEAxNTU5NDYzODc4">https://www.thingiverse.com/thing:332...</a> PCB Components ESP32 Wemos $8 (Many ESP32 devices are cheaper, but this is the smallest size broadly available to fit inside the small actuators) <a href="https://www.youtube.com/redirect?q=https%3A%2F%2Fwww.aliexpress.com%2Fitem%2FESP32-wemos-ESP32-WiFi-Modules-Bluetooth-Dual-ESP-32-ESP-32S-ESP8266%2F32815190965.html&amp;event=video_description&amp;v=RdmdFIhCo4M&amp;redir_token=ii2yaoab_KuAW516O-i_OhpUBRh8MTU1OTU1MDI3OEAxNTU5NDYzODc4">https://www.aliexpress.com/item/ESP32...</a> DRV8825 Stepper Board $0.95 <a href="https://www.youtube.com/redirect?q=https%3A%2F%2Fwww.aliexpress.com%2Fitem%2F5pcs-lot-3D-Printer-Stepstick-Drv8825-Stepper-Motor-Driver-Reprap-4-PCB-Board-Free-shipping-replace%2F32514641632.html&amp;event=video_description&amp;v=RdmdFIhCo4M&amp;redir_token=ii2yaoab_KuAW516O-i_OhpUBRh8MTU1OTU1MDI3OEAxNTU5NDYzODc4">https://www.aliexpress.com/item/5pcs-...</a> DC to DC Converter $0.90 (Pick the 5V version, not 3.3V) <a href="https://www.youtube.com/redirect?q=https%3A%2F%2Fwww.aliexpress.com%2Fitem%2FDC-DC-Power-Supply-Module-Step-Down-3A-output-24V-12V-to-5V-3-3V-Buck%2F32904709711.html&amp;event=video_description&amp;v=RdmdFIhCo4M&amp;redir_token=ii2yaoab_KuAW516O-i_OhpUBRh8MTU1OTU1MDI3OEAxNTU5NDYzODc4">https://www.aliexpress.com/item/DC-DC...</a> WS2812B LED $0.15 per (Choose white and WS2812B) <a href="https://www.youtube.com/redirect?q=https%3A%2F%2Fwww.aliexpress.com%2Fitem%2F10-1000pcs-4-Pin-WS2812B-WS2812-LED-Chip-Heatsink-5V-5050-RGB-WS2811-IC-Built-in%2F32634454437.html&amp;event=video_description&amp;v=RdmdFIhCo4M&amp;redir_token=ii2yaoab_KuAW516O-i_OhpUBRh8MTU1OTU1MDI3OEAxNTU5NDYzODc4">https://www.aliexpress.com/item/10-10...</a> Slide Switch $0.29 for 20 pieces <a href="https://www.youtube.com/redirect?q=https%3A%2F%2Fwww.aliexpress.com%2Fitem%2F20Pcs-Interruptor-on-off-mini-Slide-Switch-SS12D00-SS12D00G3-3pin-1P2T-2-Position-High-quality-toggle%2F32964400942.html&amp;event=video_description&amp;v=RdmdFIhCo4M&amp;redir_token=ii2yaoab_KuAW516O-i_OhpUBRh8MTU1OTU1MDI3OEAxNTU5NDYzODc4">https://www.aliexpress.com/item/20Pcs...</a> Screw Terminal <a href="https://www.youtube.com/redirect?q=https%3A%2F%2Fwww.aliexpress.com%2Fitem%2F20-pcs-2-Pin-Screw-blue-green-PCB-Terminal-Block-Connector-5mm-Pitch%2F32814618602.html&amp;event=video_description&amp;v=RdmdFIhCo4M&amp;redir_token=ii2yaoab_KuAW516O-i_OhpUBRh8MTU1OTU1MDI3OEAxNTU5NDYzODc4">https://www.aliexpress.com/item/20-pc...</a> 26AWG Silicone Ultra Flexible Wire for 24v (Use 2 of the 4 wires) <a href="https://www.youtube.com/redirect?q=https%3A%2F%2Fwww.aliexpress.com%2Fitem%2F2metre-26AWG-28AWG-30AWG-Silicone-Wire-Ultra-Flexiable-Test-Line-3P-4P-6P-0-08mm-Tinned%2F32870367030.html&amp;event=video_description&amp;v=RdmdFIhCo4M&amp;redir_token=ii2yaoab_KuAW516O-i_OhpUBRh8MTU1OTU1MDI3OEAxNTU5NDYzODc4">https://www.aliexpress.com/item/2metr...</a></p>
+<p>这个机器人手臂（非常）粗略地称为UR3工业机器人的80％缩放版本。它采用了相同的设计理念，即在每个接头处简单地放置一个电机/减速器执行器单元，六个执行器堆叠起来形成一个6轴臂。现在UR3使用空心力矩电机和谐振驱动器（$$$）作为执行器，这个机器人使用我在这里发布的步进电机/复合行星执行器：<a href="https://www.thingiverse.com/thing:3293562">https</a>：//www.thingiverse.com/thing:3293562 。两个大型执行器用于前两个基座接头，其中一个中型执行器用于肘关节，三个小型执行器用于腕关节。还有我在这里发布的抓手*：<a href="https://www.thingiverse.com/thing:3116728">https</a>：<a href="https://www.thingiverse.com/thing:3116728">//www.thingiverse.com/thing</a>：<a href="https://www.thingiverse.com/thing:3116728">3116728</a>。</p>
+<p>对于控制器，我使用了Pololu的Tic T500步进控制器中的七个，并使用我编写的自定义固件来支持协调运动。您可以在此处找到血淋淋的详细信息，包括Windows测试实用程序：<a href="https://drive.google.com/open?id=1rKRuWC4jAOekrds_WGUC7DkwlVsk2zdb">https</a>：<a href="https://drive.google.com/open?id=1rKRuWC4jAOekrds_WGUC7DkwlVsk2zdb">//drive.google.com/open？id = 1rKRuWC4jAOekrds_WGUC7DkwlVsk2zdb</a></p>
+<p>这是一项非常重要的工作，我会在时间充裕的情况下填补空白。在此期间，如果您需要我尚未获得的详细信息，请随时在评论部分发布问题。请仔细阅读这里的所有材料，并在开始构建之前向我提出任何问题 - 这_不是_一个简单的周末项目！</p>
+<p><a href="https://youtu.be/7u_UjMB8tJI">https://youtu.be/7u_UjMB8tJI</a></p>
+<p>这是jlauer发布的关于他的手臂的精彩视频：<a href="https://www.youtube.com/watch?v=tEbJV32GyYU">https</a>：<a href="https://www.youtube.com/watch?v=tEbJV32GyYU">//www.youtube.com/watch？v =</a>tEbJV32GyYU</p>
+<p>另外，jlauer开发了他的自定义控制器板：<a href="https://www.youtube.com/watch?v=RdmdFIhCo4M">https</a>：<a href="https://www.youtube.com/watch?v=RdmdFIhCo4M">//www.youtube.com/watch？v =</a> RMmdFIhCo4M</p>
+<p>*视频中显示的抓手与贴出的抓手略有不同。</p>
+<p>更新：我刚刚发布了一款小型手腕执行器的防反冲版本，它具有更大的扭矩，更小的间隙并且运行更平稳：<a href="https://www.thingiverse.com/thing:3566678">https</a>：<a href="https://www.thingiverse.com/thing:3566678">//www.thingiverse.com/thing</a>：<a href="https://www.thingiverse.com/thing:3566678">3566678</a></p>
+<p><strong>购买零件</strong></p>
+<p><em>螺丝（近似数字）</em>
+20 4-40插头1/4“ 
+20 4-40插头x 3/8” 
+30 6-32插头x 3/8“ 
+20 4-40螺母
+20 6-32螺母
+30 2- 56 x 1/8“螺丝</p>
+<p><em>电机</em>
+这些是推荐的电机，但你可以在ebay等上找到相同的电机：
+基座旋转：17HS15-1504S1（OMC）
+肩高：17HS19-2004S1（OMC）
+弯头：17HS13-1334S（OMC）
+手腕+ 抓手（ 4）：35 PM048S8-08001（月亮）</p>
+<p><em>控制器</em>
+7 Pololu Tic T500（使用自定义固件编程）
+4英尺24ga，2根双绞线电缆（总共4根线）
+100 Jameco 100766母压接针
+3/32“ 热缩管</p>
+<p><em>杂项。硬件</em>
+150 6毫米直径。气枪BB</p>
+<p><strong>部件</strong></p>
+<p>首先打印组装执行器（<a href="https://www.thingiverse.com/thing:3293562">https://www.thingiverse.com/thing:3293562</a>） - 2个大型20节距执行器，30个节距执行器中的1个，以及3个小型40节距执行器。您还需要点击每个减速器外壳背面的安装孔。对于20和30螺距执行器，使用6-32螺距，对于40螺距执行器，使用4-40螺距。</p>
+<p>装配最容易从基础开始。首先将基础锥体装配到20节距执行器，使用带有6-32螺钉的中等长度电机。将四个6-32螺母压入肩板底部的凹槽中，然后将肩板连接到第一个执行器的顶部。接下来，将肩部外壳拧到肩板上。要完成肩部，请将第二个20节距执行器（带有最长电机）插入肩部外壳。</p>
+<p>对于肘部，首先敲击上臂末端的四个6-32孔，然后连接弯头外壳。将30节距执行器（使用最短的NEMA 17电机）插入外壳。然后将上臂连接到肩部提升执行器的表面。</p>
+<p>手腕开始时轻拍上臂末端的四个4-40孔，然后连接其中一个腕壳。然后将40个俯仰执行器中的一个插入该外壳中。接下来，将第二个腕壳连接到该执行器的表面，然后插入另一个40螺距的执行器。最后，为最终关节添加最后一个外壳和执行器。</p>
+<p><strong>布线</strong></p>
+<p>接线是构建机器人手臂时最棘手的问题之一。不幸的是，这些执行器没有空心中心，如花式UR3执行器，因此电缆必须以足够的松弛度绕每个关节跳动以允许关节运动。为了最大限度地减少接线，串行总线（V +，GND，TX，RX）用于分布在臂上的小型控制器板，每个电机上有一个板。</p>
+<p>每个控制器板都有一组冗余的V +，GND，TX和RX引脚。这样可以很容易地使用菊花链电缆从一块板到另一块板。对于V +和GND，电路板上实际上有第二组孔用于可选的螺钉端子，但是我焊接在第二组插头中。对于TX和RX，我选择了未使用的Step和Dir引脚（您必须移除两个限流电阻以隔离这些引脚），然后在Dir和RX之间以及Step和TX之间添加跳线。</p>
+<p>在制作电缆时，您需要使用GND扭转RX，使用V +扭曲TX线以提高抗噪性。因为并非每个电缆末端的所有引脚都在一起（并且因为在某些接头中没有连接器外壳的空间），所以我只是将一个母针压接到每根电线上并用热缩管绝缘。然后，您必须非常小心地将每根导线分别连接到每个引脚。（V +引脚全部连接在一起，GND引脚全部连接在一起，来自主机的TX与所有Tic RX引脚连接在一起，主机的RX与所有Tic TX引脚连接在一起。</p>
+<p>请注意，在连接机器人之前（事实上，在组装之前），您应该在工作台上布置所有控制器和电机，将它们连接起来并使用测试软件测试所有内容。</p>
+<p>每个Tic板应安装在其中一个Tic底座上。对于接头1和3（基座旋转和弯头），您可以使用双面胶带将每个Tic基座直接安装到电机背面。对于腕关节，Tic板和底座也将位于电机的末端，但是您需要轻松地将底座拉开以拆卸接头。因此，您可以将其塞入到位并穿上贝壳帽将它固定在那里。在底座高度接头上，电机末端没有足够的空间，因此在插入电线后，可以将其滑入电机侧面。</p>
+<p>我在每个外壳中都有凹槽，用于进出电缆，还有一个小孔，用于固定拉链以将电缆固定到位。在前臂和上臂，你可以在内部蛇行电缆。</p>
+<p><strong>软件和测试</strong></p>
+<p>Pololu的Tic T500主板的标准固件不支持这样的手臂所需的多轴协调运动。所以我编写了自己的固件，您需要将其编程到Tic控制器中。（你可以使用标准固件，但你不能很好地同步所有的手臂关节。）不幸的是，你不能使用Pololu的USB bootloader（他们不会给我访问）所以你有使用PicKit编程器直接对板载PIC18F25K50芯片进行编程。您可以在以下位置找到此固件的所有详细信息（源代码，文档）以及如何对电路板进行编程：</p>
+<p><a href="https://drive.google.com/open?id=1rKRuWC4jAOekrds_WGUC7DkwlVsk2zdb">https://drive.google.com/open?id=1rKRuWC4jAOekrds_WGUC7DkwlVsk2zdb</a></p>
+<p>该目录还包含一个Windows测试程序，可用于测试单个关节，并且（非常粗略地）执行简单的机器人运动序列。包含测试程序的C ++源代码。我使用C ++ Builder的古老版本（v5.0）编写了这个，但现在有一个免费的，更现代的C ++ Builder版本（Community Edition）。</p>
+<p><strong>还有待做的东西......</strong></p>
+<p><em>关节限位器</em>
+您会注意到每个执行器在固定环中都有一个插槽。其设计用于保持浮动关节止动件，该止动件也接合下一个关节的配合部分上的槽，以形成大于360度的关节止动件。范围。不是必须在任何地方连接限位开关，而是计划在每个关节上运行以防止归位。这种浮动止动件仍然需要设计和测试。</p>
+<p><em>修改Gripper</em>
+我最初发布的夹具使用了一个小型直流电机，我计划从Tic步进驱动器的一个通道运行。不幸的是，电机刷噪声会对驱动芯片造成严重破坏，因此在视频中，我使用了较早的步进驱动夹具。步进夹具有点弱，需要一些工作。</p>
+<p><em>机器人运动学</em>
+我到目前为止所使用的测试软件非常简陋，并且没有任何正向或反向机器人运动学。我需要添加这些函数来获得笛卡尔运动，或者更好地获取，让整个手臂在ROS（一个开源机器人操作系统）内运行。</p>
+<p><em>真实文档</em>
+我需要编写一本真正的手册来打印，组装，接线和运行这个机器人</p>
+
+            </div>
+            
+              <div class="tag-container">
+                
+                  <a href="https://blog.bioprinting.site/tag/bigbridgerobot" class="tag">
+                    BigBridgeRobot
+                  </a>
+                
+              </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://blog.bioprinting.site/post/9J9NEqOgl">
+                  <h3 class="post-title">
+                    IKPY
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script type="application/javascript">
+
+AOS.init();
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+
+  </body>
+</html>
