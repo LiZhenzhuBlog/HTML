@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>PyAutoGui | Li Zhenzhu, Ph.D</title>
+<meta name="description" content="Binzhou Medical University Hospital, Email: timeanddoctor@gmail.com.">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://blog.bioprinting.site/favicon.ico?v=1560426804667">
+<link rel="stylesheet" href="https://blog.bioprinting.site/styles/main.css">
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://blog.bioprinting.site">
+        <img src="https://blog.bioprinting.site/images/avatar.png?v=1560426804667" class="site-logo">
+        <h1 class="site-title">Li Zhenzhu, Ph.D</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            Home
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            Archives
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            Tags
+          </a>
+        
+      
+        
+          <a href="/paper" class="site-nav">
+            Paper
+          </a>
+        
+      
+        
+          <a href="/3dprinting" class="site-nav">
+            3D printing
+          </a>
+        
+      
+        
+          <a href="/bigbridgerobot" class="site-nav">
+            BigBridgeRobot
+          </a>
+        
+      
+        
+          <a href="/business" class="site-nav">
+            Business
+          </a>
+        
+      
+        
+          <a href="https://blog.bioprinting.site/post/meeting/" class="site-nav">
+            Training
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      Binzhou Medical University Hospital, Email: timeanddoctor@gmail.com.
+    </div>
+    <div class="site-footer">
+      Powered by Li Zhenzhu
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">PyAutoGui</h2>
+            <div class="post-date">2019-06-13</div>
+            
+              <div class="feature-container" style="background-image: url('http://p1.qhimgs4.com/t01f69f5380f1dda8c9.jpg')">
+              </div>
+            
+            <div class="post-content">
+              <h1 id="pyautogui">PyAutoGUI</h1>
+<p>PyAutoGUI是一个面向人类的跨平台GUI自动化Python模块。用于以编程方式控制鼠标和键盘。</p>
+<p><code>pip install pyautogui</code></p>
+<p>完整文档可在<a href="https://pyautogui.readthedocs.org/">https://pyautogui.readthedocs.org获得</a></p>
+<p>简体中文文档可从<a href="https://muxuezi.github.io/posts/doc-pyautogui.html">https://muxuezi.github.io/posts/doc-pyautogui.html获得</a></p>
+<p>源代码可在<a href="https://github.com/asweigart/pyautogui">https://github.com/asweigart/pyautogui获得</a></p>
+<h1 id=""><a href="https://github.com/3dprintingdoctor/pyautogui#dependencies"></a>依赖</h1>
+<p>PyAutoGUI支持Python 2和3.如果使用pip从PyPI安装PyAutoGUI：</p>
+<p>Windows没有依赖项。不需要安装Win32扩展。</p>
+<p>OS X需要安装pyobjc-core和pyobjc模块（按此顺序）。</p>
+<p>Linux需要安装python3-xlib（或Python 2的python-xlib）模块。</p>
+<p>需要安装Pillow，在Linux上，您可能需要安装其他库以确保Pillow的PNG / JPEG正常工作。看到：</p>
+<p><code>https://stackoverflow.com/questions/7648200/pip-install-pil-e-tickets-1-no-jpeg-png-support</p>
+<p>http://ubuntuforums.org/showthread.php?t=1751455</code></p>
+<p>如果您想进行开发并为PyAutoGUI做出贡献，您需要从PyPI安装这些模块：</p>
+<ul>
+<li>pyscreeze</li>
+<li>pymsgbox</li>
+<li>pytweening</li>
+</ul>
+<h1 id="-2"><a href="https://github.com/3dprintingdoctor/pyautogui#example-usage"></a>示例用法</h1>
+<h2 id="-3"><a href="https://github.com/3dprintingdoctor/pyautogui#keyboard-and-mouse-control"></a>键盘和鼠标控制</h2>
+<pre><code> &gt;&gt; &gt;  进口 pyautogui
+ &gt;&gt; &gt;屏幕宽度，screenHeight = pyautogui.size（）
+ &gt;&gt; &gt; currentMouseX，currentMouseY = pyautogui.position（）
+ &gt;&gt; &gt; pyautogui.moveTo（100，150）
+ &gt;&gt; &gt; pyautogui.click（）
+ &gt;&gt; &gt; pyautogui.moveRel（无，10）   ＃移动鼠标10个像素向下
+&gt;&gt; &gt; pyautogui.doubleClick（）
+ &gt;&gt; &gt; pyautogui。moveTo（ 500，500，duration = 2，tween = pyautogui.tweens.easeInOutQuad）   ＃使用补间/缓动功能将鼠标移动超过2秒。
+&gt;&gt; &gt; pyautogui.typewrite（'世界，你好！'，间隔= 0.25）   ＃在每个键之间以1/4秒的暂停型
+&gt;&gt; &gt; pyautogui.press（' ESC '）
+ &gt;&gt; &gt; pyautogui.keyDown（'移'）
+ &gt;&gt; &gt; pyautogui.typewrite（['左'， '左'， '左'， '左'， '左'， '左' ]）
+&gt;&gt; &gt; pyautogui.keyUp（ '移'）
+&gt;&gt; &gt; pyautogui.hotkey（ ' CTRL '， ' Ç '）
+</code></pre>
+<h2 id="-4"><a href="https://github.com/3dprintingdoctor/pyautogui#display-message-boxes"></a>显示消息框</h2>
+<pre><code> &gt;&gt; &gt;  进口 pyautogui
+ &gt;&gt; &gt; pyautogui.alert（'这是一个警告框。'）
+ ' OK '
+&gt;&gt; &gt; pyautogui.confirm（'要我继续吗？'）
+ '取消'
+&gt;&gt; &gt; pyautogui.confirm（'输入选项。'，buttons = [ ' A '，' B '，' C ' ]）
+ 'B '
+ &gt;&gt;&gt; pyautogui.prompt（“你叫什么名字？”）
+ “铝”
+&gt;&gt; &gt; pyautogui.password（“请输入密码（文本将被隐藏）”），
+ “剑鱼”
+</code></pre>
+<h2 id="-5"><a href="https://github.com/3dprintingdoctor/pyautogui#screenshot-functions"></a>截图功能</h2>
+<p>（PyAutoGUI使用Pillow来处理与图像相关的功能。）</p>
+<pre><code> &gt;&gt; &gt;  进口 pyautogui
+ &gt;&gt; &gt; IM1 = pyautogui.screenshot（）
+ &gt;&gt; &gt; im1.save（' my_screenshot.png '）
+ &gt;&gt; &gt; IM2 = pyautogui.screenshot（' my_screenshot2.png '）
+</code></pre>
+<p>您还可以找到屏幕上图像的位置：</p>
+<pre><code> &gt;&gt; &gt;  进口 pyautogui
+ &gt;&gt; &gt; button7location = pyautogui.locateOnScreen（' button.png '）＃匹配区域的返回（左，上，宽度，高度）
+&gt;&gt; &gt; button7location
+（1416，562，50，41）
+ &gt;&gt; &gt; buttonx，buttony = pyautogui.center（button7location）
+ &gt;&gt; &gt; buttonx，buttony
+（1441，582）
+ &gt;&gt; &gt; pyautogui.click（buttonx，buttony）  ＃点击其中按钮被发现的中心
+</code></pre>
+<p>locateCenterOnScreen（）函数返回此匹配区域的中心：</p>
+<pre><code> &gt;&gt; &gt;  进口 pyautogui
+ &gt;&gt; &gt; buttonx，buttony = pyautogui.locateCenterOnScreen（' button.png '）＃返回（X，Y）的匹配区域的
+&gt;&gt; &gt; buttonx，buttony
+（1441，582）
+ &gt;&gt; &gt; pyautogui.click（buttonx，buttony）  ＃点击其中按钮被发现的中心
+</code></pre>
+<h2 id="pyautogui让所有gui都自动化">PyAutoGUI——让所有GUI都自动化</h2>
+<p>本教程译自大神<a href="http://inventwithpython.com/">Al Sweigart</a>的<a href="https://pyautogui.readthedocs.org/">PyAutoGUI</a>项目，Python自动化工具，更适合处理GUI任务，网页任务推荐：</p>
+<ul>
+<li><a href="https://selenium-python.readthedocs.org/">Selenium</a>+Firefox记录（Chromedriver和Phantomjs也很给力，Phantomjs虽然是无头浏览器，但有时定位不准），然后用Python写单元测试</li>
+<li><a href="http://www.python-requests.org/en/latest/">request</a>处理get/post请求写一堆代码自动化处理，都在后台运行，不用运行浏览器，非常适合处理表单</li>
+</ul>
+<p>没有<a href="http://www.sikuli.org/">sikuli</a>功能多，但是Python让生活更简单，<a href="http://cn.pycon.org/2015/">人生苦短，Python当歌</a>。</p>
+<p>同时推荐一本Python网络数据采集（图灵社区取的名字^_^）的基础书籍<a href="http://shop.oreilly.com/product/0636920034391.do">Ryan Mitchell的《Web Scraping with Python》</a>，可以和PyAutoGUI结合使用。</p>
+<p>tl;dr</p>
+<p>2015-08-17：输入中文bug没有解决，目前的解决方案是Python 2.X环境下安装<a href="https://github.com/asweigart/pyperclip">pyperclip</a>和pyautogui，用复制粘贴来实现。</p>
+<p>In [ ]:</p>
+<p>import pyperclip
+import pyautogui</p>
+<h1 id="pyautogui中文输入需要用粘贴实现">PyAutoGUI中文输入需要用粘贴实现</h1>
+<h1 id="python-2版本的pyperclip提供中文复制">Python 2版本的pyperclip提供中文复制</h1>
+<p>def paste(foo):
+pyperclip.copy(foo)
+pyautogui.hotkey('ctrl', 'v')</p>
+<p>foo = u'学而时习之'</p>
+<h1 id="移动到文本框">移动到文本框</h1>
+<p>pyautogui.click(130,30)
+paste(foo)</p>
+<h2 id="1简介">1.简介</h2>
+<h3 id="11-目的">1.1 目的</h3>
+<p>PyAutoGUI是一个纯Python的GUI自动化工具，其目的是可以用程序自动控制鼠标和键盘操作，多平台支持（Windows，OS X，Linux）。可以用<code>pip</code>安装，Github上有<a href="https://github.com/asweigart/pyautogui">源代码</a>。</p>
+<p>下面的代码让鼠标移到屏幕中央。</p>
+<p>In [ ]:</p>
+<p>import pyautogui
+screenWidth, screenHeight = pyautogui.size()
+pyautogui.moveTo(screenWidth / 2, screenHeight / 2)</p>
+<p>PyAutoGUI可以模拟鼠标的移动、点击、拖拽，键盘按键输入、按住操作，以及鼠标+键盘的热键同时按住等操作，可以说手能动的都可以。</p>
+<h3 id="12-例子">1.2 例子</h3>
+<p>In [ ]:</p>
+<p>import pyautogui
+screenWidth, screenHeight = pyautogui.size()
+currentMouseX, currentMouseY = pyautogui.position()
+pyautogui.moveTo(100, 150)
+pyautogui.click()</p>
+<h1 id="鼠标向下移动10像素">鼠标向下移动10像素</h1>
+<p>pyautogui.moveRel(None, 10)
+pyautogui.doubleClick()</p>
+<h1 id="用缓动渐变函数让鼠标2秒后移动到500500位置">用缓动/渐变函数让鼠标2秒后移动到(500,500)位置</h1>
+<h1 id="use-tweeningeasing-function-to-move-mouse-over-2-seconds">use tweening/easing function to move mouse over 2 seconds.</h1>
+<p>pyautogui.moveTo(1800, 500, duration=2, tween=pyautogui.easeInOutQuad)</p>
+<h1 id="在每次输入之间暂停025秒">在每次输入之间暂停0.25秒</h1>
+<p>pyautogui.typewrite('Hello world!', interval=0.25)
+pyautogui.press('esc')
+pyautogui.keyDown('shift')
+pyautogui.press(['left', 'left', 'left', 'left', 'left', 'left'])
+pyautogui.keyUp('shift')
+pyautogui.hotkey('ctrl', 'c')</p>
+<p>In [ ]:</p>
+<p>distance = 200
+while distance &gt; 0:
+pyautogui.dragRel(distance, 0, duration=0.5) # 向右
+distance -= 5
+pyautogui.dragRel(0, distance, duration=0.5) # 向下
+pyautogui.draIn gRel(-distance, 0, duration=0.5) # 向左
+distance -= 5
+pyautogui.dragRel(0, -distance, duration=0.5) # 向上</p>
+<h3 id="14-保护措施fail-safes">1.4 保护措施（Fail-Safes）</h3>
+<p>就像《魔法师的学徒》(Sorcerer’s Apprentice)会担水的扫帚，可以担水，却无力阻止水漫浴室。你的程序也可能会失控（即使是按照你的意思执行的），那时就需要中断。如果鼠标还在自动操作，就很难在程序窗口关闭它。</p>
+<p>为了能够及时中断，PyAutoGUI提供了一个保护措施。当<code>pyautogui.FAILSAFE = True</code>时，如果把鼠标光标在屏幕左上角，PyAutoGUI函数就会产生<code>pyautogui.FailSafeException</code>异常。如果失控了，需要中断PyAutoGUI函数，就把鼠标光标在屏幕左上角。要禁用这个特性，就把<code>FAILSAFE</code>设置成<code>False</code>：</p>
+<p>In [ ]:</p>
+<p>import pyautogui
+pyautogui.FAILSAFE = False</p>
+<p>通过把<code>pyautogui.PAUSE</code>设置成<code>float</code>或<code>int</code>时间（秒），可以为所有的PyAutoGUI函数增加延迟。默认延迟时间是0.1秒。在函数循环执行的时候，这样做可以让PyAutoGUI运行的慢一点，非常有用。例如：</p>
+<p>In [ ]:</p>
+<p>import pyautogui
+pyautogui.PAUSE = 2.5
+pyautogui.moveTo(100,100); pyautogui.click()</p>
+<p>所有的PyAutoGUI函数在延迟完成前都处于阻塞状态（block）。（未来计划增加一个可选的非阻塞模式来调用函数。）</p>
+<p><strong>建议<code>PAUSE</code>和<code>FAILSAFE</code>一起使用。</strong></p>
+<h2 id="2-安装与依赖">2 安装与依赖</h2>
+<p>PyAutoGUI支持Python 2.x和Python 3.x</p>
+<ul>
+<li>Windows：PyAutoGUI没有任何依赖，因为它用Python的<code>ctypes</code>模块所以不需要<code>pywin32</code><code>pip3 install pyautogui</code></li>
+<li>OS X：PyAutoGUI需要<a href="http://pythonhosted.org/pyobjc/install.html">PyObjC</a>运行AppKit和Quartz模块。这个模块在PyPI上的按住顺序是<code>pyobjc-core</code>和<code>pyobjc</code><code>sudo pip3 install pyobjc-core
+sudo pip3 install pyobjc
+sudo pip3 install pyautogui</code></li>
+<li>Linux：PyAutoGUI需要<code>python-xlib</code>（Python 2）、<code>python3-Xlib</code>（Python 3）<code>sudo pip3 install python3-xlib
+sudo apt-get scrot
+sudo apt-get install python-tk
+sudo apt-get install python3-dev
+sudo pip3 install pyautogui</code></li>
+</ul>
+<h3 id="3速查表小抄cheat-sheet">3.速查表（小抄，Cheat Sheet）</h3>
+<h4 id="31-常用函数">3.1 常用函数</h4>
+<p>In [ ]:</p>
+<p>import pyautogui</p>
+<h1 id="当前鼠标的坐标">当前鼠标的坐标</h1>
+<p>pyautogui.position()</p>
+<p>Out[ ]:</p>
+<p>(123, 372)</p>
+<p>In [ ]:</p>
+<h1 id="当前屏幕的分辨率宽度和高度">当前屏幕的分辨率（宽度和高度）</h1>
+<p>pyautogui.size()</p>
+<p>Out[ ]:</p>
+<p>(1920, 1080)</p>
+<p>In [ ]:</p>
+<h1 id="xy是否在屏幕上">(x,y)是否在屏幕上</h1>
+<p>x, y = 122, 244
+pyautogui.onScreen(x, y)</p>
+<p>Out[ ]:</p>
+<p>True</p>
+<h4 id="32-保护措施">3.2 保护措施</h4>
+<p>PyAutoGUI函数增加延迟为2.5秒：</p>
+<p>In [ ]:</p>
+<p>import pyautogui
+pyautogui.PAUSE = 2.5</p>
+<p>当pyautogui.FAILSAFE = True时，如果把鼠标光标在屏幕左上角，PyAutoGUI函数就会产生pyautogui.FailSafeException异常。</p>
+<p>In [ ]:</p>
+<p>import pyautogui
+pyautogui.FAILSAFE = True</p>
+<h4 id="33-鼠标函数">3.3 鼠标函数</h4>
+<p>坐标系的原点是左上角。X轴（水平）坐标向右增大，Y轴（竖直）坐标向下增大。</p>
+<p>In [ ]:</p>
+<p>num_seconds = 1.2</p>
+<h1 id="用num_seconds秒的时间把光标移动到x-y位置">用num_seconds秒的时间把光标移动到(x, y)位置</h1>
+<p>pyautogui.moveTo(x, y, duration=num_seconds)</p>
+<h1 id="用num_seconds秒的时间把光标的x轴水平坐标移动xoffset">用num_seconds秒的时间把光标的X轴（水平）坐标移动xOffset，</h1>
+<h1 id="y轴竖直坐标向下移动yoffset">Y轴（竖直）坐标向下移动yOffset。</h1>
+<p>xOffset, yOffset = 50, 100
+pyautogui.moveRel(xOffset, yOffset, duration=num_seconds)</p>
+<p><code>click()</code>函数就是让鼠标点击，默认是单击左键，参数可以设置：</p>
+<p>In [ ]:</p>
+<p>pyautogui.click(x=moveToX, y=moveToY, clicks=num_of_clicks, interval=secs_between_clicks, button='left')</p>
+<p>其中，<code>button</code>属性可以设置成<code>left</code>，<code>middle</code>和<code>right</code>。</p>
+<p>所有的点击都可以用这个函数，不过下面的函数可读性更好：</p>
+<p>In [ ]:</p>
+<p>pyautogui.rightClick(x=moveToX, y=moveToY)
+pyautogui.middleClick(x=moveToX, y=moveToY)
+pyautogui.doubleClick(x=moveToX, y=moveToY)
+pyautogui.tripleClick(x=moveToX, y=moveToY)</p>
+<p><code>scroll</code>函数控制鼠标滚轮的滚动，<code>amount_to_scroll</code>参数表示滚动的格数。正数则页面向上滚动，负数则向下滚动：</p>
+<p>In [ ]:</p>
+<p>pyautogui.scroll(clicks=amount_to_scroll, x=moveToX, y=moveToY)</p>
+<p>每个按键按下和松开两个事件可以分开处理：</p>
+<p>In [ ]:</p>
+<p>pyautogui.mouseDown(x=moveToX, y=moveToY, button='left')
+pyautogui.mouseUp(x=moveToX, y=moveToY, button='left')</p>
+<h4 id="34-键盘函数">3.4 键盘函数</h4>
+<p>键盘上可以按的键都可以调用：</p>
+<p>In [ ]:</p>
+<h1 id="每次键入的时间间隔">每次键入的时间间隔</h1>
+<p>secs_between_keys = 0.1
+pyautogui.typewrite('Hello world!\n', interval=secs_between_keys)</p>
+<p>多个键也可以：</p>
+<p>In [ ]:</p>
+<p>pyautogui.typewrite(['a', 'b', 'c', 'left', 'backspace', 'enter', 'f1'], interval=secs_between_keys)</p>
+<p>按键名称列表：</p>
+<p>In [ ]:</p>
+<p>pyautogui.KEYBOARD_KEYS[:10]</p>
+<p>Out[ ]:</p>
+<p>['\t', '\n', '\r', ' ', '!', '&quot;', '#', '$', '%', '&amp;']</p>
+<p>键盘的一些热键像<code>Ctrl-S</code>或<code>Ctrl-Shift-1</code>都可以用<code>hotkey()</code>函数来实现：</p>
+<p>In [ ]:</p>
+<p>pyautogui.hotkey('ctrl', 'a') # 全选
+pyautogui.hotkey('ctrl', 'c') # 复制
+pyautogui.hotkey('ctrl', 'v') # 粘贴</p>
+<p>每个按键的按下和松开也可以单独调用：</p>
+<p>In [ ]:</p>
+<p>pyautogui.keyDown(key_name)
+pyautogui.keyUp(key_name)</p>
+<h4 id="35-消息弹窗函数">3.5 消息弹窗函数</h4>
+<p>如果你需要消息弹窗，通过单击OK暂停程序，或者向用户显示一些信息，消息弹窗函数就会有类似JavaScript的功能：</p>
+<p>In [ ]:</p>
+<p>pyautogui.alert('这个消息弹窗是文字+OK按钮')
+pyautogui.confirm('这个消息弹窗是文字+OK+Cancel按钮')
+pyautogui.prompt('这个消息弹窗是让用户输入字符串，单击OK')</p>
+<p>Out[ ]:</p>
+<p>''</p>
+<p>在<code>prompt()</code>函数中，如果用户什么都不输入，就会返回<code>None</code>。</p>
+<h4 id="36-截屏函数">3.6 截屏函数</h4>
+<p>PyAutoGUI用Pillow/PIL库实现图片相关的识别和操作。</p>
+<p>在Linux里面，你必须执行<code>sudo apt-get install scrot</code>来使用截屏特性。</p>
+<p>In [ ]:</p>
+<h1 id="返回一个pillowpil的image对象">返回一个Pillow/PIL的Image对象</h1>
+<p>pyautogui.screenshot()
+pyautogui.screenshot('foo.png')</p>
+<p>如果你有一个图片文件想在上面做点击操作，你可以用<code>locateOnScreen()</code>函数来定位。</p>
+<p>In [ ]:</p>
+<h1 id="返回最左x坐标最顶y坐标宽度高度">返回(最左x坐标，最顶y坐标，宽度，高度)</h1>
+<p>pyautogui.locateOnScreen('pyautogui/looks.png')</p>
+<p>Out[ ]:</p>
+<p>(0, 1040, 48, 40)</p>
+<p><code>locateAllOnScreen()</code>函数会寻找所有相似图片，返回一个生成器：</p>
+<p>In [ ]:</p>
+<p>for i in pyautogui.locateAllOnScreen('pyautogui/looks.png'):
+print(i)</p>
+<p>(0, 1040, 48, 40)</p>
+<p>In [ ]:</p>
+<p>list(pyautogui.locateAllOnScreen('pyautogui/looks.png'))</p>
+<p>Out[ ]:</p>
+<p>[(0, 1040, 48, 40)]</p>
+<p><code>locateCenterOnScreen()</code>函数会返回图片在屏幕上的中心XY轴坐标值：</p>
+<p>In [ ]:</p>
+<p>pyautogui.locateCenterOnScreen('pyautogui/looks.png')</p>
+<p>Out[ ]:</p>
+<p>(24, 1060)</p>
+<p>如果没找到图片会返回<code>None</code>。</p>
+<blockquote>
+<p>定位比较慢，一般得用1~2秒</p>
+</blockquote>
+<h2 id="4-常用函数">4 常用函数</h2>
+<ul>
+<li><code>position()</code>：返回整数元组(x, y)，分别表示鼠标光标所在位置的XY轴坐标</li>
+<li><code>size()</code>：返回显示器的尺寸整数元组(x, y)。未来将加入多屏支持</li>
+</ul>
+<h2 id="5-鼠标控制函数">5 鼠标控制函数</h2>
+<h3 id="51-屏幕与鼠标位置">5.1 屏幕与鼠标位置</h3>
+<p>屏幕位置使用X和Y轴的笛卡尔坐标系。原点<code>(0,0)</code>在左上角，分别向右、向下增大。</p>
+<p>如果屏幕像素是<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>1920</mn><mo>×</mo><mn>1080</mn></mrow><annotation encoding="application/x-tex">1920 \times 1080</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">1</span><span class="mord">9</span><span class="mord">2</span><span class="mord">0</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span><span class="mord">0</span><span class="mord">8</span><span class="mord">0</span></span></span></span>，那么右下角的坐标是<code>(1919, 1079)</code>。</p>
+<p>分辨率大小可以通过<code>size()</code>函数返回整数元组。光标的位置用<code>position()</code>返回。例如：</p>
+<p>In [ ]:</p>
+<p>pyautogui.size()</p>
+<p>Out[ ]:</p>
+<p>(1920, 1080)</p>
+<p>In [ ]:</p>
+<p>pyautogui.position()</p>
+<p>Out[ ]:</p>
+<p>(272, 688)</p>
+<p>下面是Python 3版本的光标位置记录程序：</p>
+<p>In [ ]:</p>
+<h1 id="python-3">! python 3</h1>
+<p>import pyautogui
+print('Press Ctrl-C to quit')
+try:
+while True:
+x, y = pyautogui.position()
+positionStr = 'X: {} Y: {}'.format(*[str(x).rjust(4) for x in [x, y]])
+print(positionStr, end='')
+print('\b' * len(positionStr), end='', flush=True)
+except KeyboardInterrupt:
+print('\n')</p>
+<p>Python 2版本是：</p>
+<p>In [ ]:</p>
+<h1 id="python">! python</h1>
+<p>import pyautogui, sys
+print('Press Ctrl-C to quit.')
+try:
+while True:
+x, y = pyautogui.position()
+positionStr = 'X: ' + str(x).rjust(4) + ' Y: ' + str(y).rjust(4)
+print positionStr,
+print '\b' * (len(positionStr) + 2),
+sys.stdout.flush()
+except KeyboardInterrupt:
+print '\n'</p>
+<p>要检查XY坐标是否在屏幕上，需要用<code>onScreen()</code>函数来检验，如果在屏幕上返回<code>True</code>：</p>
+<p>In [ ]:</p>
+<p>import pyautogui
+pyautogui.onScreen(0, 0)</p>
+<p>Out[ ]:</p>
+<p>True</p>
+<p>In [ ]:</p>
+<p>pyautogui.onScreen(0, -1)</p>
+<p>Out[ ]:</p>
+<p>False</p>
+<p>In [ ]:</p>
+<p>pyautogui.onScreen(0, 2080)</p>
+<p>Out[ ]:</p>
+<p>False</p>
+<p>In [ ]:</p>
+<p>pyautogui.onScreen(1920, 1080)</p>
+<p>Out[ ]:</p>
+<p>False</p>
+<p>In [ ]:</p>
+<p>pyautogui.onScreen(1919, 1079)</p>
+<p>Out[ ]:</p>
+<p>True</p>
+<h3 id="52-鼠标行为">5.2 鼠标行为</h3>
+<p><code>moveTo()</code>函数会把鼠标光标移动到指定的XY轴坐标处。如果传入<code>None</code>值，则表示使用当前光标的对象轴坐标值。</p>
+<p>In [ ]:</p>
+<p>pyautogui.moveTo(100, 200)     # 光标移动到(100, 200)位置
+pyautogui.moveTo(None, 500)   # 光标移动到(100, 500)位置
+pyautogui.moveTo(600, None)   # 光标移动到(600, 500)位置</p>
+<p>一般鼠标光标都是瞬间移动到指定的位置，如果你想让鼠标移动的慢点，可以设置持续时间：</p>
+<p>In [ ]:</p>
+<p>pyautogui.moveTo(100, 200, duration=2)     # 用2秒把光标移动到(100, 200)位置</p>
+<p>默认的持续时间<code>pyautogui.MINIMUM_DURATION</code>是0.1秒，如果你设置的时间比默认值还短，那么就会瞬间执行。</p>
+<p>如果你想让光标以当前位置为原点，进行相对移动，就用<code>pyautogui.moveRel()</code>函数。例如：</p>
+<p>In [ ]:</p>
+<p>pyautogui.moveTo(100, 200) #把光标移动到(100, 200)位置
+pyautogui.moveRel(0, 50)   #向下移动50
+pyautogui.moveRel(30, 0, 2)   #向右移动30
+pyautogui.moveRel(30, None)   #向右移动30</p>
+<h3 id="53-鼠标拖拽">5.3 鼠标拖拽</h3>
+<p>PyAutoGUI的<code>dragTo()</code>和<code>dragRel()</code>函数与<code>moveTo()</code>和<code>moveRel()</code>函数类似。另外，他们有一个<code>button</code>参数可以设置成<code>left</code>，<code>middle</code>和<code>right</code>三个键。例如：</p>
+<p>In [ ]:</p>
+<h1 id="按住鼠标左键把鼠标拖拽到100-200位置">按住鼠标左键，把鼠标拖拽到(100, 200)位置</h1>
+<p>pyautogui.dragTo(100, 200, button='left')</p>
+<h1 id="按住鼠标左键用2秒钟把鼠标拖拽到300-400位置">按住鼠标左键，用2秒钟把鼠标拖拽到(300, 400)位置</h1>
+<p>pyautogui.dragTo(300, 400, 2, button='left')</p>
+<h1 id="按住鼠标右键用2秒钟把鼠标拖拽到300位置">按住鼠标右键，用2秒钟把鼠标拖拽到(30,0)位置</h1>
+<p>pyautogui.dragTo(30, 0, 2, button='right')</p>
+<h3 id="54-缓动渐变tween-easing函数">5.4 缓动/渐变（Tween / Easing）函数</h3>
+<p>缓动/渐变函数的作用是让光标的移动更炫。如果你不需要用到的话，你可以忽略这些。</p>
+<p>缓动/渐变函数可以改变光标移动过程的速度和方向。通常鼠标是匀速直线运动，这就是线性缓动/渐变函数。PyAutoGUI有30种缓动/渐变函数，可以通过<code>pyautogui.ease*?</code>查看。其中，<code>pyautogui.easeInQuad()</code>函数可以用于<code>moveTo()</code>，<code>moveRel()</code>，<code>dragTo()</code>和<code>dragRel()</code>函数，光标移动呈现先慢后快的效果，整个过程的时间还是和原来一样。而<code>pyautogui.easeOutQuad</code>函数的效果相反：光标开始移动很快，然后慢慢减速。<code>pyautogui.easeOutElastic</code>是弹簧效果，首先越过终点，然后再反弹回来。例如：</p>
+<p>In [ ]:</p>
+<h1 id="开始很慢不断加速">开始很慢，不断加速</h1>
+<p>pyautogui.moveTo(100, 100, 2, pyautogui.easeInQuad)</p>
+<h1 id="开始很快不断减速">开始很快，不断减速</h1>
+<p>pyautogui.moveTo(100, 100, 2, pyautogui.easeOutQuad)</p>
+<h1 id="开始和结束都快中间比较慢">开始和结束都快，中间比较慢</h1>
+<p>pyautogui.moveTo(100, 100, 2, pyautogui.easeInOutQuad)</p>
+<h1 id="一步一徘徊前进">一步一徘徊前进</h1>
+<p>pyautogui.moveTo(100, 100, 2, pyautogui.easeInBounce)</p>
+<h1 id="徘徊幅度更大甚至超过起点和终点">徘徊幅度更大，甚至超过起点和终点</h1>
+<p>pyautogui.moveTo(100, 100, 2, pyautogui.easeInElastic)</p>
+<p>这些效果函数是模仿Al Sweigart的<a href="https://github.com/asweigart/pytweening">PyTweening</a>模块，可以直接使用，不需要额外安装。</p>
+<p>如果你想创建自己的效果，也可以定义一个函数，其参数是(0.0,1.0)，表示起点和终点，返回值是介于[0.0,1.0]之间的数。</p>
+<h3 id="55-鼠标单击">5.5 鼠标单击</h3>
+<p><code>click()</code>函数模拟单击鼠标左键一次的行为。例如：</p>
+<p>In [ ]:</p>
+<p>pyautogui.click()</p>
+<p>如果单机之前要先移动，可以把目标的XY坐标值传入函数：</p>
+<p>In [ ]:</p>
+<h1 id="先移动到100-200再单击">先移动到(100, 200)再单击</h1>
+<p>pyautogui.click(x=100, y=200, duration=2)</p>
+<p>可以通过<code>button</code>参数设置<code>left</code>，<code>middle</code>和<code>right</code>三个键。例如：</p>
+<p>In [ ]:</p>
+<p>pyautogui.click(button='right')</p>
+<p>要做多次单击可以设置<code>clicks</code>参数，还有<code>interval</code>参数可以设置每次单击之间的时间间隔。例如：</p>
+<p>In [ ]:</p>
+<h1 id="双击左键">双击左键</h1>
+<p>pyautogui.click(clicks=2)</p>
+<h1 id="两次单击之间停留025秒">两次单击之间停留0.25秒</h1>
+<p>pyautogui.click(clicks=2, interval=0.25)</p>
+<h1 id="三击右键">三击右键</h1>
+<p>pyautogui.click(button='right', clicks=2, interval=0.25)</p>
+<p>为了操作方便，PyAutoGUI提供了<code>doubleClick()</code>，<code>tripleClick()</code>和<code>rightClick()</code>来实现双击、三击和右击操作。</p>
+<h3 id="56-鼠标按下和松开函数">5.6 鼠标按下和松开函数</h3>
+<p><code>mouseDown()</code>和<code>mouseUp()</code>函数可以实现鼠标按下和鼠标松开的操作。两者参数相同，有<code>x</code>，<code>y</code>和<code>button</code>。例如：</p>
+<p>In [ ]:</p>
+<h1 id="鼠标左键按下再松开">鼠标左键按下再松开</h1>
+<p>pyautogui.mouseDown(); pyautogui.mouseUp()</p>
+<h1 id="按下鼠标右键">按下鼠标右键</h1>
+<p>pyautogui.mouseDown(button='right')</p>
+<h1 id="移动到100-200位置然后松开鼠标右键">移动到(100, 200)位置，然后松开鼠标右键</h1>
+<p>pyautogui.mouseUp(button='right', x=100, y=200)</p>
+<h3 id="57-滚轮滚动函数">5.7 滚轮滚动函数</h3>
+<p>鼠标滚轮滚动可以用<code>scroll()</code>函数和<code>clicks</code>次数参数来模拟。不同平台上的<code>clicks</code>次数不太一样。还有<code>x</code>和<code>y</code>参数可以在滚动之前定位到(x, y)位置。例如：</p>
+<p>In [ ]:</p>
+<h1 id="向上滚动10格">向上滚动10格</h1>
+<p>pyautogui.scroll(10)</p>
+<h1 id="向下滚动10格">向下滚动10格</h1>
+<p>pyautogui.scroll(-10)</p>
+<h1 id="移动到100-100位置再向上滚动10格">移动到(100, 100)位置再向上滚动10格</h1>
+<p>pyautogui.scroll(10, x=100, y=100)</p>
+<p>在OS X和Linux平台上，PyAutoGUI还可以用<code>hscroll()</code>实现水平滚动。例如：</p>
+<p>In [ ]:</p>
+<h1 id="向右滚动10格">向右滚动10格</h1>
+<p>pyautogui.hscroll(10)</p>
+<h1 id="向左滚动10格">向左滚动10格</h1>
+<p>pyautogui.hscroll(-10)</p>
+<p><code>scroll()</code>函数是<code>vscroll()</code>的一个包装（<code>wrapper</code>），执行竖直滚动。</p>
+<h3 id="6-键盘控制函数">6 键盘控制函数</h3>
+<h3 id="61-typewrite输入函数">6.1 <code>typewrite()</code>输入函数</h3>
+<p>键盘控制的主要函数就是<code>typewrite()</code>。这个函数可以实现字符输入。要在两次输入间增加时间间隔，可以用<code>interval</code>参数。例如：</p>
+<p>In [ ]:</p>
+<h1 id="输入hello-world">输入Hello world!</h1>
+<p>pyautogui.typewrite('Hello world!')</p>
+<h1 id="每次输入间隔025秒输入hello-world">每次输入间隔0.25秒，输入Hello world!</h1>
+<p>pyautogui.typewrite('Hello world!', interval=0.25)</p>
+<p><code>typewrite()</code>函数只能用于单个字符键，不能按SHITF和F1这些功能键。</p>
+<h3 id="62-presskeydown和keyup函数">6.2 <code>press()</code>，<code>keyDown()</code>和<code>keyUp()</code>函数</h3>
+<p>要按那些功能键，可以用<code>press()</code>函数把<code>pyautogui.KEYBOARD_KEYS</code>里面按键对应的字符串输入进去。例如：</p>
+<p>In [ ]:</p>
+<h1 id="enter键">ENTER键</h1>
+<p>pyautogui.press('enter')</p>
+<h1 id="f1键">F1键</h1>
+<p>pyautogui.press('f1')</p>
+<h1 id="左方向键">左方向键</h1>
+<p>pyautogui.press('left')</p>
+<p><code>press()</code>函数其实是<code>keyDown()</code>和<code>keyUp()</code>函数的包装，模拟的按下然后松开两个动作。这两个函数可以单独调用。例如，按下<code>shift</code>键的同时按3次左方向键：</p>
+<p>In [ ]:</p>
+<h1 id="按下shift键">按下<code>shift</code>键</h1>
+<p>pyautogui.keyDown('shift')
+pyautogui.press('left')
+pyautogui.press('left')
+pyautogui.press('left')</p>
+<h1 id="松开shift键">松开<code>shift</code>键</h1>
+<p>pyautogui.keyUp('shift')</p>
+<p>和<code>typewrite()</code>函数一样，可以用数组把一组键传入<code>press()</code>。例如：</p>
+<p>In [ ]:</p>
+<p>pyautogui.press(['left', 'left', 'left'])</p>
+<h3 id="63-hotkey函数">6.3 <code>hotkey()</code>函数</h3>
+<p>为了更高效的输入热键，PyAutoGUI提供了<code>hotkey()</code>函数来绑定若干按键：</p>
+<p>In [ ]:</p>
+<p>pyautogui.hotkey('ctrl', 'shift', 'ese')</p>
+<p>等价于：</p>
+<p>In [ ]:</p>
+<p>pyautogui.keyDown('ctrl')
+pyautogui.keyDown('shift')
+pyautogui.keyDown('esc')
+pyautogui.keyUp('esc')
+pyautogui.keyUp('shift')
+pyautogui.keyUp('ctrl')</p>
+<h3 id="64-keyboard_keys">6.4 KEYBOARD_KEYS</h3>
+<p>下面就是<code>press()</code>，<code>keyDown()</code>，<code>keyUp()</code>和<code>hotkey()</code>函数可以输入的按键名称：</p>
+<p>In [ ]:</p>
+<p>print(pyautogui.KEYBOARD_KEYS)</p>
+<p>['\t', '\n', '\r', ' ', '!', '&quot;', '#', '$', '%', '&amp;', &quot;'&quot;, '(', ')', '*', '+', ',', '-', '.', '/', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', ':', ';', '&lt;', '=', '&gt;', '?', '@', '[', '\', ']', '^', '_', '`', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '{', '|', '}', '~', 'accept', 'add', 'alt', 'altleft', 'altright', 'apps', 'backspace', 'browserback', 'browserfavorites', 'browserforward', 'browserhome', 'browserrefresh', 'browsersearch', 'browserstop', 'capslock', 'clear', 'convert', 'ctrl', 'ctrlleft', 'ctrlright', 'decimal', 'del', 'delete', 'divide', 'down', 'end', 'enter', 'esc', 'escape', 'execute', 'f1', 'f10', 'f11', 'f12', 'f13', 'f14', 'f15', 'f16', 'f17', 'f18', 'f19', 'f2', 'f20', 'f21', 'f22', 'f23', 'f24', 'f3', 'f4', 'f5', 'f6', 'f7', 'f8', 'f9', 'final', 'fn', 'hanguel', 'hangul', 'hanja', 'help', 'home', 'insert', 'junja', 'kana', 'kanji', 'launchapp1', 'launchapp2', 'launchmail', 'launchmediaselect', 'left', 'modechange', 'multiply', 'nexttrack', 'nonconvert', 'num0', 'num1', 'num2', 'num3', 'num4', 'num5', 'num6', 'num7', 'num8', 'num9', 'numlock', 'pagedown', 'pageup', 'pause', 'pgdn', 'pgup', 'playpause', 'prevtrack', 'print', 'printscreen', 'prntscrn', 'prtsc', 'prtscr', 'return', 'right', 'scrolllock', 'select', 'separator', 'shift', 'shiftleft', 'shiftright', 'sleep', 'stop', 'subtract', 'tab', 'up', 'volumedown', 'volumemute', 'volumeup', 'win', 'winleft', 'winright', 'yen', 'command', 'option', 'optionleft', 'optionright']</p>
+<h3 id="7-消息弹窗函数">7 消息弹窗函数</h3>
+<p>PyAutoGUI通过Tkinter实现了4种纯Python的消息弹窗函数，和JavaScript类似。</p>
+<h3 id="71-alert函数">7.1 alert()函数</h3>
+<p>In [ ]:</p>
+<p>pyautogui.alert(text='', title='', button='OK')</p>
+<p>Out[ ]:</p>
+<p>'OK'</p>
+<p>显示一个简单的带文字和OK按钮的消息弹窗。用户点击后返回<code>button</code>的文字。</p>
+<h3 id="72-the-confirm-function">7.2 The confirm() Function</h3>
+<p>In [ ]:</p>
+<h1 id="ok和cancel按钮的消息弹窗">OK和Cancel按钮的消息弹窗</h1>
+<p>pyautogui.confirm(text='', title='', buttons=['OK', 'Cancel'])</p>
+<h1 id="10个按键0-9的消息弹窗">10个按键0-9的消息弹窗</h1>
+<p>pyautogui.confirm(text='', title='', buttons=range(10))</p>
+<p>Out[ ]:</p>
+<p>'0'</p>
+<p>显示一个简单的带文字、OK和Cancel按钮的消息弹窗，用户点击后返回被点击button的文字，支持自定义数字、文字的列表。</p>
+<h3 id="73-the-prompt-function">7.3 The prompt() Function</h3>
+<p>In [ ]:</p>
+<p>pyautogui.prompt(text='', title='' , default='')</p>
+<p>可以输入的消息弹窗，带OK和Cancel按钮。用户点击OK按钮返回输入的文字，点击Cancel按钮返回<code>None</code>。</p>
+<h3 id="74-the-password-function">7.4 The password() Function</h3>
+<p>In [ ]:</p>
+<p>pyautogui.password(text='', title='', default='', mask='*')</p>
+<p>样式同<code>prompt()</code>，用于输入密码，消息用<code>*</code>表示。带OK和Cancel按钮。用户点击OK按钮返回输入的文字，点击Cancel按钮返回<code>None</code>。</p>
+<h3 id="8-截屏函数">8 截屏函数</h3>
+<p>PyAutoGUI可以截屏并保存为图片文件，然后定位这些截屏在屏幕上的位置。与<a href="http://www.sikuli.org/">sikuli</a>类似，把屏幕上的按键截取下来，然后定位，就可以执行点击等操作了。</p>
+<p>截屏功能需要安装Pillow模块。OS X用<code>screencapture</code>命令，是系统自带的。Linux用户用<code>scrot</code>命令，可以通过<code>sudo apt-get install scrot</code>安装。</p>
+<h3 id="81-ubuntu注意事项">8.1 Ubuntu注意事项</h3>
+<p>由于Ubuntu上安装Pillow时缺少PNG和JPEG依赖，所以安装比较复杂，具体可以看<a href="http://conda.pydata.org/miniconda.html">Ubuntu论坛</a>。不过用<a href="http://conda.pydata.org/miniconda.html">miniconda</a>可以解决这些问题，如果Ubuntu或Mint上安装了miniconda，可以直接<code>conda install pillow</code>来安装。</p>
+<h3 id="82-screenshot函数">8.2 <code>screenshot()</code>函数</h3>
+<p><code>screenshot()</code>函数会返回<code>Image</code>对象（参考<a href="http://python-pillow.github.io/">Pillow或PIL模块文档</a>），也可以设置文件名：</p>
+<p>In [ ]:</p>
+<p>import pyautogui
+im1 = pyautogui.screenshot()
+im2 = pyautogui.screenshot('my_screenshot.png')</p>
+<p>在一个<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>1920</mn><mo>×</mo><mn>1080</mn></mrow><annotation encoding="application/x-tex">1920 \times 1080</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">1</span><span class="mord">9</span><span class="mord">2</span><span class="mord">0</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span><span class="mord">0</span><span class="mord">8</span><span class="mord">0</span></span></span></span>的屏幕上，<code>screenshot()</code>函数要消耗100微秒——不快也不慢。</p>
+<p>如果你不需要截取整个屏幕，还有一个可选的<code>region</code>参数。你可以把截取区域的左上角XY坐标值和宽度、高度传入截取。</p>
+<p>In [ ]:</p>
+<p>im = pyautogui.screenshot(region=(0, 0, 300 ,400))</p>
+<h3 id="83-定位函数">8.3 定位函数</h3>
+<p>可以定位截图在屏幕上的坐标位置。比如，你需要在计算器里输入：<img src="https://muxuezi.github.io/posts/pyautogui/calc.png" alt=""></p>
+<p>如果你不知道按钮的位置，就不能用<code>moveTo()</code>定位和<code>click()</code>点击。而且每次计算器的位置可能会变化，这时即使有来坐标也不好用了。但是如果你有要点击按钮的截图，比如数字<code>7</code>：<img src="https://muxuezi.github.io/posts/pyautogui/calc7key.png" alt=""></p>
+<p>你可以调用<code>pyautogui.locateOnScreen('calc7key.png')</code>函数来获得<code>7</code>的屏幕坐标。返回的是一个元组<code>(top, left, width, height)</code>。这个元组可以用<code>pyautogui.center()</code>函数来获取截图屏幕的中心坐标。如果截图没找到，<code>pyautogui.locateOnScreen()</code>函数返回<code>None</code>：</p>
+<p>In [ ]:</p>
+<p>import pyautogui
+button7location = pyautogui.locateOnScreen('pyautogui/calc7key.png')
+button7location</p>
+<p>Out[ ]:</p>
+<p>(1226, 546, 29, 28)</p>
+<p>In [ ]:</p>
+<p>button7x, button7y = pyautogui.center(button7location)
+button7x, button7y</p>
+<p>Out[ ]:</p>
+<p>(1240, 560)</p>
+<p>In [ ]:</p>
+<p>pyautogui.click(button7x, button7y)</p>
+<p><code>locateCenterOnScreen()</code>等价于上面的前两布操作，直接获得截屏屏幕中心坐标：</p>
+<p>In [ ]:</p>
+<p>import pyautogui
+x, y = pyautogui.locateCenterOnScreen('pyautogui/calc7key.png')
+pyautogui.click(x, y)</p>
+<p>在<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>1920</mn><mo>×</mo><mn>1080</mn></mrow><annotation encoding="application/x-tex">1920 \times 1080</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">1</span><span class="mord">9</span><span class="mord">2</span><span class="mord">0</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span><span class="mord">0</span><span class="mord">8</span><span class="mord">0</span></span></span></span>的屏幕上，定位函数需要1~2秒时间。对视频游戏（LOL、DOTA）来说就太慢了，但是上班干活还是绰绰有余。</p>
+<p>还是几个定位函数。都是从左上角原点开始向右向下搜索截图位置：</p>
+<ul>
+<li>locateOnScreen(image, grayscale=False)：返回找到的第一个截图<code>Image</code>对象在屏幕上的坐标<code>(left, top, width, height)</code>，如果没找到返回<code>None</code></li>
+<li>locateCenterOnScreen(image, grayscale=False)：返回找到的第一个截图<code>Image</code>对象在屏幕上的中心坐标<code>(x, y)</code>，如果没找到返回<code>None</code></li>
+<li>locateAllOnScreen(image, grayscale=False)：返回找到的所有相同截图<code>Image</code>对象在屏幕上的坐标<code>(left, top, width, height)</code>的生成器</li>
+<li>locate(needleImage, haystackImage, grayscale=False)：返回找到的第一个截图<code>Image</code>对象在<code>haystackImage</code>里面的坐标<code>(left, top, width, height)</code>，如果没找到返回<code>None</code></li>
+<li>locateAll(needleImage, haystackImage, grayscale=False)：返回找到的所有相同截图<code>Image</code>对象在<code>haystackImage</code>里面的坐标<code>(left, top, width, height)</code>的生成器</li>
+</ul>
+<p>两个<code>locateAll*</code>函数都可以用<code>for</code>循环和<code>list()</code>输出：</p>
+<p>In [ ]:</p>
+<p>for pos in pyautogui.locateAllOnScreen('pyautogui/calc7key.png'):
+print(pos)</p>
+<p>(1227, 546, 29, 28)</p>
+<p>In [ ]:</p>
+<p>list(pyautogui.locateAllOnScreen('pyautogui/calc7key.png'))</p>
+<p>Out[ ]:</p>
+<p>[(1227, 546, 29, 28)]</p>
+<h4 id="831-灰度值匹配">8.3.1 灰度值匹配</h4>
+<p>可以把<code>grayscale</code>参数设置为<code>True</code>来加速定位（大约提升30%），默认为<code>False</code>。这种去色（desaturate）方法可以加速定位，但是也可能导致假阳性（false-positive）匹配：</p>
+<p>In [ ]:</p>
+<p>import pyautogui
+button7location = pyautogui.locateOnScreen('pyautogui/calc7key.png', grayscale=True)
+button7location</p>
+<p>Out[ ]:</p>
+<p>(1227, 546, 29, 28)</p>
+<h4 id="832-像素匹配">8.3.2 像素匹配</h4>
+<p>要获取截屏某个位置的RGB像素值，可以用<code>Image</code>对象的<code>getpixel()</code>方法：</p>
+<p>In [ ]:</p>
+<p>import pyautogui
+im = pyautogui.screenshot()
+im.getpixel((100, 200))</p>
+<p>Out[ ]:</p>
+<p>(255, 255, 255)</p>
+<p>也可以用PyAutoGUI的<code>pixel()</code>函数，是之前调用的包装：</p>
+<p>In [ ]:</p>
+<p>pyautogui.pixel(100, 200)</p>
+<p>Out[ ]:</p>
+<p>(255, 255, 255)</p>
+<p>如果你只是要检验一下指定位置的像素值，可以用<code>pixelMatchesColor()</code>函数，把X、Y和RGB元组值穿入即可：</p>
+<p>In [ ]:</p>
+<p>pyautogui.pixelMatchesColor(100, 200, (255, 255, 255))</p>
+<p>Out[ ]:</p>
+<p>True</p>
+<p>In [ ]:</p>
+<p>pyautogui.pixelMatchesColor(100, 200, (255, 255, 245))</p>
+<p>Out[ ]:</p>
+<p>False</p>
+<p><code>tolerance</code>参数可以指定红、绿、蓝3种颜色误差范围：</p>
+<p>In [ ]:</p>
+<p>pyautogui.pixelMatchesColor(100, 200, (255, 255, 245), tolerance=10)</p>
+<p>Out[ ]:</p>
+<p>True</p>
+<p>In [ ]:</p>
+<p>pyautogui.pixelMatchesColor(100, 200, (248, 250, 245), tolerance=10)</p>
+<p>Out[ ]:</p>
+<p>True</p>
+<p>In [ ]:</p>
+<p>pyautogui.pixelMatchesColor(100, 200, (205, 255, 245), tolerance=10)</p>
+<p>Out[ ]:</p>
+<p>False</p>
+
+            </div>
+            
+              <div class="tag-container">
+                
+                  <a href="https://blog.bioprinting.site/tag/blog" class="tag">
+                    Blog
+                  </a>
+                
+              </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://blog.bioprinting.site/post/WBh3a3s5z">
+                  <h3 class="post-title">
+                    3D slicer 机械臂（ROS）
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script type="application/javascript">
+
+AOS.init();
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+
+  </body>
+</html>
