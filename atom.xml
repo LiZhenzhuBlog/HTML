@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://blog.bioprinting.site</id>
     <title>Li Zhenzhu, Ph.D</title>
-    <updated>2019-06-13T12:50:21.412Z</updated>
+    <updated>2019-06-26T12:07:54.162Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://blog.bioprinting.site"/>
     <link rel="self" href="https://blog.bioprinting.site/atom.xml"/>
@@ -10,6 +10,84 @@
     <logo>https://blog.bioprinting.site/images/avatar.png</logo>
     <icon>https://blog.bioprinting.site/favicon.ico</icon>
     <rights>All rights reserved 2019, Li Zhenzhu, Ph.D</rights>
+    <entry>
+        <title type="html"><![CDATA[matplotlib绘图注意]]></title>
+        <id>https://blog.bioprinting.site/post/HOPBFrX0u</id>
+        <link href="https://blog.bioprinting.site/post/HOPBFrX0u">
+        </link>
+        <updated>2019-06-26T11:59:40.000Z</updated>
+        <content type="html"><![CDATA[<p>转载请注明出处：</p>
+<p><a href="http://www.cnblogs.com/darkknightzh/p/6182474.html">http://www.cnblogs.com/darkknightzh/p/6182474.html</a></p>
+<p>参考网址：</p>
+<p><a href="http://matplotlib.org/examples/pylab_examples/ginput_demo.html">http://matplotlib.org/examples/pylab_examples/ginput_demo.html</a></p>
+<p><a href="http://stackoverflow.com/questions/12760797/imshowimg-cmap-cm-gray-shows-a-white-for-128-value">http://stackoverflow.com/questions/12760797/imshowimg-cmap-cm-gray-shows-a-white-for-128-value</a></p>
+<p>1. 获得鼠标点击位置——使用ginput函数：</p>
+<p><a title="复制代码"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></p>
+<p>import matplotlib.pyplot as plt
+import numpy as np</p>
+<p>x=range(1,10)
+y=[2*v for v in x]
+print(x, y)
+plt.plot(x, y)
+pos=plt.ginput(3)
+print(pos)
+<a title="复制代码"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></p>
+<p><img src="https://images2015.cnblogs.com/blog/682463/201612/682463-20161215111214808-689851759.png" alt=""></p>
+<p>那三个红色的十字为鼠标点击的位置，显示如下：</p>
+<p><img src="https://images2015.cnblogs.com/blog/682463/201612/682463-20161215111244026-2011598343.png" alt=""></p>
+<p>2. 显示灰度图像：</p>
+<p>默认imshow显示的是彩色图像：</p>
+<p><img src="https://images2015.cnblogs.com/blog/682463/201612/682463-20161215111345448-1894828896.png" alt=""></p>
+<p>需要显示灰度图像时，可以使用plt.get_cmap：</p>
+<p><a title="复制代码"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></p>
+<p>import matplotlib.pyplot as plt
+import Image</p>
+<p>im = Image.open(&quot;th.jpg&quot;)
+plt.imshow(im, cmap = plt.get_cmap(&quot;gray&quot;))
+pos=plt.ginput(3)
+print(pos)
+<a title="复制代码"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></p>
+<p><img src="https://images2015.cnblogs.com/blog/682463/201612/682463-20161215111416542-1864257153.png" alt=""></p>
+<p>可以使用vmin和vmax来达到和matlab的imshow中[]一样的效果，将小于vmin的量化成黑色，大于vmax的量化成白色：</p>
+<p>plt.imshow(im, cmap = plt.get_cmap(&quot;gray&quot;), vmin = 100, vmax = 150)</p>
+<p><img src="https://images2015.cnblogs.com/blog/682463/201612/682463-20161215111456901-1192492061.png" alt=""></p>
+<p>那三个红色的十字为鼠标点击的位置，显示如下：</p>
+<p><img src="https://images2015.cnblogs.com/blog/682463/201612/682463-20161215111519261-443664761.png" alt=""></p>
+<p>由上面可见，直接plot的话，左下角是坐标原点；使用imshow时，是左上角为坐标原点。对于图像来说，和图像的坐标一样，不用转换，可以直接使用</p>
+<p>使用matplotlib交互绘图****
+加载图片，点击左键选中图片上的点并绘出横轴纵轴垂线，确定后点击右键打印出当前坐标：</p>
+<p>#!/usr/bin/python</p>
+<h1 id="codingutf-8">coding:utf-8</h1>
+<p>from matplotlib import pyplot as plt
+import cv2</p>
+<p>def on_press(event):
+if event.button==1:
+ax.scatter(event.xdata, event.ydata)
+plt.plot([event.xdata, event.xdata], [event.ydata, 600])
+plt.plot([event.xdata, 0], [event.ydata, event.ydata])
+fig.canvas.draw()
+elif event.button==3:
+print(&quot;x,y=&quot;,event.xdata, event.ydata)
+if <strong>name</strong> == &quot;<strong>main</strong>&quot;:
+img = cv2.imread('01.png')
+cv2.imshow(&quot;src&quot;, img)
+fig = plt.figure()
+fig.canvas.mpl_connect(&quot;button_press_event&quot;, on_press)
+ax = fig.add_subplot(111)
+ax.imshow(img)
+plt.axis(&quot;off&quot;)
+plt.show()</p>
+<p>输出：
+原图01.png：</p>
+<p>点击左键选点，并绘出横轴纵轴垂线：</p>
+<h2 id="点击右键输出当前点的坐标xy-50127130681818176-20148636363636365">点击右键输出当前点的坐标：
+(‘x,y=’, 501.27130681818176, 201.48636363636365)</h2>
+<p>作者：阿卡蒂奥
+来源：CSDN
+原文：https://blog.csdn.net/akadiao/article/details/79761790
+版权声明：本文为博主原创文章，转载请附上博文链接！</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[TK 窗口]]></title>
         <id>https://blog.bioprinting.site/post/XnzyCJy-A</id>
@@ -2613,21 +2691,6 @@ theta6 = ATAN2（R3_6 [ 1，1 ]，- R3_6 [ 1，0 ]）</p>
 <p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/" title="转到此页面的其他部分">去：</a></p>
 <h2 id="致谢">致谢</h2>
 <p>该研究部分得到了美国国立卫生研究院（R01EB020667，R01CA111288，R01EB020610，P41EB015898）的支持。材料的内容完全由作者负责，并不一定代表这些机构的官方观点。作者感谢布莱根妇女医院的陈龙泉先生的技术支持。作者还感谢Christina Choi女士用Lego Mindstorms评估快速原型制作平台。</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[青岛参加全国第三次数字医学会议山东省第四次数字医学会]]></title>
-        <id>https://blog.bioprinting.site/post/euxBg5taN</id>
-        <link href="https://blog.bioprinting.site/post/euxBg5taN">
-        </link>
-        <updated>2019-05-11T23:40:29.000Z</updated>
-        <content type="html"><![CDATA[<p>青岛参加全国第三次数字医学会议山东省第四次数字医学会
-<img src="https://blog.bioprinting.site/post-images/1557618060095.jpg" alt="">
-<img src="https://blog.bioprinting.site/post-images/1557618066949.jpg" alt="">
-<img src="https://blog.bioprinting.site/post-images/1557618070147.jpg" alt="">
-<img src="https://blog.bioprinting.site/post-images/1557618073115.jpg" alt="">
-<img src="https://blog.bioprinting.site/post-images/1557618075946.jpg" alt="">
-<img src="https://blog.bioprinting.site/post-images/1557618078264.jpg" alt=""></p>
 ]]></content>
     </entry>
 </feed>
