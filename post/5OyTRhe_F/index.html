@@ -1,0 +1,1146 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>numpy_stl简介 | Li Zhenzhu, Ph.D</title>
+<meta name="description" content="Binzhou Medical University Hospital, Email: timeanddoctor@gmail.com.">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://blog.bioprinting.site/favicon.ico?v=1561715601564">
+<link rel="stylesheet" href="https://blog.bioprinting.site/styles/main.css">
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://blog.bioprinting.site">
+        <img src="https://blog.bioprinting.site/images/avatar.png?v=1561715601564" class="site-logo">
+        <h1 class="site-title">Li Zhenzhu, Ph.D</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            Home
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            Archives
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            Tags
+          </a>
+        
+      
+        
+          <a href="/paper" class="site-nav">
+            Paper
+          </a>
+        
+      
+        
+          <a href="/3dprinting" class="site-nav">
+            3D printing
+          </a>
+        
+      
+        
+          <a href="/bigbridgerobot" class="site-nav">
+            BigBridgeRobot
+          </a>
+        
+      
+        
+          <a href="/business" class="site-nav">
+            Business
+          </a>
+        
+      
+        
+          <a href="https://blog.bioprinting.site/post/meeting/" class="site-nav">
+            Training
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      Binzhou Medical University Hospital, Email: timeanddoctor@gmail.com.
+    </div>
+    <div class="site-footer">
+      Powered by Li Zhenzhu
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">numpy_stl简介</h2>
+            <div class="post-date">2019-06-28</div>
+            
+            <div class="post-content">
+              <h1 id="欢迎来到numpy-stl的文档">欢迎来到numpy-stl的文档！</h1>
+<p>内容：</p>
+<ul>
+<li><a href="https://pythonhosted.org/numpy-stl/usage.html">numpy的-STL</a>
+<ul>
+<li><a href="https://pythonhosted.org/numpy-stl/usage.html#links">链接</a></li>
+<li><a href="https://pythonhosted.org/numpy-stl/usage.html#requirements-for-installing">安装要求：</a></li>
+<li><a href="https://pythonhosted.org/numpy-stl/usage.html#installation">安装：</a></li>
+<li><a href="https://pythonhosted.org/numpy-stl/usage.html#initial-usage">初次使用：</a></li>
+<li><a href="https://pythonhosted.org/numpy-stl/usage.html#contributing">贡献：</a></li>
+<li><a href="https://pythonhosted.org/numpy-stl/usage.html#quickstart">快速开始</a></li>
+<li><a href="https://pythonhosted.org/numpy-stl/usage.html#modifying-mesh-objects">修改Mesh对象</a></li>
+<li><a href="https://pythonhosted.org/numpy-stl/usage.html#extending-mesh-objects">扩展Mesh对象</a></li>
+<li><a href="https://pythonhosted.org/numpy-stl/usage.html#creating-mesh-objects-from-a-list-of-vertices-and-faces">从顶点和面的列表创建网格对象</a></li>
+<li><a href="https://pythonhosted.org/numpy-stl/usage.html#evaluating-mesh-properties-volume-center-of-gravity-inertia">评估网格属性（体积，重心，惯性）</a></li>
+<li><a href="https://pythonhosted.org/numpy-stl/usage.html#combining-multiple-stl-files">组合多个STL文件</a></li>
+</ul>
+</li>
+<li><a href="https://pythonhosted.org/numpy-stl/tests.html">测试和例子</a>
+<ul>
+<li><a href="https://pythonhosted.org/numpy-stl/tests.html#tests-stl-corruption-module">tests.stl_corruption模块</a></li>
+<li><a href="https://pythonhosted.org/numpy-stl/tests.html#tests-test-commandline-module">tests.test_commandline模块</a></li>
+<li><a href="https://pythonhosted.org/numpy-stl/tests.html#tests-test-convert-module">tests.test_convert模块</a></li>
+<li><a href="https://pythonhosted.org/numpy-stl/tests.html#tests-test-mesh-module">tests.test_mesh模块</a></li>
+<li><a href="https://pythonhosted.org/numpy-stl/tests.html#tests-test-multiple-module">tests.test_multiple模块</a></li>
+<li><a href="https://pythonhosted.org/numpy-stl/tests.html#tests-test-rotate-module">tests.test_rotate模块</a></li>
+</ul>
+</li>
+<li><a href="https://pythonhosted.org/numpy-stl/stl.html">stl包</a>
+<ul>
+<li><a href="https://pythonhosted.org/numpy-stl/stl.html#stl-mesh">stl.Mesh</a></li>
+<li><a href="https://pythonhosted.org/numpy-stl/stl.html#module-stl.main">stl.main模块</a></li>
+<li><a href="https://pythonhosted.org/numpy-stl/stl.html#module-stl.base">stl.base模块</a></li>
+<li><a href="https://pythonhosted.org/numpy-stl/stl.html#module-stl.mesh">stl.mesh模块</a></li>
+<li><a href="https://pythonhosted.org/numpy-stl/stl.html#module-stl.stl">stl.stl模块</a></li>
+</ul>
+</li>
+</ul>
+<h1 id="指数和表">指数和表<a href="https://pythonhosted.org/numpy-stl/index.html#indices-and-tables" title="永久链接到这个标题">¶</a></h1>
+<ul>
+<li>
+<p><a href="https://pythonhosted.org/numpy-stl/genindex.html">指数</a></p>
+</li>
+<li>
+<p><a href="https://pythonhosted.org/numpy-stl/py-modindex.html">模块索引</a></p>
+</li>
+<li>
+<p><a href="https://pythonhosted.org/numpy-stl/search.html">搜索页面</a></p>
+</li>
+<li>
+<h1 id="numpy的-stl">numpy的-STL</h1>
+<p>简单的库可以快速轻松地处理STL文件（以及一般的3D对象）。</p>
+<p>由于所有操作都严重依赖于<cite>numpy，</cite>因此这是Python中最快的STL编辑库之一。</p>
+<h2 id="链接">链接</h2>
+<blockquote>
+<ul>
+<li>来源：<a href="https://github.com/WoLpH/numpy-stl">https</a>：<a href="https://github.com/WoLpH/numpy-stl">//github.com/WoLpH/numpy-stl</a></li>
+<li>项目页面：<a href="https://pypi.python.org/pypi/numpy-stl">https</a>：<a href="https://pypi.python.org/pypi/numpy-stl">//pypi.python.org/pypi/numpy-stl</a></li>
+<li>报告错误：<a href="https://github.com/WoLpH/numpy-stl/issues">https</a>：<a href="https://github.com/WoLpH/numpy-stl/issues">//github.com/WoLpH/numpy-stl/issues</a></li>
+<li>文档：<a href="http://numpy-stl.readthedocs.org/en/latest/">http</a>：<a href="http://numpy-stl.readthedocs.org/en/latest/">//numpy-stl.readthedocs.org/en/latest/</a></li>
+<li>我的博客：<a href="https://wol.ph/">https</a>：<a href="https://wol.ph/">//wol.ph/</a></li>
+</ul>
+</blockquote>
+<h2 id="安装要求">安装要求：</h2>
+<blockquote>
+<ul>
+<li><a href="http://numpy.org/">numpy</a>任何最新版本</li>
+<li><a href="https://github.com/WoLpH/python-utils">python-utils</a> 1.6或更高版本</li>
+</ul>
+</blockquote>
+<h2 id="安装">安装：</h2>
+<p><cite>pip install numpy-stl</cite></p>
+<h2 id="初次使用">初次使用：</h2>
+<blockquote>
+<ul>
+<li><cite>stl2bin your_ascii_stl_file.stl new_binary_stl_file.stl</cite></li>
+<li><cite>stl2ascii your_binary_stl_file.stl new_ascii_stl_file.stl</cite></li>
+<li><cite>stl your_ascii_stl_file.stl new_binary_stl_file.stl</cite></li>
+</ul>
+</blockquote>
+<h2 id="贡献">贡献：</h2>
+<p>我们随时欢迎您的贡献。请查看入门指南：<a href="https://github.com/WoLpH/numpy-stl/blob/develop/CONTRIBUTING.rst">https</a>： <a href="https://github.com/WoLpH/numpy-stl/blob/develop/CONTRIBUTING.rst">//github.com/WoLpH/numpy-stl/blob/develop/CONTRIBUTING.rst</a></p>
+<h2 id="快速入门">快速入门</h2>
+</li>
+<li>
+<p>Quickstart
+import numpy
+from stl import mesh</p>
+</li>
+</ul>
+<h1 id="using-an-existing-stl-file">Using an existing stl file:</h1>
+<p>your_mesh = mesh.Mesh.from_file('some_file.stl')</p>
+<h1 id="or-creating-a-new-mesh-make-sure-not-to-overwrite-the-mesh-import-by">Or creating a new mesh (make sure not to overwrite the <code>mesh</code> import by</h1>
+<h1 id="naming-it-mesh">naming it <code>mesh</code>):</h1>
+<p>VERTICE_COUNT = 100
+data = numpy.zeros(VERTICE_COUNT, dtype=mesh.Mesh.dtype)
+your_mesh = mesh.Mesh(data, remove_empty_areas=False)</p>
+<h1 id="the-mesh-normals-calculated-automatically">The mesh normals (calculated automatically)</h1>
+<p>your_mesh.normals</p>
+<h1 id="the-mesh-vectors">The mesh vectors</h1>
+<p>your_mesh.v0, your_mesh.v1, your_mesh.v2</p>
+<h1 id="accessing-individual-points-concatenation-of-v0-v1-and-v2-in-triplets">Accessing individual points (concatenation of v0, v1 and v2 in triplets)</h1>
+<p>assert (your_mesh.points[0][0:3] == your_mesh.v0[0]).all()
+assert (your_mesh.points[0][3:6] == your_mesh.v1[0]).all()
+assert (your_mesh.points[0][6:9] == your_mesh.v2[0]).all()
+assert (your_mesh.points[1][0:3] == your_mesh.v0[1]).all()</p>
+<p>your_mesh.save('new_stl_file.stl')
+Plotting using matplotlib is equally easy:</p>
+<p>from stl import mesh
+from mpl_toolkits import mplot3d
+from matplotlib import pyplot</p>
+<h1 id="create-a-new-plot">Create a new plot</h1>
+<p>figure = pyplot.figure()
+axes = mplot3d.Axes3D(figure)</p>
+<h1 id="load-the-stl-files-and-add-the-vectors-to-the-plot">Load the STL files and add the vectors to the plot</h1>
+<p>your_mesh = mesh.Mesh.from_file('tests/stl_binary/HalfDonut.stl')
+axes.add_collection3d(mplot3d.art3d.Poly3DCollection(your_mesh.vectors))</p>
+<h1 id="auto-scale-to-the-mesh-size">Auto scale to the mesh size</h1>
+<p>scale = your_mesh.points.flatten(-1)
+axes.auto_scale_xyz(scale, scale, scale)</p>
+<h1 id="show-the-plot-to-the-screen">Show the plot to the screen</h1>
+<p>pyplot.show()
+Modifying Mesh objects
+from stl import mesh
+import math
+import numpy</p>
+<h1 id="create-3-faces-of-a-cube">Create 3 faces of a cube</h1>
+<p>data = numpy.zeros(6, dtype=mesh.Mesh.dtype)</p>
+<h1 id="top-of-the-cube">Top of the cube</h1>
+<p>data['vectors'][0] = numpy.array([[0, 1, 1],
+[1, 0, 1],
+[0, 0, 1]])
+data['vectors'][1] = numpy.array([[1, 0, 1],
+[0, 1, 1],
+[1, 1, 1]])</p>
+<h1 id="right-face">Right face</h1>
+<p>data['vectors'][2] = numpy.array([[1, 0, 0],
+[1, 0, 1],
+[1, 1, 0]])
+data['vectors'][3] = numpy.array([[1, 1, 1],
+[1, 0, 1],
+[1, 1, 0]])</p>
+<h1 id="left-face">Left face</h1>
+<p>data['vectors'][4] = numpy.array([[0, 0, 0],
+[1, 0, 0],
+[1, 0, 1]])
+data['vectors'][5] = numpy.array([[0, 0, 0],
+[0, 0, 1],
+[1, 0, 1]])</p>
+<h1 id="since-the-cube-faces-are-from-0-to-1-we-can-move-it-to-the-middle-by">Since the cube faces are from 0 to 1 we can move it to the middle by</h1>
+<h1 id="substracting-5">substracting .5</h1>
+<p>data['vectors'] -= .5</p>
+<h1 id="generate-4-different-meshes-so-we-can-rotate-them-later">Generate 4 different meshes so we can rotate them later</h1>
+<p>meshes = [mesh.Mesh(data.copy()) for _ in range(4)]</p>
+<h1 id="rotate-90-degrees-over-the-y-axis">Rotate 90 degrees over the Y axis</h1>
+<p>meshes[0].rotate([0.0, 0.5, 0.0], math.radians(90))</p>
+<h1 id="translate-2-points-over-the-x-axis">Translate 2 points over the X axis</h1>
+<p>meshes[1].x += 2</p>
+<h1 id="rotate-90-degrees-over-the-x-axis">Rotate 90 degrees over the X axis</h1>
+<p>meshes[2].rotate([0.5, 0.0, 0.0], math.radians(90))</p>
+<h1 id="translate-2-points-over-the-x-and-y-points">Translate 2 points over the X and Y points</h1>
+<p>meshes[2].x += 2
+meshes[2].y += 2</p>
+<h1 id="rotate-90-degrees-over-the-x-and-y-axis">Rotate 90 degrees over the X and Y axis</h1>
+<p>meshes[3].rotate([0.5, 0.0, 0.0], math.radians(90))
+meshes[3].rotate([0.0, 0.5, 0.0], math.radians(90))</p>
+<h1 id="translate-2-points-over-the-y-axis">Translate 2 points over the Y axis</h1>
+<p>meshes[3].y += 2</p>
+<h1 id="optionally-render-the-rotated-cube-faces">Optionally render the rotated cube faces</h1>
+<p>from matplotlib import pyplot
+from mpl_toolkits import mplot3d</p>
+<h1 id="create-a-new-plot-2">Create a new plot</h1>
+<p>figure = pyplot.figure()
+axes = mplot3d.Axes3D(figure)</p>
+<h1 id="render-the-cube-faces">Render the cube faces</h1>
+<p>for m in meshes:
+axes.add_collection3d(mplot3d.art3d.Poly3DCollection(m.vectors))</p>
+<h1 id="auto-scale-to-the-mesh-size-2">Auto scale to the mesh size</h1>
+<p>scale = numpy.concatenate([m.points for m in meshes]).flatten(-1)
+axes.auto_scale_xyz(scale, scale, scale)</p>
+<h1 id="show-the-plot-to-the-screen-2">Show the plot to the screen</h1>
+<p>pyplot.show()
+Extending Mesh objects
+from stl import mesh
+import math
+import numpy</p>
+<h1 id="create-3-faces-of-a-cube-2">Create 3 faces of a cube</h1>
+<p>data = numpy.zeros(6, dtype=mesh.Mesh.dtype)</p>
+<h1 id="top-of-the-cube-2">Top of the cube</h1>
+<p>data['vectors'][0] = numpy.array([[0, 1, 1],
+[1, 0, 1],
+[0, 0, 1]])
+data['vectors'][1] = numpy.array([[1, 0, 1],
+[0, 1, 1],
+[1, 1, 1]])</p>
+<h1 id="right-face-2">Right face</h1>
+<p>data['vectors'][2] = numpy.array([[1, 0, 0],
+[1, 0, 1],
+[1, 1, 0]])
+data['vectors'][3] = numpy.array([[1, 1, 1],
+[1, 0, 1],
+[1, 1, 0]])</p>
+<h1 id="left-face-2">Left face</h1>
+<p>data['vectors'][4] = numpy.array([[0, 0, 0],
+[1, 0, 0],
+[1, 0, 1]])
+data['vectors'][5] = numpy.array([[0, 0, 0],
+[0, 0, 1],
+[1, 0, 1]])</p>
+<h1 id="since-the-cube-faces-are-from-0-to-1-we-can-move-it-to-the-middle-by-2">Since the cube faces are from 0 to 1 we can move it to the middle by</h1>
+<h1 id="substracting-5-2">substracting .5</h1>
+<p>data['vectors'] -= .5</p>
+<p>cube_back = mesh.Mesh(data.copy())
+cube_front = mesh.Mesh(data.copy())</p>
+<h1 id="rotate-90-degrees-over-the-x-axis-followed-by-the-y-axis-followed-by-the">Rotate 90 degrees over the X axis followed by the Y axis followed by the</h1>
+<h1 id="x-axis">X axis</h1>
+<p>cube_back.rotate([0.5, 0.0, 0.0], math.radians(90))
+cube_back.rotate([0.0, 0.5, 0.0], math.radians(90))
+cube_back.rotate([0.5, 0.0, 0.0], math.radians(90))</p>
+<p>cube = mesh.Mesh(numpy.concatenate([
+cube_back.data.copy(),
+cube_front.data.copy(),
+]))</p>
+<h1 id="optionally-render-the-rotated-cube-faces-2">Optionally render the rotated cube faces</h1>
+<p>from matplotlib import pyplot
+from mpl_toolkits import mplot3d</p>
+<h1 id="create-a-new-plot-3">Create a new plot</h1>
+<p>figure = pyplot.figure()
+axes = mplot3d.Axes3D(figure)</p>
+<h1 id="render-the-cube">Render the cube</h1>
+<p>axes.add_collection3d(mplot3d.art3d.Poly3DCollection(cube.vectors))</p>
+<h1 id="auto-scale-to-the-mesh-size-3">Auto scale to the mesh size</h1>
+<p>scale = cube_back.points.flatten(-1)
+axes.auto_scale_xyz(scale, scale, scale)</p>
+<h1 id="show-the-plot-to-the-screen-3">Show the plot to the screen</h1>
+<p>pyplot.show()
+Creating Mesh objects from a list of vertices and faces
+import numpy as np
+from stl import mesh</p>
+<h1 id="define-the-8-vertices-of-the-cube">Define the 8 vertices of the cube</h1>
+<p>vertices = np.array([<br>
+[-1, -1, -1],
+[+1, -1, -1],
+[+1, +1, -1],
+[-1, +1, -1],
+[-1, -1, +1],
+[+1, -1, +1],
+[+1, +1, +1],
+[-1, +1, +1]])</p>
+<h1 id="define-the-12-triangles-composing-the-cube">Define the 12 triangles composing the cube</h1>
+<p>faces = np.array([<br>
+[0,3,1],
+[1,3,2],
+[0,4,7],
+[0,7,3],
+[4,5,6],
+[4,6,7],
+[5,1,2],
+[5,2,6],
+[2,3,6],
+[3,7,6],
+[0,1,5],
+[0,5,4]])</p>
+<h1 id="create-the-mesh">Create the mesh</h1>
+<p>cube = mesh.Mesh(np.zeros(faces.shape[0], dtype=mesh.Mesh.dtype))
+for i, f in enumerate(faces):
+for j in range(3):
+cube.vectors[i][j] = vertices[f[j],:]</p>
+<h1 id="write-the-mesh-to-file-cubestl">Write the mesh to file &quot;cube.stl&quot;</h1>
+<p>cube.save('cube.stl')
+Evaluating Mesh properties (Volume, Center of gravity, Inertia)
+import numpy as np
+from stl import mesh</p>
+<h1 id="using-an-existing-closed-stl-file">Using an existing closed stl file:</h1>
+<p>your_mesh = mesh.Mesh.from_file('some_file.stl')</p>
+<p>volume, cog, inertia = your_mesh.get_mass_properties()
+print(&quot;Volume                                  = {0}&quot;.format(volume))
+print(&quot;Position of the center of gravity (COG) = {0}&quot;.format(cog))
+print(&quot;Inertia matrix at expressed at the COG  = {0}&quot;.format(inertia[0,:]))
+print(&quot;                                          {0}&quot;.format(inertia[1,:]))
+print(&quot;                                          {0}&quot;.format(inertia[2,:]))
+Combining multiple STL files
+import math
+import stl
+from stl import mesh
+import numpy</p>
+<h1 id="find-the-max-dimensions-so-we-can-know-the-bounding-box-getting-the-height">find the max dimensions, so we can know the bounding box, getting the height,</h1>
+<h1 id="width-length-because-these-are-the-step-size">width, length (because these are the step size)...</h1>
+<p>def find_mins_maxs(obj):
+minx = maxx = miny = maxy = minz = maxz = None
+for p in obj.points:
+# p contains (x, y, z)
+if minx is None:
+minx = p[stl.Dimension.X]
+maxx = p[stl.Dimension.X]
+miny = p[stl.Dimension.Y]
+maxy = p[stl.Dimension.Y]
+minz = p[stl.Dimension.Z]
+maxz = p[stl.Dimension.Z]
+else:
+maxx = max(p[stl.Dimension.X], maxx)
+minx = min(p[stl.Dimension.X], minx)
+maxy = max(p[stl.Dimension.Y], maxy)
+miny = min(p[stl.Dimension.Y], miny)
+maxz = max(p[stl.Dimension.Z], maxz)
+minz = min(p[stl.Dimension.Z], minz)
+return minx, maxx, miny, maxy, minz, maxz</p>
+<p>def translate(_solid, step, padding, multiplier, axis):
+if axis == 'x':
+items = [0, 3, 6]
+elif axis == 'y':
+items = [1, 4, 7]
+elif axis == 'z':
+items = [2, 5, 8]
+for p in _solid.points:
+# point items are ((x, y, z), (x, y, z), (x, y, z))
+for i in range(3):
+p[items[i]] += (step * multiplier) + (padding * multiplier)</p>
+<p>def copy_obj(obj, dims, num_rows, num_cols, num_layers):
+w, l, h = dims
+copies = []
+for layer in range(num_layers):
+for row in range(num_rows):
+for col in range(num_cols):
+# skip the position where original being copied is
+if row == 0 and col == 0 and layer == 0:
+continue
+_copy = mesh.Mesh(obj.data.copy())
+# pad the space between objects by 10% of the dimension being
+# translated
+if col != 0:
+translate(_copy, w, w / 10., col, 'x')
+if row != 0:
+translate(_copy, l, l / 10., row, 'y')
+if layer != 0:
+translate(_copy, h, h / 10., layer, 'z')
+copies.append(_copy)
+return copies</p>
+<h1 id="using-an-existing-stl-file-2">Using an existing stl file:</h1>
+<p>main_body = mesh.Mesh.from_file('ball_and_socket_simplified_-_main_body.stl')</p>
+<h1 id="rotate-along-y">rotate along Y</h1>
+<p>main_body.rotate([0.0, 0.5, 0.0], math.radians(90))</p>
+<p>minx, maxx, miny, maxy, minz, maxz = find_mins_maxs(main_body)
+w1 = maxx - minx
+l1 = maxy - miny
+h1 = maxz - minz
+copies = copy_obj(main_body, (w1, l1, h1), 2, 2, 1)</p>
+<h1 id="i-wanted-to-add-another-related-stl-to-the-final-stl">I wanted to add another related STL to the final STL</h1>
+<p>twist_lock = mesh.Mesh.from_file('ball_and_socket_simplified_-_twist_lock.stl')
+minx, maxx, miny, maxy, minz, maxz = find_mins_maxs(twist_lock)
+w2 = maxx - minx
+l2 = maxy - miny
+h2 = maxz - minz
+translate(twist_lock, w1, w1 / 10., 3, 'x')
+copies2 = copy_obj(twist_lock, (w2, l2, h2), 2, 2, 1)
+combined = mesh.Mesh(numpy.concatenate([main_body.data, twist_lock.data] +
+[copy.data for copy in copies] +
+[copy.data for copy in copies2]))</p>
+<p>combined.save('combined.stl', mode=stl.Mode.ASCII)  # save as ASCII</p>
+<ul>
+<li>
+<h2 id="testsstl_corruption-module">tests.stl_corruption module</h2>
+<p>from <strong>future</strong> import print_function
+import pytest
+import struct</p>
+<p>from stl import mesh</p>
+<p>_STL_FILE = '''
+solid test.stl
+facet normal -0.014565 0.073223 -0.002897
+outer loop
+vertex 0.399344 0.461940 1.044090
+vertex 0.500000 0.500000 1.500000
+vertex 0.576120 0.500000 1.117320
+endloop
+endfacet
+endsolid test.stl
+'''.lstrip()</p>
+<p>def test_valid_ascii(tmpdir, speedups):
+tmp_file = tmpdir.join('tmp.stl')
+with tmp_file.open('w+') as fh:
+fh.write(_STL_FILE)
+fh.seek(0)
+mesh.Mesh.from_file(str(tmp_file), fh=fh, speedups=speedups)</p>
+<p>def test_ascii_with_missing_name(tmpdir, speedups):
+tmp_file = tmpdir.join('tmp.stl')
+with tmp_file.open('w+') as fh:
+# Split the file into lines
+lines = _STL_FILE.splitlines()</p>
+<pre><code>    # Remove everything except solid
+    lines[0] = lines[0].split()[0]
+
+    # Join the lines to test files that start with solid without space
+    fh.write('\n'.join(lines))
+    fh.seek(0)
+    mesh.Mesh.from_file(str(tmp_file), fh=fh, speedups=speedups)
+</code></pre>
+<p>def test_ascii_with_blank_lines(tmpdir, speedups):
+_stl_file = '''
+solid test.stl</p>
+<p>facet normal -0.014565 0.073223 -0.002897</p>
+<p>outer loop</p>
+<p>vertex 0.399344 0.461940 1.044090
+vertex 0.500000 0.500000 1.500000</p>
+<p>vertex 0.576120 0.500000 1.117320</p>
+<p>endloop</p>
+<p>endfacet</p>
+<p>endsolid test.stl
+'''.lstrip()</p>
+<pre><code>tmp_file = tmpdir.join('tmp.stl')
+with tmp_file.open('w+') as fh:
+    fh.write(_stl_file)
+    fh.seek(0)
+    mesh.Mesh.from_file(str(tmp_file), fh=fh, speedups=speedups)
+</code></pre>
+<p>def test_incomplete_ascii_file(tmpdir, speedups):
+tmp_file = tmpdir.join('tmp.stl')
+with tmp_file.open('w+') as fh:
+fh.write('solid some_file.stl')
+fh.seek(0)
+with pytest.raises(AssertionError):
+mesh.Mesh.from_file(str(tmp_file), fh=fh, speedups=speedups)</p>
+<pre><code>for offset in (-20, 82, 100):
+    with tmp_file.open('w+') as fh:
+        fh.write(_STL_FILE[:-offset])
+        fh.seek(0)
+        with pytest.raises(AssertionError):
+            mesh.Mesh.from_file(str(tmp_file), fh=fh, speedups=speedups)
+</code></pre>
+<p>def test_corrupt_ascii_file(tmpdir, speedups):
+tmp_file = tmpdir.join('tmp.stl')
+with tmp_file.open('w+') as fh:
+fh.write(_STL_FILE)
+fh.seek(40)
+print('####\n' * 100, file=fh)
+fh.seek(0)
+with pytest.raises(AssertionError):
+mesh.Mesh.from_file(str(tmp_file), fh=fh, speedups=speedups)</p>
+<pre><code>with tmp_file.open('w+') as fh:
+    fh.write(_STL_FILE)
+    fh.seek(40)
+    print(' ' * 100, file=fh)
+    fh.seek(80)
+    fh.write(struct.pack('&lt;i', 10).decode('utf-8'))
+    fh.seek(0)
+    with pytest.raises(AssertionError):
+        mesh.Mesh.from_file(str(tmp_file), fh=fh, speedups=speedups)
+</code></pre>
+<p>def test_corrupt_binary_file(tmpdir, speedups):
+tmp_file = tmpdir.join('tmp.stl')
+with tmp_file.open('w+') as fh:
+fh.write('#########\n' * 8)
+fh.write('#\0\0\0')
+fh.seek(0)
+mesh.Mesh.from_file(str(tmp_file), fh=fh, speedups=speedups)</p>
+<pre><code>with tmp_file.open('w+') as fh:
+    fh.write('#########\n' * 9)
+    fh.seek(0)
+    with pytest.raises(AssertionError):
+        mesh.Mesh.from_file(str(tmp_file), fh=fh, speedups=speedups)
+
+with tmp_file.open('w+') as fh:
+    fh.write('#########\n' * 8)
+    fh.write('#\0\0\0')
+    fh.seek(0)
+    fh.write('solid test.stl')
+    fh.seek(0)
+    mesh.Mesh.from_file(str(tmp_file), fh=fh, speedups=speedups)
+</code></pre>
+<h2 id="teststest_commandline-module">tests.test_commandline module</h2>
+<p>import sys</p>
+<p>from stl import main</p>
+<p>def test_main(ascii_file, binary_file, tmpdir, speedups):
+original_argv = sys.argv[:]
+args_pre = ['stl']
+args_post = [str(tmpdir.join('output.stl'))]</p>
+<pre><code>if not speedups:
+    args_pre.append('-s')
+
+try:
+    sys.argv[:] = args_pre + [ascii_file] + args_post
+    main.main()
+    sys.argv[:] = args_pre + ['-r', ascii_file] + args_post
+    main.main()
+    sys.argv[:] = args_pre + ['-a', binary_file] + args_post
+    main.main()
+    sys.argv[:] = args_pre + ['-b', ascii_file] + args_post
+    main.main()
+finally:
+    sys.argv[:] = original_argv
+</code></pre>
+<p>def test_args(ascii_file, tmpdir):
+parser = main._get_parser('')</p>
+<pre><code>def _get_name(*args):
+    return main._get_name(parser.parse_args(list(map(str, args))))
+
+assert _get_name('--name', 'foobar') == 'foobar'
+assert _get_name('-', tmpdir.join('binary.stl')).endswith('binary.stl')
+assert _get_name(ascii_file, '-').endswith('HalfDonut.stl')
+assert _get_name('-', '-')
+</code></pre>
+<p>def test_ascii(binary_file, tmpdir, speedups):
+original_argv = sys.argv[:]
+try:
+sys.argv[:] = [
+'stl',
+'-s' if not speedups else '',
+binary_file,
+str(tmpdir.join('ascii.stl')),
+]
+try:
+main.to_ascii()
+except SystemExit:
+pass
+finally:
+sys.argv[:] = original_argv</p>
+<p>def test_binary(ascii_file, tmpdir, speedups):
+original_argv = sys.argv[:]
+try:
+sys.argv[:] = [
+'stl',
+'-s' if not speedups else '',
+ascii_file,
+str(tmpdir.join('binary.stl')),
+]
+try:
+main.to_binary()
+except SystemExit:
+pass
+finally:
+sys.argv[:] = original_argv</p>
+<h2 id="teststest_convert-module">tests.test_convert module</h2>
+<h1 id="import-os">import os</h1>
+<p>import pytest
+import tempfile</p>
+<p>from stl import stl</p>
+<p>def <em>test_conversion(from</em>, to, mode, speedups):</p>
+<pre><code>for name in from_.listdir():
+    source_file = from_.join(name)
+    expected_file = to.join(name)
+    if not expected_file.exists():
+        continue
+
+    mesh = stl.StlMesh(source_file, speedups=speedups)
+    with open(str(expected_file), 'rb') as expected_fh:
+        expected = expected_fh.read()
+        # For binary files, skip the header
+        if mode is stl.BINARY:
+            expected = expected[80:]
+
+        with tempfile.TemporaryFile() as dest_fh:
+            mesh.save(name, dest_fh, mode)
+            # Go back to the beginning to read
+            dest_fh.seek(0)
+            dest = dest_fh.read()
+            # For binary files, skip the header
+            if mode is stl.BINARY:
+                dest = dest[80:]
+
+            assert dest.strip() == expected.strip()
+</code></pre>
+<p>def test_ascii_to_binary(ascii_path, binary_path, speedups):
+_test_conversion(ascii_path, binary_path, mode=stl.BINARY,
+speedups=speedups)</p>
+<p>def test_binary_to_ascii(ascii_path, binary_path, speedups):
+_test_conversion(binary_path, ascii_path, mode=stl.ASCII,
+speedups=speedups)</p>
+<p>def test_stl_mesh(ascii_file, tmpdir, speedups):
+tmp_file = tmpdir.join('tmp.stl')</p>
+<pre><code>mesh = stl.StlMesh(ascii_file, speedups=speedups)
+with pytest.raises(ValueError):
+    mesh.save(filename=str(tmp_file), mode='test')
+
+mesh.save(str(tmp_file))
+mesh.save(str(tmp_file), update_normals=False)
+</code></pre>
+<h2 id="teststest_mesh-module">tests.test_mesh module</h2>
+<p>import numpy</p>
+<p>from stl.mesh import Mesh
+from stl.base import BaseMesh
+from stl.base import RemoveDuplicates</p>
+<p>def test_units_1d():
+data = numpy.zeros(1, dtype=Mesh.dtype)
+data['vectors'][0] = numpy.array([[0, 0, 0],
+[1, 0, 0],
+[2, 0, 0]])</p>
+<pre><code>mesh = Mesh(data, remove_empty_areas=False)
+mesh.update_units()
+
+assert mesh.areas == 0
+assert (mesh.normals == [0, 0, 0]).all()
+assert (mesh.units == [0, 0, 0]).all()
+</code></pre>
+<p>def test_units_2d():
+data = numpy.zeros(2, dtype=Mesh.dtype)
+data['vectors'][0] = numpy.array([[0, 0, 0],
+[1, 0, 0],
+[0, 1, 0]])
+data['vectors'][1] = numpy.array([[1, 0, 0],
+[0, 1, 0],
+[1, 1, 0]])</p>
+<pre><code>mesh = Mesh(data, remove_empty_areas=False)
+mesh.update_units()
+
+assert (mesh.areas == [.5, .5]).all()
+assert (mesh.normals == [[0, 0, 1.],
+                         [0, 0, -1.]]).all()
+
+assert (mesh.units == [[0, 0, 1],
+                       [0, 0, -1]]).all()
+</code></pre>
+<p>def test_units_3d():
+data = numpy.zeros(1, dtype=Mesh.dtype)
+data['vectors'][0] = numpy.array([[0, 0, 0],
+[1, 0, 0],
+[0, 1, 1.]])</p>
+<pre><code>mesh = Mesh(data, remove_empty_areas=False)
+mesh.update_units()
+
+assert (mesh.areas - 2 ** .5) &lt; 0.0001
+assert (mesh.normals == [0, -1, 1]).all()
+
+units = mesh.units[0]
+assert units[0] == 0
+# Due to floating point errors
+assert (units[1] + .5 * 2 ** .5) &lt; 0.0001
+assert (units[2] - .5 * 2 ** .5) &lt; 0.0001
+</code></pre>
+<p>def test_duplicate_polygons():
+data = numpy.zeros(6, dtype=Mesh.dtype)
+data['vectors'][0] = numpy.array([[1, 0, 0],
+[0, 0, 0],
+[0, 0, 0]])
+data['vectors'][1] = numpy.array([[2, 0, 0],
+[0, 0, 0],
+[0, 0, 0]])
+data['vectors'][2] = numpy.array([[0, 0, 0],
+[0, 0, 0],
+[0, 0, 0]])
+data['vectors'][3] = numpy.array([[2, 0, 0],
+[0, 0, 0],
+[0, 0, 0]])
+data['vectors'][4] = numpy.array([[1, 0, 0],
+[0, 0, 0],
+[0, 0, 0]])
+data['vectors'][5] = numpy.array([[0, 0, 0],
+[0, 0, 0],
+[0, 0, 0]])</p>
+<pre><code>mesh = Mesh(data)
+assert mesh.data.size == 6
+
+mesh = Mesh(data, remove_duplicate_polygons=0)
+assert mesh.data.size == 6
+
+mesh = Mesh(data, remove_duplicate_polygons=False)
+assert mesh.data.size == 6
+
+mesh = Mesh(data, remove_duplicate_polygons=None)
+assert mesh.data.size == 6
+
+mesh = Mesh(data, remove_duplicate_polygons=RemoveDuplicates.NONE)
+assert mesh.data.size == 6
+
+mesh = Mesh(data, remove_duplicate_polygons=RemoveDuplicates.SINGLE)
+assert mesh.data.size == 3
+
+mesh = Mesh(data, remove_duplicate_polygons=True)
+assert mesh.data.size == 3
+
+assert (mesh.vectors[0] == numpy.array([[1, 0, 0],
+                                        [0, 0, 0],
+                                        [0, 0, 0]])).all()
+assert (mesh.vectors[1] == numpy.array([[2, 0, 0],
+                                        [0, 0, 0],
+                                        [0, 0, 0]])).all()
+assert (mesh.vectors[2] == numpy.array([[0, 0, 0],
+                                        [0, 0, 0],
+                                        [0, 0, 0]])).all()
+
+mesh = Mesh(data, remove_duplicate_polygons=RemoveDuplicates.ALL)
+assert mesh.data.size == 3
+
+assert (mesh.vectors[0] == numpy.array([[1, 0, 0],
+                                        [0, 0, 0],
+                                        [0, 0, 0]])).all()
+assert (mesh.vectors[1] == numpy.array([[2, 0, 0],
+                                        [0, 0, 0],
+                                        [0, 0, 0]])).all()
+assert (mesh.vectors[2] == numpy.array([[0, 0, 0],
+                                        [0, 0, 0],
+                                        [0, 0, 0]])).all()
+</code></pre>
+<p>def test_remove_all_duplicate_polygons():
+data = numpy.zeros(5, dtype=Mesh.dtype)
+data['vectors'][0] = numpy.array([[0, 0, 0],
+[0, 0, 0],
+[0, 0, 0]])
+data['vectors'][1] = numpy.array([[1, 0, 0],
+[0, 0, 0],
+[0, 0, 0]])
+data['vectors'][2] = numpy.array([[2, 0, 0],
+[0, 0, 0],
+[0, 0, 0]])
+data['vectors'][3] = numpy.array([[3, 0, 0],
+[0, 0, 0],
+[0, 0, 0]])
+data['vectors'][4] = numpy.array([[3, 0, 0],
+[0, 0, 0],
+[0, 0, 0]])</p>
+<pre><code>mesh = Mesh(data, remove_duplicate_polygons=False)
+assert mesh.data.size == 5
+Mesh.remove_duplicate_polygons(mesh.data, RemoveDuplicates.NONE)
+
+mesh = Mesh(data, remove_duplicate_polygons=RemoveDuplicates.ALL)
+assert mesh.data.size == 3
+
+assert (mesh.vectors[0] == numpy.array([[0, 0, 0],
+                                        [0, 0, 0],
+                                        [0, 0, 0]])).all()
+assert (mesh.vectors[1] == numpy.array([[1, 0, 0],
+                                        [0, 0, 0],
+                                        [0, 0, 0]])).all()
+assert (mesh.vectors[2] == numpy.array([[2, 0, 0],
+                                        [0, 0, 0],
+                                        [0, 0, 0]])).all()
+</code></pre>
+<p>def test_empty_areas():
+data = numpy.zeros(3, dtype=Mesh.dtype)
+data['vectors'][0] = numpy.array([[0, 0, 0],
+[1, 0, 0],
+[0, 1, 0]])
+data['vectors'][1] = numpy.array([[1, 0, 0],
+[0, 1, 0],
+[1, 0, 0]])
+data['vectors'][2] = numpy.array([[1, 0, 0],
+[0, 1, 0],
+[1, 0, 0]])</p>
+<pre><code>mesh = Mesh(data, remove_empty_areas=False)
+assert mesh.data.size == 3
+
+mesh = Mesh(data, remove_empty_areas=True)
+assert mesh.data.size == 1
+</code></pre>
+<p>def test_base_mesh():
+data = numpy.zeros(10, dtype=BaseMesh.dtype)
+mesh = BaseMesh(data, remove_empty_areas=False)
+# Increment vector 0 item 0
+mesh.v0[0] += 1
+mesh.v1[0] += 2</p>
+<pre><code># Check item 0 (contains v0, v1 and v2)
+assert (mesh[0] == numpy.array(
+    [1., 1., 1., 2., 2., 2., 0., 0., 0.], dtype=numpy.float32)
+).all()
+assert (mesh.vectors[0] == numpy.array([
+        [1., 1., 1.],
+        [2., 2., 2.],
+        [0., 0., 0.]], dtype=numpy.float32)).all()
+assert (mesh.v0[0] == numpy.array([1., 1., 1.], dtype=numpy.float32)).all()
+assert (mesh.points[0] == numpy.array(
+    [1., 1., 1., 2., 2., 2., 0., 0., 0.], dtype=numpy.float32)
+).all()
+assert (
+    mesh.x[0] == numpy.array([1., 2., 0.], dtype=numpy.float32)).all()
+
+mesh[0] = 3
+assert (mesh[0] == numpy.array(
+    [3., 3., 3., 3., 3., 3., 3., 3., 3.], dtype=numpy.float32)
+).all()
+
+assert len(mesh) == len(list(mesh))
+assert (mesh.min_ &lt; mesh.max_).all()
+mesh.update_normals()
+assert mesh.units.sum() == 0.0
+mesh.v0[:] = mesh.v1[:] = mesh.v2[:] = 0
+assert mesh.points.sum() == 0.0
+</code></pre>
+<h2 id="teststest_multiple-module">tests.test_multiple module</h2>
+<p>from stl import mesh
+from stl.utils import b</p>
+<p>_STL_FILE = b('''
+solid test.stl
+facet normal -0.014565 0.073223 -0.002897
+outer loop
+vertex 0.399344 0.461940 1.044090
+vertex 0.500000 0.500000 1.500000
+vertex 0.576120 0.500000 1.117320
+endloop
+endfacet
+endsolid test.stl
+'''.lstrip())</p>
+<p>def test_single_stl(tmpdir, speedups):
+tmp_file = tmpdir.join('tmp.stl')
+with tmp_file.open('wb+') as fh:
+fh.write(_STL_FILE)
+fh.seek(0)
+for m in mesh.Mesh.from_multi_file(
+str(tmp_file), fh=fh, speedups=speedups):
+pass</p>
+<p>def test_multiple_stl(tmpdir, speedups):
+tmp_file = tmpdir.join('tmp.stl')
+with tmp_file.open('wb+') as fh:
+for _ in range(10):
+fh.write(_STL_FILE)
+fh.seek(0)
+for i, m in enumerate(mesh.Mesh.from_multi_file(
+str(tmp_file), fh=fh, speedups=speedups)):
+assert m.name == b'test.stl'</p>
+<pre><code>    assert i == 9
+</code></pre>
+<p>def test_single_stl_file(tmpdir, speedups):
+tmp_file = tmpdir.join('tmp.stl')
+with tmp_file.open('wb+') as fh:
+fh.write(_STL_FILE)
+fh.seek(0)
+for m in mesh.Mesh.from_multi_file(
+str(tmp_file), speedups=speedups):
+pass</p>
+<p>def test_multiple_stl_file(tmpdir, speedups):
+tmp_file = tmpdir.join('tmp.stl')
+with tmp_file.open('wb+') as fh:
+for _ in range(10):
+fh.write(_STL_FILE)</p>
+<pre><code>    fh.seek(0)
+    for i, m in enumerate(mesh.Mesh.from_multi_file(
+            str(tmp_file), speedups=speedups)):
+        assert m.name == b'test.stl'
+
+    assert i == 9
+</code></pre>
+<h2 id="teststest_rotate-module">tests.test_rotate module</h2>
+<p>import math
+import numpy</p>
+<p>from stl.mesh import Mesh</p>
+<p>def test_rotation():
+# Create 6 faces of a cube
+data = numpy.zeros(6, dtype=Mesh.dtype)</p>
+<pre><code># Top of the cube
+data['vectors'][0] = numpy.array([[0, 1, 1],
+                                  [1, 0, 1],
+                                  [0, 0, 1]])
+data['vectors'][1] = numpy.array([[1, 0, 1],
+                                  [0, 1, 1],
+                                  [1, 1, 1]])
+# Right face
+data['vectors'][2] = numpy.array([[1, 0, 0],
+                                  [1, 0, 1],
+                                  [1, 1, 0]])
+data['vectors'][3] = numpy.array([[1, 1, 1],
+                                  [1, 0, 1],
+                                  [1, 1, 0]])
+# Left face
+data['vectors'][4] = numpy.array([[0, 0, 0],
+                                  [1, 0, 0],
+                                  [1, 0, 1]])
+data['vectors'][5] = numpy.array([[0, 0, 0],
+                                  [0, 0, 1],
+                                  [1, 0, 1]])
+
+mesh = Mesh(data, remove_empty_areas=False)
+
+# Since the cube faces are from 0 to 1 we can move it to the middle by
+# substracting .5
+data['vectors'] -= .5
+
+# Rotate 90 degrees over the X axis followed by the Y axis followed by the
+# X axis
+mesh.rotate([0.5, 0.0, 0.0], math.radians(90))
+mesh.rotate([0.0, 0.5, 0.0], math.radians(90))
+mesh.rotate([0.5, 0.0, 0.0], math.radians(90))
+
+# Since the cube faces are from 0 to 1 we can move it to the middle by
+# substracting .5
+data['vectors'] += .5
+
+assert (mesh.vectors == numpy.array([
+    [[1, 0, 0], [0, 1, 0], [0, 0, 0]],
+    [[0, 1, 0], [1, 0, 0], [1, 1, 0]],
+    [[0, 1, 1], [0, 1, 0], [1, 1, 1]],
+    [[1, 1, 0], [0, 1, 0], [1, 1, 1]],
+    [[0, 0, 1], [0, 1, 1], [0, 1, 0]],
+    [[0, 0, 1], [0, 0, 0], [0, 1, 0]],
+])).all()
+</code></pre>
+<p>def test_rotation_over_point():
+# Create a single face
+data = numpy.zeros(1, dtype=Mesh.dtype)</p>
+<pre><code>data['vectors'][0] = numpy.array([[1, 0, 0],
+                                  [0, 1, 0],
+                                  [0, 0, 1]])
+
+mesh = Mesh(data, remove_empty_areas=False)
+
+mesh.rotate([1, 0, 0], math.radians(180), point=[1, 2, 3])
+assert (mesh.vectors == numpy.array([[1, -4, -6],
+                                     [0, -5, -6],
+                                     [0, -4, -7]])).all()
+</code></pre>
+<p>def test_no_rotation():
+# Create a single face
+data = numpy.zeros(1, dtype=Mesh.dtype)</p>
+<pre><code>data['vectors'][0] = numpy.array([[0, 1, 1],
+                                  [1, 0, 1],
+                                  [0, 0, 1]])
+
+mesh = Mesh(data, remove_empty_areas=False)
+
+# Rotate by 0 degrees
+mesh.rotate([0.5, 0.0, 0.0], math.radians(0))
+assert (mesh.vectors == numpy.array([
+    [[0, 1, 1], [1, 0, 1], [0, 0, 1]]])).all()
+
+# Use a zero rotation matrix
+mesh.rotate([0.0, 0.0, 0.0], math.radians(90))
+assert (mesh.vectors == numpy.array([
+    [[0, 1, 1], [1, 0, 1], [0, 0, 1]]])).all()
+</code></pre>
+<p>def test_no_translation():
+# Create a single face
+data = numpy.zeros(1, dtype=Mesh.dtype)
+data['vectors'][0] = numpy.array([[0, 1, 1],
+[1, 0, 1],
+[0, 0, 1]])</p>
+<pre><code>mesh = Mesh(data, remove_empty_areas=False)
+assert (mesh.vectors == numpy.array([
+    [[0, 1, 1], [1, 0, 1], [0, 0, 1]]])).all()
+
+# Translate mesh with a zero vector
+mesh.translate([0.0, 0.0, 0.0])
+assert (mesh.vectors == numpy.array([
+    [[0, 1, 1], [1, 0, 1], [0, 0, 1]]])).all()
+</code></pre>
+<p>def test_translation():
+# Create a single face
+data = numpy.zeros(1, dtype=Mesh.dtype)
+data['vectors'][0] = numpy.array([[0, 1, 1],
+[1, 0, 1],
+[0, 0, 1]])</p>
+<pre><code>mesh = Mesh(data, remove_empty_areas=False)
+assert (mesh.vectors == numpy.array([
+    [[0, 1, 1], [1, 0, 1], [0, 0, 1]]])).all()
+
+# Translate mesh with vector [1, 2, 3]
+mesh.translate([1.0, 2.0, 3.0])
+assert (mesh.vectors == numpy.array([
+    [[1, 3, 4], [2, 2, 4], [1, 2, 4]]])).all()
+</code></pre>
+<p>def test_no_transformation():
+# Create a single face
+data = numpy.zeros(1, dtype=Mesh.dtype)
+data['vectors'][0] = numpy.array([[0, 1, 1],
+[1, 0, 1],
+[0, 0, 1]])</p>
+<pre><code>mesh = Mesh(data, remove_empty_areas=False)
+assert (mesh.vectors == numpy.array([
+    [[0, 1, 1], [1, 0, 1], [0, 0, 1]]])).all()
+
+# Transform mesh with identity matrix
+mesh.transform(numpy.eye(4))
+assert (mesh.vectors == numpy.array([
+    [[0, 1, 1], [1, 0, 1], [0, 0, 1]]])).all()
+assert numpy.all(mesh.areas == 0.5)
+</code></pre>
+<p>def test_transformation():
+# Create a single face
+data = numpy.zeros(1, dtype=Mesh.dtype)
+data['vectors'][0] = numpy.array([[0, 1, 1],
+[1, 0, 1],
+[0, 0, 1]])</p>
+<pre><code>mesh = Mesh(data, remove_empty_areas=False)
+assert (mesh.vectors == numpy.array([
+    [[0, 1, 1], [1, 0, 1], [0, 0, 1]]])).all()
+
+# Transform mesh with identity matrix
+tr = numpy.zeros((4, 4))
+tr[0:3, 0:3] = Mesh.rotation_matrix([0, 0, 1], 0.5 * numpy.pi)
+tr[0:3, 3] = [1, 2, 3]
+mesh.transform(tr)
+assert (mesh.vectors == numpy.array([
+    [[0, 2, 4], [1, 3, 4], [1, 2, 4]]])).all()
+assert numpy.all(mesh.areas == 0.5)</code></pre>
+</li>
+</ul>
+
+            </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://blog.bioprinting.site/post/HOPBFrX0u">
+                  <h3 class="post-title">
+                    matplotlib绘图注意
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script type="application/javascript">
+
+AOS.init();
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+
+  </body>
+</html>

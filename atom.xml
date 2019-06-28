@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://blog.bioprinting.site</id>
     <title>Li Zhenzhu, Ph.D</title>
-    <updated>2019-06-26T12:13:08.545Z</updated>
+    <updated>2019-06-28T10:00:40.164Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://blog.bioprinting.site"/>
     <link rel="self" href="https://blog.bioprinting.site/atom.xml"/>
@@ -10,6 +10,995 @@
     <logo>https://blog.bioprinting.site/images/avatar.png</logo>
     <icon>https://blog.bioprinting.site/favicon.ico</icon>
     <rights>All rights reserved 2019, Li Zhenzhu, Ph.D</rights>
+    <entry>
+        <title type="html"><![CDATA[numpy_stl简介]]></title>
+        <id>https://blog.bioprinting.site/post/5OyTRhe_F</id>
+        <link href="https://blog.bioprinting.site/post/5OyTRhe_F">
+        </link>
+        <updated>2019-06-28T09:49:05.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="欢迎来到numpy-stl的文档">欢迎来到numpy-stl的文档！</h1>
+<p>内容：</p>
+<ul>
+<li><a href="https://pythonhosted.org/numpy-stl/usage.html">numpy的-STL</a>
+<ul>
+<li><a href="https://pythonhosted.org/numpy-stl/usage.html#links">链接</a></li>
+<li><a href="https://pythonhosted.org/numpy-stl/usage.html#requirements-for-installing">安装要求：</a></li>
+<li><a href="https://pythonhosted.org/numpy-stl/usage.html#installation">安装：</a></li>
+<li><a href="https://pythonhosted.org/numpy-stl/usage.html#initial-usage">初次使用：</a></li>
+<li><a href="https://pythonhosted.org/numpy-stl/usage.html#contributing">贡献：</a></li>
+<li><a href="https://pythonhosted.org/numpy-stl/usage.html#quickstart">快速开始</a></li>
+<li><a href="https://pythonhosted.org/numpy-stl/usage.html#modifying-mesh-objects">修改Mesh对象</a></li>
+<li><a href="https://pythonhosted.org/numpy-stl/usage.html#extending-mesh-objects">扩展Mesh对象</a></li>
+<li><a href="https://pythonhosted.org/numpy-stl/usage.html#creating-mesh-objects-from-a-list-of-vertices-and-faces">从顶点和面的列表创建网格对象</a></li>
+<li><a href="https://pythonhosted.org/numpy-stl/usage.html#evaluating-mesh-properties-volume-center-of-gravity-inertia">评估网格属性（体积，重心，惯性）</a></li>
+<li><a href="https://pythonhosted.org/numpy-stl/usage.html#combining-multiple-stl-files">组合多个STL文件</a></li>
+</ul>
+</li>
+<li><a href="https://pythonhosted.org/numpy-stl/tests.html">测试和例子</a>
+<ul>
+<li><a href="https://pythonhosted.org/numpy-stl/tests.html#tests-stl-corruption-module">tests.stl_corruption模块</a></li>
+<li><a href="https://pythonhosted.org/numpy-stl/tests.html#tests-test-commandline-module">tests.test_commandline模块</a></li>
+<li><a href="https://pythonhosted.org/numpy-stl/tests.html#tests-test-convert-module">tests.test_convert模块</a></li>
+<li><a href="https://pythonhosted.org/numpy-stl/tests.html#tests-test-mesh-module">tests.test_mesh模块</a></li>
+<li><a href="https://pythonhosted.org/numpy-stl/tests.html#tests-test-multiple-module">tests.test_multiple模块</a></li>
+<li><a href="https://pythonhosted.org/numpy-stl/tests.html#tests-test-rotate-module">tests.test_rotate模块</a></li>
+</ul>
+</li>
+<li><a href="https://pythonhosted.org/numpy-stl/stl.html">stl包</a>
+<ul>
+<li><a href="https://pythonhosted.org/numpy-stl/stl.html#stl-mesh">stl.Mesh</a></li>
+<li><a href="https://pythonhosted.org/numpy-stl/stl.html#module-stl.main">stl.main模块</a></li>
+<li><a href="https://pythonhosted.org/numpy-stl/stl.html#module-stl.base">stl.base模块</a></li>
+<li><a href="https://pythonhosted.org/numpy-stl/stl.html#module-stl.mesh">stl.mesh模块</a></li>
+<li><a href="https://pythonhosted.org/numpy-stl/stl.html#module-stl.stl">stl.stl模块</a></li>
+</ul>
+</li>
+</ul>
+<h1 id="指数和表">指数和表<a href="https://pythonhosted.org/numpy-stl/index.html#indices-and-tables" title="永久链接到这个标题">¶</a></h1>
+<ul>
+<li>
+<p><a href="https://pythonhosted.org/numpy-stl/genindex.html">指数</a></p>
+</li>
+<li>
+<p><a href="https://pythonhosted.org/numpy-stl/py-modindex.html">模块索引</a></p>
+</li>
+<li>
+<p><a href="https://pythonhosted.org/numpy-stl/search.html">搜索页面</a></p>
+</li>
+<li>
+<h1 id="numpy的-stl">numpy的-STL</h1>
+<p>简单的库可以快速轻松地处理STL文件（以及一般的3D对象）。</p>
+<p>由于所有操作都严重依赖于<cite>numpy，</cite>因此这是Python中最快的STL编辑库之一。</p>
+<h2 id="链接">链接</h2>
+<blockquote>
+<ul>
+<li>来源：<a href="https://github.com/WoLpH/numpy-stl">https</a>：<a href="https://github.com/WoLpH/numpy-stl">//github.com/WoLpH/numpy-stl</a></li>
+<li>项目页面：<a href="https://pypi.python.org/pypi/numpy-stl">https</a>：<a href="https://pypi.python.org/pypi/numpy-stl">//pypi.python.org/pypi/numpy-stl</a></li>
+<li>报告错误：<a href="https://github.com/WoLpH/numpy-stl/issues">https</a>：<a href="https://github.com/WoLpH/numpy-stl/issues">//github.com/WoLpH/numpy-stl/issues</a></li>
+<li>文档：<a href="http://numpy-stl.readthedocs.org/en/latest/">http</a>：<a href="http://numpy-stl.readthedocs.org/en/latest/">//numpy-stl.readthedocs.org/en/latest/</a></li>
+<li>我的博客：<a href="https://wol.ph/">https</a>：<a href="https://wol.ph/">//wol.ph/</a></li>
+</ul>
+</blockquote>
+<h2 id="安装要求">安装要求：</h2>
+<blockquote>
+<ul>
+<li><a href="http://numpy.org/">numpy</a>任何最新版本</li>
+<li><a href="https://github.com/WoLpH/python-utils">python-utils</a> 1.6或更高版本</li>
+</ul>
+</blockquote>
+<h2 id="安装">安装：</h2>
+<p><cite>pip install numpy-stl</cite></p>
+<h2 id="初次使用">初次使用：</h2>
+<blockquote>
+<ul>
+<li><cite>stl2bin your_ascii_stl_file.stl new_binary_stl_file.stl</cite></li>
+<li><cite>stl2ascii your_binary_stl_file.stl new_ascii_stl_file.stl</cite></li>
+<li><cite>stl your_ascii_stl_file.stl new_binary_stl_file.stl</cite></li>
+</ul>
+</blockquote>
+<h2 id="贡献">贡献：</h2>
+<p>我们随时欢迎您的贡献。请查看入门指南：<a href="https://github.com/WoLpH/numpy-stl/blob/develop/CONTRIBUTING.rst">https</a>： <a href="https://github.com/WoLpH/numpy-stl/blob/develop/CONTRIBUTING.rst">//github.com/WoLpH/numpy-stl/blob/develop/CONTRIBUTING.rst</a></p>
+<h2 id="快速入门">快速入门</h2>
+</li>
+<li>
+<p>Quickstart
+import numpy
+from stl import mesh</p>
+</li>
+</ul>
+<h1 id="using-an-existing-stl-file">Using an existing stl file:</h1>
+<p>your_mesh = mesh.Mesh.from_file('some_file.stl')</p>
+<h1 id="or-creating-a-new-mesh-make-sure-not-to-overwrite-the-mesh-import-by">Or creating a new mesh (make sure not to overwrite the <code>mesh</code> import by</h1>
+<h1 id="naming-it-mesh">naming it <code>mesh</code>):</h1>
+<p>VERTICE_COUNT = 100
+data = numpy.zeros(VERTICE_COUNT, dtype=mesh.Mesh.dtype)
+your_mesh = mesh.Mesh(data, remove_empty_areas=False)</p>
+<h1 id="the-mesh-normals-calculated-automatically">The mesh normals (calculated automatically)</h1>
+<p>your_mesh.normals</p>
+<h1 id="the-mesh-vectors">The mesh vectors</h1>
+<p>your_mesh.v0, your_mesh.v1, your_mesh.v2</p>
+<h1 id="accessing-individual-points-concatenation-of-v0-v1-and-v2-in-triplets">Accessing individual points (concatenation of v0, v1 and v2 in triplets)</h1>
+<p>assert (your_mesh.points[0][0:3] == your_mesh.v0[0]).all()
+assert (your_mesh.points[0][3:6] == your_mesh.v1[0]).all()
+assert (your_mesh.points[0][6:9] == your_mesh.v2[0]).all()
+assert (your_mesh.points[1][0:3] == your_mesh.v0[1]).all()</p>
+<p>your_mesh.save('new_stl_file.stl')
+Plotting using matplotlib is equally easy:</p>
+<p>from stl import mesh
+from mpl_toolkits import mplot3d
+from matplotlib import pyplot</p>
+<h1 id="create-a-new-plot">Create a new plot</h1>
+<p>figure = pyplot.figure()
+axes = mplot3d.Axes3D(figure)</p>
+<h1 id="load-the-stl-files-and-add-the-vectors-to-the-plot">Load the STL files and add the vectors to the plot</h1>
+<p>your_mesh = mesh.Mesh.from_file('tests/stl_binary/HalfDonut.stl')
+axes.add_collection3d(mplot3d.art3d.Poly3DCollection(your_mesh.vectors))</p>
+<h1 id="auto-scale-to-the-mesh-size">Auto scale to the mesh size</h1>
+<p>scale = your_mesh.points.flatten(-1)
+axes.auto_scale_xyz(scale, scale, scale)</p>
+<h1 id="show-the-plot-to-the-screen">Show the plot to the screen</h1>
+<p>pyplot.show()
+Modifying Mesh objects
+from stl import mesh
+import math
+import numpy</p>
+<h1 id="create-3-faces-of-a-cube">Create 3 faces of a cube</h1>
+<p>data = numpy.zeros(6, dtype=mesh.Mesh.dtype)</p>
+<h1 id="top-of-the-cube">Top of the cube</h1>
+<p>data['vectors'][0] = numpy.array([[0, 1, 1],
+[1, 0, 1],
+[0, 0, 1]])
+data['vectors'][1] = numpy.array([[1, 0, 1],
+[0, 1, 1],
+[1, 1, 1]])</p>
+<h1 id="right-face">Right face</h1>
+<p>data['vectors'][2] = numpy.array([[1, 0, 0],
+[1, 0, 1],
+[1, 1, 0]])
+data['vectors'][3] = numpy.array([[1, 1, 1],
+[1, 0, 1],
+[1, 1, 0]])</p>
+<h1 id="left-face">Left face</h1>
+<p>data['vectors'][4] = numpy.array([[0, 0, 0],
+[1, 0, 0],
+[1, 0, 1]])
+data['vectors'][5] = numpy.array([[0, 0, 0],
+[0, 0, 1],
+[1, 0, 1]])</p>
+<h1 id="since-the-cube-faces-are-from-0-to-1-we-can-move-it-to-the-middle-by">Since the cube faces are from 0 to 1 we can move it to the middle by</h1>
+<h1 id="substracting-5">substracting .5</h1>
+<p>data['vectors'] -= .5</p>
+<h1 id="generate-4-different-meshes-so-we-can-rotate-them-later">Generate 4 different meshes so we can rotate them later</h1>
+<p>meshes = [mesh.Mesh(data.copy()) for _ in range(4)]</p>
+<h1 id="rotate-90-degrees-over-the-y-axis">Rotate 90 degrees over the Y axis</h1>
+<p>meshes[0].rotate([0.0, 0.5, 0.0], math.radians(90))</p>
+<h1 id="translate-2-points-over-the-x-axis">Translate 2 points over the X axis</h1>
+<p>meshes[1].x += 2</p>
+<h1 id="rotate-90-degrees-over-the-x-axis">Rotate 90 degrees over the X axis</h1>
+<p>meshes[2].rotate([0.5, 0.0, 0.0], math.radians(90))</p>
+<h1 id="translate-2-points-over-the-x-and-y-points">Translate 2 points over the X and Y points</h1>
+<p>meshes[2].x += 2
+meshes[2].y += 2</p>
+<h1 id="rotate-90-degrees-over-the-x-and-y-axis">Rotate 90 degrees over the X and Y axis</h1>
+<p>meshes[3].rotate([0.5, 0.0, 0.0], math.radians(90))
+meshes[3].rotate([0.0, 0.5, 0.0], math.radians(90))</p>
+<h1 id="translate-2-points-over-the-y-axis">Translate 2 points over the Y axis</h1>
+<p>meshes[3].y += 2</p>
+<h1 id="optionally-render-the-rotated-cube-faces">Optionally render the rotated cube faces</h1>
+<p>from matplotlib import pyplot
+from mpl_toolkits import mplot3d</p>
+<h1 id="create-a-new-plot-2">Create a new plot</h1>
+<p>figure = pyplot.figure()
+axes = mplot3d.Axes3D(figure)</p>
+<h1 id="render-the-cube-faces">Render the cube faces</h1>
+<p>for m in meshes:
+axes.add_collection3d(mplot3d.art3d.Poly3DCollection(m.vectors))</p>
+<h1 id="auto-scale-to-the-mesh-size-2">Auto scale to the mesh size</h1>
+<p>scale = numpy.concatenate([m.points for m in meshes]).flatten(-1)
+axes.auto_scale_xyz(scale, scale, scale)</p>
+<h1 id="show-the-plot-to-the-screen-2">Show the plot to the screen</h1>
+<p>pyplot.show()
+Extending Mesh objects
+from stl import mesh
+import math
+import numpy</p>
+<h1 id="create-3-faces-of-a-cube-2">Create 3 faces of a cube</h1>
+<p>data = numpy.zeros(6, dtype=mesh.Mesh.dtype)</p>
+<h1 id="top-of-the-cube-2">Top of the cube</h1>
+<p>data['vectors'][0] = numpy.array([[0, 1, 1],
+[1, 0, 1],
+[0, 0, 1]])
+data['vectors'][1] = numpy.array([[1, 0, 1],
+[0, 1, 1],
+[1, 1, 1]])</p>
+<h1 id="right-face-2">Right face</h1>
+<p>data['vectors'][2] = numpy.array([[1, 0, 0],
+[1, 0, 1],
+[1, 1, 0]])
+data['vectors'][3] = numpy.array([[1, 1, 1],
+[1, 0, 1],
+[1, 1, 0]])</p>
+<h1 id="left-face-2">Left face</h1>
+<p>data['vectors'][4] = numpy.array([[0, 0, 0],
+[1, 0, 0],
+[1, 0, 1]])
+data['vectors'][5] = numpy.array([[0, 0, 0],
+[0, 0, 1],
+[1, 0, 1]])</p>
+<h1 id="since-the-cube-faces-are-from-0-to-1-we-can-move-it-to-the-middle-by-2">Since the cube faces are from 0 to 1 we can move it to the middle by</h1>
+<h1 id="substracting-5-2">substracting .5</h1>
+<p>data['vectors'] -= .5</p>
+<p>cube_back = mesh.Mesh(data.copy())
+cube_front = mesh.Mesh(data.copy())</p>
+<h1 id="rotate-90-degrees-over-the-x-axis-followed-by-the-y-axis-followed-by-the">Rotate 90 degrees over the X axis followed by the Y axis followed by the</h1>
+<h1 id="x-axis">X axis</h1>
+<p>cube_back.rotate([0.5, 0.0, 0.0], math.radians(90))
+cube_back.rotate([0.0, 0.5, 0.0], math.radians(90))
+cube_back.rotate([0.5, 0.0, 0.0], math.radians(90))</p>
+<p>cube = mesh.Mesh(numpy.concatenate([
+cube_back.data.copy(),
+cube_front.data.copy(),
+]))</p>
+<h1 id="optionally-render-the-rotated-cube-faces-2">Optionally render the rotated cube faces</h1>
+<p>from matplotlib import pyplot
+from mpl_toolkits import mplot3d</p>
+<h1 id="create-a-new-plot-3">Create a new plot</h1>
+<p>figure = pyplot.figure()
+axes = mplot3d.Axes3D(figure)</p>
+<h1 id="render-the-cube">Render the cube</h1>
+<p>axes.add_collection3d(mplot3d.art3d.Poly3DCollection(cube.vectors))</p>
+<h1 id="auto-scale-to-the-mesh-size-3">Auto scale to the mesh size</h1>
+<p>scale = cube_back.points.flatten(-1)
+axes.auto_scale_xyz(scale, scale, scale)</p>
+<h1 id="show-the-plot-to-the-screen-3">Show the plot to the screen</h1>
+<p>pyplot.show()
+Creating Mesh objects from a list of vertices and faces
+import numpy as np
+from stl import mesh</p>
+<h1 id="define-the-8-vertices-of-the-cube">Define the 8 vertices of the cube</h1>
+<p>vertices = np.array([<br>
+[-1, -1, -1],
+[+1, -1, -1],
+[+1, +1, -1],
+[-1, +1, -1],
+[-1, -1, +1],
+[+1, -1, +1],
+[+1, +1, +1],
+[-1, +1, +1]])</p>
+<h1 id="define-the-12-triangles-composing-the-cube">Define the 12 triangles composing the cube</h1>
+<p>faces = np.array([<br>
+[0,3,1],
+[1,3,2],
+[0,4,7],
+[0,7,3],
+[4,5,6],
+[4,6,7],
+[5,1,2],
+[5,2,6],
+[2,3,6],
+[3,7,6],
+[0,1,5],
+[0,5,4]])</p>
+<h1 id="create-the-mesh">Create the mesh</h1>
+<p>cube = mesh.Mesh(np.zeros(faces.shape[0], dtype=mesh.Mesh.dtype))
+for i, f in enumerate(faces):
+for j in range(3):
+cube.vectors[i][j] = vertices[f[j],:]</p>
+<h1 id="write-the-mesh-to-file-cubestl">Write the mesh to file &quot;cube.stl&quot;</h1>
+<p>cube.save('cube.stl')
+Evaluating Mesh properties (Volume, Center of gravity, Inertia)
+import numpy as np
+from stl import mesh</p>
+<h1 id="using-an-existing-closed-stl-file">Using an existing closed stl file:</h1>
+<p>your_mesh = mesh.Mesh.from_file('some_file.stl')</p>
+<p>volume, cog, inertia = your_mesh.get_mass_properties()
+print(&quot;Volume                                  = {0}&quot;.format(volume))
+print(&quot;Position of the center of gravity (COG) = {0}&quot;.format(cog))
+print(&quot;Inertia matrix at expressed at the COG  = {0}&quot;.format(inertia[0,:]))
+print(&quot;                                          {0}&quot;.format(inertia[1,:]))
+print(&quot;                                          {0}&quot;.format(inertia[2,:]))
+Combining multiple STL files
+import math
+import stl
+from stl import mesh
+import numpy</p>
+<h1 id="find-the-max-dimensions-so-we-can-know-the-bounding-box-getting-the-height">find the max dimensions, so we can know the bounding box, getting the height,</h1>
+<h1 id="width-length-because-these-are-the-step-size">width, length (because these are the step size)...</h1>
+<p>def find_mins_maxs(obj):
+minx = maxx = miny = maxy = minz = maxz = None
+for p in obj.points:
+# p contains (x, y, z)
+if minx is None:
+minx = p[stl.Dimension.X]
+maxx = p[stl.Dimension.X]
+miny = p[stl.Dimension.Y]
+maxy = p[stl.Dimension.Y]
+minz = p[stl.Dimension.Z]
+maxz = p[stl.Dimension.Z]
+else:
+maxx = max(p[stl.Dimension.X], maxx)
+minx = min(p[stl.Dimension.X], minx)
+maxy = max(p[stl.Dimension.Y], maxy)
+miny = min(p[stl.Dimension.Y], miny)
+maxz = max(p[stl.Dimension.Z], maxz)
+minz = min(p[stl.Dimension.Z], minz)
+return minx, maxx, miny, maxy, minz, maxz</p>
+<p>def translate(_solid, step, padding, multiplier, axis):
+if axis == 'x':
+items = [0, 3, 6]
+elif axis == 'y':
+items = [1, 4, 7]
+elif axis == 'z':
+items = [2, 5, 8]
+for p in _solid.points:
+# point items are ((x, y, z), (x, y, z), (x, y, z))
+for i in range(3):
+p[items[i]] += (step * multiplier) + (padding * multiplier)</p>
+<p>def copy_obj(obj, dims, num_rows, num_cols, num_layers):
+w, l, h = dims
+copies = []
+for layer in range(num_layers):
+for row in range(num_rows):
+for col in range(num_cols):
+# skip the position where original being copied is
+if row == 0 and col == 0 and layer == 0:
+continue
+_copy = mesh.Mesh(obj.data.copy())
+# pad the space between objects by 10% of the dimension being
+# translated
+if col != 0:
+translate(_copy, w, w / 10., col, 'x')
+if row != 0:
+translate(_copy, l, l / 10., row, 'y')
+if layer != 0:
+translate(_copy, h, h / 10., layer, 'z')
+copies.append(_copy)
+return copies</p>
+<h1 id="using-an-existing-stl-file-2">Using an existing stl file:</h1>
+<p>main_body = mesh.Mesh.from_file('ball_and_socket_simplified_-_main_body.stl')</p>
+<h1 id="rotate-along-y">rotate along Y</h1>
+<p>main_body.rotate([0.0, 0.5, 0.0], math.radians(90))</p>
+<p>minx, maxx, miny, maxy, minz, maxz = find_mins_maxs(main_body)
+w1 = maxx - minx
+l1 = maxy - miny
+h1 = maxz - minz
+copies = copy_obj(main_body, (w1, l1, h1), 2, 2, 1)</p>
+<h1 id="i-wanted-to-add-another-related-stl-to-the-final-stl">I wanted to add another related STL to the final STL</h1>
+<p>twist_lock = mesh.Mesh.from_file('ball_and_socket_simplified_-_twist_lock.stl')
+minx, maxx, miny, maxy, minz, maxz = find_mins_maxs(twist_lock)
+w2 = maxx - minx
+l2 = maxy - miny
+h2 = maxz - minz
+translate(twist_lock, w1, w1 / 10., 3, 'x')
+copies2 = copy_obj(twist_lock, (w2, l2, h2), 2, 2, 1)
+combined = mesh.Mesh(numpy.concatenate([main_body.data, twist_lock.data] +
+[copy.data for copy in copies] +
+[copy.data for copy in copies2]))</p>
+<p>combined.save('combined.stl', mode=stl.Mode.ASCII)  # save as ASCII</p>
+<ul>
+<li>
+<h2 id="testsstl_corruption-module">tests.stl_corruption module</h2>
+<p>from <strong>future</strong> import print_function
+import pytest
+import struct</p>
+<p>from stl import mesh</p>
+<p>_STL_FILE = '''
+solid test.stl
+facet normal -0.014565 0.073223 -0.002897
+outer loop
+vertex 0.399344 0.461940 1.044090
+vertex 0.500000 0.500000 1.500000
+vertex 0.576120 0.500000 1.117320
+endloop
+endfacet
+endsolid test.stl
+'''.lstrip()</p>
+<p>def test_valid_ascii(tmpdir, speedups):
+tmp_file = tmpdir.join('tmp.stl')
+with tmp_file.open('w+') as fh:
+fh.write(_STL_FILE)
+fh.seek(0)
+mesh.Mesh.from_file(str(tmp_file), fh=fh, speedups=speedups)</p>
+<p>def test_ascii_with_missing_name(tmpdir, speedups):
+tmp_file = tmpdir.join('tmp.stl')
+with tmp_file.open('w+') as fh:
+# Split the file into lines
+lines = _STL_FILE.splitlines()</p>
+<pre><code>    # Remove everything except solid
+    lines[0] = lines[0].split()[0]
+
+    # Join the lines to test files that start with solid without space
+    fh.write('\n'.join(lines))
+    fh.seek(0)
+    mesh.Mesh.from_file(str(tmp_file), fh=fh, speedups=speedups)
+</code></pre>
+<p>def test_ascii_with_blank_lines(tmpdir, speedups):
+_stl_file = '''
+solid test.stl</p>
+<p>facet normal -0.014565 0.073223 -0.002897</p>
+<p>outer loop</p>
+<p>vertex 0.399344 0.461940 1.044090
+vertex 0.500000 0.500000 1.500000</p>
+<p>vertex 0.576120 0.500000 1.117320</p>
+<p>endloop</p>
+<p>endfacet</p>
+<p>endsolid test.stl
+'''.lstrip()</p>
+<pre><code>tmp_file = tmpdir.join('tmp.stl')
+with tmp_file.open('w+') as fh:
+    fh.write(_stl_file)
+    fh.seek(0)
+    mesh.Mesh.from_file(str(tmp_file), fh=fh, speedups=speedups)
+</code></pre>
+<p>def test_incomplete_ascii_file(tmpdir, speedups):
+tmp_file = tmpdir.join('tmp.stl')
+with tmp_file.open('w+') as fh:
+fh.write('solid some_file.stl')
+fh.seek(0)
+with pytest.raises(AssertionError):
+mesh.Mesh.from_file(str(tmp_file), fh=fh, speedups=speedups)</p>
+<pre><code>for offset in (-20, 82, 100):
+    with tmp_file.open('w+') as fh:
+        fh.write(_STL_FILE[:-offset])
+        fh.seek(0)
+        with pytest.raises(AssertionError):
+            mesh.Mesh.from_file(str(tmp_file), fh=fh, speedups=speedups)
+</code></pre>
+<p>def test_corrupt_ascii_file(tmpdir, speedups):
+tmp_file = tmpdir.join('tmp.stl')
+with tmp_file.open('w+') as fh:
+fh.write(_STL_FILE)
+fh.seek(40)
+print('####\n' * 100, file=fh)
+fh.seek(0)
+with pytest.raises(AssertionError):
+mesh.Mesh.from_file(str(tmp_file), fh=fh, speedups=speedups)</p>
+<pre><code>with tmp_file.open('w+') as fh:
+    fh.write(_STL_FILE)
+    fh.seek(40)
+    print(' ' * 100, file=fh)
+    fh.seek(80)
+    fh.write(struct.pack('&lt;i', 10).decode('utf-8'))
+    fh.seek(0)
+    with pytest.raises(AssertionError):
+        mesh.Mesh.from_file(str(tmp_file), fh=fh, speedups=speedups)
+</code></pre>
+<p>def test_corrupt_binary_file(tmpdir, speedups):
+tmp_file = tmpdir.join('tmp.stl')
+with tmp_file.open('w+') as fh:
+fh.write('#########\n' * 8)
+fh.write('#\0\0\0')
+fh.seek(0)
+mesh.Mesh.from_file(str(tmp_file), fh=fh, speedups=speedups)</p>
+<pre><code>with tmp_file.open('w+') as fh:
+    fh.write('#########\n' * 9)
+    fh.seek(0)
+    with pytest.raises(AssertionError):
+        mesh.Mesh.from_file(str(tmp_file), fh=fh, speedups=speedups)
+
+with tmp_file.open('w+') as fh:
+    fh.write('#########\n' * 8)
+    fh.write('#\0\0\0')
+    fh.seek(0)
+    fh.write('solid test.stl')
+    fh.seek(0)
+    mesh.Mesh.from_file(str(tmp_file), fh=fh, speedups=speedups)
+</code></pre>
+<h2 id="teststest_commandline-module">tests.test_commandline module</h2>
+<p>import sys</p>
+<p>from stl import main</p>
+<p>def test_main(ascii_file, binary_file, tmpdir, speedups):
+original_argv = sys.argv[:]
+args_pre = ['stl']
+args_post = [str(tmpdir.join('output.stl'))]</p>
+<pre><code>if not speedups:
+    args_pre.append('-s')
+
+try:
+    sys.argv[:] = args_pre + [ascii_file] + args_post
+    main.main()
+    sys.argv[:] = args_pre + ['-r', ascii_file] + args_post
+    main.main()
+    sys.argv[:] = args_pre + ['-a', binary_file] + args_post
+    main.main()
+    sys.argv[:] = args_pre + ['-b', ascii_file] + args_post
+    main.main()
+finally:
+    sys.argv[:] = original_argv
+</code></pre>
+<p>def test_args(ascii_file, tmpdir):
+parser = main._get_parser('')</p>
+<pre><code>def _get_name(*args):
+    return main._get_name(parser.parse_args(list(map(str, args))))
+
+assert _get_name('--name', 'foobar') == 'foobar'
+assert _get_name('-', tmpdir.join('binary.stl')).endswith('binary.stl')
+assert _get_name(ascii_file, '-').endswith('HalfDonut.stl')
+assert _get_name('-', '-')
+</code></pre>
+<p>def test_ascii(binary_file, tmpdir, speedups):
+original_argv = sys.argv[:]
+try:
+sys.argv[:] = [
+'stl',
+'-s' if not speedups else '',
+binary_file,
+str(tmpdir.join('ascii.stl')),
+]
+try:
+main.to_ascii()
+except SystemExit:
+pass
+finally:
+sys.argv[:] = original_argv</p>
+<p>def test_binary(ascii_file, tmpdir, speedups):
+original_argv = sys.argv[:]
+try:
+sys.argv[:] = [
+'stl',
+'-s' if not speedups else '',
+ascii_file,
+str(tmpdir.join('binary.stl')),
+]
+try:
+main.to_binary()
+except SystemExit:
+pass
+finally:
+sys.argv[:] = original_argv</p>
+<h2 id="teststest_convert-module">tests.test_convert module</h2>
+<h1 id="import-os">import os</h1>
+<p>import pytest
+import tempfile</p>
+<p>from stl import stl</p>
+<p>def <em>test_conversion(from</em>, to, mode, speedups):</p>
+<pre><code>for name in from_.listdir():
+    source_file = from_.join(name)
+    expected_file = to.join(name)
+    if not expected_file.exists():
+        continue
+
+    mesh = stl.StlMesh(source_file, speedups=speedups)
+    with open(str(expected_file), 'rb') as expected_fh:
+        expected = expected_fh.read()
+        # For binary files, skip the header
+        if mode is stl.BINARY:
+            expected = expected[80:]
+
+        with tempfile.TemporaryFile() as dest_fh:
+            mesh.save(name, dest_fh, mode)
+            # Go back to the beginning to read
+            dest_fh.seek(0)
+            dest = dest_fh.read()
+            # For binary files, skip the header
+            if mode is stl.BINARY:
+                dest = dest[80:]
+
+            assert dest.strip() == expected.strip()
+</code></pre>
+<p>def test_ascii_to_binary(ascii_path, binary_path, speedups):
+_test_conversion(ascii_path, binary_path, mode=stl.BINARY,
+speedups=speedups)</p>
+<p>def test_binary_to_ascii(ascii_path, binary_path, speedups):
+_test_conversion(binary_path, ascii_path, mode=stl.ASCII,
+speedups=speedups)</p>
+<p>def test_stl_mesh(ascii_file, tmpdir, speedups):
+tmp_file = tmpdir.join('tmp.stl')</p>
+<pre><code>mesh = stl.StlMesh(ascii_file, speedups=speedups)
+with pytest.raises(ValueError):
+    mesh.save(filename=str(tmp_file), mode='test')
+
+mesh.save(str(tmp_file))
+mesh.save(str(tmp_file), update_normals=False)
+</code></pre>
+<h2 id="teststest_mesh-module">tests.test_mesh module</h2>
+<p>import numpy</p>
+<p>from stl.mesh import Mesh
+from stl.base import BaseMesh
+from stl.base import RemoveDuplicates</p>
+<p>def test_units_1d():
+data = numpy.zeros(1, dtype=Mesh.dtype)
+data['vectors'][0] = numpy.array([[0, 0, 0],
+[1, 0, 0],
+[2, 0, 0]])</p>
+<pre><code>mesh = Mesh(data, remove_empty_areas=False)
+mesh.update_units()
+
+assert mesh.areas == 0
+assert (mesh.normals == [0, 0, 0]).all()
+assert (mesh.units == [0, 0, 0]).all()
+</code></pre>
+<p>def test_units_2d():
+data = numpy.zeros(2, dtype=Mesh.dtype)
+data['vectors'][0] = numpy.array([[0, 0, 0],
+[1, 0, 0],
+[0, 1, 0]])
+data['vectors'][1] = numpy.array([[1, 0, 0],
+[0, 1, 0],
+[1, 1, 0]])</p>
+<pre><code>mesh = Mesh(data, remove_empty_areas=False)
+mesh.update_units()
+
+assert (mesh.areas == [.5, .5]).all()
+assert (mesh.normals == [[0, 0, 1.],
+                         [0, 0, -1.]]).all()
+
+assert (mesh.units == [[0, 0, 1],
+                       [0, 0, -1]]).all()
+</code></pre>
+<p>def test_units_3d():
+data = numpy.zeros(1, dtype=Mesh.dtype)
+data['vectors'][0] = numpy.array([[0, 0, 0],
+[1, 0, 0],
+[0, 1, 1.]])</p>
+<pre><code>mesh = Mesh(data, remove_empty_areas=False)
+mesh.update_units()
+
+assert (mesh.areas - 2 ** .5) &lt; 0.0001
+assert (mesh.normals == [0, -1, 1]).all()
+
+units = mesh.units[0]
+assert units[0] == 0
+# Due to floating point errors
+assert (units[1] + .5 * 2 ** .5) &lt; 0.0001
+assert (units[2] - .5 * 2 ** .5) &lt; 0.0001
+</code></pre>
+<p>def test_duplicate_polygons():
+data = numpy.zeros(6, dtype=Mesh.dtype)
+data['vectors'][0] = numpy.array([[1, 0, 0],
+[0, 0, 0],
+[0, 0, 0]])
+data['vectors'][1] = numpy.array([[2, 0, 0],
+[0, 0, 0],
+[0, 0, 0]])
+data['vectors'][2] = numpy.array([[0, 0, 0],
+[0, 0, 0],
+[0, 0, 0]])
+data['vectors'][3] = numpy.array([[2, 0, 0],
+[0, 0, 0],
+[0, 0, 0]])
+data['vectors'][4] = numpy.array([[1, 0, 0],
+[0, 0, 0],
+[0, 0, 0]])
+data['vectors'][5] = numpy.array([[0, 0, 0],
+[0, 0, 0],
+[0, 0, 0]])</p>
+<pre><code>mesh = Mesh(data)
+assert mesh.data.size == 6
+
+mesh = Mesh(data, remove_duplicate_polygons=0)
+assert mesh.data.size == 6
+
+mesh = Mesh(data, remove_duplicate_polygons=False)
+assert mesh.data.size == 6
+
+mesh = Mesh(data, remove_duplicate_polygons=None)
+assert mesh.data.size == 6
+
+mesh = Mesh(data, remove_duplicate_polygons=RemoveDuplicates.NONE)
+assert mesh.data.size == 6
+
+mesh = Mesh(data, remove_duplicate_polygons=RemoveDuplicates.SINGLE)
+assert mesh.data.size == 3
+
+mesh = Mesh(data, remove_duplicate_polygons=True)
+assert mesh.data.size == 3
+
+assert (mesh.vectors[0] == numpy.array([[1, 0, 0],
+                                        [0, 0, 0],
+                                        [0, 0, 0]])).all()
+assert (mesh.vectors[1] == numpy.array([[2, 0, 0],
+                                        [0, 0, 0],
+                                        [0, 0, 0]])).all()
+assert (mesh.vectors[2] == numpy.array([[0, 0, 0],
+                                        [0, 0, 0],
+                                        [0, 0, 0]])).all()
+
+mesh = Mesh(data, remove_duplicate_polygons=RemoveDuplicates.ALL)
+assert mesh.data.size == 3
+
+assert (mesh.vectors[0] == numpy.array([[1, 0, 0],
+                                        [0, 0, 0],
+                                        [0, 0, 0]])).all()
+assert (mesh.vectors[1] == numpy.array([[2, 0, 0],
+                                        [0, 0, 0],
+                                        [0, 0, 0]])).all()
+assert (mesh.vectors[2] == numpy.array([[0, 0, 0],
+                                        [0, 0, 0],
+                                        [0, 0, 0]])).all()
+</code></pre>
+<p>def test_remove_all_duplicate_polygons():
+data = numpy.zeros(5, dtype=Mesh.dtype)
+data['vectors'][0] = numpy.array([[0, 0, 0],
+[0, 0, 0],
+[0, 0, 0]])
+data['vectors'][1] = numpy.array([[1, 0, 0],
+[0, 0, 0],
+[0, 0, 0]])
+data['vectors'][2] = numpy.array([[2, 0, 0],
+[0, 0, 0],
+[0, 0, 0]])
+data['vectors'][3] = numpy.array([[3, 0, 0],
+[0, 0, 0],
+[0, 0, 0]])
+data['vectors'][4] = numpy.array([[3, 0, 0],
+[0, 0, 0],
+[0, 0, 0]])</p>
+<pre><code>mesh = Mesh(data, remove_duplicate_polygons=False)
+assert mesh.data.size == 5
+Mesh.remove_duplicate_polygons(mesh.data, RemoveDuplicates.NONE)
+
+mesh = Mesh(data, remove_duplicate_polygons=RemoveDuplicates.ALL)
+assert mesh.data.size == 3
+
+assert (mesh.vectors[0] == numpy.array([[0, 0, 0],
+                                        [0, 0, 0],
+                                        [0, 0, 0]])).all()
+assert (mesh.vectors[1] == numpy.array([[1, 0, 0],
+                                        [0, 0, 0],
+                                        [0, 0, 0]])).all()
+assert (mesh.vectors[2] == numpy.array([[2, 0, 0],
+                                        [0, 0, 0],
+                                        [0, 0, 0]])).all()
+</code></pre>
+<p>def test_empty_areas():
+data = numpy.zeros(3, dtype=Mesh.dtype)
+data['vectors'][0] = numpy.array([[0, 0, 0],
+[1, 0, 0],
+[0, 1, 0]])
+data['vectors'][1] = numpy.array([[1, 0, 0],
+[0, 1, 0],
+[1, 0, 0]])
+data['vectors'][2] = numpy.array([[1, 0, 0],
+[0, 1, 0],
+[1, 0, 0]])</p>
+<pre><code>mesh = Mesh(data, remove_empty_areas=False)
+assert mesh.data.size == 3
+
+mesh = Mesh(data, remove_empty_areas=True)
+assert mesh.data.size == 1
+</code></pre>
+<p>def test_base_mesh():
+data = numpy.zeros(10, dtype=BaseMesh.dtype)
+mesh = BaseMesh(data, remove_empty_areas=False)
+# Increment vector 0 item 0
+mesh.v0[0] += 1
+mesh.v1[0] += 2</p>
+<pre><code># Check item 0 (contains v0, v1 and v2)
+assert (mesh[0] == numpy.array(
+    [1., 1., 1., 2., 2., 2., 0., 0., 0.], dtype=numpy.float32)
+).all()
+assert (mesh.vectors[0] == numpy.array([
+        [1., 1., 1.],
+        [2., 2., 2.],
+        [0., 0., 0.]], dtype=numpy.float32)).all()
+assert (mesh.v0[0] == numpy.array([1., 1., 1.], dtype=numpy.float32)).all()
+assert (mesh.points[0] == numpy.array(
+    [1., 1., 1., 2., 2., 2., 0., 0., 0.], dtype=numpy.float32)
+).all()
+assert (
+    mesh.x[0] == numpy.array([1., 2., 0.], dtype=numpy.float32)).all()
+
+mesh[0] = 3
+assert (mesh[0] == numpy.array(
+    [3., 3., 3., 3., 3., 3., 3., 3., 3.], dtype=numpy.float32)
+).all()
+
+assert len(mesh) == len(list(mesh))
+assert (mesh.min_ &lt; mesh.max_).all()
+mesh.update_normals()
+assert mesh.units.sum() == 0.0
+mesh.v0[:] = mesh.v1[:] = mesh.v2[:] = 0
+assert mesh.points.sum() == 0.0
+</code></pre>
+<h2 id="teststest_multiple-module">tests.test_multiple module</h2>
+<p>from stl import mesh
+from stl.utils import b</p>
+<p>_STL_FILE = b('''
+solid test.stl
+facet normal -0.014565 0.073223 -0.002897
+outer loop
+vertex 0.399344 0.461940 1.044090
+vertex 0.500000 0.500000 1.500000
+vertex 0.576120 0.500000 1.117320
+endloop
+endfacet
+endsolid test.stl
+'''.lstrip())</p>
+<p>def test_single_stl(tmpdir, speedups):
+tmp_file = tmpdir.join('tmp.stl')
+with tmp_file.open('wb+') as fh:
+fh.write(_STL_FILE)
+fh.seek(0)
+for m in mesh.Mesh.from_multi_file(
+str(tmp_file), fh=fh, speedups=speedups):
+pass</p>
+<p>def test_multiple_stl(tmpdir, speedups):
+tmp_file = tmpdir.join('tmp.stl')
+with tmp_file.open('wb+') as fh:
+for _ in range(10):
+fh.write(_STL_FILE)
+fh.seek(0)
+for i, m in enumerate(mesh.Mesh.from_multi_file(
+str(tmp_file), fh=fh, speedups=speedups)):
+assert m.name == b'test.stl'</p>
+<pre><code>    assert i == 9
+</code></pre>
+<p>def test_single_stl_file(tmpdir, speedups):
+tmp_file = tmpdir.join('tmp.stl')
+with tmp_file.open('wb+') as fh:
+fh.write(_STL_FILE)
+fh.seek(0)
+for m in mesh.Mesh.from_multi_file(
+str(tmp_file), speedups=speedups):
+pass</p>
+<p>def test_multiple_stl_file(tmpdir, speedups):
+tmp_file = tmpdir.join('tmp.stl')
+with tmp_file.open('wb+') as fh:
+for _ in range(10):
+fh.write(_STL_FILE)</p>
+<pre><code>    fh.seek(0)
+    for i, m in enumerate(mesh.Mesh.from_multi_file(
+            str(tmp_file), speedups=speedups)):
+        assert m.name == b'test.stl'
+
+    assert i == 9
+</code></pre>
+<h2 id="teststest_rotate-module">tests.test_rotate module</h2>
+<p>import math
+import numpy</p>
+<p>from stl.mesh import Mesh</p>
+<p>def test_rotation():
+# Create 6 faces of a cube
+data = numpy.zeros(6, dtype=Mesh.dtype)</p>
+<pre><code># Top of the cube
+data['vectors'][0] = numpy.array([[0, 1, 1],
+                                  [1, 0, 1],
+                                  [0, 0, 1]])
+data['vectors'][1] = numpy.array([[1, 0, 1],
+                                  [0, 1, 1],
+                                  [1, 1, 1]])
+# Right face
+data['vectors'][2] = numpy.array([[1, 0, 0],
+                                  [1, 0, 1],
+                                  [1, 1, 0]])
+data['vectors'][3] = numpy.array([[1, 1, 1],
+                                  [1, 0, 1],
+                                  [1, 1, 0]])
+# Left face
+data['vectors'][4] = numpy.array([[0, 0, 0],
+                                  [1, 0, 0],
+                                  [1, 0, 1]])
+data['vectors'][5] = numpy.array([[0, 0, 0],
+                                  [0, 0, 1],
+                                  [1, 0, 1]])
+
+mesh = Mesh(data, remove_empty_areas=False)
+
+# Since the cube faces are from 0 to 1 we can move it to the middle by
+# substracting .5
+data['vectors'] -= .5
+
+# Rotate 90 degrees over the X axis followed by the Y axis followed by the
+# X axis
+mesh.rotate([0.5, 0.0, 0.0], math.radians(90))
+mesh.rotate([0.0, 0.5, 0.0], math.radians(90))
+mesh.rotate([0.5, 0.0, 0.0], math.radians(90))
+
+# Since the cube faces are from 0 to 1 we can move it to the middle by
+# substracting .5
+data['vectors'] += .5
+
+assert (mesh.vectors == numpy.array([
+    [[1, 0, 0], [0, 1, 0], [0, 0, 0]],
+    [[0, 1, 0], [1, 0, 0], [1, 1, 0]],
+    [[0, 1, 1], [0, 1, 0], [1, 1, 1]],
+    [[1, 1, 0], [0, 1, 0], [1, 1, 1]],
+    [[0, 0, 1], [0, 1, 1], [0, 1, 0]],
+    [[0, 0, 1], [0, 0, 0], [0, 1, 0]],
+])).all()
+</code></pre>
+<p>def test_rotation_over_point():
+# Create a single face
+data = numpy.zeros(1, dtype=Mesh.dtype)</p>
+<pre><code>data['vectors'][0] = numpy.array([[1, 0, 0],
+                                  [0, 1, 0],
+                                  [0, 0, 1]])
+
+mesh = Mesh(data, remove_empty_areas=False)
+
+mesh.rotate([1, 0, 0], math.radians(180), point=[1, 2, 3])
+assert (mesh.vectors == numpy.array([[1, -4, -6],
+                                     [0, -5, -6],
+                                     [0, -4, -7]])).all()
+</code></pre>
+<p>def test_no_rotation():
+# Create a single face
+data = numpy.zeros(1, dtype=Mesh.dtype)</p>
+<pre><code>data['vectors'][0] = numpy.array([[0, 1, 1],
+                                  [1, 0, 1],
+                                  [0, 0, 1]])
+
+mesh = Mesh(data, remove_empty_areas=False)
+
+# Rotate by 0 degrees
+mesh.rotate([0.5, 0.0, 0.0], math.radians(0))
+assert (mesh.vectors == numpy.array([
+    [[0, 1, 1], [1, 0, 1], [0, 0, 1]]])).all()
+
+# Use a zero rotation matrix
+mesh.rotate([0.0, 0.0, 0.0], math.radians(90))
+assert (mesh.vectors == numpy.array([
+    [[0, 1, 1], [1, 0, 1], [0, 0, 1]]])).all()
+</code></pre>
+<p>def test_no_translation():
+# Create a single face
+data = numpy.zeros(1, dtype=Mesh.dtype)
+data['vectors'][0] = numpy.array([[0, 1, 1],
+[1, 0, 1],
+[0, 0, 1]])</p>
+<pre><code>mesh = Mesh(data, remove_empty_areas=False)
+assert (mesh.vectors == numpy.array([
+    [[0, 1, 1], [1, 0, 1], [0, 0, 1]]])).all()
+
+# Translate mesh with a zero vector
+mesh.translate([0.0, 0.0, 0.0])
+assert (mesh.vectors == numpy.array([
+    [[0, 1, 1], [1, 0, 1], [0, 0, 1]]])).all()
+</code></pre>
+<p>def test_translation():
+# Create a single face
+data = numpy.zeros(1, dtype=Mesh.dtype)
+data['vectors'][0] = numpy.array([[0, 1, 1],
+[1, 0, 1],
+[0, 0, 1]])</p>
+<pre><code>mesh = Mesh(data, remove_empty_areas=False)
+assert (mesh.vectors == numpy.array([
+    [[0, 1, 1], [1, 0, 1], [0, 0, 1]]])).all()
+
+# Translate mesh with vector [1, 2, 3]
+mesh.translate([1.0, 2.0, 3.0])
+assert (mesh.vectors == numpy.array([
+    [[1, 3, 4], [2, 2, 4], [1, 2, 4]]])).all()
+</code></pre>
+<p>def test_no_transformation():
+# Create a single face
+data = numpy.zeros(1, dtype=Mesh.dtype)
+data['vectors'][0] = numpy.array([[0, 1, 1],
+[1, 0, 1],
+[0, 0, 1]])</p>
+<pre><code>mesh = Mesh(data, remove_empty_areas=False)
+assert (mesh.vectors == numpy.array([
+    [[0, 1, 1], [1, 0, 1], [0, 0, 1]]])).all()
+
+# Transform mesh with identity matrix
+mesh.transform(numpy.eye(4))
+assert (mesh.vectors == numpy.array([
+    [[0, 1, 1], [1, 0, 1], [0, 0, 1]]])).all()
+assert numpy.all(mesh.areas == 0.5)
+</code></pre>
+<p>def test_transformation():
+# Create a single face
+data = numpy.zeros(1, dtype=Mesh.dtype)
+data['vectors'][0] = numpy.array([[0, 1, 1],
+[1, 0, 1],
+[0, 0, 1]])</p>
+<pre><code>mesh = Mesh(data, remove_empty_areas=False)
+assert (mesh.vectors == numpy.array([
+    [[0, 1, 1], [1, 0, 1], [0, 0, 1]]])).all()
+
+# Transform mesh with identity matrix
+tr = numpy.zeros((4, 4))
+tr[0:3, 0:3] = Mesh.rotation_matrix([0, 0, 1], 0.5 * numpy.pi)
+tr[0:3, 3] = [1, 2, 3]
+mesh.transform(tr)
+assert (mesh.vectors == numpy.array([
+    [[0, 2, 4], [1, 3, 4], [1, 2, 4]]])).all()
+assert numpy.all(mesh.areas == 0.5)</code></pre>
+</li>
+</ul>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[matplotlib绘图注意]]></title>
         <id>https://blog.bioprinting.site/post/HOPBFrX0u</id>
@@ -88,6 +1077,83 @@ plt.show()</p>
 来源：CSDN
 原文：https://blog.csdn.net/akadiao/article/details/79761790
 版权声明：本文为博主原创文章，转载请附上博文链接！</p>
+<p>这篇文章的目的出于实验的需要,我需要对图片上的部分区域做出涂抹标记,本来是选择用opencv做交互的，但在需要进行图像的输出以及鼠标时间添加时，opencv出现错误。</p>
+<p>解决方案网上有很多，尝试以后依然bug，这里先做一个记录,有时间再来处理。错误报告如下:</p>
+<p>OpenCV Error: Unspecified error (The function is not implemented. Rebuild the library with Windows, GTK+ 2.x or Carbon support. If you are on Ubuntu or Debian, install libgtk2.0-dev and pkg-config, then re-run cmake or configure script) in cvShowImage, file -------src-dir-------/opencv-2.4.10/modules/highgui/src/window.cpp, line 501
+Traceback (most recent call last):
+File &quot;test.py&quot;, line 20, in <module>
+cv2.imshow('img',img)
+cv2.error: -------src-dir-------/opencv-2.4.10/modules/highgui/src/window.cpp:501: error: (-2) The function is not implemented. Rebuild the library with Windows, GTK+ 2.x or Carbon support. If you are on Ubuntu or Debian, install libgtk2.0-dev and pkg-config, then re-run cmake or configure script in function cvShowImage</p>
+<p>这里我们切换另一种解决方案，利用python的matplotlib库完成图像的输出以及鼠标事件的添加。</p>
+<p>点击图片，在图像中鼠标对应位置画点：</p>
+<h1 id="codingutf-8-2">coding=utf-8</h1>
+<p>from matplotlib import pyplot as plt
+import cv2</p>
+<p>def on_press(event):
+if event.inaxes == None:
+print &quot;none&quot;
+return
+#在鼠标的当前位置绘制一个点
+ax.scatter(event.xdata, event.ydata）
+#更新画板
+fig.canvas.draw()</p>
+<p>if <strong>name</strong> == &quot;<strong>main</strong>&quot;:
+fileN = r'./0107_1.3.6.1.4.1.14519.5.2.1.6279.6001.263660956768649083933159084365.bmp'
+img = cv2.imread(fileN)
+cv2.imshow('img',img)
+fig = py.figure()
+fig.canvas.mpl_connect(&quot;button_press_event&quot;, on_press)
+ax = fig.add_subplot(121)
+ax1 = fig.add_subplot(122)
+ax.imshow(img)
+ax1.imshow(img)
+plt.axis(&quot;off&quot;)
+plt.show()</p>
+<p>先来简单解释一下代码的含义：</p>
+<p>fig.canvas.mpl_connect(&quot;button_press_event&quot;, on_press)#在这个figure上加点击事件，点击后的情况在自己写的on_press()方法里
+def on_press(event):
+event.inaxes.figure.canvas.draw()#用于图片刷新
+event.x#事件的坐标用于其他按钮点击和figure点击发生冲突时判断返回
+event.xdata,event.ydata#鼠标点击的位置，与上面那个坐标表示形式不同</p>
+<p>最后的输出结果入下图。我们得到了非常奇怪的结果，如果你自己亲自动手试的话体会应该会更有体会，两边的图像本来应该一样大，但在第一次绘制点的时候，左侧图像出现了闪动，然后尺寸的比例突然发生了变化。</p>
+<p>是的，图像尺寸没有发生变化，但尺寸的比例的确变了，这里我们要做的就是关闭自动变化的尺度比例。</p>
+<p>if <strong>name</strong> == &quot;<strong>main</strong>&quot;:
+fileN = r'./0107_1.3.6.1.4.1.14519.5.2.1.6279.6001.263660956768649083933159084365.bmp'
+img = cv2.imread(fileN)
+cv2.imshow('img',img)
+fig = py.figure()
+fig.canvas.mpl_connect(&quot;button_press_event&quot;, on_press)
+ax = fig.add_subplot(121)
+ax1 = fig.add_subplot(122)
+ax.imshow(img)
+ax1.imshow(img)
+#关闭自动尺度适配
+ax.set_autoscale_on(False)
+plt.axis(&quot;off&quot;)
+plt.show()
+当然，我们可以改变绘制标记的样式：</p>
+<p>ax.scatter(x,y,c='k',s=25,alpha=1.0,marker='o')
+#T:散点的颜色
+#s：散点的大小
+#alpha:是透明程度</p>
+<p>现在我们能够在图像上进行标记了，但这样还不够，程序需要获取这些标记点。</p>
+<p>实际上fig.canvas.mpl_connect(&quot;button_press_event&quot;, on_press)能够进行自定义的多参数传递，如果在每次绘制的时候将数据保存在外部传入的列表中，那么当画板被销毁时，我们就能获取到原来所有的绘制点。</p>
+<p>这里介绍两种使用方法：</p>
+<p>def on_key(event, arg1, arg2, arg3):
+pass
+canvas.mpl_connect('key_press_event', lambda event: on_key(event, plt1, plt2, plt3))</p>
+<p>和</p>
+<p>def on_key(event, args_list):
+pass
+fig.canvas.mpl_connect('key_press_event', lambda event: on_key(event, [plt1, plt2, plt3]))</p>
+<p>这里需要注意的是scatter绘制的点，实际上并没有大小的概念，这个点实质是一个坐标。</p>
+<p>如果需要绘制有实际面积的圆形的标记，可以使用matplotlib.patches.Circle</p>
+<p>具体的使用如下：</p>
+<p>from matplotlib.patches import Circle</p>
+<h2 id="fig-pltfigureax-figadd_subplot111cir-circlexy-eventxdata-eventydatafacecolor-black-edgecolorblackradius10-alpha10axadd_patchcir">fig = plt.figure()
+ax = fig.add_subplot(111)
+cir = Circle(xy = (event.xdata, event.ydata),facecolor = 'black', edgecolor='black',radius=10, alpha=1.0)
+ax.add_patch(cir)</h2>
 ]]></content>
     </entry>
     <entry>
@@ -2490,209 +3556,6 @@ theta6 = ATAN2（R3_6 [ 1，1 ]，- R3_6 [ 1，0 ]）</p>
 <p>因此，我们可以得出结论，FK和IK计算中的误差非常低，如果我们有更好的抓手操作，我们可以在10次尝试中达到100％。</p>
 <h3 id="-9"><a href="https://github.com/zenetio/RoboND-Kinematics-Project#future-improvements"></a>未来的改进</h3>
 <p>改进夹具操作以避免即使夹具处于正确姿势时也会失败。</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[ROS-IGTL-Bridge：使用ROS环境进行图像引导治疗的开放式网络接口]]></title>
-        <id>https://blog.bioprinting.site/post/AKuuLRT2E</id>
-        <link href="https://blog.bioprinting.site/post/AKuuLRT2E">
-        </link>
-        <updated>2019-05-12T13:59:18.000Z</updated>
-        <content type="html"><![CDATA[<h3 id="目的">目的</h3>
-<p>随着人们对手术机器人系统先进图像引导的兴趣日益增加，机器人设备和医学图像计算软件的快速集成和测试在研究和开发中变得至关重要。最大限度地利用在不同领域广泛接受的平台上构建的现有工程资源，例如机器人中的机器人操作系统（ROS）和医学图像计算中的3D切片器可以简化这些任务。我们提出了一个集成在ROS中的新的开放式网桥接口，以确保无缝的跨平台数据共享。</p>
-<h3 id="方法">方法</h3>
-<p>实现了名为ROS-IGTL-Bridge的ROS节点。它使用OpenIGTLink协议在ROS环境和外部医学图像计算软件之间建立TCP / IP网络连接。该节点同时通过网络将ROS消息输出到外部软件，反之亦然，从而允许基于ROS的设备和医学图像计算平台之间的无缝和透明数据共享。</p>
-<h3 id="结果">结果</h3>
-<p>性能测试表明，网桥可以成功地在两个方向上以30 fps流式传输变换，字符串，点和图像。变换，字符串和点的数据传输延迟小于1.2 ms，而rrom VGA图像的数据传输延迟小于1.2 ms。另外一项测试还表明，该桥可以实现900 fps的变换。此外，该桥在两个具有代表性的系统中进行了演示：模拟图像引导的手术机器人设置，包括3D切片机，以及带有ROS的Lego Mindstorms，作为IGT研究的原型和教育平台; 和智能组织自主机器人（STAR）手术设置与3D切片机。</p>
-<h3 id="结论">结论</h3>
-<p>该研究表明，该桥实现了ROS与医学图像计算软件之间的跨平台数据共享。这将允许由诸如3D切片器的医学图像计算软件提供的基于图像的高级计划/导航快速且无缝地集成到基于ROS的手术机器人系统中。</p>
-<p>**关键词：**ROS，OpenIGTLink，界面，手术机器人，图像引导治疗</p>
-<p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/" title="转到此页面的其他部分">去：</a></p>
-<h2 id="1简介">1简介</h2>
-<p>机器人系统在图像引导治疗（IGT）中的应用已经在许多医学领域得到扩展，导致现代医学技术的不断发展[ <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/#R1">1</a> ]。机器人辅助腹腔镜手术在美国和其他发达国家的根治性前列腺切除术中已经很常见[ <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/#R2">2</a> ]并且在其他手术中扩大了其用途。机器人导管系统已被用于各种血管内手术[ <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/#R3">3</a> ]和心律失常手术[ <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/#R4">4</a> ]。机器人放射外科系统已被用于治疗肺，肝，胰腺，脊柱，肾，头部和颈部以及前列腺的肿瘤[ <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/#R5">5</a> ]。</p>
-<p>虽然今天的大多数临床机器人系统都是为了通过遵循他们的命令和计划来帮助外科医生，但人们越来越关注自动化辅助，其中机器人系统接管一些外科医生的常规任务，例如切割和缝合，让外科医生集中于高级别外科决策[ <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/#R6">6</a>，<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/#R7">7</a> ]。随着对自主技术的兴趣日益增加，研究人员和外科医生在手术室中面临着各种各样的技术。这种不断增长的兴趣促使医疗机器人社区利用机器人操作系统（ROS）中的各种功能<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/#R8"> [8]</a>]，例如计算机视觉，传感，运动学，模拟和运动规划。机器人研究系统包括医疗机器人Raven II [ <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/#R9">9</a> ]和达芬奇研究套件（dVRK）[ <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/#R10">10</a> ]以及KUKA轻量重型机器人（LWR）[ <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/#R11">11</a> ]已经使用ROS作为软件平台。</p>
-<p>但是，ROS平台不是执行某些临床任务的理想环境。具体而言，现代手术计划和指导严重依赖于医学图像来识别和定位患病区域和关键结构。此外，必须将这种导航信息映射到物理空间，以实现安全和准确的处理。虽然ROS的多功能性允许研究人员自己实现这些功能，但其中许多已经在一些专门为医学图像计算和图像引导治疗开发的研究平台上可用，例如3D Slicer [ <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/#R12">12</a> ]，IGSTK [ <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/#R13">13</a> ]， MITK [ <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/#R14">14</a> ]或NifTK [ <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/#R15">15</a> ]，OsiriX [ <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/#R16">16</a> ]，XIP-Builder <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/#R17"> [17]</a>]和MeVisLab [ <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/#R18">18</a> ]。因此，将ROS等机器人研究平台与医学图像计算平台连接起来对于先进医疗机器人系统的开发正变得越来越重要。通过将两个研究领域广泛开发的流行平台结合在一起，研究人员可以利用这两个领域丰富的工程资源。</p>
-<p>将ROS等流行平台与医学图像计算平台连接起来，将进一步有益于医学机器人研究。由于ROS支持的机器人硬件种类繁多，从爱好导向产品到工业级高灵敏度机器人，人们可以轻松切换硬件，或者将系统从概念验证原型扩展到完全 - 用于动物和人类研究的功能系统，无需显着改变软件架构。因此，该桥将使原型设计和测试的迭代变得更加容易和快速。</p>
-<p>这项研究的目标是开发一个新的软件界面，连接ROS和流行的医学图像计算软件3D Slicer，并提供支持图像引导和机器人辅助手术系统开发的研究和工程工具。这两个软件平台使用开放式网络通信协议OpenIGTLink [ <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/#R19">19</a> ] 通过TCP / IP网络无缝共享数据和命令。</p>
-<p>在本文中，我们描述了系统架构及其实现，以及概念验证场景。ROS中实现的桥接结构以及ROS和OpenIGTLink消息之间的转换在“方法”部分中进行了解释。随后，网络通信性能测试的结果显示在实验部分，然后是用例部分，其中提供了网桥功能的展望。实验结果和用例在讨论部分讨论。</p>
-<p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/" title="转到此页面的其他部分">去：</a></p>
-<h2 id="2方法">2方法</h2>
-<h3 id="21-ros-igtl-bridge节点">2.1 ROS-IGTL-Bridge节点</h3>
-<p>我们软件界面的核心组件是名为ROS-IGTL-Bridge的ROS节点。ROS-IGTL-Bridge作为基于ROS的系统中的节点之一，与3D Slicer或配备有套接字接口的其他外部医学图像计算软件建立TCP / IP套接字连接。它可以配置为作为TCP / IP服务器或客户端运行。ROS提供了由多个节点组成的图形架构，这些节点通过对等网络连接并将数据一起处理。节点可以将ROS消息发布到给定_主题_，以及其他节点可以通过订阅主题来接收消息。ROS-IGTL-Bridge节点将ROS消息转换为OpenIGTLink消息，并通过TCP / IP连接将其发送到外部软件。它还接收OpenIGTLink消息，将其转换为ROS消息，并将其发布到ROS网络中（<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/figure/F1/">图1</a>）。</p>
-<p><a href="https://www.ncbi.nlm.nih.gov/core/lw/2.0/html/tileshop_pmc/tileshop_pmc_inline.html?title=Click%20on%20image%20to%20zoom&amp;p=PMC3&amp;id=5543207_nihms883782f1.jpg"><img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/bin/nihms883782f1.jpg" alt="包含图片，插图等的外部文件。对象名称为nihms883782f1.jpg" title="点击图片放大"></a></p>
-<p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/figure/F1/">图。1</a></p>
-<p>ROS-IGTL-Bridge作为支持图像导入，图像处理，手术计划和手术导航的医学图像计算软件（左）之间的消息接口，以及提供运动学计算，传感，模拟，运动规划和计算机的ROS环境。愿景（右）。</p>
-<p>该界面支持在图像引导和机器人辅助治疗的背景下常用的数据类型。支持的数据类型将在下一节中列出。</p>
-<p>ROS-IGTL-Bridge节点进程由两个独立的POSIX线程组成，允许同时发送和接收数据（<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/figure/F2/">图2</a>）。每个消息类型实现了用于OpenIGTLink通信的消息序列化和反序列化的方法作为回调函数，并由两个线程调用。通过OpenIGTLink连接接收的传入消息由消息的头信息评估，并发布到ROS网络中相应的ROS-Topic。</p>
-<p><a href="https://www.ncbi.nlm.nih.gov/core/lw/2.0/html/tileshop_pmc/tileshop_pmc_inline.html?title=Click%20on%20image%20to%20zoom&amp;p=PMC3&amp;id=5543207_nihms883782f2.jpg"><img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/bin/nihms883782f2.jpg" alt="包含图片，插图等的外部文件。对象名称为nihms883782f2.jpg" title="点击图片放大"></a></p>
-<p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/figure/F2/">图2</a></p>
-<p>桥接数据处理由两个独立的POSIX线程组成。线程“接收”（左）通过评估头信息并执行消息转换来处理传入的Open-IGTLink消息，随后将数据发布到相应的ROS主题。同时，线程“发送”在订阅的ROS主题上的先前触发的回调之后发送传出消息（右）。</p>
-<p>ROS网络中创建的主题标记为OUT表示传出数据，IN表示传入数据。通过使用启动文件并设置参数服务器IP，端口和客户端/服务器标志，可以轻松配置ROS-IGTL-Bridge节点。此外，自主测试节点ROS-IGTL-Test可用于通过发送虚拟数据并在订阅的ROS主题上可视化接收的数据来评估功能。在测试例程期间，发送随机变换，点，包含20个点的点云，字符串和样本vtkPolyData模型。</p>
-<h3 id="22-ros-igtl-bridge支持的消息类型">2.2 ROS-IGTL-Bridge支持的消息类型</h3>
-<p>ROS-IGTL-Bridge支持IGT应用中经常使用的各种类型的数据。支持的类型包括字符串，变换，图像，多边形数据和点。以下段落详细介绍了支持的OpenIGT-Link消息以及ROS中的相应主题。为了确定从OpenIGTLink消息到相应ROS消息的转换方法，ROS-IGTL-Bridge使用OpenIGTLink消息的标题部分，该消息提供元数据，包括类型名称，设备名称，时间戳，正文大小和包状态（<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/figure/F3/">图3</a>）。</p>
-<p><a href="https://www.ncbi.nlm.nih.gov/core/lw/2.0/html/tileshop_pmc/tileshop_pmc_inline.html?title=Click%20on%20image%20to%20zoom&amp;p=PMC3&amp;id=5543207_nihms883782f3.jpg"><img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/bin/nihms883782f3.jpg" alt="包含图片，插图等的外部文件。对象名称为nihms883782f3.jpg" title="点击图片放大"></a></p>
-<p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/figure/F3/">图3</a></p>
-<p>OpenIGTLink消息的基本结构由通用头信息组成，包括数据类型，名称，时间戳，大小和包状态以及特定于数据类型的主体部分。</p>
-<h4 id="221字符串">2.2.1字符串</h4>
-<p>设备和外部图像计算软件之间的字符串消息交换允许发送和接收命令或状态更新。因此，外部软件的图形用户界面可以扩展为显示诸如关于接收数据的确认之类的信息，或者提供用于控制所用设备的指令（<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/figure/F4/">图4</a>）。</p>
-<p><a href="https://www.ncbi.nlm.nih.gov/core/lw/2.0/html/tileshop_pmc/tileshop_pmc_inline.html?title=Click%20on%20image%20to%20zoom&amp;p=PMC3&amp;id=5543207_nihms883782f4.jpg"><img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/bin/nihms883782f4.jpg" alt="包含图片，插图等的外部文件。对象名称为nihms883782f4.jpg" title="点击图片放大"></a></p>
-<p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/figure/F4/">图4</a></p>
-<p>OpenIGTLink和ROS-IGTL-Bridge的字符串消息中的相应数据字段。</p>
-<h4 id="222变换">2.2.2变换</h4>
-<p>变换消息可以包含表示设备，兴趣对象等的位置和方向的线性变换，由连接到ROS的传感器测量，或者在外部图像计算软件上生成。消息可用于监视工具，设备和对象的位置和方向，或向设备提供规划数据。OpenIGTLink igtlTransformMessage由4 <em>×</em> 4矩阵表示，并转换为ROS消息类型几何msgs / Transform，包含用于平移的向量和用于方向的四元数（<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/figure/F5/">图5</a>）。</p>
-<p><a href="https://www.ncbi.nlm.nih.gov/core/lw/2.0/html/tileshop_pmc/tileshop_pmc_inline.html?title=Click%20on%20image%20to%20zoom&amp;p=PMC3&amp;id=5543207_nihms883782f5.jpg"><img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/bin/nihms883782f5.jpg" alt="包含图片，插图等的外部文件。对象名称为nihms883782f5.jpg" title="点击图片放大"></a></p>
-<p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/figure/F5/">图5</a></p>
-<p>Open-IGTLink和ROS-IGTL-Bridge的转换消息中的相应数据字段。ROS标准数据类型_几何msgs / Transform_包含作为3元素向量的转换和作为四元数的旋转。</p>
-<h4 id="223图像">2.2.3图像</h4>
-<p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/figure/F6/">图6</a>显示了相应图像消息的属性。图像由3D空间中每个维度的大小和间距参数组成。数据存储在具有图像尺寸大小的8位数组中。可以使用IGTL VIDEO OUT主题从ROS发送2D视频流，该主题支持常见的ROS消息类型传感器msgs / Image。因此，摄像机数据可以直接转发到网桥，不需要额外的消息转换。</p>
-<p><a href="https://www.ncbi.nlm.nih.gov/core/lw/2.0/html/tileshop_pmc/tileshop_pmc_inline.html?title=Click%20on%20image%20to%20zoom&amp;p=PMC3&amp;id=5543207_nihms883782f6.jpg"><img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/bin/nihms883782f6.jpg" alt="包含图片，插图等的外部文件。对象名称为nihms883782f6.jpg" title="点击图片放大"></a></p>
-<p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/figure/F6/">图6</a></p>
-<p>OpenIGTLink和ROS-IGTL-Bridge图像消息中的相应数据字段。消息包含卷的元信息，包括大小和间距以及像素数据。</p>
-<h4 id="224多边形数据">2.2.4多边形数据</h4>
-<p>多边形数据消息允许传输由点和附加表面信息组成的3D模型。多边形，三角形条带，线条或顶点表示网格的结构。由于缺少ROS中的vtkPolyData消息的显式等价物，因此提供了将vtkPolyData转换为ros igtl bridge :: igtlpolydata消息的方法。</p>
-<h4 id="225点">2.2.5点</h4>
-<p>点消息包括3D点数据，允许发送和获取目标点作为机器人的移动目的地，操纵器的位置或地标坐标用于登记目的或者还有点云和点列表形式的传感器数据（<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/figure/F8/">图8</a>）。此外，网桥能够以IGTL POINTCLOUD OUT主题上发布的几何msgs / Point形式发送点云。</p>
-<p><a href="https://www.ncbi.nlm.nih.gov/core/lw/2.0/html/tileshop_pmc/tileshop_pmc_inline.html?title=Click%20on%20image%20to%20zoom&amp;p=PMC3&amp;id=5543207_nihms883782f8.jpg"><img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/bin/nihms883782f8.jpg" alt="包含图片，插图等的外部文件。对象名称为nihms883782f8.jpg" title="点击图片放大"></a></p>
-<p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/figure/F8/">图8</a></p>
-<p>OpenIGTLink和ROS-IGTL-Bridge的点消息中的相应数据字段。_geometry msgs / Point_包含_点_的x，y和z坐标。</p>
-<h3 id="23系统配置和消息方案">2.3系统配置和消息方案</h3>
-<p>使用不同的消息类型取决于系统配置和操作IGT设置所需的消息方案。<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/figure/F10/">图10</a>显示了两个代表性的系统配置，作为使用ROS-IGTL-Bridge的示例应用程序。</p>
-<p><a href="https://www.ncbi.nlm.nih.gov/core/lw/2.0/html/tileshop_pmc/tileshop_pmc_inline.html?title=Click%20on%20image%20to%20zoom&amp;p=PMC3&amp;id=5543207_nihms883782f10.jpg"><img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/bin/nihms883782f10.jpg" alt="包含图片，插图等的外部文件。对象名称为nihms883782f10.jpg" title="点击图片放大"></a></p>
-<p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/figure/F10/">图10</a></p>
-<p>显示ROS-IGTL-Bridge功能的示例设置。（a）机器人和跟踪系统连接到ROS，并由3D Slicer通过ROS-IGTL-Bridge控制。使用OpenIGTLink接口将成像设备直接连接到3D Slicer。（b）机器人和成像设备（超声波）连接到由ROS操作的机器人，并由3D切片机通过ROS-IGTL桥控制。</p>
-<p>第一个示例IGT设置包括机器人和跟踪系统，这两个系统都由ROS使用已经存在的ROS节点来操作。跟踪系统用于跟踪机器人的末端执行器。外部成像装置，例如光学相干断层扫描（OCT），超声或MRI，连接到医学图像计算平台，如3D切片器，其提供用于处理和可视化这种医学数据的方法（<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/figure/F10/">图10a）。</a>）。通过桥接ROS消息环境和医学图像计算平台，功能集可以有效地相互补充。使用桥的字符串消息转换来交换命令和状态更新，因此可以使用外科手术规划工具的用户界面来操作系统。转换消息允许获得连续刷新的跟踪数据或在六个自由度中命令某个位置。机器人模型数据可以作为多边形数据模型传输，以在3D切片机中可视化。可以将跟踪设备的原始点云或图像数据转发到图像处理平台，以便定位机器人位置或执行路径规划。</p>
-<p>第二示例表示机器人引导的成像装置，其可能是附接到机器人末端执行器的超声探头（<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/figure/F10/">图10b）</a>）。机器人和成像设备由可下载的标准ROS节点控制，允许在所需设置中进行简单集成。为了在生成的ROS消息环境中访问或发布数据，使用ROS-IGTL-Bridge节点建立与诸如3D Slicer之类的外部手术计划平台的通信。因此，机器人控制以及图像设备命令和响应可以通过网桥作为字符串消息传输。另外，可以将作为点或转换消息的定位命令发送到ROS环境。获取的图像数据被转发到控制机器人的计划软件作为图像或点云消息，因此，图像处理和可视化方法可用于比较术中与术前数据。<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/figure/F9/">图9</a> 示出了ROS环境和手术计划平台之间可能的通信协议，同时在被命令到特定点位置之后执行图像采集。</p>
-<p><a href="https://www.ncbi.nlm.nih.gov/core/lw/2.0/html/tileshop_pmc/tileshop_pmc_inline.html?title=Click%20on%20image%20to%20zoom&amp;p=PMC3&amp;id=5543207_nihms883782f9.jpg"><img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/bin/nihms883782f9.jpg" alt="包含图片，插图等的外部文件。对象名称为nihms883782f9.jpg" title="点击图片放大"></a></p>
-<p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/figure/F9/">图9</a></p>
-<p>使用ROS IGTL桥作为网络接口的手术计划软件和ROS操作机器人之间可能的通信协议。初始化机器人，命令移动到一个点并获取具有附加变换信息的图像数据。最后，机器人关闭了。</p>
-<p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/" title="转到此页面的其他部分">去：</a></p>
-<h2 id="3实验">3实验</h2>
-<p>我们使用模拟图像引导的手术机器人系统评估了ROS和3D切片机之间的网络通信性能。此外，我们在两个有代表性的用例场景中展示了该软件的可行性：基于Lego Mindstorms的教育/快速原型图像引导手术导航系统和自主缝合机器人。</p>
-<h3 id="31实验设置">3.1实验设置</h3>
-<p>模拟图像引导的手术机器人系统由两台计算机组成：基于Linux的计算机（Precision M3800，四核Intel Core i7-4712HQ 2.3 GHz，16 GB 1600MHz DDR3内存，Ubuntu Linux 14.04LTS，Dell Inc.，Round Rock ，TX）模仿机器人控制器和基于Mac的工作站（Mac Pro，双6核Intel Xeon 2.66 GHz和40 GB 1333 MHz DDR3内存，Mac OS X 10.10，Apple Inc.，Cupertino，CA）模仿用于手术计划和导航界面的工作站。这两台计算机通过Cat 5e电缆连接到8端口千兆以太网交换机（SG100D-08，Cisco Systems Inc.，San Jose，CA）。ROS Indigo安装在基于Linux的计算机上，带有ROS-IGTL-Bridge节点。在Mac工作站上，安装了3D Slicer 4.6，用于可视化从ROS传输的数据。</p>
-<p>为了评估延迟，发送方根据发送方的内部时钟将数据生成时间嵌入到消息头中。一旦接收器接收到消息，接收器就会提取数据生成的时间，并将其与接收器的内部时钟进行比较，以计算两个模拟器之间数据传输所花费的时间。为了准确确定延迟，使用PTPd [ <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/#R20">20</a> ] 同步两台计算机的内部时钟。PTPd使用IEEE 1588-2008标准中定义的精确时间协议（PTP）通过网络将内部时钟与主时钟同步。与广泛使用的网络时间协议（NTP）不同[ <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/#R21">21</a>]，PTP旨在实现连接到局域网（LAN）的计算机之间更精确的时钟同步。</p>
-<h3 id="32数据传输性能评估">3.2数据传输性能评估</h3>
-<p>使用此设置，我们评估了变换，字符串，点和图像的数据传输性能。这些数据类型通常用于实时数据共享，例如工具跟踪，视频流和状态监控，因此确保以适当的帧速率和延迟进行数据传输至关重要。</p>
-<p>我们分别在Linux计算机和Mac工作站上部署了两个自定义软件模拟器，即_ROS测试节点_和_IGTL测试服务器_。ROS测试节点是ROS节点，通过ROS网络与ROS-IGTL-Bridge通信，而IGT测试服务器是TCP / IP服务器，使用OpenIGTLink协议通过LAN与ROS-IGTL-Bridge通信。IGTL测试服务器模拟3D切片机或任何其他手术计划和导航软件的行为。两个模拟器都可以作为_发送者_或_接收者_; 当发送者角色分配给一个模拟器时，接收者角色被分配给另一个。发送方生成具有给定类型和消息大小的随机消息，并通过ROS-IGTL-Bridge节点将其发送到接收方。进行了两组测试：</p>
-<ul>
-<li>
-<p>数据传输延迟的定性评估。我们测量了数据传输延迟，同时以每秒30帧（fps）的速度将消息从发送器流式传输到接收器。每个变换消息包含一个表示位置和方向的线性变换。每个字符串消息的大小固定为100个字节，这对于设备的命令就足够了。对于点消息，使用多个数据大小，从每个消息1个点到每个消息10000个点，考虑不同的用例场景，包括工具跟踪，地标跟踪和点云传输。对于图像信息，我们考虑五种图像格式的二维彩色图像（RGB）：VGA（640 <em>×</em> 480像素），SVGA（800 <em>×</em> 600像素），XGA（1024 <em>×</em> 768像素），HD（1280）<em>×</em> 720像素）和全高清（1920 <em>×</em> 1080像素）。</p>
-</li>
-<li>
-<p>高帧率数据传输的演示。此外，我们使用变换数据类型测试高帧速率数据传输，高速率为1000 fps，考虑到感应数据（例如跟踪传感器，编码器）通过局域网在两台计算机之间传输的应用。</p>
-</li>
-</ul>
-<p>在两个测试中，数据都从ROS测试节点传输到IGTL测试服务器，反之亦然。</p>
-<h3 id="33多边形数据共享的演示">3.3多边形数据共享的演示</h3>
-<p>此外，使用设置演示了多边形数据的传输。对于这种定性评估，称为ROS-IGTL-Test节点的模拟器程序用作ROS节点，而3D Slicer用作外部软件，其基于MRI数据生成3D多边形数据模型。ROS-IGTL-Test节点附带ROS-IGTL-Bridge软件，用于测试人体头部的3D模型。在文件_test.launch中_设置连接参数后，ROS-IGTL-Bridge和3D Slicer中的集成Open-IGTLinkIF模块建立连接，然后交换poly数据消息。</p>
-<h3 id="34结果">3.4结果</h3>
-<p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/table/T1/">表1</a>中显示了1000帧的平均和标准差延迟。有些情况下，由于数据传输延迟大于消息传输的间隔，因此未传递某些消息。在测量期间，两台计算机之间的时钟偏移保持在0.00 <em>±</em> 0.28毫秒（平均值_±_SD）。</p>
-<h3 id="表格1">表格1</h3>
-<p>基于1000个消息传输中的测量的变换，点，字符串和图像消息的消息传送等待时间的均值和标准偏差（SD）。</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">消息类型</th>
-<th style="text-align:center">从ROS测试节点到IGTL测试服务器（毫秒）</th>
-<th style="text-align:center">从IGTL测试服务器到ROS测试节点（毫秒）</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">转变</td>
-<td style="text-align:center">1.1 <em>±</em> 0.5</td>
-<td style="text-align:center">1.1 <em>±</em> 0.4</td>
-</tr>
-<tr>
-<td style="text-align:left">字符串（100字节）</td>
-<td style="text-align:center">1.1 <em>±</em> 0.5</td>
-<td style="text-align:center">1.2 <em>±</em> 0.4</td>
-</tr>
-<tr>
-<td style="text-align:left">点（1分）</td>
-<td style="text-align:center">1.2 <em>±</em> 0.5</td>
-<td style="text-align:center">1.2 <em>±</em> 0.4</td>
-</tr>
-<tr>
-<td style="text-align:left">点（10分）</td>
-<td style="text-align:center">1.2 <em>±</em> 0.5</td>
-<td style="text-align:center">1.4 <em>±</em> 0.5</td>
-</tr>
-<tr>
-<td style="text-align:left">点（100分）</td>
-<td style="text-align:center">17.2 <em>±</em> 12.6</td>
-<td style="text-align:center">3.8 <em>±</em> 5.4</td>
-</tr>
-<tr>
-<td style="text-align:left">点（1000分）</td>
-<td style="text-align:center">24.8 <em>±</em> 12.3</td>
-<td style="text-align:center">20.9 <em>±</em> 26.7</td>
-</tr>
-<tr>
-<td style="text-align:left">图像（VGA）</td>
-<td style="text-align:center">25.2 <em>±</em> 4.3</td>
-<td style="text-align:center">23.6 <em>±</em> 3.5</td>
-</tr>
-<tr>
-<td style="text-align:left">图像（SVGA）</td>
-<td style="text-align:center">33.6 <em>±</em> 4.6 *</td>
-<td style="text-align:center">33.6 <em>±</em> 3.7 *</td>
-</tr>
-<tr>
-<td style="text-align:left">图像（XGA）</td>
-<td style="text-align:center">58.8 <em>±</em> 10.6 *</td>
-<td style="text-align:center">58.5 <em>±</em> 6.0 *</td>
-</tr>
-<tr>
-<td style="text-align:left">图像（HD）</td>
-<td style="text-align:center">76.3 <em>±</em> 10.5 *</td>
-<td style="text-align:center">67.2 <em>±</em> 6.1 *</td>
-</tr>
-<tr>
-<td style="text-align:left">图像（全高清）</td>
-<td style="text-align:center">NA *</td>
-<td style="text-align:center">144.5 <em>±</em> 12.2 *</td>
-</tr>
-</tbody>
-</table>
-<p>星号（*）表示某些消息未传递给收件人。</p>
-<p>为了演示高帧率数据传输，转换消息成功地以1000 fps从ROS测试节点传输到IGTL测试服务器。当消息以另一个方向传输时，数据传输成功达到900 fps。</p>
-<p>在多数据传输的附加演示中，由超过60万个点和23万个面组成的多边形数据模型成功地从ROS转移到3D切片器，反之亦然。转移的多边形数据在两种环境中都成功可视化（<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/figure/F11/">图11</a>）。</p>
-<p><a href="https://www.ncbi.nlm.nih.gov/core/lw/2.0/html/tileshop_pmc/tileshop_pmc_inline.html?title=Click%20on%20image%20to%20zoom&amp;p=PMC3&amp;id=5543207_nihms883782f11.jpg"><img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/bin/nihms883782f11.jpg" alt="包含图片，插图等的外部文件。对象名称为nihms883782f11.jpg" title="点击图片放大"></a></p>
-<p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/figure/F11/">图11</a></p>
-<p>交换的vtkPolyData模型从样本数据生成，该样本数据在ROS侧（左侧）的vtkRenderWindow中可视化，并在3D Slicer场景（右侧）中进行比较。</p>
-<p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/" title="转到此页面的其他部分">去：</a></p>
-<h2 id="4个用例">4个用例</h2>
-<h3 id="41-igt快速原型教育平台">4.1 IGT快速原型/教育平台</h3>
-<p>使用3D Slicer，ROS和Lego Mindstorms EV3对概念验证图像引导机械手系统进行了原型设计。Lego Mindstorms已被用于教育背景下的IGT相关项目[ <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/#R22">22</a> ]以及硬件/软件测试平台[ <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/#R23">23</a> ]。该项目的目标有两个：（1）利用可扩展的软件系统为医疗机器人创建头脑风暴工具，促进从原型到研究和商业级系统的无缝转换; （2）为学生，工程师和科学家创建一个教育工具，以学习图像引导和医疗机器人。</p>
-<p>该系统模仿手术机器人，其致动其末端执行器以跟随在手术导航软件上的3D医学图像（例如，CT，MRI）上定义的物理空间中的轨迹。可以通过3D图形监控该过程。该系统由一个主动的三自由度（DoF）并行链接机械手，控制砖，ROS主计算机和运行ROS主服务器和导航软件3D Slicer的导航计算机组成。控制计算机模块（Lego EV3可编程砖块）通过无线网络上的ROS主服务器与导航软件通信。我们使用大脑的MR图像和从图像创建的2D体模执行模拟程序。通过用其末端执行器物理地触摸它们来记录预定义地标的坐标，将操纵器登记到模型中，<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/figure/F12/">图12</a>）。</p>
-<p><a href="https://www.ncbi.nlm.nih.gov/core/lw/2.0/html/tileshop_pmc/tileshop_pmc_inline.html?title=Click%20on%20image%20to%20zoom&amp;p=PMC3&amp;id=5543207_nihms883782f12.jpg"><img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/bin/nihms883782f12.jpg" alt="包含图片，插图等的外部文件。对象名称为nihms883782f12.jpg" title="点击图片放大"></a></p>
-<p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/figure/F12/">图12</a></p>
-<p>使用3D切片器中的点配准算法在2D样本数据上匹配定义的和物理的界标。</p>
-<p>然后，使用先前定义的从3D切片机传送到控制砖的轨迹点，执行2D体模上的绘制过程（<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/figure/F13/">图13a</a>）（<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/figure/F13/">图13b</a>）。这个模拟程序表明，这个基于乐高的系统可用于构建具有研究或商业级架构的机器人系统，并模拟真实的临床工作流程，使其成为快速原型设计和教育的理想工具。</p>
-<p><a href="https://www.ncbi.nlm.nih.gov/core/lw/2.0/html/tileshop_pmc/tileshop_pmc_inline.html?title=Click%20on%20image%20to%20zoom&amp;p=PMC3&amp;id=5543207_nihms883782f13.jpg"><img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/bin/nihms883782f13.jpg" alt="包含图片，插图等的外部文件。对象名称为nihms883782f13.jpg" title="点击图片放大"></a></p>
-<p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/figure/F13/">图13</a></p>
-<p>使用Lego Mindstorms构建的机器人手臂遵循2D体模（a）上的轨迹，该轨迹先前在3D切片器（b）中成功进行了图像到患者注册后的计划。</p>
-<h3 id="42使用kuka-lwr进行自主缝合">4.2使用KUKA LWR进行自主缝合</h3>
-<p>目的是测试ROS-IGTL-Bridge在规划和引导自主手术机器人方面的可行性。使用开发的ROS-IGTL-Bridge，我们开始改进智能组织自主机器人（STAR）的软件系统，该机器人使用KUKA LWR机器人。STAR包括基于商用腹腔镜Endo360°（EndoEvolution，Raynham）工具的机器人缝合工具，使用ROS实现图形用户界面（GUI）和相机集成的自定义控制，以及实时开放式机器人控制软件（OROCOS）控制[ <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/#R11">11</a>，<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/#R24">24</a> ]。虽然我们使用STAR证明了卓越的一致性和爆破压力，但是42.2％的缝线需要手动操作员调整，与手动和远程操作机器人手术相比，手术时间更长[<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/#R7">7</a> ]。需要操作员调整的大多数错过的缝线放置是由全光相机的噪声点云数据引起的，特别是沿着深度轴，这在ROS提供的二维缝线计划中是不明显的。通过使用ROS-IGTL-Bridge升级STAR，我们能够将3D点云从STAR转移到Slicer进行点云可视化（<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/figure/F14/">图14</a>）。这可以改善缝合位置的3D规划工作流程，更大的自主性和更短的手术时间。</p>
-<p><a href="https://www.ncbi.nlm.nih.gov/core/lw/2.0/html/tileshop_pmc/tileshop_pmc_inline.html?title=Click%20on%20image%20to%20zoom&amp;p=PMC3&amp;id=5543207_nihms883782f14.jpg"><img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/bin/nihms883782f14.jpg" alt="包含图片，插图等的外部文件。对象名称为nihms883782f14.jpg" title="点击图片放大"></a></p>
-<p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/figure/F14/">图14</a></p>
-<p>图为猪肠道吻合术（左），当前STAR缝合计划（中），以及使用3D切片机实现3D调整的缝合计划（右图）。</p>
-<p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/" title="转到此页面的其他部分">去：</a></p>
-<h2 id="5讨论">5讨论</h2>
-<p>在这项工作中，ROS-IGTL-Bridge节点被实现为通过基于OpenIGTLink协议的通用开放网络接口来扩展ROS。该接口支持在基于ROS的系统和外部医学图像计算平台之间无缝共享IGT应用中经常使用的数据，包括字符串，变换，点，多边形数据和图像。生成匹配消息类型的转换方法以确保兼容性。虽然OpenIGTLink协议为传输线性变换提供了两种不同的消息类型，即TRANSFORM和TDATA，但由于其简单性和通用性，我们选择在当前实现中使用TRANSFORM。TRANSFORM消息表示仿射变换矩阵，可以很容易地将其转换为ROS _几何msgs / Transform_消息，可用于多种用途，从工具跟踪到坐标转换。未来可以支持TDATA，因为它为工具跟踪提供了便利的功能，例如多通道跟踪的传输。可以轻松调整创建的消息和转换，或者可以另外包含新的消息类型以满足特定于任务的需求。</p>
-<p>使用ROS-IGTL-Bridge进行数据传输的性能足以满足许多实时IGT应用的需求。我们的测试表明，对于字符串，点和转换消息，每秒30帧的传入和传出消息的数据传输延迟小于1.2毫秒，对于图像（VGA），小于25毫秒。另外，对于变换消息，实现了高达900fps的高帧速率数据传输。此外，成功交换了超过60万点和23万面的大型多边形数据模型。传输大于XGA格式的图像无法达到完整的30 fps。我们目前正致力于扩展OpenIGTLink协议，以提供视频压缩，以获得更好的流媒体性能。</p>
-<p>使用3D Slicer和Lego Mind-storm的模拟IGT系统证明了ROS-IGTL-Bridge允许构建原型系统并在有限时间内在模拟IGT程序中验证其功能。我们能够在2016年第22届NA-MIC冬季项目周期间建立这个演示设置，这是为期一周的黑客马拉松活动，重点关注开源医学图像计算软件基础设施[ <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/#R25">25</a> ]。ROS-IGTL-Bridge也在高档IGT设置中得到了验证，该设置由具有自主控制系统的工业级高灵巧度机器人组成。ROS-IGTL-Bridge能够传输点云数据，并将3D Slicer提供的缝合定位的高级可视化和3D规划纳入系统。</p>
-<p>该研究表明，ROS-IGTL-Bridge支持ROS和图像引导软件之间的跨平台数据共享，具有足够的数据传输性能。通过将ROS中的机器人控制，运动规划和感知等特定方法与3D切片机等手术规划工具的图像处理和可视化功能组合，该桥接器有益于IGT设置。这将允许快速无缝地将图像引导软件（如3D Slicer）提供的基于图像的高级计划/导航集成到基于ROS的手术机器人系统中。通过桥接两个不同的软件平台，研究人员可以从不同研究领域开发的最先进的工程资源中受益，包括机器人和医学图像计算，以开发先进的图像引导手术机器人系统。</p>
-<p>一些研究已经证明了使用OpenIGTLink桥接两个研究平台的想法。特别是，OpenIGTLink已被广泛用于桥接数据抓取软件和可视化/用户交互软件，用于医学图像计算研究。Papademetris，Tokuda _等人_使用OpenIGTLink将商业导航系统与外部研究平台（包括3D Slicer [ <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/#R19">19</a> ]和BioImage Suite [ <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/#R26">26</a> ]）联系起来。图像引导外科工具包（IGSTK）[ <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/#R27">27</a> ]，一个开放的软件平台提供与跟踪和成像设备的连接，支承OpenIGTLink跟踪和成像数据输出到其它平台，比如3D切片机和MITK [ <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/#R28">28</a>，<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/#R29">29</a>]。最近，Lasso _等人_使用OpenIGTLink将其数据抓取软件PLUS与外部可视化软件桥接，以流式跟踪和超声图像数据[ <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/#R30">30</a> ]。Clarkson _等人_开发了一个基于OpenIGTLink的消息库NiftyLink，用于集成数据抓取软件和用于可视化/用户交互的最终用户应用程序[ <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/#R15">15</a> ]。其他开源软件包，例如CustusX [ <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/#R31">31</a> ]，IBIS [ <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/#R32">32</a> ]和MeVisLab [ <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/#R18">18</a> ]，也适用于OpenIGTLink，以利用社区中现有的现有软件基础架构。</p>
-<p>OpenIGTLink还被用于桥接医学图像计算领域之外的平台。医疗机器人平台CISST库提供了一个OpenIGTLink桥，可将图像可视化软件集成到医疗机器人应用中[ <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/#R33">33</a> ]。OpenIGTLink还与基于ROS的机器人系统一起用于腹腔镜介入治疗[ <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/#R34">34</a> ]。ROS-IGTL-Bridge是对那些旨在扩展医学图像计算领域中的成功模型的先前工作的概括，并且具有促进医学机器人和医学图像计算之间的工程资源共享的潜力。</p>
-<p>ROS-IGTL-Bridge的源代码，指令和测试程序在GitHub [ <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/#R35">35</a> ]中作为开源软件提供。可以使用基于CMake的构建系统Catkin编译和安装代码。</p>
-<p><a href="https://www.ncbi.nlm.nih.gov/core/lw/2.0/html/tileshop_pmc/tileshop_pmc_inline.html?title=Click%20on%20image%20to%20zoom&amp;p=PMC3&amp;id=5543207_nihms883782f7.jpg"><img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/bin/nihms883782f7.jpg" alt="包含图片，插图等的外部文件。对象名称为nihms883782f7.jpg" title="点击图片放大"></a></p>
-<p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/figure/F7/">图7</a></p>
-<p>OpenIGT-Link和ROS-IGTL-Bridge的poly数据消息中的相应数据字段。考虑的属性包括_名称，点，多边形，条带，线_和_顶点_。</p>
-<p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/" title="转到此页面的其他部分">去：</a></p>
-<h2 id="致谢">致谢</h2>
-<p>该研究部分得到了美国国立卫生研究院（R01EB020667，R01CA111288，R01EB020610，P41EB015898）的支持。材料的内容完全由作者负责，并不一定代表这些机构的官方观点。作者感谢布莱根妇女医院的陈龙泉先生的技术支持。作者还感谢Christina Choi女士用Lego Mindstorms评估快速原型制作平台。</p>
 ]]></content>
     </entry>
 </feed>
