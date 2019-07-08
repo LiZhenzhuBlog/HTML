@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" >
 
-<title>Boolean Operation in Blender | Li Zhenzhu, Ph.D</title>
+<title>从一个py中运行另一个带参数的py | Li Zhenzhu, Ph.D</title>
 <meta name="description" content="Binzhou Medical University Hospital, Email: timeanddoctor@gmail.com.">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -115,39 +115,76 @@
       <div class="main-container">
         <div class="content-container" data-aos="fade-up">
           <div class="post-detail">
-            <h2 class="post-title">Boolean Operation in Blender</h2>
-            <div class="post-date">2019-02-24</div>
+            <h2 class="post-title">从一个py中运行另一个带参数的py</h2>
+            <div class="post-date">2019-07-08</div>
             
-              <div class="feature-container" style="background-image: url('https://blog.bioprinting.site/post-images/L1PrwRRb_.jpg')">
+              <div class="feature-container" style="background-image: url('http://p5.so.qhimgs1.com/sdr/400__/t01b8fa0635ddbb2ddb.jpg')">
               </div>
             
             <div class="post-content">
-              <pre><code>import bpy
-from bpy.types import Operator
-from bpy.props import BoolProperty, StringProperty
+              <pre><code>import sys
+import argparse
+import getpass
 
-#   need to spend more time on bpy: types, props,data,ops, context
-xx = 15
-while (xx &lt; 16):
-yy = 15
-    while (yy &lt; 16):    
-        #  set the 'cutter' in location
-        bpy.data.objects['Cylinder.002'].location=(xx,yy,0)
+def main(args):
+    if args['username'] is None:
+        print 'No user name specified. Login to WebCTRL needs a user name and password. Check all options for this command via -h'
+        sys.exit(1)
+    else:
+        username = args['username']
+    if args['password'] is None:
+        password = getpass.getpass('No password specified via -p. Please enter your WebCTRL login password: ')
+    else:
+        password = args['password']
+    if args['node'] is None:
+        print 'No path to a node specified. Check all options for this command via -h'
+        sys.exit(1)
+    if args['url'] is None:
+        print 'No URL given. Specify the URL to the WebCTRL server analogous to http://google.de'
+        sys.exit(1)
+    else:
+        wsdlFile = args['url'] + '/_common/webservices/Eval?wsdl'
 
-        #  make sure that the base object is selected 
-        bpy.data.objects['Cylinder.005'].select = False
-        bpy.data.objects['Cylinder.005'].select = True
+    # This doesn't belong to my original code. It's rather for demonstration:
+    # Print the arguments and leave the script
+    print 'Username: ' + args['username']
+    print 'Node: ' + args['node']
+    print 'URL: ' + args['url']
 
-        #  set the modifier
-        bpy.ops.object.modifier_add(type='BOOLEAN')
-        bpy.context.object.modifiers['Boolean'].operation = 'DIFFERENCE'
-        bpy.context.object.modifiers['Boolean'].object = bpy.data.objects['Cylinder.002']
 
-        #  execute
-        bpy.ops.object.modifier_apply(apply_as='DATA', modifier='Boolean')
-    yy += 3
-xx += 3
+# The parser is only called if this script is called as a script/executable (via command line) but not when imported by another script
+if __name__=='__main__':
+    if len(sys.argv) &lt; 2:
+        print &quot;You haven't specified any arguments. Use -h to get more details on how to use this command.&quot;
+        sys.exit(1)
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--username', '-u', type=str, default=None, help='Username for the login to the WebCTRL server')
+    parser.add_argument('--password', '-p', type=str, default=None, help='Password for the login to the WebCTRL server')
+    parser.add_argument('--node', '-n', type=str, default=None,
+        help='Path to the point or node whose children you want to retrieve. Start querying at the lowest level with &quot;-n /trees/geographic&quot;')
+    parser.add_argument('-url', type=str, default='https://webctrl.rz-berlin.mpg.de',
+        help=&quot;URL of the WebCTRL server as e.g. http://google.de&quot;)
+    args = parser.parse_args()
+
+    # Convert the argparse.Namespace to a dictionary: vars(args)
+    main(vars(args))
+    sys.exit(0)
 </code></pre>
+<p>现在，有三种执行wc_query_test的方法，这就是我想要实现的目标：</p>
+<p>1）从命令行调用wc_query_test.py：</p>
+<p><code>~/PycharmProjects/webctrl$ python wc_query_test.py -u aawrg -p wgAWER -n YWERGAEWR</code></p>
+<p>2）从命令行编译和调用wc_query_test：</p>
+<p><code>~/PycharmProjects/webctrl$ pyinstaller --distpath dist/. wc_query_test.py
+~/PycharmProjects/webctrl$ ./dist/wc_query_test/wc_query_test -u aawrg -p wgAWER -n YWERGAEWR</code></p>
+<p>3）从另一个python脚本调用wc_query_test，该脚本进入模块类型用法的方向：</p>
+<p><code>import wc_query_test
+myDictonary = {'username':'wsdl', 'password':'aaaaaa', 'node':'/trees/geographic', 'url':'https://my.server.de'}
+wc_query_test.main(myDictonary)</code></p>
+<p>所有三个版本都会产生与预期相同的输出，例如：</p>
+<p><code>~/PycharmProjects/webctrl$ ./dist/wc_query_test/wc_query_test -u aawrg -p wgAWER -n YWERGAEWR
+Username: aawrg
+Node: YWERGAEWR
+URL: https://webctrl.rz-berlin.mpg.de</code></p>
 
             </div>
             
@@ -157,18 +194,14 @@ xx += 3
                     Blog
                   </a>
                 
-                  <a href="https://blog.bioprinting.site/tag/3d" class="tag">
-                    3D
-                  </a>
-                
               </div>
             
             
               <div class="next-post">
                 <div class="next">下一篇</div>
-                <a href="https://blog.bioprinting.site/post/meeting">
+                <a href="https://blog.bioprinting.site/post/5OyTRhe_F">
                   <h3 class="post-title">
-                    3D printing techology in Neurosrugery-Training
+                    numpy_stl简介
                   </h3>
                 </a>
               </div>
