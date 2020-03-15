@@ -2,14 +2,23 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://blog.bioprinting.site</id>
     <title>Li Zhenzhu, Ph.D</title>
-    <updated>2019-10-05T11:43:10.652Z</updated>
+    <updated>2020-03-15T12:58:33.492Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://blog.bioprinting.site"/>
     <link rel="self" href="https://blog.bioprinting.site/atom.xml"/>
     <subtitle>Binzhou Medical University Hospital, Email: timeanddoctor@gmail.com.</subtitle>
     <logo>https://blog.bioprinting.site/images/avatar.png</logo>
     <icon>https://blog.bioprinting.site/favicon.ico</icon>
-    <rights>All rights reserved 2019, Li Zhenzhu, Ph.D</rights>
+    <rights>All rights reserved 2020, Li Zhenzhu, Ph.D</rights>
+    <entry>
+        <title type="html"><![CDATA[测试]]></title>
+        <id>https://blog.bioprinting.site/post/HFfQEX-Xa</id>
+        <link href="https://blog.bioprinting.site/post/HFfQEX-Xa">
+        </link>
+        <updated>2020-03-15T12:57:26.000Z</updated>
+        <content type="html"><![CDATA[<p>测试</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[儿童脑干肿瘤及手术入路]]></title>
         <id>https://blog.bioprinting.site/post/2IgPVMzQH</id>
@@ -2915,99 +2924,6 @@ sudo docker run -it --rm -p 6080:80 -p 28944:18944 rosmed/docker-ros-igtl</code>
 我到目前为止所使用的测试软件非常简陋，并且没有任何正向或反向机器人运动学。我需要添加这些函数来获得笛卡尔运动，或者更好地获取，让整个手臂在ROS（一个开源机器人操作系统）内运行。</p>
 <p><em>真实文档</em>
 我需要编写一本真正的手册来打印，组装，接线和运行这个机器人</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[IKPY]]></title>
-        <id>https://blog.bioprinting.site/post/9J9NEqOgl</id>
-        <link href="https://blog.bioprinting.site/post/9J9NEqOgl">
-        </link>
-        <updated>2019-05-20T14:11:18.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="入门">入门</h1>
-<p>本教程将向您介绍IKPy的基本概念。您可以在相应的<a href="https://github.com/Phylliade/ikpy/blob/master/tutorials/Quickstart.ipynb">IPython Notebook中</a>测试实时版本。</p>
-<h1 id=""><a href="https://github.com/Phylliade/ikpy/wiki#the-chain-object"></a>Chain对象</h1>
-<p>这<a href="https://github.com/Phylliade/ikpy/blob/dev/src/ikpy/chain.py"><code>Chain</code></a>是您将使用的主要对象：它是您可以移动，检查和绘制的链接列表。</p>
-<h2 id="-2"><a href="https://github.com/Phylliade/ikpy/wiki#creating-a-chain-from-a-urdf-file"></a>从URDF文件创建链</h2>
-<p>IKPy的一个重要特性是您可以从URDF文件创建链。如果您的文件符合URDF，它将起作用！</p>
-<p><code>my_chain = Chain.from_urdf_file(&quot;poppy_ergo.URDF&quot;)</code></p>
-<p>要发现URDF解析的更多高级功能，请转到专用<a href="https://github.com/Phylliade/ikpy/wiki/URDF">页面</a>。</p>
-<h2 id="-3"><a href="https://github.com/Phylliade/ikpy/wiki#creating-a-chain-manually"></a>手动创建链</h2>
-<p>如果你不想弄乱URDF文件（还），你可以手动创建你的链：</p>
-<p>来自 ikpy.link 进口链
-从 ikpy.link 导入 OriginLink，URDFLink</p>
-<p>left_arm_chain = Chain（name = ' left_arm '，links = [
-OriginLink（）
-URDFLink（
-命名= “肩”，
-translation_vector = [ - 10，0，5 ]，
-取向= [ 0，1.57，0 ]，
-转动= [ 0，1，0 ]，
-）
-URDFLink（
-命名= “肘”，
-translation_vector = [ 25，0，0 ]，
-取向= [ 0，0，0 ]，
-转动= [ 0，1，0 ]，
-）
-URDFLink（
-命名= “手腕”，
-translation_vector = [ 22，0，0 ]，
-取向= [ 0，0，0 ]，
-转动= [ 0，1，0 ]，
-）
-]）</p>
-<h1 id="-4"><a href="https://github.com/Phylliade/ikpy/wiki#getting-the-position-of-your-chain-aka-forward-kinematics-aka-fk"></a>获得你的链的位置（又名前进运动学，又名FK）</h1>
-<p>只需<code>forward_kinematics</code>使用每个关节的位置调用链的方法即可。</p>
-<p><code>my_chain.forward_kinematics([0] * 7)</code></p>
-<p>这将返回一个4x4变换矩阵，给出空间位置和链尖的方向。如果您不知道这些矩阵，请转到下面的“使用齐次坐标”部分。</p>
-<h1 id="-5"><a href="https://github.com/Phylliade/ikpy/wiki#setting-the-position-of-your-chain-aka-inverse-kinematics-aka-ik"></a>设置链条的位置（又名反向运动学，又称IK）</h1>
-<p>只需将框架矩阵（4x4 <a href="https://en.wikipedia.org/wiki/Transformation_matrix#Other_kinds_of_transformations">方向+平移矩阵</a>）传递<code>inverse_kinematics</code>给链的方法即可。</p>
-<p>例如，目标位置为[2,2,2]，方向矩阵为标识：</p>
-<p><code>my_chain.inverse_kinematics([[1, 0, 0, 2],
-[0, 1, 0, 2],
-[0, 0, 1, 2],
-[0, 0, 0, 1]])</code></p>
-<p>会回来：</p>
-<p><code>[  0.00000000e+00,  -7.85169183e-01, -9.71977343e-01, 8.39302626e-01,   7.03536053e-05,   7.31439909e-01,  0.00000000e+00]</code></p>
-<p>要获得有关Inverse Kinematics选项的更多信息，请单击此<a href="https://github.com/Phylliade/ikpy/wiki/Inverse-Kinematics">链接</a>。</p>
-<h2 id="-6"><a href="https://github.com/Phylliade/ikpy/wiki#using-homogeneous-coordinates"></a>使用齐次坐标</h2>
-<p>如果您不知道这些坐标并且4x4矩阵似乎排斥，则此部分适合您！</p>
-<p>该矩阵只是存储平移和旋转的简单方法。要使用这样的矩阵，有一个辅助<code>geometry_utils.to_transformation_matrix(translation_vector, orientation_matrix)</code>函数可以为您计算这个矩阵：</p>
-<p><code>my_chain.inverse_kinematics(geometry_utils.to_transformation_matrix(
-[2, 2, 2],
-[[1, 0, 0],
-[0, 1, 0],
-[0, 0, 1]]))</code></p>
-<p>将返回与上一节完全相同的内容。</p>
-<p>请注意，orientation_matrix参数是可选的。</p>
-<h1 id="-7"><a href="https://github.com/Phylliade/ikpy/wiki#plotting-your-chain"></a>绘制链条</h1>
-<p>您可以使用<code>plot</code>链对象的方法显示运动链，并传递链的每个关节的位置。</p>
-<p>这里我们使用以下给出的位置<code>inverse_kinematics</code>：</p>
-<p><code>import matplotlib.pyplot
-from mpl_toolkits.mplot3d import Axes3D
-ax = matplotlib.pyplot.figure().add_subplot(111, projection='3d')</p>
-<p>my_chain.plot(my_chain.inverse_kinematics([
-[1, 0, 0, 2],
-[0, 1, 0, 2],
-[0, 0, 1, 2],
-[0, 0, 0, 1]
-]), ax)
-matplotlib.pyplot.show()</code></p>
-<p>例如 ： <img src="https://github.com/Phylliade/ikpy/raw/master/tutorials/ikpy/plotting.png" alt=""></p>
-<p>要使用高级绘图功能，例如在同一图形上显示多个链，请遵循<a href="https://github.com/Phylliade/ikpy/wiki/Plotting">本指南</a>。</p>
-<p>&quot;&quot;&quot;
-反向运动学
-Pierre Manceron编辑了此页面 on 22 Jan 2016 · 3次修订
-反向运动学
-活动链接
-在IKPy中，您可以随意激活或停用某些功能</p>
-<p>例如，在这4个链接链中，通过指定掩码：</p>
-<p>[True, True, False, True]
-您将激活每个链接，但第三个链接：</p>
-<p>要使用链接掩码，请active_links_mask在创建Chain对象时使用该参数。</p>
-<p>初始位置
-要计算反向运动学，算法将需要链的初始位置。您可以使用方法的initial_position参数传递它inverse_kinematics。预期的数据类型是完全一样的预期值joints的的forward_kinematics方法。</p>
-<p>这是一个非常重要的参数，并且可能对计算产生巨大影响（在持续时间和返回的解决方案方面）如果您不提供它，IKPy将使用填充零的数组作为初始位置。</p>
 ]]></content>
     </entry>
 </feed>
