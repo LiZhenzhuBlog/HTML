@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://blog.bioprinting.site</id>
     <title>Li Zhenzhu, Ph.D</title>
-    <updated>2020-03-15T12:58:33.492Z</updated>
+    <updated>2020-04-22T11:32:40.781Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://blog.bioprinting.site"/>
     <link rel="self" href="https://blog.bioprinting.site/atom.xml"/>
@@ -11,12 +11,420 @@
     <icon>https://blog.bioprinting.site/favicon.ico</icon>
     <rights>All rights reserved 2020, Li Zhenzhu, Ph.D</rights>
     <entry>
-        <title type="html"><![CDATA[测试]]></title>
-        <id>https://blog.bioprinting.site/post/HFfQEX-Xa</id>
-        <link href="https://blog.bioprinting.site/post/HFfQEX-Xa">
+        <title type="html"><![CDATA[如何将视频转换为图片]]></title>
+        <id>https://blog.bioprinting.site/post/dx7xPaKP-</id>
+        <link href="https://blog.bioprinting.site/post/dx7xPaKP-">
         </link>
-        <updated>2020-03-15T12:57:26.000Z</updated>
-        <content type="html"><![CDATA[<p>测试</p>
+        <updated>2020-04-22T11:30:05.000Z</updated>
+        <content type="html"><![CDATA[<ul>
+<li>如何将视频转换为图片</li>
+</ul>
+<pre><code>import numpy as np
+import cv2, PIL, os
+from cv2 import aruco
+from mpl_toolkits.mplot3d import Axes3D
+import matplotlib.pyplot as plt
+import matplotlib as mpl
+import pandas as pd
+%matplotlib nbagg
+
+workdir = &quot;../Aruco/data/calib_tel_ludo2/&quot;
+name = &quot;VID_20180406_104312.mp4&quot;
+rootname = name.split(&quot;.&quot;)[0]
+cap = cv2.VideoCapture(workdir + name)
+counter = 0
+each = 10
+length = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
+for i in range(length):
+    ret, frame = cap.read()
+    if i % each == 0: cv2.imwrite(workdir + rootname + &quot;_{0}&quot;.format(i) + &quot;.png&quot;, frame)
+
+cap.release()
+
+os.listdir(&quot;../Aruco/data/calib_tel_ludo/&quot;)
+int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[另一个完整的例子]]></title>
+        <id>https://blog.bioprinting.site/post/QAHUqM6yQ</id>
+        <link href="https://blog.bioprinting.site/post/QAHUqM6yQ">
+        </link>
+        <updated>2020-04-22T11:10:21.000Z</updated>
+        <content type="html"><![CDATA[<ul>
+<li>
+<ol>
+<li>生成棋盘并且打印</li>
+</ol>
+</li>
+</ul>
+<pre><code>import numpy as np
+import cv2, PIL, os
+from cv2 import aruco
+from mpl_toolkits.mplot3d import Axes3D
+import matplotlib.pyplot as plt
+import matplotlib as mpl
+import pandas as pd
+%matplotlib nbagg
+
+#创建棋盘
+workdir = &quot;./workdir/&quot;
+aruco_dict = aruco.Dictionary_get(aruco.DICT_6X6_250)
+board = aruco.CharucoBoard_create(7, 5, 1, .8, aruco_dict)
+imboard = board.draw((2000, 2000))
+cv2.imwrite(workdir + &quot;chessboard.tiff&quot;, imboard)
+fig = plt.figure()
+ax = fig.add_subplot(1,1,1)
+plt.imshow(imboard, cmap = mpl.cm.gray, interpolation = &quot;nearest&quot;)
+ax.axis(&quot;off&quot;)
+plt.show()
+
+#通过相机不同角度拍照
+
+datadir = &quot;../../data/calib_tel_ludo/&quot;
+images = np.array([datadir + f for f in os.listdir(datadir) if f.endswith(&quot;.png&quot;) ])
+order = np.argsort([int(p.split(&quot;.&quot;)[-2].split(&quot;_&quot;)[-1]) for p in images])
+images = images[order]
+images
+#读取一个照片并展示
+im = PIL.Image.open(images[0])
+fig = plt.figure()
+ax = fig.add_subplot(1,1,1)
+plt.imshow(im)
+#ax.axis('off')
+plt.show()
+</code></pre>
+<ul>
+<li>2.现在，可以使用棋盘上的所有图像进行相机校准。两个功能是必需的：</li>
+</ul>
+<p>第一个将检测所有图像上的标记和。
+第二秒将继续检测到的标记以估计相机校准数据。</p>
+<pre><code>def read_chessboards(images):
+    &quot;&quot;&quot;
+    Charuco base pose estimation.
+    &quot;&quot;&quot;
+    print(&quot;POSE ESTIMATION STARTS:&quot;)
+    allCorners = []
+    allIds = []
+    decimator = 0
+    # SUB PIXEL CORNER DETECTION CRITERION
+    criteria = (cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_MAX_ITER, 100, 0.00001)
+
+    for im in images:
+        print(&quot;=&gt; Processing image {0}&quot;.format(im))
+        frame = cv2.imread(im)
+        gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+        corners, ids, rejectedImgPoints = cv2.aruco.detectMarkers(gray, aruco_dict)
+
+        if len(corners)&gt;0:
+            # SUB PIXEL DETECTION
+            for corner in corners:
+                cv2.cornerSubPix(gray, corner,
+                                 winSize = (3,3),
+                                 zeroZone = (-1,-1),
+                                 criteria = criteria)
+            res2 = cv2.aruco.interpolateCornersCharuco(corners,ids,gray,board)
+            if res2[1] is not None and res2[2] is not None and len(res2[1])&gt;3 and decimator%1==0:
+                allCorners.append(res2[1])
+                allIds.append(res2[2])
+
+        decimator+=1
+
+    imsize = gray.shape
+    return allCorners,allIds,imsize
+
+
+def calibrate_camera(allCorners,allIds,imsize):
+    &quot;&quot;&quot;
+    Calibrates the camera using the dected corners.
+    &quot;&quot;&quot;
+    print(&quot;CAMERA CALIBRATION&quot;)
+
+    cameraMatrixInit = np.array([[ 1000.,    0., imsize[0]/2.],
+                                 [    0., 1000., imsize[1]/2.],
+                                 [    0.,    0.,           1.]])
+
+    distCoeffsInit = np.zeros((5,1))
+    flags = (cv2.CALIB_USE_INTRINSIC_GUESS + cv2.CALIB_RATIONAL_MODEL + cv2.CALIB_FIX_ASPECT_RATIO)
+    #flags = (cv2.CALIB_RATIONAL_MODEL)
+    (ret, camera_matrix, distortion_coefficients0,
+     rotation_vectors, translation_vectors,
+     stdDeviationsIntrinsics, stdDeviationsExtrinsics,
+     perViewErrors) = cv2.aruco.calibrateCameraCharucoExtended(
+                      charucoCorners=allCorners,
+                      charucoIds=allIds,
+                      board=board,
+                      imageSize=imsize,
+                      cameraMatrix=cameraMatrixInit,
+                      distCoeffs=distCoeffsInit,
+                      flags=flags,
+                      criteria=(cv2.TERM_CRITERIA_EPS &amp; cv2.TERM_CRITERIA_COUNT, 10000, 1e-9))
+
+    return ret, camera_matrix, distortion_coefficients0, rotation_vectors, translation_vectors
+
+
+#读取所有的照片		
+allCorners,allIds,imsize=read_chessboards(images)
+
+#标定相机
+%time
+ret, mtx, dist, rvecs, tvecs = calibrate_camera(allCorners,allIds,imsize)
+
+
+</code></pre>
+<ul>
+<li>3.检验标记结果</li>
+</ul>
+<pre><code>#Check calibration results
+i=20 # 选择打开哪一个照片
+plt.figure()
+frame = cv2.imread(images[i])
+img_undist = cv2.undistort(frame,mtx,dist,None)
+plt.subplot(1,2,1)
+plt.imshow(frame)
+plt.title(&quot;Raw image&quot;)
+plt.axis(&quot;off&quot;)
+plt.subplot(1,2,2)
+plt.imshow(img_undist)
+plt.title(&quot;Corrected image&quot;)
+plt.axis(&quot;off&quot;)
+plt.show()
+</code></pre>
+<ul>
+<li>4.开始使用相机并且预估3D</li>
+</ul>
+<pre><code>#读取照片
+frame = cv2.imread(&quot;../../data/IMG_20180406_095219.jpg&quot;)
+#frame = cv2.undistort(src = frame, cameraMatrix = mtx, distCoeffs = dist)
+plt.figure()
+plt.imshow(frame, interpolation = &quot;nearest&quot;)
+plt.show()
+
+#处理
+gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+aruco_dict = aruco.Dictionary_get(aruco.DICT_6X6_250)
+parameters =  aruco.DetectorParameters_create()
+corners, ids, rejectedImgPoints = aruco.detectMarkers(gray, aruco_dict,
+                                                      parameters=parameters)
+# SUB PIXEL DETECTION
+criteria = (cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_MAX_ITER, 100, 0.0001)
+for corner in corners:
+    cv2.cornerSubPix(gray, corner, winSize = (3,3), zeroZone = (-1,-1), criteria = criteria)
+
+frame_markers = aruco.drawDetectedMarkers(frame.copy(), corners, ids)
+
+print(corners)
+
+#画出图片
+plt.figure()
+plt.imshow(frame_markers, interpolation = &quot;nearest&quot;)
+
+plt.show()
+</code></pre>
+<ul>
+<li>5.添加3轴标识</li>
+</ul>
+<pre><code>size_of_marker =  0.0285 # side lenght of the marker in meter
+rvecs,tvecs = aruco.estimatePoseSingleMarkers(corners, size_of_marker , mtx, dist)
+
+#添加轴
+length_of_axis = 0.1
+imaxis = aruco.drawDetectedMarkers(frame.copy(), corners, ids)
+
+for i in range(len(tvecs)):
+    imaxis = aruco.drawAxis(imaxis, mtx, dist, rvecs[i], tvecs[i], length_of_axis)
+		
+plt.figure()
+plt.imshow(imaxis)
+plt.grid()
+plt.show()
+
+#表格展示移动参数
+data = pd.DataFrame(data = tvecs.reshape(len(tvecs),3), columns = [&quot;tx&quot;, &quot;ty&quot;, &quot;tz&quot;],
+                    index = ids.flatten())
+data.index.name = &quot;marker&quot;
+data.sort_index(inplace= True)
+print(data)
+#表格展示旋转参数
+datar = pd.DataFrame(data = tvecs.reshape(len(rvecs),3), columns = [&quot;rx&quot;, &quot;ry&quot;, &quot;rz&quot;],
+                    index = ids.flatten())
+datar.index.name = &quot;marker&quot;
+datar.sort_index(inplace= True)
+np.degrees(datar)
+</code></pre>
+<ul>
+<li>6.后期处理相关的数据</li>
+</ul>
+<pre><code>v = data.loc[3:6].values
+((v[1:] - v[:-1])**2).sum(axis = 1)**.5
+cv2.Rodrigues(rvecs[0], np.zeros((3,3)))
+fig = plt.figure()
+#ax = fig.add_subplot(111, projection='3d')
+ax = fig.add_subplot(1,2,1)
+ax.set_aspect(&quot;equal&quot;)
+plt.plot(data.tx, data.ty, &quot;or-&quot;)
+plt.grid()
+ax = fig.add_subplot(1,2,2)
+plt.imshow(imaxis, origin = &quot;upper&quot;)
+plt.plot(np.array(corners)[:, 0, 0,0], np.array(corners)[:, 0, 0,1], &quot;or&quot;)
+plt.show()
+</code></pre>
+<ul>
+<li>7.开始定义在图片中的位置</li>
+</ul>
+<pre><code>a = np.arange(50)
+import pickle
+f = open(&quot;truc.pckl&quot;, &quot;wb&quot;)
+pickle.dump(a, f)
+f.close()
+
+f = open(&quot;truc.pckl&quot;, &quot;rb&quot;)
+b = pickle.load(f)
+b == a
+
+corners = np.array(corners)
+data2 = pd.DataFrame({&quot;px&quot;: corners[:, 0, 0, 1],
+                      &quot;py&quot;: corners[:, 0, 0, 0]}, index = ids.flatten())
+data2.sort_index(inplace=True)
+print(data2)
+
+m0 = data2.loc[0]
+m43 = data2.loc[43]
+d01 = ((m0 - m43).values**2).sum()**.5
+d = 42.5e-3 * (3.5**2 + 4.5**2)**.5
+factor = d / d01
+data2[&quot;x&quot;] = data2.px * factor
+data2[&quot;y&quot;] = data2.py * factor
+((data2[[&quot;x&quot;, &quot;y&quot;]].loc[11] - data2[[&quot;x&quot;, &quot;y&quot;]].loc[0]).values**2).sum()**.5
+c = np.array(corners).astype(np.float64).reshape(44,4,2)
+(((c[:, 1:] - c[:, :-1])**2).sum(axis = 2)**.5).mean(axis =1)
+</code></pre>
+<ul>
+<li>9.利用help函数查看帮助文档</li>
+</ul>
+<pre><code>help(cv2.aruco.detectMarkers)
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[机器视觉2 创建标记并识别]]></title>
+        <id>https://blog.bioprinting.site/post/O_TkJInMU</id>
+        <link href="https://blog.bioprinting.site/post/O_TkJInMU">
+        </link>
+        <updated>2020-04-22T11:00:59.000Z</updated>
+        <content type="html"><![CDATA[<ul>
+<li>创建</li>
+</ul>
+<pre><code>import numpy as np
+import cv2, PIL
+from cv2 import aruco
+import matplotlib.pyplot as plt
+import matplotlib as mpl
+import pandas as pd
+%matplotlib nbagg
+
+
+aruco_dict = aruco.Dictionary_get(aruco.DICT_6X6_250)
+
+fig = plt.figure()
+nx = 4
+ny = 3
+for i in range(1, nx*ny+1):
+    ax = fig.add_subplot(ny,nx, i)
+    img = aruco.drawMarker(aruco_dict,i, 700)
+    plt.imshow(img, cmap = mpl.cm.gray, interpolation = &quot;nearest&quot;)
+    ax.axis(&quot;off&quot;)
+
+plt.savefig(&quot;_data/markers.pdf&quot;)  #保存为pdf
+plt.show()
+
+#通过打印机打印，裁剪后拍照
+#读取照片
+frame = cv2.imread(&quot;_data/aruco_photo.jpg&quot;)
+plt.figure()
+plt.imshow(frame)
+plt.show()
+
+#追踪
+%%time
+gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+aruco_dict = aruco.Dictionary_get(aruco.DICT_6X6_250)
+parameters =  aruco.DetectorParameters_create()
+corners, ids, rejectedImgPoints = aruco.detectMarkers(gray, aruco_dict, parameters=parameters)
+frame_markers = aruco.drawDetectedMarkers(frame.copy(), corners, ids)
+
+#把追踪的结果图片展示
+plt.figure()
+plt.imshow(frame_markers)
+for i in range(len(ids)):
+    c = corners[i][0]
+    plt.plot([c[:, 0].mean()], [c[:, 1].mean()], &quot;o&quot;, label = &quot;id={0}&quot;.format(ids[i]))
+plt.legend()
+plt.show()
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[机器视觉]]></title>
+        <id>https://blog.bioprinting.site/post/XMhGzY5TR</id>
+        <link href="https://blog.bioprinting.site/post/XMhGzY5TR">
+        </link>
+        <updated>2020-04-22T10:23:31.000Z</updated>
+        <content type="html"><![CDATA[<p><strong>Aruco</strong></p>
+<ul>
+<li><a href="https://mecaruco2.readthedocs.io/en/latest/notebooks_rst/Aruco/Projet+calibration-Paul.html">检查校准</a>
+<ul>
+<li><a href="https://mecaruco2.readthedocs.io/en/latest/notebooks_rst/Aruco/Projet+calibration-Paul.html#use-of-camera-calibration-to-estimate-3d-translation-and-rotation-of-each-marker-on-a-scene">使用相机校准来估计场景中每个标记的3D平移和旋转</a></li>
+<li><a href="https://mecaruco2.readthedocs.io/en/latest/notebooks_rst/Aruco/Projet+calibration-Paul.html#post-processing">后期处理</a></li>
+<li><a href="https://mecaruco2.readthedocs.io/en/latest/notebooks_rst/Aruco/Projet+calibration-Paul.html#result">结果</a>
+<ul>
+<li><a href="https://mecaruco2.readthedocs.io/en/latest/notebooks_rst/Aruco/Projet+calibration-Paul.html#add-local-axis-on-each-maker">在每个制造商上添加局部轴</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="https://mecaruco2.readthedocs.io/en/latest/notebooks_rst/Aruco/aruco_basics.html">ARUCO标记：基础知识</a>
+<ul>
+<li><a href="https://mecaruco2.readthedocs.io/en/latest/notebooks_rst/Aruco/aruco_basics.html#marker-creation">1：标记创建</a></li>
+<li><a href="https://mecaruco2.readthedocs.io/en/latest/notebooks_rst/Aruco/aruco_basics.html#print-cut-stick-and-take-a-picture">2：打印，剪切，粘贴并拍照</a></li>
+<li><a href="https://mecaruco2.readthedocs.io/en/latest/notebooks_rst/Aruco/aruco_basics.html#post-processing">3：后期处理</a></li>
+<li><a href="https://mecaruco2.readthedocs.io/en/latest/notebooks_rst/Aruco/aruco_basics.html#results">4：结果</a></li>
+</ul>
+</li>
+<li><a href="https://mecaruco2.readthedocs.io/en/latest/notebooks_rst/Aruco/aruco_basics_video.html">ARUCO标记：基础知识</a>
+<ul>
+<li><a href="https://mecaruco2.readthedocs.io/en/latest/notebooks_rst/Aruco/aruco_basics_video.html#marker-creation">1：标记创建</a></li>
+<li><a href="https://mecaruco2.readthedocs.io/en/latest/notebooks_rst/Aruco/aruco_basics_video.html#print-cut-stick-and-take-a-picture">2：打印，剪切，粘贴并拍照</a></li>
+<li><a href="https://mecaruco2.readthedocs.io/en/latest/notebooks_rst/Aruco/aruco_basics_video.html#post-processing">3：后期处理</a></li>
+<li><a href="https://mecaruco2.readthedocs.io/en/latest/notebooks_rst/Aruco/aruco_basics_video.html#results">4：结果</a></li>
+</ul>
+</li>
+<li><a href="https://mecaruco2.readthedocs.io/en/latest/notebooks_rst/Aruco/sandbox/sandbox.html">沙盒</a>
+<ul>
+<li><a href="https://mecaruco2.readthedocs.io/en/latest/notebooks_rst/Aruco/sandbox/ludovic/ludovic.html">鲁多维奇</a>
+<ul>
+<li><a href="https://mecaruco2.readthedocs.io/en/latest/notebooks_rst/Aruco/sandbox/ludovic/aruco_calibration_rotation.html">使用CHARUCO进行相机校准</a>
+<ul>
+<li><a href="https://mecaruco2.readthedocs.io/en/latest/notebooks_rst/Aruco/sandbox/ludovic/aruco_calibration_rotation.html#camera-pose-estimation-using-charuco-chessboard">2.使用CHARUCO国际象棋棋盘估算相机姿势</a>
+<ul>
+<li><a href="https://mecaruco2.readthedocs.io/en/latest/notebooks_rst/Aruco/sandbox/ludovic/aruco_calibration_rotation.html#check-calibration-results">检查校准结果</a></li>
+</ul>
+</li>
+<li><a href="https://mecaruco2.readthedocs.io/en/latest/notebooks_rst/Aruco/sandbox/ludovic/aruco_calibration_rotation.html#use-of-camera-calibration-to-estimate-3d-translation-and-rotation-of-each-marker-on-a-scene">3。使用相机校准来估计场景中每个标记的3D平移和旋转</a></li>
+<li><a href="https://mecaruco2.readthedocs.io/en/latest/notebooks_rst/Aruco/sandbox/ludovic/aruco_calibration_rotation.html#post-processing">后期处理</a></li>
+<li><a href="https://mecaruco2.readthedocs.io/en/latest/notebooks_rst/Aruco/sandbox/ludovic/aruco_calibration_rotation.html#results">结果</a>
+<ul>
+<li><a href="https://mecaruco2.readthedocs.io/en/latest/notebooks_rst/Aruco/sandbox/ludovic/aruco_calibration_rotation.html#add-local-axis-on-each-marker">在每个标记上添加局部轴</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 ]]></content>
     </entry>
     <entry>
@@ -1824,1106 +2232,6 @@ tearoff=0指的是不分开，就是说你所添加的submenu不能弹出新窗�
 <img src="https://pic002.cnblogs.com/images/2012/370835/2012102220204555.png" alt=""></p>
 <p>点了以后就是这样的</p>
 <p><img src="https://pic002.cnblogs.com/images/2012/370835/2012102220205355.png" alt=""></p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[PyAutoGui]]></title>
-        <id>https://blog.bioprinting.site/post/BI_VpZjOp</id>
-        <link href="https://blog.bioprinting.site/post/BI_VpZjOp">
-        </link>
-        <updated>2019-06-13T11:48:21.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="pyautogui">PyAutoGUI</h1>
-<p>PyAutoGUI是一个面向人类的跨平台GUI自动化Python模块。用于以编程方式控制鼠标和键盘。</p>
-<p><code>pip install pyautogui</code></p>
-<p>完整文档可在<a href="https://pyautogui.readthedocs.org/">https://pyautogui.readthedocs.org获得</a></p>
-<p>简体中文文档可从<a href="https://muxuezi.github.io/posts/doc-pyautogui.html">https://muxuezi.github.io/posts/doc-pyautogui.html获得</a></p>
-<p>源代码可在<a href="https://github.com/asweigart/pyautogui">https://github.com/asweigart/pyautogui获得</a></p>
-<h1 id=""><a href="https://github.com/3dprintingdoctor/pyautogui#dependencies"></a>依赖</h1>
-<p>PyAutoGUI支持Python 2和3.如果使用pip从PyPI安装PyAutoGUI：</p>
-<p>Windows没有依赖项。不需要安装Win32扩展。</p>
-<p>OS X需要安装pyobjc-core和pyobjc模块（按此顺序）。</p>
-<p>Linux需要安装python3-xlib（或Python 2的python-xlib）模块。</p>
-<p>需要安装Pillow，在Linux上，您可能需要安装其他库以确保Pillow的PNG / JPEG正常工作。看到：</p>
-<p><code>https://stackoverflow.com/questions/7648200/pip-install-pil-e-tickets-1-no-jpeg-png-support</p>
-<p>http://ubuntuforums.org/showthread.php?t=1751455</code></p>
-<p>如果您想进行开发并为PyAutoGUI做出贡献，您需要从PyPI安装这些模块：</p>
-<ul>
-<li>pyscreeze</li>
-<li>pymsgbox</li>
-<li>pytweening</li>
-</ul>
-<h1 id="-2"><a href="https://github.com/3dprintingdoctor/pyautogui#example-usage"></a>示例用法</h1>
-<h2 id="-3"><a href="https://github.com/3dprintingdoctor/pyautogui#keyboard-and-mouse-control"></a>键盘和鼠标控制</h2>
-<pre><code> &gt;&gt; &gt;  进口 pyautogui
- &gt;&gt; &gt;屏幕宽度，screenHeight = pyautogui.size（）
- &gt;&gt; &gt; currentMouseX，currentMouseY = pyautogui.position（）
- &gt;&gt; &gt; pyautogui.moveTo（100，150）
- &gt;&gt; &gt; pyautogui.click（）
- &gt;&gt; &gt; pyautogui.moveRel（无，10）   ＃移动鼠标10个像素向下
-&gt;&gt; &gt; pyautogui.doubleClick（）
- &gt;&gt; &gt; pyautogui。moveTo（ 500，500，duration = 2，tween = pyautogui.tweens.easeInOutQuad）   ＃使用补间/缓动功能将鼠标移动超过2秒。
-&gt;&gt; &gt; pyautogui.typewrite（'世界，你好！'，间隔= 0.25）   ＃在每个键之间以1/4秒的暂停型
-&gt;&gt; &gt; pyautogui.press（' ESC '）
- &gt;&gt; &gt; pyautogui.keyDown（'移'）
- &gt;&gt; &gt; pyautogui.typewrite（['左'， '左'， '左'， '左'， '左'， '左' ]）
-&gt;&gt; &gt; pyautogui.keyUp（ '移'）
-&gt;&gt; &gt; pyautogui.hotkey（ ' CTRL '， ' Ç '）
-</code></pre>
-<h2 id="-4"><a href="https://github.com/3dprintingdoctor/pyautogui#display-message-boxes"></a>显示消息框</h2>
-<pre><code> &gt;&gt; &gt;  进口 pyautogui
- &gt;&gt; &gt; pyautogui.alert（'这是一个警告框。'）
- ' OK '
-&gt;&gt; &gt; pyautogui.confirm（'要我继续吗？'）
- '取消'
-&gt;&gt; &gt; pyautogui.confirm（'输入选项。'，buttons = [ ' A '，' B '，' C ' ]）
- 'B '
- &gt;&gt;&gt; pyautogui.prompt（“你叫什么名字？”）
- “铝”
-&gt;&gt; &gt; pyautogui.password（“请输入密码（文本将被隐藏）”），
- “剑鱼”
-</code></pre>
-<h2 id="-5"><a href="https://github.com/3dprintingdoctor/pyautogui#screenshot-functions"></a>截图功能</h2>
-<p>（PyAutoGUI使用Pillow来处理与图像相关的功能。）</p>
-<pre><code> &gt;&gt; &gt;  进口 pyautogui
- &gt;&gt; &gt; IM1 = pyautogui.screenshot（）
- &gt;&gt; &gt; im1.save（' my_screenshot.png '）
- &gt;&gt; &gt; IM2 = pyautogui.screenshot（' my_screenshot2.png '）
-</code></pre>
-<p>您还可以找到屏幕上图像的位置：</p>
-<pre><code> &gt;&gt; &gt;  进口 pyautogui
- &gt;&gt; &gt; button7location = pyautogui.locateOnScreen（' button.png '）＃匹配区域的返回（左，上，宽度，高度）
-&gt;&gt; &gt; button7location
-（1416，562，50，41）
- &gt;&gt; &gt; buttonx，buttony = pyautogui.center（button7location）
- &gt;&gt; &gt; buttonx，buttony
-（1441，582）
- &gt;&gt; &gt; pyautogui.click（buttonx，buttony）  ＃点击其中按钮被发现的中心
-</code></pre>
-<p>locateCenterOnScreen（）函数返回此匹配区域的中心：</p>
-<pre><code> &gt;&gt; &gt;  进口 pyautogui
- &gt;&gt; &gt; buttonx，buttony = pyautogui.locateCenterOnScreen（' button.png '）＃返回（X，Y）的匹配区域的
-&gt;&gt; &gt; buttonx，buttony
-（1441，582）
- &gt;&gt; &gt; pyautogui.click（buttonx，buttony）  ＃点击其中按钮被发现的中心
-</code></pre>
-<h2 id="pyautogui让所有gui都自动化">PyAutoGUI——让所有GUI都自动化</h2>
-<p>本教程译自大神<a href="http://inventwithpython.com/">Al Sweigart</a>的<a href="https://pyautogui.readthedocs.org/">PyAutoGUI</a>项目，Python自动化工具，更适合处理GUI任务，网页任务推荐：</p>
-<ul>
-<li><a href="https://selenium-python.readthedocs.org/">Selenium</a>+Firefox记录（Chromedriver和Phantomjs也很给力，Phantomjs虽然是无头浏览器，但有时定位不准），然后用Python写单元测试</li>
-<li><a href="http://www.python-requests.org/en/latest/">request</a>处理get/post请求写一堆代码自动化处理，都在后台运行，不用运行浏览器，非常适合处理表单</li>
-</ul>
-<p>没有<a href="http://www.sikuli.org/">sikuli</a>功能多，但是Python让生活更简单，<a href="http://cn.pycon.org/2015/">人生苦短，Python当歌</a>。</p>
-<p>同时推荐一本Python网络数据采集（图灵社区取的名字^_^）的基础书籍<a href="http://shop.oreilly.com/product/0636920034391.do">Ryan Mitchell的《Web Scraping with Python》</a>，可以和PyAutoGUI结合使用。</p>
-<p>tl;dr</p>
-<p>2015-08-17：输入中文bug没有解决，目前的解决方案是Python 2.X环境下安装<a href="https://github.com/asweigart/pyperclip">pyperclip</a>和pyautogui，用复制粘贴来实现。</p>
-<p>In [ ]:</p>
-<p>import pyperclip
-import pyautogui</p>
-<h1 id="pyautogui中文输入需要用粘贴实现">PyAutoGUI中文输入需要用粘贴实现</h1>
-<h1 id="python-2版本的pyperclip提供中文复制">Python 2版本的pyperclip提供中文复制</h1>
-<p>def paste(foo):
-pyperclip.copy(foo)
-pyautogui.hotkey('ctrl', 'v')</p>
-<p>foo = u'学而时习之'</p>
-<h1 id="移动到文本框">移动到文本框</h1>
-<p>pyautogui.click(130,30)
-paste(foo)</p>
-<h2 id="1简介">1.简介</h2>
-<h3 id="11-目的">1.1 目的</h3>
-<p>PyAutoGUI是一个纯Python的GUI自动化工具，其目的是可以用程序自动控制鼠标和键盘操作，多平台支持（Windows，OS X，Linux）。可以用<code>pip</code>安装，Github上有<a href="https://github.com/asweigart/pyautogui">源代码</a>。</p>
-<p>下面的代码让鼠标移到屏幕中央。</p>
-<p>In [ ]:</p>
-<p>import pyautogui
-screenWidth, screenHeight = pyautogui.size()
-pyautogui.moveTo(screenWidth / 2, screenHeight / 2)</p>
-<p>PyAutoGUI可以模拟鼠标的移动、点击、拖拽，键盘按键输入、按住操作，以及鼠标+键盘的热键同时按住等操作，可以说手能动的都可以。</p>
-<h3 id="12-例子">1.2 例子</h3>
-<p>In [ ]:</p>
-<p>import pyautogui
-screenWidth, screenHeight = pyautogui.size()
-currentMouseX, currentMouseY = pyautogui.position()
-pyautogui.moveTo(100, 150)
-pyautogui.click()</p>
-<h1 id="鼠标向下移动10像素">鼠标向下移动10像素</h1>
-<p>pyautogui.moveRel(None, 10)
-pyautogui.doubleClick()</p>
-<h1 id="用缓动渐变函数让鼠标2秒后移动到500500位置">用缓动/渐变函数让鼠标2秒后移动到(500,500)位置</h1>
-<h1 id="use-tweeningeasing-function-to-move-mouse-over-2-seconds">use tweening/easing function to move mouse over 2 seconds.</h1>
-<p>pyautogui.moveTo(1800, 500, duration=2, tween=pyautogui.easeInOutQuad)</p>
-<h1 id="在每次输入之间暂停025秒">在每次输入之间暂停0.25秒</h1>
-<p>pyautogui.typewrite('Hello world!', interval=0.25)
-pyautogui.press('esc')
-pyautogui.keyDown('shift')
-pyautogui.press(['left', 'left', 'left', 'left', 'left', 'left'])
-pyautogui.keyUp('shift')
-pyautogui.hotkey('ctrl', 'c')</p>
-<p>In [ ]:</p>
-<p>distance = 200
-while distance &gt; 0:
-pyautogui.dragRel(distance, 0, duration=0.5) # 向右
-distance -= 5
-pyautogui.dragRel(0, distance, duration=0.5) # 向下
-pyautogui.draIn gRel(-distance, 0, duration=0.5) # 向左
-distance -= 5
-pyautogui.dragRel(0, -distance, duration=0.5) # 向上</p>
-<h3 id="14-保护措施fail-safes">1.4 保护措施（Fail-Safes）</h3>
-<p>就像《魔法师的学徒》(Sorcerer’s Apprentice)会担水的扫帚，可以担水，却无力阻止水漫浴室。你的程序也可能会失控（即使是按照你的意思执行的），那时就需要中断。如果鼠标还在自动操作，就很难在程序窗口关闭它。</p>
-<p>为了能够及时中断，PyAutoGUI提供了一个保护措施。当<code>pyautogui.FAILSAFE = True</code>时，如果把鼠标光标在屏幕左上角，PyAutoGUI函数就会产生<code>pyautogui.FailSafeException</code>异常。如果失控了，需要中断PyAutoGUI函数，就把鼠标光标在屏幕左上角。要禁用这个特性，就把<code>FAILSAFE</code>设置成<code>False</code>：</p>
-<p>In [ ]:</p>
-<p>import pyautogui
-pyautogui.FAILSAFE = False</p>
-<p>通过把<code>pyautogui.PAUSE</code>设置成<code>float</code>或<code>int</code>时间（秒），可以为所有的PyAutoGUI函数增加延迟。默认延迟时间是0.1秒。在函数循环执行的时候，这样做可以让PyAutoGUI运行的慢一点，非常有用。例如：</p>
-<p>In [ ]:</p>
-<p>import pyautogui
-pyautogui.PAUSE = 2.5
-pyautogui.moveTo(100,100); pyautogui.click()</p>
-<p>所有的PyAutoGUI函数在延迟完成前都处于阻塞状态（block）。（未来计划增加一个可选的非阻塞模式来调用函数。）</p>
-<p><strong>建议<code>PAUSE</code>和<code>FAILSAFE</code>一起使用。</strong></p>
-<h2 id="2-安装与依赖">2 安装与依赖</h2>
-<p>PyAutoGUI支持Python 2.x和Python 3.x</p>
-<ul>
-<li>Windows：PyAutoGUI没有任何依赖，因为它用Python的<code>ctypes</code>模块所以不需要<code>pywin32</code><code>pip3 install pyautogui</code></li>
-<li>OS X：PyAutoGUI需要<a href="http://pythonhosted.org/pyobjc/install.html">PyObjC</a>运行AppKit和Quartz模块。这个模块在PyPI上的按住顺序是<code>pyobjc-core</code>和<code>pyobjc</code><code>sudo pip3 install pyobjc-core
-sudo pip3 install pyobjc
-sudo pip3 install pyautogui</code></li>
-<li>Linux：PyAutoGUI需要<code>python-xlib</code>（Python 2）、<code>python3-Xlib</code>（Python 3）<code>sudo pip3 install python3-xlib
-sudo apt-get scrot
-sudo apt-get install python-tk
-sudo apt-get install python3-dev
-sudo pip3 install pyautogui</code></li>
-</ul>
-<h3 id="3速查表小抄cheat-sheet">3.速查表（小抄，Cheat Sheet）</h3>
-<h4 id="31-常用函数">3.1 常用函数</h4>
-<p>In [ ]:</p>
-<p>import pyautogui</p>
-<h1 id="当前鼠标的坐标">当前鼠标的坐标</h1>
-<p>pyautogui.position()</p>
-<p>Out[ ]:</p>
-<p>(123, 372)</p>
-<p>In [ ]:</p>
-<h1 id="当前屏幕的分辨率宽度和高度">当前屏幕的分辨率（宽度和高度）</h1>
-<p>pyautogui.size()</p>
-<p>Out[ ]:</p>
-<p>(1920, 1080)</p>
-<p>In [ ]:</p>
-<h1 id="xy是否在屏幕上">(x,y)是否在屏幕上</h1>
-<p>x, y = 122, 244
-pyautogui.onScreen(x, y)</p>
-<p>Out[ ]:</p>
-<p>True</p>
-<h4 id="32-保护措施">3.2 保护措施</h4>
-<p>PyAutoGUI函数增加延迟为2.5秒：</p>
-<p>In [ ]:</p>
-<p>import pyautogui
-pyautogui.PAUSE = 2.5</p>
-<p>当pyautogui.FAILSAFE = True时，如果把鼠标光标在屏幕左上角，PyAutoGUI函数就会产生pyautogui.FailSafeException异常。</p>
-<p>In [ ]:</p>
-<p>import pyautogui
-pyautogui.FAILSAFE = True</p>
-<h4 id="33-鼠标函数">3.3 鼠标函数</h4>
-<p>坐标系的原点是左上角。X轴（水平）坐标向右增大，Y轴（竖直）坐标向下增大。</p>
-<p>In [ ]:</p>
-<p>num_seconds = 1.2</p>
-<h1 id="用num_seconds秒的时间把光标移动到x-y位置">用num_seconds秒的时间把光标移动到(x, y)位置</h1>
-<p>pyautogui.moveTo(x, y, duration=num_seconds)</p>
-<h1 id="用num_seconds秒的时间把光标的x轴水平坐标移动xoffset">用num_seconds秒的时间把光标的X轴（水平）坐标移动xOffset，</h1>
-<h1 id="y轴竖直坐标向下移动yoffset">Y轴（竖直）坐标向下移动yOffset。</h1>
-<p>xOffset, yOffset = 50, 100
-pyautogui.moveRel(xOffset, yOffset, duration=num_seconds)</p>
-<p><code>click()</code>函数就是让鼠标点击，默认是单击左键，参数可以设置：</p>
-<p>In [ ]:</p>
-<p>pyautogui.click(x=moveToX, y=moveToY, clicks=num_of_clicks, interval=secs_between_clicks, button='left')</p>
-<p>其中，<code>button</code>属性可以设置成<code>left</code>，<code>middle</code>和<code>right</code>。</p>
-<p>所有的点击都可以用这个函数，不过下面的函数可读性更好：</p>
-<p>In [ ]:</p>
-<p>pyautogui.rightClick(x=moveToX, y=moveToY)
-pyautogui.middleClick(x=moveToX, y=moveToY)
-pyautogui.doubleClick(x=moveToX, y=moveToY)
-pyautogui.tripleClick(x=moveToX, y=moveToY)</p>
-<p><code>scroll</code>函数控制鼠标滚轮的滚动，<code>amount_to_scroll</code>参数表示滚动的格数。正数则页面向上滚动，负数则向下滚动：</p>
-<p>In [ ]:</p>
-<p>pyautogui.scroll(clicks=amount_to_scroll, x=moveToX, y=moveToY)</p>
-<p>每个按键按下和松开两个事件可以分开处理：</p>
-<p>In [ ]:</p>
-<p>pyautogui.mouseDown(x=moveToX, y=moveToY, button='left')
-pyautogui.mouseUp(x=moveToX, y=moveToY, button='left')</p>
-<h4 id="34-键盘函数">3.4 键盘函数</h4>
-<p>键盘上可以按的键都可以调用：</p>
-<p>In [ ]:</p>
-<h1 id="每次键入的时间间隔">每次键入的时间间隔</h1>
-<p>secs_between_keys = 0.1
-pyautogui.typewrite('Hello world!\n', interval=secs_between_keys)</p>
-<p>多个键也可以：</p>
-<p>In [ ]:</p>
-<p>pyautogui.typewrite(['a', 'b', 'c', 'left', 'backspace', 'enter', 'f1'], interval=secs_between_keys)</p>
-<p>按键名称列表：</p>
-<p>In [ ]:</p>
-<p>pyautogui.KEYBOARD_KEYS[:10]</p>
-<p>Out[ ]:</p>
-<p>['\t', '\n', '\r', ' ', '!', '&quot;', '#', '$', '%', '&amp;']</p>
-<p>键盘的一些热键像<code>Ctrl-S</code>或<code>Ctrl-Shift-1</code>都可以用<code>hotkey()</code>函数来实现：</p>
-<p>In [ ]:</p>
-<p>pyautogui.hotkey('ctrl', 'a') # 全选
-pyautogui.hotkey('ctrl', 'c') # 复制
-pyautogui.hotkey('ctrl', 'v') # 粘贴</p>
-<p>每个按键的按下和松开也可以单独调用：</p>
-<p>In [ ]:</p>
-<p>pyautogui.keyDown(key_name)
-pyautogui.keyUp(key_name)</p>
-<h4 id="35-消息弹窗函数">3.5 消息弹窗函数</h4>
-<p>如果你需要消息弹窗，通过单击OK暂停程序，或者向用户显示一些信息，消息弹窗函数就会有类似JavaScript的功能：</p>
-<p>In [ ]:</p>
-<p>pyautogui.alert('这个消息弹窗是文字+OK按钮')
-pyautogui.confirm('这个消息弹窗是文字+OK+Cancel按钮')
-pyautogui.prompt('这个消息弹窗是让用户输入字符串，单击OK')</p>
-<p>Out[ ]:</p>
-<p>''</p>
-<p>在<code>prompt()</code>函数中，如果用户什么都不输入，就会返回<code>None</code>。</p>
-<h4 id="36-截屏函数">3.6 截屏函数</h4>
-<p>PyAutoGUI用Pillow/PIL库实现图片相关的识别和操作。</p>
-<p>在Linux里面，你必须执行<code>sudo apt-get install scrot</code>来使用截屏特性。</p>
-<p>In [ ]:</p>
-<h1 id="返回一个pillowpil的image对象">返回一个Pillow/PIL的Image对象</h1>
-<p>pyautogui.screenshot()
-pyautogui.screenshot('foo.png')</p>
-<p>如果你有一个图片文件想在上面做点击操作，你可以用<code>locateOnScreen()</code>函数来定位。</p>
-<p>In [ ]:</p>
-<h1 id="返回最左x坐标最顶y坐标宽度高度">返回(最左x坐标，最顶y坐标，宽度，高度)</h1>
-<p>pyautogui.locateOnScreen('pyautogui/looks.png')</p>
-<p>Out[ ]:</p>
-<p>(0, 1040, 48, 40)</p>
-<p><code>locateAllOnScreen()</code>函数会寻找所有相似图片，返回一个生成器：</p>
-<p>In [ ]:</p>
-<p>for i in pyautogui.locateAllOnScreen('pyautogui/looks.png'):
-print(i)</p>
-<p>(0, 1040, 48, 40)</p>
-<p>In [ ]:</p>
-<p>list(pyautogui.locateAllOnScreen('pyautogui/looks.png'))</p>
-<p>Out[ ]:</p>
-<p>[(0, 1040, 48, 40)]</p>
-<p><code>locateCenterOnScreen()</code>函数会返回图片在屏幕上的中心XY轴坐标值：</p>
-<p>In [ ]:</p>
-<p>pyautogui.locateCenterOnScreen('pyautogui/looks.png')</p>
-<p>Out[ ]:</p>
-<p>(24, 1060)</p>
-<p>如果没找到图片会返回<code>None</code>。</p>
-<blockquote>
-<p>定位比较慢，一般得用1~2秒</p>
-</blockquote>
-<h2 id="4-常用函数">4 常用函数</h2>
-<ul>
-<li><code>position()</code>：返回整数元组(x, y)，分别表示鼠标光标所在位置的XY轴坐标</li>
-<li><code>size()</code>：返回显示器的尺寸整数元组(x, y)。未来将加入多屏支持</li>
-</ul>
-<h2 id="5-鼠标控制函数">5 鼠标控制函数</h2>
-<h3 id="51-屏幕与鼠标位置">5.1 屏幕与鼠标位置</h3>
-<p>屏幕位置使用X和Y轴的笛卡尔坐标系。原点<code>(0,0)</code>在左上角，分别向右、向下增大。</p>
-<p>如果屏幕像素是<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>1920</mn><mo>×</mo><mn>1080</mn></mrow><annotation encoding="application/x-tex">1920 \times 1080</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">1</span><span class="mord">9</span><span class="mord">2</span><span class="mord">0</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span><span class="mord">0</span><span class="mord">8</span><span class="mord">0</span></span></span></span>，那么右下角的坐标是<code>(1919, 1079)</code>。</p>
-<p>分辨率大小可以通过<code>size()</code>函数返回整数元组。光标的位置用<code>position()</code>返回。例如：</p>
-<p>In [ ]:</p>
-<p>pyautogui.size()</p>
-<p>Out[ ]:</p>
-<p>(1920, 1080)</p>
-<p>In [ ]:</p>
-<p>pyautogui.position()</p>
-<p>Out[ ]:</p>
-<p>(272, 688)</p>
-<p>下面是Python 3版本的光标位置记录程序：</p>
-<p>In [ ]:</p>
-<h1 id="python-3">! python 3</h1>
-<p>import pyautogui
-print('Press Ctrl-C to quit')
-try:
-while True:
-x, y = pyautogui.position()
-positionStr = 'X: {} Y: {}'.format(*[str(x).rjust(4) for x in [x, y]])
-print(positionStr, end='')
-print('\b' * len(positionStr), end='', flush=True)
-except KeyboardInterrupt:
-print('\n')</p>
-<p>Python 2版本是：</p>
-<p>In [ ]:</p>
-<h1 id="python">! python</h1>
-<p>import pyautogui, sys
-print('Press Ctrl-C to quit.')
-try:
-while True:
-x, y = pyautogui.position()
-positionStr = 'X: ' + str(x).rjust(4) + ' Y: ' + str(y).rjust(4)
-print positionStr,
-print '\b' * (len(positionStr) + 2),
-sys.stdout.flush()
-except KeyboardInterrupt:
-print '\n'</p>
-<p>要检查XY坐标是否在屏幕上，需要用<code>onScreen()</code>函数来检验，如果在屏幕上返回<code>True</code>：</p>
-<p>In [ ]:</p>
-<p>import pyautogui
-pyautogui.onScreen(0, 0)</p>
-<p>Out[ ]:</p>
-<p>True</p>
-<p>In [ ]:</p>
-<p>pyautogui.onScreen(0, -1)</p>
-<p>Out[ ]:</p>
-<p>False</p>
-<p>In [ ]:</p>
-<p>pyautogui.onScreen(0, 2080)</p>
-<p>Out[ ]:</p>
-<p>False</p>
-<p>In [ ]:</p>
-<p>pyautogui.onScreen(1920, 1080)</p>
-<p>Out[ ]:</p>
-<p>False</p>
-<p>In [ ]:</p>
-<p>pyautogui.onScreen(1919, 1079)</p>
-<p>Out[ ]:</p>
-<p>True</p>
-<h3 id="52-鼠标行为">5.2 鼠标行为</h3>
-<p><code>moveTo()</code>函数会把鼠标光标移动到指定的XY轴坐标处。如果传入<code>None</code>值，则表示使用当前光标的对象轴坐标值。</p>
-<p>In [ ]:</p>
-<p>pyautogui.moveTo(100, 200)     # 光标移动到(100, 200)位置
-pyautogui.moveTo(None, 500)   # 光标移动到(100, 500)位置
-pyautogui.moveTo(600, None)   # 光标移动到(600, 500)位置</p>
-<p>一般鼠标光标都是瞬间移动到指定的位置，如果你想让鼠标移动的慢点，可以设置持续时间：</p>
-<p>In [ ]:</p>
-<p>pyautogui.moveTo(100, 200, duration=2)     # 用2秒把光标移动到(100, 200)位置</p>
-<p>默认的持续时间<code>pyautogui.MINIMUM_DURATION</code>是0.1秒，如果你设置的时间比默认值还短，那么就会瞬间执行。</p>
-<p>如果你想让光标以当前位置为原点，进行相对移动，就用<code>pyautogui.moveRel()</code>函数。例如：</p>
-<p>In [ ]:</p>
-<p>pyautogui.moveTo(100, 200) #把光标移动到(100, 200)位置
-pyautogui.moveRel(0, 50)   #向下移动50
-pyautogui.moveRel(30, 0, 2)   #向右移动30
-pyautogui.moveRel(30, None)   #向右移动30</p>
-<h3 id="53-鼠标拖拽">5.3 鼠标拖拽</h3>
-<p>PyAutoGUI的<code>dragTo()</code>和<code>dragRel()</code>函数与<code>moveTo()</code>和<code>moveRel()</code>函数类似。另外，他们有一个<code>button</code>参数可以设置成<code>left</code>，<code>middle</code>和<code>right</code>三个键。例如：</p>
-<p>In [ ]:</p>
-<h1 id="按住鼠标左键把鼠标拖拽到100-200位置">按住鼠标左键，把鼠标拖拽到(100, 200)位置</h1>
-<p>pyautogui.dragTo(100, 200, button='left')</p>
-<h1 id="按住鼠标左键用2秒钟把鼠标拖拽到300-400位置">按住鼠标左键，用2秒钟把鼠标拖拽到(300, 400)位置</h1>
-<p>pyautogui.dragTo(300, 400, 2, button='left')</p>
-<h1 id="按住鼠标右键用2秒钟把鼠标拖拽到300位置">按住鼠标右键，用2秒钟把鼠标拖拽到(30,0)位置</h1>
-<p>pyautogui.dragTo(30, 0, 2, button='right')</p>
-<h3 id="54-缓动渐变tween-easing函数">5.4 缓动/渐变（Tween / Easing）函数</h3>
-<p>缓动/渐变函数的作用是让光标的移动更炫。如果你不需要用到的话，你可以忽略这些。</p>
-<p>缓动/渐变函数可以改变光标移动过程的速度和方向。通常鼠标是匀速直线运动，这就是线性缓动/渐变函数。PyAutoGUI有30种缓动/渐变函数，可以通过<code>pyautogui.ease*?</code>查看。其中，<code>pyautogui.easeInQuad()</code>函数可以用于<code>moveTo()</code>，<code>moveRel()</code>，<code>dragTo()</code>和<code>dragRel()</code>函数，光标移动呈现先慢后快的效果，整个过程的时间还是和原来一样。而<code>pyautogui.easeOutQuad</code>函数的效果相反：光标开始移动很快，然后慢慢减速。<code>pyautogui.easeOutElastic</code>是弹簧效果，首先越过终点，然后再反弹回来。例如：</p>
-<p>In [ ]:</p>
-<h1 id="开始很慢不断加速">开始很慢，不断加速</h1>
-<p>pyautogui.moveTo(100, 100, 2, pyautogui.easeInQuad)</p>
-<h1 id="开始很快不断减速">开始很快，不断减速</h1>
-<p>pyautogui.moveTo(100, 100, 2, pyautogui.easeOutQuad)</p>
-<h1 id="开始和结束都快中间比较慢">开始和结束都快，中间比较慢</h1>
-<p>pyautogui.moveTo(100, 100, 2, pyautogui.easeInOutQuad)</p>
-<h1 id="一步一徘徊前进">一步一徘徊前进</h1>
-<p>pyautogui.moveTo(100, 100, 2, pyautogui.easeInBounce)</p>
-<h1 id="徘徊幅度更大甚至超过起点和终点">徘徊幅度更大，甚至超过起点和终点</h1>
-<p>pyautogui.moveTo(100, 100, 2, pyautogui.easeInElastic)</p>
-<p>这些效果函数是模仿Al Sweigart的<a href="https://github.com/asweigart/pytweening">PyTweening</a>模块，可以直接使用，不需要额外安装。</p>
-<p>如果你想创建自己的效果，也可以定义一个函数，其参数是(0.0,1.0)，表示起点和终点，返回值是介于[0.0,1.0]之间的数。</p>
-<h3 id="55-鼠标单击">5.5 鼠标单击</h3>
-<p><code>click()</code>函数模拟单击鼠标左键一次的行为。例如：</p>
-<p>In [ ]:</p>
-<p>pyautogui.click()</p>
-<p>如果单机之前要先移动，可以把目标的XY坐标值传入函数：</p>
-<p>In [ ]:</p>
-<h1 id="先移动到100-200再单击">先移动到(100, 200)再单击</h1>
-<p>pyautogui.click(x=100, y=200, duration=2)</p>
-<p>可以通过<code>button</code>参数设置<code>left</code>，<code>middle</code>和<code>right</code>三个键。例如：</p>
-<p>In [ ]:</p>
-<p>pyautogui.click(button='right')</p>
-<p>要做多次单击可以设置<code>clicks</code>参数，还有<code>interval</code>参数可以设置每次单击之间的时间间隔。例如：</p>
-<p>In [ ]:</p>
-<h1 id="双击左键">双击左键</h1>
-<p>pyautogui.click(clicks=2)</p>
-<h1 id="两次单击之间停留025秒">两次单击之间停留0.25秒</h1>
-<p>pyautogui.click(clicks=2, interval=0.25)</p>
-<h1 id="三击右键">三击右键</h1>
-<p>pyautogui.click(button='right', clicks=2, interval=0.25)</p>
-<p>为了操作方便，PyAutoGUI提供了<code>doubleClick()</code>，<code>tripleClick()</code>和<code>rightClick()</code>来实现双击、三击和右击操作。</p>
-<h3 id="56-鼠标按下和松开函数">5.6 鼠标按下和松开函数</h3>
-<p><code>mouseDown()</code>和<code>mouseUp()</code>函数可以实现鼠标按下和鼠标松开的操作。两者参数相同，有<code>x</code>，<code>y</code>和<code>button</code>。例如：</p>
-<p>In [ ]:</p>
-<h1 id="鼠标左键按下再松开">鼠标左键按下再松开</h1>
-<p>pyautogui.mouseDown(); pyautogui.mouseUp()</p>
-<h1 id="按下鼠标右键">按下鼠标右键</h1>
-<p>pyautogui.mouseDown(button='right')</p>
-<h1 id="移动到100-200位置然后松开鼠标右键">移动到(100, 200)位置，然后松开鼠标右键</h1>
-<p>pyautogui.mouseUp(button='right', x=100, y=200)</p>
-<h3 id="57-滚轮滚动函数">5.7 滚轮滚动函数</h3>
-<p>鼠标滚轮滚动可以用<code>scroll()</code>函数和<code>clicks</code>次数参数来模拟。不同平台上的<code>clicks</code>次数不太一样。还有<code>x</code>和<code>y</code>参数可以在滚动之前定位到(x, y)位置。例如：</p>
-<p>In [ ]:</p>
-<h1 id="向上滚动10格">向上滚动10格</h1>
-<p>pyautogui.scroll(10)</p>
-<h1 id="向下滚动10格">向下滚动10格</h1>
-<p>pyautogui.scroll(-10)</p>
-<h1 id="移动到100-100位置再向上滚动10格">移动到(100, 100)位置再向上滚动10格</h1>
-<p>pyautogui.scroll(10, x=100, y=100)</p>
-<p>在OS X和Linux平台上，PyAutoGUI还可以用<code>hscroll()</code>实现水平滚动。例如：</p>
-<p>In [ ]:</p>
-<h1 id="向右滚动10格">向右滚动10格</h1>
-<p>pyautogui.hscroll(10)</p>
-<h1 id="向左滚动10格">向左滚动10格</h1>
-<p>pyautogui.hscroll(-10)</p>
-<p><code>scroll()</code>函数是<code>vscroll()</code>的一个包装（<code>wrapper</code>），执行竖直滚动。</p>
-<h3 id="6-键盘控制函数">6 键盘控制函数</h3>
-<h3 id="61-typewrite输入函数">6.1 <code>typewrite()</code>输入函数</h3>
-<p>键盘控制的主要函数就是<code>typewrite()</code>。这个函数可以实现字符输入。要在两次输入间增加时间间隔，可以用<code>interval</code>参数。例如：</p>
-<p>In [ ]:</p>
-<h1 id="输入hello-world">输入Hello world!</h1>
-<p>pyautogui.typewrite('Hello world!')</p>
-<h1 id="每次输入间隔025秒输入hello-world">每次输入间隔0.25秒，输入Hello world!</h1>
-<p>pyautogui.typewrite('Hello world!', interval=0.25)</p>
-<p><code>typewrite()</code>函数只能用于单个字符键，不能按SHITF和F1这些功能键。</p>
-<h3 id="62-presskeydown和keyup函数">6.2 <code>press()</code>，<code>keyDown()</code>和<code>keyUp()</code>函数</h3>
-<p>要按那些功能键，可以用<code>press()</code>函数把<code>pyautogui.KEYBOARD_KEYS</code>里面按键对应的字符串输入进去。例如：</p>
-<p>In [ ]:</p>
-<h1 id="enter键">ENTER键</h1>
-<p>pyautogui.press('enter')</p>
-<h1 id="f1键">F1键</h1>
-<p>pyautogui.press('f1')</p>
-<h1 id="左方向键">左方向键</h1>
-<p>pyautogui.press('left')</p>
-<p><code>press()</code>函数其实是<code>keyDown()</code>和<code>keyUp()</code>函数的包装，模拟的按下然后松开两个动作。这两个函数可以单独调用。例如，按下<code>shift</code>键的同时按3次左方向键：</p>
-<p>In [ ]:</p>
-<h1 id="按下shift键">按下<code>shift</code>键</h1>
-<p>pyautogui.keyDown('shift')
-pyautogui.press('left')
-pyautogui.press('left')
-pyautogui.press('left')</p>
-<h1 id="松开shift键">松开<code>shift</code>键</h1>
-<p>pyautogui.keyUp('shift')</p>
-<p>和<code>typewrite()</code>函数一样，可以用数组把一组键传入<code>press()</code>。例如：</p>
-<p>In [ ]:</p>
-<p>pyautogui.press(['left', 'left', 'left'])</p>
-<h3 id="63-hotkey函数">6.3 <code>hotkey()</code>函数</h3>
-<p>为了更高效的输入热键，PyAutoGUI提供了<code>hotkey()</code>函数来绑定若干按键：</p>
-<p>In [ ]:</p>
-<p>pyautogui.hotkey('ctrl', 'shift', 'ese')</p>
-<p>等价于：</p>
-<p>In [ ]:</p>
-<p>pyautogui.keyDown('ctrl')
-pyautogui.keyDown('shift')
-pyautogui.keyDown('esc')
-pyautogui.keyUp('esc')
-pyautogui.keyUp('shift')
-pyautogui.keyUp('ctrl')</p>
-<h3 id="64-keyboard_keys">6.4 KEYBOARD_KEYS</h3>
-<p>下面就是<code>press()</code>，<code>keyDown()</code>，<code>keyUp()</code>和<code>hotkey()</code>函数可以输入的按键名称：</p>
-<p>In [ ]:</p>
-<p>print(pyautogui.KEYBOARD_KEYS)</p>
-<p>['\t', '\n', '\r', ' ', '!', '&quot;', '#', '$', '%', '&amp;', &quot;'&quot;, '(', ')', '*', '+', ',', '-', '.', '/', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', ':', ';', '&lt;', '=', '&gt;', '?', '@', '[', '\', ']', '^', '_', '`', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '{', '|', '}', '~', 'accept', 'add', 'alt', 'altleft', 'altright', 'apps', 'backspace', 'browserback', 'browserfavorites', 'browserforward', 'browserhome', 'browserrefresh', 'browsersearch', 'browserstop', 'capslock', 'clear', 'convert', 'ctrl', 'ctrlleft', 'ctrlright', 'decimal', 'del', 'delete', 'divide', 'down', 'end', 'enter', 'esc', 'escape', 'execute', 'f1', 'f10', 'f11', 'f12', 'f13', 'f14', 'f15', 'f16', 'f17', 'f18', 'f19', 'f2', 'f20', 'f21', 'f22', 'f23', 'f24', 'f3', 'f4', 'f5', 'f6', 'f7', 'f8', 'f9', 'final', 'fn', 'hanguel', 'hangul', 'hanja', 'help', 'home', 'insert', 'junja', 'kana', 'kanji', 'launchapp1', 'launchapp2', 'launchmail', 'launchmediaselect', 'left', 'modechange', 'multiply', 'nexttrack', 'nonconvert', 'num0', 'num1', 'num2', 'num3', 'num4', 'num5', 'num6', 'num7', 'num8', 'num9', 'numlock', 'pagedown', 'pageup', 'pause', 'pgdn', 'pgup', 'playpause', 'prevtrack', 'print', 'printscreen', 'prntscrn', 'prtsc', 'prtscr', 'return', 'right', 'scrolllock', 'select', 'separator', 'shift', 'shiftleft', 'shiftright', 'sleep', 'stop', 'subtract', 'tab', 'up', 'volumedown', 'volumemute', 'volumeup', 'win', 'winleft', 'winright', 'yen', 'command', 'option', 'optionleft', 'optionright']</p>
-<h3 id="7-消息弹窗函数">7 消息弹窗函数</h3>
-<p>PyAutoGUI通过Tkinter实现了4种纯Python的消息弹窗函数，和JavaScript类似。</p>
-<h3 id="71-alert函数">7.1 alert()函数</h3>
-<p>In [ ]:</p>
-<p>pyautogui.alert(text='', title='', button='OK')</p>
-<p>Out[ ]:</p>
-<p>'OK'</p>
-<p>显示一个简单的带文字和OK按钮的消息弹窗。用户点击后返回<code>button</code>的文字。</p>
-<h3 id="72-the-confirm-function">7.2 The confirm() Function</h3>
-<p>In [ ]:</p>
-<h1 id="ok和cancel按钮的消息弹窗">OK和Cancel按钮的消息弹窗</h1>
-<p>pyautogui.confirm(text='', title='', buttons=['OK', 'Cancel'])</p>
-<h1 id="10个按键0-9的消息弹窗">10个按键0-9的消息弹窗</h1>
-<p>pyautogui.confirm(text='', title='', buttons=range(10))</p>
-<p>Out[ ]:</p>
-<p>'0'</p>
-<p>显示一个简单的带文字、OK和Cancel按钮的消息弹窗，用户点击后返回被点击button的文字，支持自定义数字、文字的列表。</p>
-<h3 id="73-the-prompt-function">7.3 The prompt() Function</h3>
-<p>In [ ]:</p>
-<p>pyautogui.prompt(text='', title='' , default='')</p>
-<p>可以输入的消息弹窗，带OK和Cancel按钮。用户点击OK按钮返回输入的文字，点击Cancel按钮返回<code>None</code>。</p>
-<h3 id="74-the-password-function">7.4 The password() Function</h3>
-<p>In [ ]:</p>
-<p>pyautogui.password(text='', title='', default='', mask='*')</p>
-<p>样式同<code>prompt()</code>，用于输入密码，消息用<code>*</code>表示。带OK和Cancel按钮。用户点击OK按钮返回输入的文字，点击Cancel按钮返回<code>None</code>。</p>
-<h3 id="8-截屏函数">8 截屏函数</h3>
-<p>PyAutoGUI可以截屏并保存为图片文件，然后定位这些截屏在屏幕上的位置。与<a href="http://www.sikuli.org/">sikuli</a>类似，把屏幕上的按键截取下来，然后定位，就可以执行点击等操作了。</p>
-<p>截屏功能需要安装Pillow模块。OS X用<code>screencapture</code>命令，是系统自带的。Linux用户用<code>scrot</code>命令，可以通过<code>sudo apt-get install scrot</code>安装。</p>
-<h3 id="81-ubuntu注意事项">8.1 Ubuntu注意事项</h3>
-<p>由于Ubuntu上安装Pillow时缺少PNG和JPEG依赖，所以安装比较复杂，具体可以看<a href="http://conda.pydata.org/miniconda.html">Ubuntu论坛</a>。不过用<a href="http://conda.pydata.org/miniconda.html">miniconda</a>可以解决这些问题，如果Ubuntu或Mint上安装了miniconda，可以直接<code>conda install pillow</code>来安装。</p>
-<h3 id="82-screenshot函数">8.2 <code>screenshot()</code>函数</h3>
-<p><code>screenshot()</code>函数会返回<code>Image</code>对象（参考<a href="http://python-pillow.github.io/">Pillow或PIL模块文档</a>），也可以设置文件名：</p>
-<p>In [ ]:</p>
-<p>import pyautogui
-im1 = pyautogui.screenshot()
-im2 = pyautogui.screenshot('my_screenshot.png')</p>
-<p>在一个<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>1920</mn><mo>×</mo><mn>1080</mn></mrow><annotation encoding="application/x-tex">1920 \times 1080</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">1</span><span class="mord">9</span><span class="mord">2</span><span class="mord">0</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span><span class="mord">0</span><span class="mord">8</span><span class="mord">0</span></span></span></span>的屏幕上，<code>screenshot()</code>函数要消耗100微秒——不快也不慢。</p>
-<p>如果你不需要截取整个屏幕，还有一个可选的<code>region</code>参数。你可以把截取区域的左上角XY坐标值和宽度、高度传入截取。</p>
-<p>In [ ]:</p>
-<p>im = pyautogui.screenshot(region=(0, 0, 300 ,400))</p>
-<h3 id="83-定位函数">8.3 定位函数</h3>
-<p>可以定位截图在屏幕上的坐标位置。比如，你需要在计算器里输入：<img src="https://muxuezi.github.io/posts/pyautogui/calc.png" alt=""></p>
-<p>如果你不知道按钮的位置，就不能用<code>moveTo()</code>定位和<code>click()</code>点击。而且每次计算器的位置可能会变化，这时即使有来坐标也不好用了。但是如果你有要点击按钮的截图，比如数字<code>7</code>：<img src="https://muxuezi.github.io/posts/pyautogui/calc7key.png" alt=""></p>
-<p>你可以调用<code>pyautogui.locateOnScreen('calc7key.png')</code>函数来获得<code>7</code>的屏幕坐标。返回的是一个元组<code>(top, left, width, height)</code>。这个元组可以用<code>pyautogui.center()</code>函数来获取截图屏幕的中心坐标。如果截图没找到，<code>pyautogui.locateOnScreen()</code>函数返回<code>None</code>：</p>
-<p>In [ ]:</p>
-<p>import pyautogui
-button7location = pyautogui.locateOnScreen('pyautogui/calc7key.png')
-button7location</p>
-<p>Out[ ]:</p>
-<p>(1226, 546, 29, 28)</p>
-<p>In [ ]:</p>
-<p>button7x, button7y = pyautogui.center(button7location)
-button7x, button7y</p>
-<p>Out[ ]:</p>
-<p>(1240, 560)</p>
-<p>In [ ]:</p>
-<p>pyautogui.click(button7x, button7y)</p>
-<p><code>locateCenterOnScreen()</code>等价于上面的前两布操作，直接获得截屏屏幕中心坐标：</p>
-<p>In [ ]:</p>
-<p>import pyautogui
-x, y = pyautogui.locateCenterOnScreen('pyautogui/calc7key.png')
-pyautogui.click(x, y)</p>
-<p>在<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>1920</mn><mo>×</mo><mn>1080</mn></mrow><annotation encoding="application/x-tex">1920 \times 1080</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">1</span><span class="mord">9</span><span class="mord">2</span><span class="mord">0</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span><span class="mord">0</span><span class="mord">8</span><span class="mord">0</span></span></span></span>的屏幕上，定位函数需要1~2秒时间。对视频游戏（LOL、DOTA）来说就太慢了，但是上班干活还是绰绰有余。</p>
-<p>还是几个定位函数。都是从左上角原点开始向右向下搜索截图位置：</p>
-<ul>
-<li>locateOnScreen(image, grayscale=False)：返回找到的第一个截图<code>Image</code>对象在屏幕上的坐标<code>(left, top, width, height)</code>，如果没找到返回<code>None</code></li>
-<li>locateCenterOnScreen(image, grayscale=False)：返回找到的第一个截图<code>Image</code>对象在屏幕上的中心坐标<code>(x, y)</code>，如果没找到返回<code>None</code></li>
-<li>locateAllOnScreen(image, grayscale=False)：返回找到的所有相同截图<code>Image</code>对象在屏幕上的坐标<code>(left, top, width, height)</code>的生成器</li>
-<li>locate(needleImage, haystackImage, grayscale=False)：返回找到的第一个截图<code>Image</code>对象在<code>haystackImage</code>里面的坐标<code>(left, top, width, height)</code>，如果没找到返回<code>None</code></li>
-<li>locateAll(needleImage, haystackImage, grayscale=False)：返回找到的所有相同截图<code>Image</code>对象在<code>haystackImage</code>里面的坐标<code>(left, top, width, height)</code>的生成器</li>
-</ul>
-<p>两个<code>locateAll*</code>函数都可以用<code>for</code>循环和<code>list()</code>输出：</p>
-<p>In [ ]:</p>
-<p>for pos in pyautogui.locateAllOnScreen('pyautogui/calc7key.png'):
-print(pos)</p>
-<p>(1227, 546, 29, 28)</p>
-<p>In [ ]:</p>
-<p>list(pyautogui.locateAllOnScreen('pyautogui/calc7key.png'))</p>
-<p>Out[ ]:</p>
-<p>[(1227, 546, 29, 28)]</p>
-<h4 id="831-灰度值匹配">8.3.1 灰度值匹配</h4>
-<p>可以把<code>grayscale</code>参数设置为<code>True</code>来加速定位（大约提升30%），默认为<code>False</code>。这种去色（desaturate）方法可以加速定位，但是也可能导致假阳性（false-positive）匹配：</p>
-<p>In [ ]:</p>
-<p>import pyautogui
-button7location = pyautogui.locateOnScreen('pyautogui/calc7key.png', grayscale=True)
-button7location</p>
-<p>Out[ ]:</p>
-<p>(1227, 546, 29, 28)</p>
-<h4 id="832-像素匹配">8.3.2 像素匹配</h4>
-<p>要获取截屏某个位置的RGB像素值，可以用<code>Image</code>对象的<code>getpixel()</code>方法：</p>
-<p>In [ ]:</p>
-<p>import pyautogui
-im = pyautogui.screenshot()
-im.getpixel((100, 200))</p>
-<p>Out[ ]:</p>
-<p>(255, 255, 255)</p>
-<p>也可以用PyAutoGUI的<code>pixel()</code>函数，是之前调用的包装：</p>
-<p>In [ ]:</p>
-<p>pyautogui.pixel(100, 200)</p>
-<p>Out[ ]:</p>
-<p>(255, 255, 255)</p>
-<p>如果你只是要检验一下指定位置的像素值，可以用<code>pixelMatchesColor()</code>函数，把X、Y和RGB元组值穿入即可：</p>
-<p>In [ ]:</p>
-<p>pyautogui.pixelMatchesColor(100, 200, (255, 255, 255))</p>
-<p>Out[ ]:</p>
-<p>True</p>
-<p>In [ ]:</p>
-<p>pyautogui.pixelMatchesColor(100, 200, (255, 255, 245))</p>
-<p>Out[ ]:</p>
-<p>False</p>
-<p><code>tolerance</code>参数可以指定红、绿、蓝3种颜色误差范围：</p>
-<p>In [ ]:</p>
-<p>pyautogui.pixelMatchesColor(100, 200, (255, 255, 245), tolerance=10)</p>
-<p>Out[ ]:</p>
-<p>True</p>
-<p>In [ ]:</p>
-<p>pyautogui.pixelMatchesColor(100, 200, (248, 250, 245), tolerance=10)</p>
-<p>Out[ ]:</p>
-<p>True</p>
-<p>In [ ]:</p>
-<p>pyautogui.pixelMatchesColor(100, 200, (205, 255, 245), tolerance=10)</p>
-<p>Out[ ]:</p>
-<p>False</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[3D slicer 机械臂（ROS）]]></title>
-        <id>https://blog.bioprinting.site/post/WBh3a3s5z</id>
-        <link href="https://blog.bioprinting.site/post/WBh3a3s5z">
-        </link>
-        <updated>2019-06-02T09:05:47.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="ismr-2019规划">ISMR 2019规划</h1>
-<h2 id=""><a href="https://github.com/rosmed/rosmed.github.io/wiki/ISMR2019#organizers"></a>主办单位</h2>
-<ul>
-<li>Junichi Tokuda，布莱根妇女医院和哈佛医学院（<a href="mailto:tokuda@bwh.harvard.edu">tokuda@bwh.harvard.edu</a>）</li>
-<li>女王大学Tamas Ungi（<a href="mailto:ungi@queensu.ca">ungi@queensu.ca</a>）</li>
-<li>马里兰大学Axel Krieger（<a href="mailto:axel@umd.edu">axel@umd.edu</a>）</li>
-<li>约翰霍普金斯大学Simon Leonard（<a href="mailto:sleonard@jhu.edu">sleonard@jhu.edu</a>）</li>
-</ul>
-<h2 id="-2"><a href="https://github.com/rosmed/rosmed.github.io/wiki/ISMR2019#invited-talk"></a>特邀演讲</h2>
-<ul>
-<li>Junichi Tokuda，博士，布莱根妇女医院</li>
-<li>Tamas Ungi，医学博士，女王大学博士，图像引导治疗原型软件</li>
-<li>Axel Krieger，马里兰大学自主外科软件系统博士</li>
-<li>伍斯特理工学院Gregory Fischer博士</li>
-<li>范德比尔特大学博士罗伯特韦伯斯特
-<ul>
-<li>（演讲者变更）范德比尔特大学Stanley D. Herrell博士</li>
-</ul>
-</li>
-<li>Niguhiko Hata，博士，布莱根妇女医院</li>
-</ul>
-<h2 id="-3"><a href="https://github.com/rosmed/rosmed.github.io/wiki/ISMR2019#time-table-draft"></a>时间表（草案）</h2>
-<ul>
-<li>下午1:30 - 1：40：开场白和介绍（Junichi Tokuda）</li>
-<li>下午1:40至下午2:30：特邀演讲
-<ul>
-<li>下午1:40 :( Stanley Herrel）</li>
-<li>下午1:50 :( Nobuhiko Hata）</li>
-<li>下午2:00 :( Axel Krieger）</li>
-<li>下午2:10 :(格雷戈里菲舍尔）</li>
-<li>下午2:20 :( Tamas Ungi）</li>
-</ul>
-</li>
-<li>下午2:30 - 下午3:00：教程第1节</li>
-<li>下午3:00 - 下午3:30：喝咖啡休息时间</li>
-<li>下午3:30 - 下午5:00：教程第2节</li>
-</ul>
-<h2 id="-4"><a href="https://github.com/rosmed/rosmed.github.io/wiki/ISMR2019#tutorial---workflow"></a>教程 - 工作流程</h2>
-<p>请参见<a href="https://dl.dropboxusercontent.com/s/kamqj85tdhrgbgc/ROSIGTLTutorial-ISMR2019.pptx">教程幻灯片</a>。</p>
-<p>以下工作流程是草稿。</p>
-<ul>
-<li>条件
-<ul>
-<li>切片机工作站
-<ul>
-<li>请参阅<a href="https://www.slicer.org/wiki/Documentation/4.8/SlicerApplication/HardwareConfiguration">www.slicer.org上的切片机4.8的硬件要求</a></li>
-</ul>
-</li>
-<li>ROS计算机
-<ul>
-<li>[选项1]原生Linux机器 - 请参考[安装页面]）<a href="http://wiki.ros.org/kinetic/Installation">http://wiki.ros.org/kinetic/Installation</a>）</li>
-<li>[选项2] Docker - 在这种情况下，不需要专用的ROS计算机。Docker容器可以在Slicer工作站上运行。</li>
-<li>[选项3]可以使用其他虚拟化环境（VMWare，VirtualBox等）。VirtualBox在3D图形方面存在一些性能问题（rviz需要），此时不建议使用。</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a href="https://github.com/rosmed/rosmed.github.io/wiki/ROS_Environment">设置ROS环境</a>
-<ul>
-<li>安装ROS
-<ul>
-<li>[选项1/3]使用原生Linux或虚拟盒（不推荐）</li>
-<li>[选项2]使用Docker</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a href="https://github.com/rosmed/rosmed.github.io/wiki/Slicer">设置3D切片器</a>
-<ul>
-<li>安装扩展（插件）</li>
-<li>使用ROS-IGTL-Bridge测试3D Slicer-ROS通信</li>
-</ul>
-</li>
-<li><a href="https://github.com/rosmed/rosmed.github.io/wiki/ROS_Robot">在ROS上设置通用机器人手臂</a>
-<ul>
-<li>使用rviz在ROS场景中加载机器人和患者模型</li>
-<li>使用rviz上的指针功能将患者模型移动到机器人的工作空间中</li>
-</ul>
-</li>
-<li><a href="https://github.com/rosmed/rosmed.github.io/wiki/Slicer_Planning">规划3D切片机</a>
-<ul>
-<li>加载患者模型</li>
-<li>定义目标针轨迹（插入前和插入后）</li>
-<li>加载机器人模型</li>
-</ul>
-</li>
-<li><a href="https://github.com/rosmed/rosmed.github.io/wiki/Connecting_Slicer_and_ROS">在Slicer和ROS之间建立连接</a>
-<ul>
-<li>使用ROS-IGTL-Bridge将3D切片机与ROS连接</li>
-<li>检查3D Slicer和ROS上的机器人模型的同步</li>
-</ul>
-</li>
-<li><a href="https://github.com/rosmed/rosmed.github.io/wiki/Registration">注册</a>
-<ul>
-<li>（切片器）启动Fiducial Registration Wizard</li>
-<li>（rviz）手动将末端执行器移动到头骨上的第一个界标</li>
-<li>（切片器）记录尖端的当前位置，然后单击ull模型上的相应点</li>
-<li>重复前两个步骤</li>
-<li>运行地标注册。</li>
-<li>将变换应用于机器人</li>
-</ul>
-</li>
-<li><a href="https://github.com/rosmed/rosmed.github.io/wiki/Slicer_Visualization">规划针位置</a>
-<ul>
-<li>（切片器）设置音量Reslice驱动程序</li>
-<li>（切片器）将插入前的末端效应器位置发送到ROS</li>
-</ul>
-</li>
-<li><a href="https://github.com/rosmed/rosmed.github.io/wiki/Execution">执行计划</a>
-<ul>
-<li>（ROS）将手臂移至原位</li>
-<li>（ROS）将手臂移动到插入前的位置</li>
-<li>（ROS）将手臂移动到插入后位置</li>
-</ul>
-</li>
-</ul>
-<h2 id="-5"><a href="https://github.com/rosmed/rosmed.github.io/wiki/ISMR2019#memos"></a>备忘录</h2>
-<ul>
-<li>3D切片机教程
-<ul>
-<li><a href="https://www.slicer.org/wiki/Documentation/4.8/Training">入门教程</a></li>
-<li><a href="https://onedrive.live.com/view.aspx?resid=7230D4DEC6058018!29379&amp;ithint=file%2cpptx&amp;authkey=!AL2fpr9tHQTEWNA">脑外科教程</a></li>
-</ul>
-</li>
-<li><a href="https://github.com/rosmed/rosmed.github.io/wiki/VirtualEnvironments">虚拟环境解决方案</a></li>
-<li><a href="https://github.com/rosmed/rosmed.github.io/wiki/DockerROS">设置Docker镜像</a></li>
-</ul>
-<p>关注<a href="https://github.com/openigtlink/ROS-IGTL-Bridge">https://github.com/openigtlink/ROS-IGTL-Bridge</a></p>
-<h1 id="ros-igtl桥">ROS-IGTL桥</h1>
-<p>作者：Tobias Frank，Junichi Tokuda（布莱根妇女医院）</p>
-<p>该ROS-Node提供了一个OpenIGTLink桥，用于与ROS交换数据。它支持发送和接收转换，图像，字符串，PolyData，Points和Pointcloud。有关OpenIGTLink协议的更多信息，请参阅：</p>
-<ul>
-<li><a href="http://openigtlink.org/">http://openigtlink.org/</a></li>
-</ul>
-<hr>
-<h2 id="-6"><a href="https://github.com/openigtlink/ROS-IGTL-Bridge#build-instruction"></a>构建指令</h2>
-<p>测试了以下步骤：</p>
-<ul>
-<li>Ubuntu 14.04 + ROS Indigo</li>
-<li>Ubuntu 16.04 + ROS Kinetic Kame</li>
-</ul>
-<p>首先，在本地计算机中安装OpenIGTLink。有关详细说明，请访问<a href="http://openigtlink.org/">http://openigtlink.org/</a>。在以下指令中，我们假设OpenIGTLink库的构建目录位于：〜/ igtl / OpenIGTLink-build</p>
-<p><code>$ cd <your OpenIGTLink directory>
-$ git clone https://github.com/openigtlink/OpenIGTLink.git
-$ mkdir OpenIGTLink-build
-$ cd OpenIGTLink-build
-$ cmake -DBUILD_SHARED_LIBS:BOOL=ON ../OpenIGTLink
-$ make</code></p>
-<p>安装<a href="http://wiki.ros.org/">ROS</a>并按照标准<a href="http://wiki.ros.org/catkin/Tutorials/create_a_workspace">ROS说明</a>创建ROS工作区（如有必要）。</p>
-<p><code>$ mkdir -p ~/catkin_ws/src
-$ cd ~/catkin_ws
-$ catkin_make
-$ source devel/setup.bash</code></p>
-<p>ROS-IGTL-Bridge需要VTK。您可以使用apt-get安装它：</p>
-<p><code>$ sudo apt-get install libvtk6-dev</code></p>
-<p>然后从GitHub下载ros_igtl_bridge包：</p>
-<p><code>$ cd ~/catkin_ws/src
-$ git clone https://github.com/openigtlink/ROS-IGTL-Bridge</code></p>
-<p>并在工作区目录中执行catkin_make：</p>
-<p><code>$ cd ~/catkin_ws/
-$ catkin_make --cmake-args -DOpenIGTLink_DIR:PATH=<your OpenIGTLink directory>/OpenIGTLink-build</code></p>
-<p>要运行网桥，请键入：</p>
-<p><code>$ roslaunch ros_igtl_bridge bridge.launch</code></p>
-<p>如果已设置桥接，则可以启动与[3D Slicer]（<a href="https://www.slicer.org/">https://www.slicer.org/</a>）进行通信的测试程序：</p>
-<p><code>$ roslaunch ros_igtl_bridge test.launch</code></p>
-<p>可以编辑启动文件并在文件中设置IP和端口。通过调整参数RIB_type将节点作为服务器或客户端运行。打开文件并取消注释行：</p>
-<p><code>$ <!--param name="RIB_server_ip" value="111.111.111.111" type="str"/-->
-$ <!--param name="RIB_port" value="18944" type="int"/-->
-$ <!--param name="RIB_type" value="client" type="str"/--></code></p>
-<p>该节点可以作为服务器或客户端运行。如果您执行了测试程序，该节点将发送带有随机翻译的“ROS_IGTL_Test_Transform”，随机的“ROS_IGTL_Test_Point”，包含20个点的随机“ROS_IGTL_Test_Pointcloud”，“ROS_IGTL_Test_String”和“ROS_IGTL_Test_PolyData”，这是一个渲染模型。 3D Slicer MRHead样本数据。从3D切片器接收的任何数据都由桥节点发布到ROS主题并由测试节点显示。</p>
-<h2 id="-7"><a href="https://github.com/openigtlink/ROS-IGTL-Bridge#references"></a>参考</h2>
-<ol>
-<li>Frank T，Krieger A，Leonard S，Patel NA，Tokuda J. ROS-IGTL-Bridge：一种开放式网络接口，用于使用ROS环境进行图像引导治疗。Int J Comput Assist Radiol Surg。2017年5月31日doi：10.1007 / s11548-017-1618-1。PubMed PMID：<a href="https://www.ncbi.nlm.nih.gov/pubmed/?term=28567563">28567563</a>。</li>
-</ol>
-<h2 id="docker-image">Docker Image</h2>
-<p>由Christian Henkel开发的基础Docker映像（vnc-ros-kinetic-full）源自<a href="https://hub.docker.com/r/ct2034/vnc-ros-kinetic-full/">Docker Hub存储库</a>。此Docker镜像附带：</p>
-<ul>
-<li>Ubuntu 16.04</li>
-<li>ROS动力学</li>
-<li>HTML5 VNC服务器</li>
-</ul>
-<p>我们的Docker镜像包含以下附加包：</p>
-<ul>
-<li>ROS-工业</li>
-<li>ROS通用机器人包</li>
-<li>ROS MoveIt！包</li>
-<li>OpenIGTLink</li>
-<li>ROS-IGTL桥</li>
-</ul>
-<p>我们的Dockerfile可以在<a href="https://github.com/rosmed/docker-ros-igtl">GitHub上获得</a>，它的图像在<a href="https://cloud.docker.com/u/rosmed/repository/docker/rosmed/docker-ros-igtl">Docker Hub上发布</a>。</p>
-<h2 id="-8"><a href="https://github.com/rosmed/rosmed.github.io/wiki/DockerROS#building-docker-image-not-needed"></a>构建Docker镜像（不需要）</h2>
-<p>要使用修改后的Dockerfile构建Docker镜像，请运行以下命令：</p>
-<p><code>$ cd <working directory>
-$ git clone https://github.com/rosmed/docker-ros-igtl
-$ cd docker-ros-igtl
-$ docker build -t docker-ros-igtl .</code></p>
-<h2 id="-9"><a href="https://github.com/rosmed/rosmed.github.io/wiki/DockerROS#running-docker-image"></a>运行Docker镜像</h2>
-<p>要执行docker镜像，请调用以下命令：</p>
-<p><code>$ docker pull docker pull rosmed/docker-ros-igtl
-$ docker run -it --rm -p 6080:80 rosmed/docker-ros-igtl</code></p>
-<p>在此示例中，docker容器上的Web端口将映射到主机上的端口6080。' - rm'选项将在终止时删除容器。</p>
-<h1 id="connecting_slicer_and_ros">Connecting_Slicer_and_ROS</h1>
-<p>Junichi Tokuda编辑了这个页面 on 21 Mar · <a href="https://github.com/rosmed/rosmed.github.io/wiki/Connecting_Slicer_and_ROS/_history">3次修订</a></p>
-<h1 id="-10"><a href="https://github.com/rosmed/rosmed.github.io/wiki/Connecting_Slicer_and_ROS#connecting-3d-slicer-with-ros"></a>连接3D切片机与ROS</h1>
-<p>确保以下组件正在运行：</p>
-<ul>
-<li>ROS计算机
-<ul>
-<li>rviz上的通用机器人</li>
-<li>IGTL出口商</li>
-<li>ROS-IGTL桥</li>
-</ul>
-</li>
-<li>切片机工作站
-<ul>
-<li>3D切片机</li>
-</ul>
-</li>
-</ul>
-<p>现在我们连接3D Slicer和来自OpenIGTLinkIF模块的ROS，正如我们在<a href="https://github.com/rosmed/rosmed.github.io/wiki/Slicer">上一步中</a>测试<a href="https://github.com/rosmed/rosmed.github.io/wiki/Slicer">的那样</a>。打开OpenIGTLinkIF模块（模块菜单 - &gt;“IGT” - &gt;“OpenIGTLinkIF”）。然后单击“连接器”列表下的“+”按钮创建一个新节点，并从“属性”部分进行配置，如下所示：</p>
-<ul>
-<li>名称：“IGTLConnector”（默认）</li>
-<li>键入：“客户端”（默认）</li>
-<li>状态：未选中（默认）</li>
-<li>MRMLNodeAlgorithm：保持未选中状态</li>
-<li>主机名：localhost（如果使用Docker）或ROS机器的IP（用于非Docker环境）</li>
-<li>端口：28944（如果Docker与“-p 28944：18944”选项一起使用）或18944（非Docker环境的默认值）</li>
-</ul>
-<p>配置连接器后，单击“活动”复选框。如果3D Slicer成功连接到ROS-IGTL-Bridge，则OpenIGTLinkIF的连接器列表上的状态字段将显示为“ON”。</p>
-<h1 id="加载mr图像和患者模型">加载MR图像和患者模型</h1>
-<p>首先，下载<a href="http://bit.ly/2UZ8OaR">ISMR19的切片器场景</a>。这个场景包含：</p>
-<ul>
-<li>场景描述文件（Scene-ISMR19.mrml）</li>
-<li>患者的MR图像（MRI.nrrd）</li>
-<li>患者的3D模型（SkullDrilled1.stl）</li>
-<li>机器人链接的3D模型（* .stl除了SkullDrilled1.stl）</li>
-<li>链接的转换矩阵（* .h5）</li>
-</ul>
-<p>解压缩zip文件。在Linux / Mac上的终端上，可以通过以下方式完成：</p>
-<p><code>$ unzip SlicerScene-ISMR19.zip
-Archive:  SlicerScene-ISMR19.zip
-inflating: SlicerScene/MRI.nrrd<br>
-inflating: SlicerScene/Scene-ISMR19.mrml<br>
-inflating: SlicerScene/Scene-ISMR19.png<br>
-inflating: SlicerScene/SkullDrilled1_mm.stl<br>
-inflating: SlicerScene/base_mm.stl<br>
-inflating: SlicerScene/forearm_link.h5<br>
-inflating: SlicerScene/forearm_mm.stl<br>
-inflating: SlicerScene/needle.h5<br>
-inflating: SlicerScene/needle_holder.h5<br>
-inflating: SlicerScene/needle_holder_mm.stl<br>
-inflating: SlicerScene/shoulder_link.h5<br>
-inflating: SlicerScene/shoulder_mm.stl<br>
-inflating: SlicerScene/tool0.h5<br>
-inflating: SlicerScene/upper_arm_link.h5<br>
-inflating: SlicerScene/upperarm_mm.stl<br>
-inflating: SlicerScene/wrist1_mm.stl<br>
-inflating: SlicerScene/wrist2_mm.stl<br>
-inflating: SlicerScene/wrist3_mm.stl<br>
-inflating: SlicerScene/wrist_1_link.h5<br>
-inflating: SlicerScene/wrist_2_link.h5<br>
-inflating: SlicerScene/wrist_3_link.h5</code></p>
-<p>请注意，STL格式不包含单位信息。虽然文件应该以适当的比例加载到3D Slicer上，但它们可能无法在其他环境中运行。</p>
-<p>提取完所有文件后，我们从3D Slicer加载场景，如下所示：</p>
-<ul>
-<li>打开“添加数据”对话框（“文件” - &gt;“添加数据”）。</li>
-<li>单击“选择要添加的文件”按钮。</li>
-<li>从“打开”对话框中选择“Scene-ISMR19.mrml”。</li>
-<li>单击“打开”。文件名应出现在“选择要添加的文件”对话框中。单击“确定”后，3D切片器开始将文件加载到场景中。</li>
-</ul>
-<p>如果文件成功加载，您应该能够在红色/黄色/绿色查看器上看到MR图像，并在3D查看器上看到头骨和机器人的模型。头骨相对于机器人的位置是不现实的，但这是因为它们尚未注册（或校准）。我们将在本教程的后面注册它们。</p>
-<h1 id="-11"><a href="https://github.com/rosmed/rosmed.github.io/wiki/Slicer_Planning#planning-needle-placement"></a>规划针位置</h1>
-<p>我们通过定义1）目标点和2）皮肤上的针入口点来计划针放置轨迹。</p>
-<p>首先，我们使头骨模型的部分在3轴平面上可见，如下所示：</p>
-<ul>
-<li>打开“模型”模块（“模块”菜单 - &gt;“模型”）</li>
-<li>从模型列表中选择“SkullDrilled1_mm”。</li>
-<li>在“切片显示”框中，选中“可见”。现在您应该看到头骨模型的部分覆盖在MR图像上。</li>
-</ul>
-<p>要定义条目和目标点：</p>
-<ul>
-<li>单击工具栏中的“创建并放置基准”按钮。</li>
-<li>单击肿瘤中心作为目标点。（基准“F-1”应出现在MR图像上）</li>
-<li>单击头骨上的孔的中心作为入口点。（基准“F-2”应出现在MR图像上）</li>
-<li>从模块菜单中打开“Markups”模块。</li>
-<li>下拉列表菜单，然后选择“重命名当前MarkupsFiducials”。</li>
-<li>在弹出窗口中，键入“Plan”（区分大小写）作为新名称，然后单击“确定”。</li>
-<li>通过单击名称（即“F-1”和“F-2”）将点的名称从“F-1”和“F-2”更改为“目标”和“条目”，然后输入新的名称名。名称区分大小写，因为它们将被转移到ROS并用于识别点。</li>
-</ul>
-<h1 id="ros_robot">ROS_Robot</h1>
-<p>Simon Leonard编辑了此页面 on 29 Mar · <a href="https://github.com/rosmed/rosmed.github.io/wiki/ROS_Robot/_history">19次修订</a></p>
-<h1 id="-12"><a href="https://github.com/rosmed/rosmed.github.io/wiki/ROS_Robot#installing-ros-packages"></a>安装ROS包</h1>
-<p>（如果使用本教程中提供的Docker镜像设置ROS环境，则可以跳过此步骤。）</p>
-<p>在ROS计算机上，我们打开一个终端并将两个ROS包复制到katkin工作区：</p>
-<p><code>cd ~/catkin_ws/src
-git clone https://github.com/rosmed/ismr19_description
-git clone https://github.com/rosmed/ismr19_moveit
-git clone https://github.com/rosmed/ismr19_control</code></p>
-<p>此外，我们还复制了IGTL Exporter，它通过ROS-IGTL-Bridge将机器人链接的转换流式传输到3D Slicer。</p>
-<p><code>cd ~/catkin_ws/src
-git clone https://github.com/tokjun/ros_bx_robot_bridge</code></p>
-<p>然后，运行catkin_make</p>
-<p><code>cd ~/catkin_ws
-catkin_make
-source devel/setup.bash</code></p>
-<h1 id="-13"><a href="https://github.com/rosmed/rosmed.github.io/wiki/ROS_Robot#launching-the-ros-packages"></a>启动ROS包</h1>
-<p>！以下步骤将被修改 - 不确定我们是否将使用demo.launch !!</p>
-<p>我们使用以下命令在rviz上使用自定义针头hodler启动通用机器人：</p>
-<p><code>roslaunch ismr19_moveit demo.launch</code></p>
-<h1 id="-14"><a href="https://github.com/rosmed/rosmed.github.io/wiki/ROS_Robot#launching-igtl-exporter"></a>启动IGTL Exporter</h1>
-<p>要启动IGTL导出器，请打开另一个终端并运行以下命令：</p>
-<p><code>cd ~/catkin_ws
-source devel/setup.bash
-rosrun bx_robot_bridge igtl_exporter.py</code></p>
-<h1 id="-15"><a href="https://github.com/rosmed/rosmed.github.io/wiki/ROS_Robot#loading-patient-model"></a>加载患者模型</h1>
-<p>我们将加载患者的表面模型。首先，我们下载模型：</p>
-<p><code>cd ~
-mkdir models
-cd models
-wget -O ismr19.scene https://bit.ly/2OpSdKM</code></p>
-<p>从rviz中，打开“MotionPlanning”框中的“Scene Objects”选项卡，单击“Current Scene Objects”部分右下方区域的“Import From Text”按钮，选择下载的文件（“ismr19.scene”） ）在“导入场景几何体”对话框中，单击“打开”按钮。头骨模型出现在3D查看器上。</p>
-<p>看到头骨后，单击“发布场景”按钮。</p>
-<h1 id="切片机">切片机</h1>
-<p>Simon Leonard编辑了此页面 on 29 Mar · <a href="https://github.com/rosmed/rosmed.github.io/wiki/Slicer/_history">19次修订</a></p>
-<h1 id="-16"><a href="https://github.com/rosmed/rosmed.github.io/wiki/Slicer#installing-3d-slicer-and-extensions"></a>安装3D切片器和扩展</h1>
-<p>在本教程中，我们将使用3D Slicer版本4.8.1二进制文件可从以下链接获得：</p>
-<ul>
-<li><a href="http://slicer.kitware.com/midas3/download/item/330417/Slicer-4.8.1-linux-amd64.tar.gz">适用于Linux的切片器4.8.1（Intel 64位）</a></li>
-<li><a href="http://slicer.kitware.com/midas3/download/item/330418/Slicer-4.8.1-macosx-amd64.dmg">用于macOS的切片器4.8.1（Intel 64位）</a></li>
-<li><a href="http://slicer.kitware.com/midas3/download/item/329467/Slicer-4.8.1-win-amd64.exe">适用于Windows的切片器4.8.1（Intel 64位）</a></li>
-</ul>
-<p>**Mac用户注意事项：**如果首次启动3D Slicer时系统弹出一个窗口警告“Slicer.app无法打开，因为它来自一位身份不明的开发人员”，请点击图标启动Slicer应用程序用鼠标右键（或用Ctrl键单击），然后从下拉菜单中选择“打开”。然后，系统将提示您确认是否正在打开该应用程序。单击“打开”按钮后将启动切片器。</p>
-<p>在本教程中，我们不会使用最新版本的3D Slicer（自2019年3月起为4.10.1），因为它仍然存在一些与ROS-IGTL-Bridge之间传输点和多边形数据的问题。</p>
-<p>安装并启动3D Slicer后，打开Extension Manager（“查看” - &gt;“Extension Manager”），并安装以下扩展名：</p>
-<ul>
-<li><strong>SlicerIGT</strong></li>
-</ul>
-<p>重新启动3D切片器后，您应该会在模块菜单的“IGT”部分下看到扩展中包含的插件模块。</p>
-<h1 id="-17"><a href="https://github.com/rosmed/rosmed.github.io/wiki/Slicer#testing-communication-with-ros-using-ros-igtl-bridge"></a>使用ROS-IGTL-Bridge测试与ROS的通信</h1>
-<p>首先，我们从Linux上的终端（使用ROS）启动roscore：</p>
-<p><code>roscore</code></p>
-<p>然后我们启动了ROS-IGTL-Bridge。打开另一个终端，然后运行以下命令：</p>
-<p><code>cd ~/catkin_ws
-source devel/setup.bash
-roslaunch ros_igtl_bridge bridge.launch
-..
-[ROS-IGTL-Bridge] Please type &lt;1&gt; or &lt;2&gt; to run node as OpenIGTLink client or server
-1 : Server
-2 : Client</code></p>
-<p>终端将提示选择类型（服务器或客户端），然后选择主机信息（两种情况下的端口号，如果网桥作为服务器启动，则为IP）。在本教程中，我们将桥接器作为服务器运行并使用端口18944.还可以编辑启动文件并在文件中设置IP和端口。通过调整参数RIB_type将节点作为服务器或客户端运行。打开文件并取消注释行：</p>
-<p><code>$ <!--param name="RIB_server_ip" value="111.111.111.111" type="str"/-->
-$ <!--param name="RIB_port" value="18944" type="int"/-->
-$ <!--param name="RIB_type" value="client" type="str"/--></code></p>
-<p>桥接器准备就绪后，打开3D Slicer（如果尚未打开），打开OpenIGTLinkIF模块（模块菜单 - &gt;“IGT” - &gt;“OpenIGTLinkIF”）。然后单击“连接器”列表下的“+”按钮创建一个新节点，并从“属性”部分进行配置，如下所示：</p>
-<ul>
-<li>名称：“IGTLConnector”（默认）</li>
-<li>键入：“客户端”（默认）</li>
-<li>状态：未选中（默认）</li>
-<li>MRMLNodeAlgorithm：保持未选中状态</li>
-<li>主机名：localhost（如果使用Docker）或ROS机器的IP（用于非Docker环境）</li>
-<li>端口：28944（如果Docker与“-p 28944：18944”选项一起使用）或18944（非Docker环境的默认值）</li>
-</ul>
-<p>配置连接器后，单击“活动”复选框。如果3D Slicer成功连接到ROS-IGTL-Bridge，则OpenIGTLinkIF的连接器列表上的状态字段将显示为“ON”。</p>
-<p>在Linux（使用ROS）上打开一个新终端，然后运行以下命令：</p>
-<p><code>cd ~/catkin_ws
-source devel/setup.bash
-roslaunch ros_igtl_bridge test.launch</code></p>
-<p>测试节点发送带有随机翻译的“ROS_IGTL_Test_Transform”，随机的“ROS_IGTL_Test_Point”，包括20个点的随机“ROS_IGTL_Test_Pointcloud”，“ROS_IGTL_Test_String”和“ROS_IGTL_Test_PolyData”。您可以在OpenIGTLinkIF模块的“I / O配置”中确认它们。（确保展开“场景” - &gt;“IGTLConnector1” - &gt;“IN”）。</p>
-<p>这些数据将显示在3D Slicer上。在3D Slicer显示患者的表面模型之前，可能需要几秒到一分钟。</p>
-<p>确认桥接器正常工作后，通过取消选中“Active”复选框来断开3D Slicer。在3D Slicer上连接状态变为“OFF”后，按终端上的Ctrl-C停止桥接和测试节点。关闭3D切片器上的场景（“文件” - &gt;“关闭场景”）或关闭3D切片器应用程序。</p>
-<h1 id="ros_environment">ROS_Environment</h1>
-<p>Simon Leonard编辑了此页面 3月29日 · <a href="https://github.com/rosmed/rosmed.github.io/wiki/ROS_Environment/_history">16次修订</a></p>
-<h1 id="-18"><a href="https://github.com/rosmed/rosmed.github.io/wiki/ROS_Environment#setting-up-ros-environment-for-tutorial"></a>为教程设置ROS环境</h1>
-<h2 id="-19"><a href="https://github.com/rosmed/rosmed.github.io/wiki/ROS_Environment#prerequisite"></a>条件</h2>
-<p>在本教程中，我们将使用ROS Kinetic，它支持Wily（Ubuntu 15.10），Xenial（Ubuntu 16.04）和Jessie（Debian 8）用于Debian。请参阅<a href="http://wiki.ros.org/kinetic/Installation/Ubuntu">安装页面</a>了解详细信</p>
-<h2 id="-20"><a href="https://github.com/rosmed/rosmed.github.io/wiki/ROS_Environment#option-1-installing-ros-on-dedicated-ros-computer"></a>[选项1]在专用ROS计算机上安装ROS</h2>
-<p>请按照<a href="http://wiki.ros.org/kinetic/Installation/Ubuntu">安装页面</a>。</p>
-<h3 id="-21"><a href="https://github.com/rosmed/rosmed.github.io/wiki/ROS_Environment#installing-ros-kinetic"></a>安装ROS Kinetic</h3>
-<p>然后我们安装其他软件包，包括ROS-Industrial，MoveIt！，Universal Robot和libvtk6-dev。从终端，</p>
-<p><code>sudo rosdep update -y
-sudo apt-get update -y
-sudo apt-get dist-upgrade -y
-sudo apt-get install -y ros-kinetic-industrial-core
-sudo apt-get install -y ros-kinetic-universal-robot
-sudo apt-get install -y ros-kinetic-moveit
-sudo apt-get install -y ros-kinetic-moveit-visual-tools
-sudo apt-get install libvtk6-dev</code></p>
-<h3 id="-22"><a href="https://github.com/rosmed/rosmed.github.io/wiki/ROS_Environment#building-openigtlink"></a>构建OpenIGTLink</h3>
-<p>ROS-IGTL-Bridge依赖于OpenIGTLink库。我们在〜/ igtl / OpenIGTLink下安装libary的源文件，并在〜/ igtl / OpenIGTLink-build下构建文件</p>
-<p><code>cd ~
-mkdir igtl
-cd igtl
-git clone https://github.com/openigtlink/OpenIGTLink.git
-mkdir OpenIGTLink-build
-cd OpenIGTLink-build
-cmake -DBUILD_SHARED_LIBS:BOOL=ON ../OpenIGTLink
-make</code></p>
-<h3 id="-23"><a href="https://github.com/rosmed/rosmed.github.io/wiki/ROS_Environment#installing-ros-igtl-bridge"></a>安装ROS-IGTL-Bridge</h3>
-<p>首先，设置catkin工作目录（如果尚未设置）。我们将使用标准的ROS工作区“catkin_ws”。如果您已有现有的，我们建议您在本教程的持续时间内将其移至其他位置</p>
-<p><code>mv ~/catkin_ws ~/catkin_ws_old</code></p>
-<p>然后，继续创建一个干净的工作区</p>
-<p><code>mkdir -p ~/catkin_ws/src
-cd ~/catkin_ws
-catkin_make
-source devel/setup.bash</code></p>
-<p>然后从github存储库中获取代码：</p>
-<p><code>cd ~/catkin_ws/src
-git clone https://github.com/openigtlink/ROS-IGTL-Bridge</code></p>
-<p>要构建ROS-IGTL-Bridge，请运行</p>
-<p><code>cd ~/catkin_ws/
-catkin_make --cmake-args -DOpenIGTLink_DIR:PATH=~/igtl/OpenIGTLink-build</code></p>
-<h2 id="-24"><a href="https://github.com/rosmed/rosmed.github.io/wiki/ROS_Environment#option-2-installing-ros-using-docker"></a>[选项2]使用Docker安装ROS</h2>
-<p>必须在安装之前安装<a href="https://www.docker.com/">Docker</a>。要安装教程的Docker镜像，请打开终端并运行以下命令：</p>
-<p><code>sudo docker pull rosmed/docker-ros-igtl
-sudo docker run -it --rm -p 6080:80 -p 28944:18944 rosmed/docker-ros-igtl</code></p>
-<p>在此示例中，docker容器上的HTTP端口（端口80）和OpenIGTLink端口（端口18944）分别映射到主机上的端口6080和28944。' - rm'选项将在终止时删除容器。</p>
-<p>要访问桌面，请在同一台计算机上打开Web浏览器（与HTML5兼容），然后在地址栏中键入以下地址：</p>
-<p><code>http://localhost:6080</code></p>
-<p>如果Docker镜像容器成功运行，则浏览器应显示桌面屏幕。</p>
-<p>此docker镜像包含本教程所需的所有软件，无需安装其他软件包（即OpenIGTLink和ROS-IGTL-Bridge）</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[机械臂类似UR5]]></title>
-        <id>https://blog.bioprinting.site/post/9WyZd7kxa</id>
-        <link href="https://blog.bioprinting.site/post/9WyZd7kxa">
-        </link>
-        <updated>2019-06-02T08:32:46.000Z</updated>
-        <content type="html"><![CDATA[<p>This is part 2 of my 3D printed robot arm. You can watch part 1 at <a href="https://www.youtube.com/watch?v=tEbJV32GyYU">https://www.youtube.com/watch?v=tEbJV...</a> in case you missed it. The CAD design of the extended wrist cap with the electronics inside is available at <a href="https://www.youtube.com/redirect?q=https%3A%2F%2Fgallery.autodesk.com%2Ffusion360%2Fprojects%2Frobot-arm-esp32-drv8825-actuator-controller&amp;event=video_description&amp;v=RdmdFIhCo4M&amp;redir_token=ii2yaoab_KuAW516O-i_OhpUBRh8MTU1OTU1MDI3OEAxNTU5NDYzODc4">https://gallery.autodesk.com/fusion36...</a> The PCB Eagle Board design is available at <a href="https://www.youtube.com/redirect?q=https%3A%2F%2Fgithub.com%2Fchilipeppr%2Frobot-actuator-controller-v1&amp;event=video_description&amp;v=RdmdFIhCo4M&amp;redir_token=ii2yaoab_KuAW516O-i_OhpUBRh8MTU1OTU1MDI3OEAxNTU5NDYzODc4">https://github.com/chilipeppr/robot-a...</a> as well as the Lua code that I used to test the actuators in this video. The NodeMCU.bin firmware is there too. This has the latest release of the firmware plus the stepper library built in. Just flash NodeMCU.bin via esptool to your ESP32 board. The ChiliPeppr ESP32 for Lua Workspace was used to program the board and is available at <a href="https://www.youtube.com/redirect?q=http%3A%2F%2Fchilipeppr.com%2Fesp32&amp;event=video_description&amp;v=RdmdFIhCo4M&amp;redir_token=ii2yaoab_KuAW516O-i_OhpUBRh8MTU1OTU1MDI3OEAxNTU5NDYzODc4">http://chilipeppr.com/esp32</a> Video on how to use the ESP32 for Lua workspace to upload firmware and Lua code on your ESP32. <a href="https://www.youtube.com/watch?v=njAeHfoVIoY">https://www.youtube.com/watch?v=njAeH...</a> Jeff Kerr's (LoboCNC) original 3D printed robot arm design is on Thingiverse at <a href="https://www.youtube.com/redirect?q=https%3A%2F%2Fwww.thingiverse.com%2Fthing%3A3327968%2F&amp;event=video_description&amp;v=RdmdFIhCo4M&amp;redir_token=ii2yaoab_KuAW516O-i_OhpUBRh8MTU1OTU1MDI3OEAxNTU5NDYzODc4">https://www.thingiverse.com/thing:332...</a> PCB Components ESP32 Wemos $8 (Many ESP32 devices are cheaper, but this is the smallest size broadly available to fit inside the small actuators) <a href="https://www.youtube.com/redirect?q=https%3A%2F%2Fwww.aliexpress.com%2Fitem%2FESP32-wemos-ESP32-WiFi-Modules-Bluetooth-Dual-ESP-32-ESP-32S-ESP8266%2F32815190965.html&amp;event=video_description&amp;v=RdmdFIhCo4M&amp;redir_token=ii2yaoab_KuAW516O-i_OhpUBRh8MTU1OTU1MDI3OEAxNTU5NDYzODc4">https://www.aliexpress.com/item/ESP32...</a> DRV8825 Stepper Board $0.95 <a href="https://www.youtube.com/redirect?q=https%3A%2F%2Fwww.aliexpress.com%2Fitem%2F5pcs-lot-3D-Printer-Stepstick-Drv8825-Stepper-Motor-Driver-Reprap-4-PCB-Board-Free-shipping-replace%2F32514641632.html&amp;event=video_description&amp;v=RdmdFIhCo4M&amp;redir_token=ii2yaoab_KuAW516O-i_OhpUBRh8MTU1OTU1MDI3OEAxNTU5NDYzODc4">https://www.aliexpress.com/item/5pcs-...</a> DC to DC Converter $0.90 (Pick the 5V version, not 3.3V) <a href="https://www.youtube.com/redirect?q=https%3A%2F%2Fwww.aliexpress.com%2Fitem%2FDC-DC-Power-Supply-Module-Step-Down-3A-output-24V-12V-to-5V-3-3V-Buck%2F32904709711.html&amp;event=video_description&amp;v=RdmdFIhCo4M&amp;redir_token=ii2yaoab_KuAW516O-i_OhpUBRh8MTU1OTU1MDI3OEAxNTU5NDYzODc4">https://www.aliexpress.com/item/DC-DC...</a> WS2812B LED $0.15 per (Choose white and WS2812B) <a href="https://www.youtube.com/redirect?q=https%3A%2F%2Fwww.aliexpress.com%2Fitem%2F10-1000pcs-4-Pin-WS2812B-WS2812-LED-Chip-Heatsink-5V-5050-RGB-WS2811-IC-Built-in%2F32634454437.html&amp;event=video_description&amp;v=RdmdFIhCo4M&amp;redir_token=ii2yaoab_KuAW516O-i_OhpUBRh8MTU1OTU1MDI3OEAxNTU5NDYzODc4">https://www.aliexpress.com/item/10-10...</a> Slide Switch $0.29 for 20 pieces <a href="https://www.youtube.com/redirect?q=https%3A%2F%2Fwww.aliexpress.com%2Fitem%2F20Pcs-Interruptor-on-off-mini-Slide-Switch-SS12D00-SS12D00G3-3pin-1P2T-2-Position-High-quality-toggle%2F32964400942.html&amp;event=video_description&amp;v=RdmdFIhCo4M&amp;redir_token=ii2yaoab_KuAW516O-i_OhpUBRh8MTU1OTU1MDI3OEAxNTU5NDYzODc4">https://www.aliexpress.com/item/20Pcs...</a> Screw Terminal <a href="https://www.youtube.com/redirect?q=https%3A%2F%2Fwww.aliexpress.com%2Fitem%2F20-pcs-2-Pin-Screw-blue-green-PCB-Terminal-Block-Connector-5mm-Pitch%2F32814618602.html&amp;event=video_description&amp;v=RdmdFIhCo4M&amp;redir_token=ii2yaoab_KuAW516O-i_OhpUBRh8MTU1OTU1MDI3OEAxNTU5NDYzODc4">https://www.aliexpress.com/item/20-pc...</a> 26AWG Silicone Ultra Flexible Wire for 24v (Use 2 of the 4 wires) <a href="https://www.youtube.com/redirect?q=https%3A%2F%2Fwww.aliexpress.com%2Fitem%2F2metre-26AWG-28AWG-30AWG-Silicone-Wire-Ultra-Flexiable-Test-Line-3P-4P-6P-0-08mm-Tinned%2F32870367030.html&amp;event=video_description&amp;v=RdmdFIhCo4M&amp;redir_token=ii2yaoab_KuAW516O-i_OhpUBRh8MTU1OTU1MDI3OEAxNTU5NDYzODc4">https://www.aliexpress.com/item/2metr...</a></p>
-<p>这个机器人手臂（非常）粗略地称为UR3工业机器人的80％缩放版本。它采用了相同的设计理念，即在每个接头处简单地放置一个电机/减速器执行器单元，六个执行器堆叠起来形成一个6轴臂。现在UR3使用空心力矩电机和谐振驱动器（$$$）作为执行器，这个机器人使用我在这里发布的步进电机/复合行星执行器：<a href="https://www.thingiverse.com/thing:3293562">https</a>：//www.thingiverse.com/thing:3293562 。两个大型执行器用于前两个基座接头，其中一个中型执行器用于肘关节，三个小型执行器用于腕关节。还有我在这里发布的抓手*：<a href="https://www.thingiverse.com/thing:3116728">https</a>：<a href="https://www.thingiverse.com/thing:3116728">//www.thingiverse.com/thing</a>：<a href="https://www.thingiverse.com/thing:3116728">3116728</a>。</p>
-<p>对于控制器，我使用了Pololu的Tic T500步进控制器中的七个，并使用我编写的自定义固件来支持协调运动。您可以在此处找到血淋淋的详细信息，包括Windows测试实用程序：<a href="https://drive.google.com/open?id=1rKRuWC4jAOekrds_WGUC7DkwlVsk2zdb">https</a>：<a href="https://drive.google.com/open?id=1rKRuWC4jAOekrds_WGUC7DkwlVsk2zdb">//drive.google.com/open？id = 1rKRuWC4jAOekrds_WGUC7DkwlVsk2zdb</a></p>
-<p>这是一项非常重要的工作，我会在时间充裕的情况下填补空白。在此期间，如果您需要我尚未获得的详细信息，请随时在评论部分发布问题。请仔细阅读这里的所有材料，并在开始构建之前向我提出任何问题 - 这_不是_一个简单的周末项目！</p>
-<p><a href="https://youtu.be/7u_UjMB8tJI">https://youtu.be/7u_UjMB8tJI</a></p>
-<p>这是jlauer发布的关于他的手臂的精彩视频：<a href="https://www.youtube.com/watch?v=tEbJV32GyYU">https</a>：<a href="https://www.youtube.com/watch?v=tEbJV32GyYU">//www.youtube.com/watch？v =</a>tEbJV32GyYU</p>
-<p>另外，jlauer开发了他的自定义控制器板：<a href="https://www.youtube.com/watch?v=RdmdFIhCo4M">https</a>：<a href="https://www.youtube.com/watch?v=RdmdFIhCo4M">//www.youtube.com/watch？v =</a> RMmdFIhCo4M</p>
-<p>*视频中显示的抓手与贴出的抓手略有不同。</p>
-<p>更新：我刚刚发布了一款小型手腕执行器的防反冲版本，它具有更大的扭矩，更小的间隙并且运行更平稳：<a href="https://www.thingiverse.com/thing:3566678">https</a>：<a href="https://www.thingiverse.com/thing:3566678">//www.thingiverse.com/thing</a>：<a href="https://www.thingiverse.com/thing:3566678">3566678</a></p>
-<p><strong>购买零件</strong></p>
-<p><em>螺丝（近似数字）</em>
-20 4-40插头1/4“ 
-20 4-40插头x 3/8” 
-30 6-32插头x 3/8“ 
-20 4-40螺母
-20 6-32螺母
-30 2- 56 x 1/8“螺丝</p>
-<p><em>电机</em>
-这些是推荐的电机，但你可以在ebay等上找到相同的电机：
-基座旋转：17HS15-1504S1（OMC）
-肩高：17HS19-2004S1（OMC）
-弯头：17HS13-1334S（OMC）
-手腕+ 抓手（ 4）：35 PM048S8-08001（月亮）</p>
-<p><em>控制器</em>
-7 Pololu Tic T500（使用自定义固件编程）
-4英尺24ga，2根双绞线电缆（总共4根线）
-100 Jameco 100766母压接针
-3/32“ 热缩管</p>
-<p><em>杂项。硬件</em>
-150 6毫米直径。气枪BB</p>
-<p><strong>部件</strong></p>
-<p>首先打印组装执行器（<a href="https://www.thingiverse.com/thing:3293562">https://www.thingiverse.com/thing:3293562</a>） - 2个大型20节距执行器，30个节距执行器中的1个，以及3个小型40节距执行器。您还需要点击每个减速器外壳背面的安装孔。对于20和30螺距执行器，使用6-32螺距，对于40螺距执行器，使用4-40螺距。</p>
-<p>装配最容易从基础开始。首先将基础锥体装配到20节距执行器，使用带有6-32螺钉的中等长度电机。将四个6-32螺母压入肩板底部的凹槽中，然后将肩板连接到第一个执行器的顶部。接下来，将肩部外壳拧到肩板上。要完成肩部，请将第二个20节距执行器（带有最长电机）插入肩部外壳。</p>
-<p>对于肘部，首先敲击上臂末端的四个6-32孔，然后连接弯头外壳。将30节距执行器（使用最短的NEMA 17电机）插入外壳。然后将上臂连接到肩部提升执行器的表面。</p>
-<p>手腕开始时轻拍上臂末端的四个4-40孔，然后连接其中一个腕壳。然后将40个俯仰执行器中的一个插入该外壳中。接下来，将第二个腕壳连接到该执行器的表面，然后插入另一个40螺距的执行器。最后，为最终关节添加最后一个外壳和执行器。</p>
-<p><strong>布线</strong></p>
-<p>接线是构建机器人手臂时最棘手的问题之一。不幸的是，这些执行器没有空心中心，如花式UR3执行器，因此电缆必须以足够的松弛度绕每个关节跳动以允许关节运动。为了最大限度地减少接线，串行总线（V +，GND，TX，RX）用于分布在臂上的小型控制器板，每个电机上有一个板。</p>
-<p>每个控制器板都有一组冗余的V +，GND，TX和RX引脚。这样可以很容易地使用菊花链电缆从一块板到另一块板。对于V +和GND，电路板上实际上有第二组孔用于可选的螺钉端子，但是我焊接在第二组插头中。对于TX和RX，我选择了未使用的Step和Dir引脚（您必须移除两个限流电阻以隔离这些引脚），然后在Dir和RX之间以及Step和TX之间添加跳线。</p>
-<p>在制作电缆时，您需要使用GND扭转RX，使用V +扭曲TX线以提高抗噪性。因为并非每个电缆末端的所有引脚都在一起（并且因为在某些接头中没有连接器外壳的空间），所以我只是将一个母针压接到每根电线上并用热缩管绝缘。然后，您必须非常小心地将每根导线分别连接到每个引脚。（V +引脚全部连接在一起，GND引脚全部连接在一起，来自主机的TX与所有Tic RX引脚连接在一起，主机的RX与所有Tic TX引脚连接在一起。</p>
-<p>请注意，在连接机器人之前（事实上，在组装之前），您应该在工作台上布置所有控制器和电机，将它们连接起来并使用测试软件测试所有内容。</p>
-<p>每个Tic板应安装在其中一个Tic底座上。对于接头1和3（基座旋转和弯头），您可以使用双面胶带将每个Tic基座直接安装到电机背面。对于腕关节，Tic板和底座也将位于电机的末端，但是您需要轻松地将底座拉开以拆卸接头。因此，您可以将其塞入到位并穿上贝壳帽将它固定在那里。在底座高度接头上，电机末端没有足够的空间，因此在插入电线后，可以将其滑入电机侧面。</p>
-<p>我在每个外壳中都有凹槽，用于进出电缆，还有一个小孔，用于固定拉链以将电缆固定到位。在前臂和上臂，你可以在内部蛇行电缆。</p>
-<p><strong>软件和测试</strong></p>
-<p>Pololu的Tic T500主板的标准固件不支持这样的手臂所需的多轴协调运动。所以我编写了自己的固件，您需要将其编程到Tic控制器中。（你可以使用标准固件，但你不能很好地同步所有的手臂关节。）不幸的是，你不能使用Pololu的USB bootloader（他们不会给我访问）所以你有使用PicKit编程器直接对板载PIC18F25K50芯片进行编程。您可以在以下位置找到此固件的所有详细信息（源代码，文档）以及如何对电路板进行编程：</p>
-<p><a href="https://drive.google.com/open?id=1rKRuWC4jAOekrds_WGUC7DkwlVsk2zdb">https://drive.google.com/open?id=1rKRuWC4jAOekrds_WGUC7DkwlVsk2zdb</a></p>
-<p>该目录还包含一个Windows测试程序，可用于测试单个关节，并且（非常粗略地）执行简单的机器人运动序列。包含测试程序的C ++源代码。我使用C ++ Builder的古老版本（v5.0）编写了这个，但现在有一个免费的，更现代的C ++ Builder版本（Community Edition）。</p>
-<p><strong>还有待做的东西......</strong></p>
-<p><em>关节限位器</em>
-您会注意到每个执行器在固定环中都有一个插槽。其设计用于保持浮动关节止动件，该止动件也接合下一个关节的配合部分上的槽，以形成大于360度的关节止动件。范围。不是必须在任何地方连接限位开关，而是计划在每个关节上运行以防止归位。这种浮动止动件仍然需要设计和测试。</p>
-<p><em>修改Gripper</em>
-我最初发布的夹具使用了一个小型直流电机，我计划从Tic步进驱动器的一个通道运行。不幸的是，电机刷噪声会对驱动芯片造成严重破坏，因此在视频中，我使用了较早的步进驱动夹具。步进夹具有点弱，需要一些工作。</p>
-<p><em>机器人运动学</em>
-我到目前为止所使用的测试软件非常简陋，并且没有任何正向或反向机器人运动学。我需要添加这些函数来获得笛卡尔运动，或者更好地获取，让整个手臂在ROS（一个开源机器人操作系统）内运行。</p>
-<p><em>真实文档</em>
-我需要编写一本真正的手册来打印，组装，接线和运行这个机器人</p>
 ]]></content>
     </entry>
 </feed>

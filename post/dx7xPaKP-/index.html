@@ -3,13 +3,13 @@
   <head>
     <meta charset="utf-8" >
 
-<title>测试 | Li Zhenzhu, Ph.D</title>
+<title>如何将视频转换为图片 | Li Zhenzhu, Ph.D</title>
 <meta name="description" content="Binzhou Medical University Hospital, Email: timeanddoctor@gmail.com.">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="https://blog.bioprinting.site/favicon.ico?v=1584277056215">
+<link rel="shortcut icon" href="https://blog.bioprinting.site/favicon.ico?v=1587555135577">
 <link rel="stylesheet" href="https://blog.bioprinting.site/styles/main.css">
 
 
@@ -29,7 +29,7 @@
   <div class="top-container" data-aos="fade-right">
     <div class="top-header-container">
       <a class="site-title-container" href="https://blog.bioprinting.site">
-        <img src="https://blog.bioprinting.site/images/avatar.png?v=1584277056215" class="site-logo">
+        <img src="https://blog.bioprinting.site/images/avatar.png?v=1587555135577" class="site-logo">
         <h1 class="site-title">Li Zhenzhu, Ph.D</h1>
       </a>
       <div class="menu-btn" @click="menuVisible = !menuVisible">
@@ -115,20 +115,58 @@
       <div class="main-container">
         <div class="content-container" data-aos="fade-up">
           <div class="post-detail">
-            <h2 class="post-title">测试</h2>
-            <div class="post-date">2020-03-15</div>
+            <h2 class="post-title">如何将视频转换为图片</h2>
+            <div class="post-date">2020-04-22</div>
+            
+              <div class="feature-container" style="background-image: url('http://userimages11.51sole.com/20161004/b_3880797_201610041704591144.jpg')">
+              </div>
             
             <div class="post-content">
-              <p>测试</p>
+              <ul>
+<li>如何将视频转换为图片</li>
+</ul>
+<pre><code>import numpy as np
+import cv2, PIL, os
+from cv2 import aruco
+from mpl_toolkits.mplot3d import Axes3D
+import matplotlib.pyplot as plt
+import matplotlib as mpl
+import pandas as pd
+%matplotlib nbagg
+
+workdir = &quot;../Aruco/data/calib_tel_ludo2/&quot;
+name = &quot;VID_20180406_104312.mp4&quot;
+rootname = name.split(&quot;.&quot;)[0]
+cap = cv2.VideoCapture(workdir + name)
+counter = 0
+each = 10
+length = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
+for i in range(length):
+    ret, frame = cap.read()
+    if i % each == 0: cv2.imwrite(workdir + rootname + &quot;_{0}&quot;.format(i) + &quot;.png&quot;, frame)
+
+cap.release()
+
+os.listdir(&quot;../Aruco/data/calib_tel_ludo/&quot;)
+int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
+</code></pre>
 
             </div>
+            
+              <div class="tag-container">
+                
+                  <a href="https://blog.bioprinting.site/tag/happy" class="tag">
+                    Happy
+                  </a>
+                
+              </div>
             
             
               <div class="next-post">
                 <div class="next">下一篇</div>
-                <a href="https://blog.bioprinting.site/post/2IgPVMzQH">
+                <a href="https://blog.bioprinting.site/post/QAHUqM6yQ">
                   <h3 class="post-title">
-                    儿童脑干肿瘤及手术入路
+                    另一个完整的例子
                   </h3>
                 </a>
               </div>
