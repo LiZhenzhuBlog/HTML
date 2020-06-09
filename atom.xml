@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-    <id>https://lizhenzhublog.github.io/HTML</id>
+    <id>D:/我的网站建设/blog/output</id>
     <title>Li Zhenzhu, Ph.D</title>
-    <updated>2020-06-09T10:36:53.003Z</updated>
+    <updated>2020-06-09T10:45:48.270Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
-    <link rel="alternate" href="https://lizhenzhublog.github.io/HTML"/>
-    <link rel="self" href="https://lizhenzhublog.github.io/HTML/atom.xml"/>
+    <link rel="alternate" href="D:/我的网站建设/blog/output"/>
+    <link rel="self" href="D:/我的网站建设/blog/output/atom.xml"/>
     <subtitle>Binzhou Medical University Hospital, Email: timeanddoctor@gmail.com.</subtitle>
-    <logo>https://lizhenzhublog.github.io/HTML/images/avatar.png</logo>
-    <icon>https://lizhenzhublog.github.io/HTML/favicon.ico</icon>
+    <logo>D:/我的网站建设/blog/output/images/avatar.png</logo>
+    <icon>D:/我的网站建设/blog/output/favicon.ico</icon>
     <rights>All rights reserved 2020, Li Zhenzhu, Ph.D</rights>
     <entry>
         <title type="html"><![CDATA[Python+OpenCV录制双目摄像头视频]]></title>
-        <id>https://lizhenzhublog.github.io/HTML/post/dL-YnYF3i</id>
-        <link href="https://lizhenzhublog.github.io/HTML/post/dL-YnYF3i">
+        <id>D:/我的网站建设/blog/output/post/dL-YnYF3i/index.html</id>
+        <link href="D:/我的网站建设/blog/output/post/dL-YnYF3i/index.html">
         </link>
         <updated>2020-04-22T12:52:47.000Z</updated>
         <summary type="html"><![CDATA[<ul>
@@ -205,8 +205,8 @@ cv2.destroyAllWindows()
     </entry>
     <entry>
         <title type="html"><![CDATA[如何将视频转换为图片]]></title>
-        <id>https://lizhenzhublog.github.io/HTML/post/dx7xPaKP-</id>
-        <link href="https://lizhenzhublog.github.io/HTML/post/dx7xPaKP-">
+        <id>D:/我的网站建设/blog/output/post/dx7xPaKP-/index.html</id>
+        <link href="D:/我的网站建设/blog/output/post/dx7xPaKP-/index.html">
         </link>
         <updated>2020-04-22T11:30:05.000Z</updated>
         <summary type="html"><![CDATA[<ul>
@@ -248,8 +248,8 @@ int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
     </entry>
     <entry>
         <title type="html"><![CDATA[另一个完整的例子]]></title>
-        <id>https://lizhenzhublog.github.io/HTML/post/QAHUqM6yQ</id>
-        <link href="https://lizhenzhublog.github.io/HTML/post/QAHUqM6yQ">
+        <id>D:/我的网站建设/blog/output/post/QAHUqM6yQ/index.html</id>
+        <link href="D:/我的网站建设/blog/output/post/QAHUqM6yQ/index.html">
         </link>
         <updated>2020-04-22T11:10:21.000Z</updated>
         <content type="html"><![CDATA[<ul>
@@ -509,8 +509,8 @@ c = np.array(corners).astype(np.float64).reshape(44,4,2)
     </entry>
     <entry>
         <title type="html"><![CDATA[机器视觉2 创建标记并识别]]></title>
-        <id>https://lizhenzhublog.github.io/HTML/post/O_TkJInMU</id>
-        <link href="https://lizhenzhublog.github.io/HTML/post/O_TkJInMU">
+        <id>D:/我的网站建设/blog/output/post/O_TkJInMU/index.html</id>
+        <link href="D:/我的网站建设/blog/output/post/O_TkJInMU/index.html">
         </link>
         <updated>2020-04-22T11:00:59.000Z</updated>
         <content type="html"><![CDATA[<ul>
@@ -567,8 +567,8 @@ plt.show()
     </entry>
     <entry>
         <title type="html"><![CDATA[机器视觉]]></title>
-        <id>https://lizhenzhublog.github.io/HTML/post/XMhGzY5TR</id>
-        <link href="https://lizhenzhublog.github.io/HTML/post/XMhGzY5TR">
+        <id>D:/我的网站建设/blog/output/post/XMhGzY5TR/index.html</id>
+        <link href="D:/我的网站建设/blog/output/post/XMhGzY5TR/index.html">
         </link>
         <updated>2020-04-22T10:23:31.000Z</updated>
         <content type="html"><![CDATA[<p><strong>Aruco</strong></p>
@@ -629,8 +629,8 @@ plt.show()
     </entry>
     <entry>
         <title type="html"><![CDATA[儿童脑干肿瘤及手术入路]]></title>
-        <id>https://lizhenzhublog.github.io/HTML/post/2IgPVMzQH</id>
-        <link href="https://lizhenzhublog.github.io/HTML/post/2IgPVMzQH">
+        <id>D:/我的网站建设/blog/output/post/2IgPVMzQH/index.html</id>
+        <link href="D:/我的网站建设/blog/output/post/2IgPVMzQH/index.html">
         </link>
         <updated>2019-10-05T11:42:04.000Z</updated>
         <content type="html"><![CDATA[<h3 id="目的">目的</h3>
@@ -882,8 +882,8 @@ plt.show()
     </entry>
     <entry>
         <title type="html"><![CDATA[颞下入路]]></title>
-        <id>https://lizhenzhublog.github.io/HTML/post/1SM-ibZ3Z</id>
-        <link href="https://lizhenzhublog.github.io/HTML/post/1SM-ibZ3Z">
+        <id>D:/我的网站建设/blog/output/post/1SM-ibZ3Z/index.html</id>
+        <link href="D:/我的网站建设/blog/output/post/1SM-ibZ3Z/index.html">
         </link>
         <updated>2019-10-05T05:48:06.000Z</updated>
         <content type="html"><![CDATA[<p>这个技术是指颞下keyhole开颅经硬膜外入路显露颞骨上面。这种颞下入路的变型之目的是打开IAC，显露面神经、上前庭神经、耳蜗神经和下前庭神经。</p>
@@ -1077,8 +1077,8 @@ plt.show()
     </entry>
     <entry>
         <title type="html"><![CDATA[从一个py中运行另一个带参数的py]]></title>
-        <id>https://lizhenzhublog.github.io/HTML/post/6F7PaKHq4</id>
-        <link href="https://lizhenzhublog.github.io/HTML/post/6F7PaKHq4">
+        <id>D:/我的网站建设/blog/output/post/6F7PaKHq4/index.html</id>
+        <link href="D:/我的网站建设/blog/output/post/6F7PaKHq4/index.html">
         </link>
         <updated>2019-07-08T12:15:16.000Z</updated>
         <content type="html"><![CDATA[<pre><code>import sys
@@ -1148,8 +1148,8 @@ URL: https://webctrl.rz-berlin.mpg.de</code></p>
     </entry>
     <entry>
         <title type="html"><![CDATA[numpy_stl简介]]></title>
-        <id>https://lizhenzhublog.github.io/HTML/post/5OyTRhe_F</id>
-        <link href="https://lizhenzhublog.github.io/HTML/post/5OyTRhe_F">
+        <id>D:/我的网站建设/blog/output/post/5OyTRhe_F/index.html</id>
+        <link href="D:/我的网站建设/blog/output/post/5OyTRhe_F/index.html">
         </link>
         <updated>2019-06-28T09:49:05.000Z</updated>
         <content type="html"><![CDATA[<h1 id="欢迎来到numpy-stl的文档">欢迎来到numpy-stl的文档！</h1>
@@ -2137,8 +2137,8 @@ assert numpy.all(mesh.areas == 0.5)</code></pre>
     </entry>
     <entry>
         <title type="html"><![CDATA[matplotlib绘图注意]]></title>
-        <id>https://lizhenzhublog.github.io/HTML/post/HOPBFrX0u</id>
-        <link href="https://lizhenzhublog.github.io/HTML/post/HOPBFrX0u">
+        <id>D:/我的网站建设/blog/output/post/HOPBFrX0u/index.html</id>
+        <link href="D:/我的网站建设/blog/output/post/HOPBFrX0u/index.html">
         </link>
         <updated>2019-06-26T11:59:40.000Z</updated>
         <content type="html"><![CDATA[<p>https://wizardforcel.gitbooks.io/matplotlib-user-guide/7.3.html
