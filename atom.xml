@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://lizhenzhublog.github.io</id>
     <title>Li Zhenzhu, Ph.D</title>
-    <updated>2020-06-09T09:14:48.089Z</updated>
+    <updated>2020-06-09T09:50:13.446Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://lizhenzhublog.github.io"/>
     <link rel="self" href="https://lizhenzhublog.github.io/atom.xml"/>
@@ -16,11 +16,18 @@
         <link href="https://lizhenzhublog.github.io/post/dL-YnYF3i/">
         </link>
         <updated>2020-04-22T12:52:47.000Z</updated>
+        <summary type="html"><![CDATA[<ul>
+<li>第一个例子<br>
+说起来录制视频，我们可能有很多的软件，但是比较坑的是，好像很少的软件支持能够同时录制两个摄像头的视频，于是我们用python自己写一个。要是OpenCV+python<br>
+https://github.com/anonymouslycn/bjtu_BinocularCameraRecord</li>
+</ul>
+]]></summary>
         <content type="html"><![CDATA[<ul>
 <li>第一个例子<br>
 说起来录制视频，我们可能有很多的软件，但是比较坑的是，好像很少的软件支持能够同时录制两个摄像头的视频，于是我们用python自己写一个。要是OpenCV+python<br>
 https://github.com/anonymouslycn/bjtu_BinocularCameraRecord</li>
 </ul>
+<!-- more -->
 <pre><code>import cv2
 import numpy as np
 from PyQt5.QtWidgets import (QMainWindow, QApplication, QFileDialog)
@@ -202,9 +209,16 @@ cv2.destroyAllWindows()
         <link href="https://lizhenzhublog.github.io/post/dx7xPaKP-/">
         </link>
         <updated>2020-04-22T11:30:05.000Z</updated>
+        <summary type="html"><![CDATA[<ul>
+<li>如何将视频转换为图片</li>
+</ul>
+<p>更具根据就</p>
+]]></summary>
         <content type="html"><![CDATA[<ul>
 <li>如何将视频转换为图片</li>
 </ul>
+<p>更具根据就</p>
+<!-- more -->
 <pre><code>import numpy as np
 import cv2, PIL, os
 from cv2 import aruco
