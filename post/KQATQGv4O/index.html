@@ -9,8 +9,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="https://blog.bioprinting.site/favicon.ico?v=1587555135577">
-<link rel="stylesheet" href="https://blog.bioprinting.site/styles/main.css">
+<link rel="shortcut icon" href="https://lizhenzhublog.github.io/favicon.ico?v=1591694069327">
+<link rel="stylesheet" href="https://lizhenzhublog.github.io/styles/main.css">
 
 
 
@@ -28,8 +28,8 @@
       <div class="sidebar" :class="{ 'full-height': menuVisible }">
   <div class="top-container" data-aos="fade-right">
     <div class="top-header-container">
-      <a class="site-title-container" href="https://blog.bioprinting.site">
-        <img src="https://blog.bioprinting.site/images/avatar.png?v=1587555135577" class="site-logo">
+      <a class="site-title-container" href="https://lizhenzhublog.github.io">
+        <img src="https://lizhenzhublog.github.io/images/avatar.png?v=1591694069327" class="site-logo">
         <h1 class="site-title">Li Zhenzhu, Ph.D</h1>
       </a>
       <div class="menu-btn" @click="menuVisible = !menuVisible">
@@ -127,15 +127,15 @@
 <hr>
 <p><strong>概述：</strong></p>
 <p>该项目的目标是为Kuka R210机器人手臂提供运动学分析。在模拟中，我们处理一个任务来挑选，移动和放下一个对象到一个盒子里。在这个项目中，我将使用ROS系统和Gazebo + Rviz作为模拟环境。使用反向运动学（IK），我们可以找到正确的轨迹来驱动手臂将物体放在所需的位置。可以在此<a href="https://github.com/zenetio/RoboND-Kinematics-Project.git">存储库中</a>找到完整的项目，这是<a href="https://youtu.be/Zh5tTvKKrH4">视频</a>。</p>
-<p><a href="https://github.com/zenetio/RoboND-Kinematics-Project/blob/master/misc_images/first_try.png"><img src="https://github.com/zenetio/RoboND-Kinematics-Project/raw/master/misc_images/first_try.png" alt="替代文字"></a></p>
+<figure data-type="image" tabindex="1"><a href="https://github.com/zenetio/RoboND-Kinematics-Project/blob/master/misc_images/first_try.png"><img src="https://github.com/zenetio/RoboND-Kinematics-Project/raw/master/misc_images/first_try.png" alt="替代文字" loading="lazy"></a></figure>
 <p>图1。</p>
 <h3 id="-2"><a href="https://github.com/zenetio/RoboND-Kinematics-Project#kinematic-analysis-model-of-6-dof-kuka-r210-robot"></a>6自由度Kuka R210机器人运动分析模型</h3>
 <h4 id="-3"><a href="https://github.com/zenetio/RoboND-Kinematics-Project#1-forward-kinematic"></a>1.前进运动学</h4>
 <p>运动学分析主要包括两个方面，即正向运动学分析（FK）和反向运动学分析（IK）。正向运动学分析意味着Kuka的末端执行器的姿态可以用链接的给定几何参数和关节的变量来计算。机器人具有平移或旋转关节。平移沿着给定的矢量方向在空间中移动有限距离，并且可以通过相邻链路之间的以下均匀变换矩阵来描述，如图2所示。</p>
-<p><a href="https://github.com/zenetio/RoboND-Kinematics-Project/blob/master/misc_images/homo.png"><img src="https://github.com/zenetio/RoboND-Kinematics-Project/raw/master/misc_images/homo.png" alt="替代文字"></a></p>
+<figure data-type="image" tabindex="2"><a href="https://github.com/zenetio/RoboND-Kinematics-Project/blob/master/misc_images/homo.png"><img src="https://github.com/zenetio/RoboND-Kinematics-Project/raw/master/misc_images/homo.png" alt="替代文字" loading="lazy"></a></figure>
 <p>图2。</p>
 <p>正向运动（FK）问题的解决方案是直线计算，其中我们可以使用关节角度并找到机器人手臂的末端执行器姿势（位置+方向）。下面的图3显示了FK和IK之间的分析模型。</p>
-<p><a href="https://github.com/zenetio/RoboND-Kinematics-Project/blob/master/misc_images/fk_ik.png"><img src="https://github.com/zenetio/RoboND-Kinematics-Project/raw/master/misc_images/fk_ik.png" alt="替代文字"></a></p>
+<figure data-type="image" tabindex="3"><a href="https://github.com/zenetio/RoboND-Kinematics-Project/blob/master/misc_images/fk_ik.png"><img src="https://github.com/zenetio/RoboND-Kinematics-Project/raw/master/misc_images/fk_ik.png" alt="替代文字" loading="lazy"></a></figure>
 <p>图3。</p>
 <p>但是什么是联系或联合角度？我们将在下一节中看到。可以使用Denavit-Hartenberg（DH）惯例导出机器人的链接和关节角度之间的关系。</p>
 <h3 id="-4"><a href="https://github.com/zenetio/RoboND-Kinematics-Project#2-dh-parameters"></a>2. DH参数</h3>
@@ -204,106 +204,106 @@
 </tbody>
 </table>
 <p>DH参数由坐标系i-1到i的变换通过表1中给出的旋转和平移变换给出。注意，这是DH惯例的修改惯例。图4显示了表1中描述的每个变量的位置。</p>
-<p><a href="https://github.com/zenetio/RoboND-Kinematics-Project/blob/master/misc_images/kr210_schematic.png"><img src="https://github.com/zenetio/RoboND-Kinematics-Project/raw/master/misc_images/kr210_schematic.png" alt="替代文字"></a></p>
+<figure data-type="image" tabindex="4"><a href="https://github.com/zenetio/RoboND-Kinematics-Project/blob/master/misc_images/kr210_schematic.png"><img src="https://github.com/zenetio/RoboND-Kinematics-Project/raw/master/misc_images/kr210_schematic.png" alt="替代文字" loading="lazy"></a></figure>
 <p>图4。</p>
 <p>在Gazebo中，DH参数表由URDF文件描述。URDF文件中详细描述了所有关节和链接。下面的图5显示了Kuka R210 URDF文件的一部分。</p>
-<p><a href="https://github.com/zenetio/RoboND-Kinematics-Project/blob/master/misc_images/urdf.png"><img src="https://github.com/zenetio/RoboND-Kinematics-Project/raw/master/misc_images/urdf.png" alt="替代文字"></a></p>
+<figure data-type="image" tabindex="5"><a href="https://github.com/zenetio/RoboND-Kinematics-Project/blob/master/misc_images/urdf.png"><img src="https://github.com/zenetio/RoboND-Kinematics-Project/raw/master/misc_images/urdf.png" alt="替代文字" loading="lazy"></a></figure>
 <p>图5。</p>
 <p>例如，请注意，joint_3与父link_2和子link_3链接。</p>
 <h3 id="-5"><a href="https://github.com/zenetio/RoboND-Kinematics-Project#3-implementation-of-forward-kinematics"></a>3.正向运动学的实现</h3>
 <p>因此，使用表1中的值和图2中描述的均匀变换公式，我们可以创建关于每个关节的各个变换矩阵。此外，我们还可以仅使用末端效应器（抓取器）姿势在base_link和gripper_link之间生成广义齐次变换。</p>
 <p>例如，base_link和link_1（T0_1）的同构变换可以写成如下：</p>
-<p>def  Tn_m（th，alpha，a，d）：
-t =矩阵（[[cos（th），             - sin（th），             0，a]，
-[sin（th）* cos（alpha），cos（th）* cos（alpha），- sin（alpha），- sin（alpha）* d]，
-[sin（th）* sin（alpha），cos（th）* sin（alpha），cos（alpha），cos（alpha）* d]，
-[                    0，                    0，            0，                1 ]]）
-＃从base_link到LINK_1转化
+<p>def  Tn_m（th，alpha，a，d）：<br>
+t =矩阵（[[cos（th），             - sin（th），             0，a]，<br>
+[sin（th）* cos（alpha），cos（th）* cos（alpha），- sin（alpha），- sin（alpha）* d]，<br>
+[sin（th）* sin（alpha），cos（th）* sin（alpha），cos（alpha），cos（alpha）* d]，<br>
+[                    0，                    0，            0，                1 ]]）<br>
+＃从base_link到LINK_1转化<br>
 T0_1 = Tn_m（Q1，alpha0，A0，D1）.subs（S）</p>
 <p>我们对所有其他链接重复相同的方法</p>
-<p>＃从link_1到Link_2的转换
-T1_2 = Tn_m（q2，alpha1，a1，d2）.subs（s）
-＃从link_2到Link_3的
-转换T2_3 = Tn_m（q3，alpha2，a2，d3）.subs（s）
-＃来自link_3的转换到Link_4
-T3_4 = Tn_m（q4，alpha3，a3，d4）.subs（s）
-＃从link_4到Link_5的
-转换T4_5 = Tn_m（q5，alpha4，a4，d5）.subs（s）
-＃从link_5到Link_6的
-转换T5_6 = Tn_m（q6，alpha5，a5，d6）.subs（s）
-＃从link_6到夹子的转换G
+<p>＃从link_1到Link_2的转换<br>
+T1_2 = Tn_m（q2，alpha1，a1，d2）.subs（s）<br>
+＃从link_2到Link_3的<br>
+转换T2_3 = Tn_m（q3，alpha2，a2，d3）.subs（s）<br>
+＃来自link_3的转换到Link_4<br>
+T3_4 = Tn_m（q4，alpha3，a3，d4）.subs（s）<br>
+＃从link_4到Link_5的<br>
+转换T4_5 = Tn_m（q5，alpha4，a4，d5）.subs（s）<br>
+＃从link_5到Link_6的<br>
+转换T5_6 = Tn_m（q6，alpha5，a5，d6）.subs（s）<br>
+＃从link_6到夹子的转换G<br>
 T6_G  = Tn_m（q7，alpha6，a6，d7）.subs（s）</p>
 <p>然后使用上面的等式，对于从base_link到gripper_link的每个同构变换，我们有：</p>
-<p>T0_1 =矩阵（[[COS（Q1），-罪（Q1），0，     0 ]，
-[罪（Q1），COS（Q1），0，     0 ]，
-[       0，         0，1，0.75 ]，
+<p>T0_1 =矩阵（[[COS（Q1），-罪（Q1），0，     0 ]，<br>
+[罪（Q1），COS（Q1），0，     0 ]，<br>
+[       0，         0，1，0.75 ]，<br>
 [       0，         0，0，     1 ]]）</p>
-<p>T1_2 =矩阵（[[罪（Q2），COS（Q2），0，0.35 ]，
-[       0，         0，1，     0 ]，
-[COS（Q2），-罪（Q2），0，     0 ]，
+<p>T1_2 =矩阵（[[罪（Q2），COS（Q2），0，0.35 ]，<br>
+[       0，         0，1，     0 ]，<br>
+[COS（Q2），-罪（Q2），0，     0 ]，<br>
 [       0，         0，0，     1 ]]）</p>
-<p>T2_3 =矩阵（[[COS（Q3），-罪（Q3），0，1.25 ]，
-[罪（Q3），COS（Q3），0，     0 ]，
-[       0，         0，1，     0 ]，
+<p>T2_3 =矩阵（[[COS（Q3），-罪（Q3），0，1.25 ]，<br>
+[罪（Q3），COS（Q3），0，     0 ]，<br>
+[       0，         0，1，     0 ]，<br>
 [       0，        0，0，     1 ]]）</p>
-<p>T3_4 =矩阵（[[COS（Q4），-罪（Q4），0，- 0.054 ]，
-[        0，         0，1，     1.5 ]，
-[ -罪（Q4），- COS （Q4），0，       0 ]，
+<p>T3_4 =矩阵（[[COS（Q4），-罪（Q4），0，- 0.054 ]，<br>
+[        0，         0，1，     1.5 ]，<br>
+[ -罪（Q4），- COS （Q4），0，       0 ]，<br>
 [        0，         0，0，       1 ]]）</p>
-<p>T4_5 =矩阵（[[COS（Q5），-罪（Q5），   0，0 ]，
-[       0，         0，- 1，0 ]，
-[罪（Q5），COS（Q5），   0，0 ]，
+<p>T4_5 =矩阵（[[COS（Q5），-罪（Q5），   0，0 ]，<br>
+[       0，         0，- 1，0 ]，<br>
+[罪（Q5），COS（Q5），   0，0 ]，<br>
 [       0，         0，   0，1 ]]）</p>
-<p>T5_6 =矩阵（[[COS（Q6），- SIN（Q6），0，0 ]，
-[        0，         0，1，0 ]，
-[ - SIN（Q6），- COS（Q6），0，0 ]，
-[        0，         0，0，1 ]]）T6_G =矩阵（[[ 1，0，0，      0 ]，
-[ 0，1，0，      0 ]，
-[ 0，0，1，0.303 ]，
+<p>T5_6 =矩阵（[[COS（Q6），- SIN（Q6），0，0 ]，<br>
+[        0，         0，1，0 ]，<br>
+[ - SIN（Q6），- COS（Q6），0，0 ]，<br>
+[        0，         0，0，1 ]]）T6_G =矩阵（[[ 1，0，0，      0 ]，<br>
+[ 0，1，0，      0 ]，<br>
+[ 0，0，1，0.303 ]，<br>
 [ 0，</p>
 <p>0，0，      1 ]]）</p>
 <p>因此，我们可以计算抓手姿势的完整FK。</p>
 <p>注意，均匀变换具有平移和旋转部分。使用此属性，我们可以重新排列同构变换并编写以下内容：</p>
-<p><a href="https://github.com/zenetio/RoboND-Kinematics-Project/blob/master/misc_images/wc.png"><img src="https://github.com/zenetio/RoboND-Kinematics-Project/raw/master/misc_images/wc.png" alt="替代文字"></a></p>
+<figure data-type="image" tabindex="6"><a href="https://github.com/zenetio/RoboND-Kinematics-Project/blob/master/misc_images/wc.png"><img src="https://github.com/zenetio/RoboND-Kinematics-Project/raw/master/misc_images/wc.png" alt="替代文字" loading="lazy"></a></figure>
 <p>图6。</p>
 <p>它会导致手腕中心姿势。</p>
 <h3 id="-6"><a href="https://github.com/zenetio/RoboND-Kinematics-Project#4-implementation-of-inverse-kinematics"></a>4.反向运动学的实现</h3>
 <p>逆运动学分析与正向运动学分析相反。现在情况有点复杂了。给定期望的末端效应器姿势，我们需要找到将实现到目标位置的正确轨迹的关节角度的值。利用反向运动学解决方案，可以确定每个关节角度的值，以便将臂放置在期望的位置和方向。</p>
 <p>也就是说，我们需要找到q1，q2，q3，q4，q5和q6的值，这些值会将手臂移动到所需的姿势。</p>
-<p><a href="https://github.com/zenetio/RoboND-Kinematics-Project/blob/master/misc_images/geometry.png"><img src="https://github.com/zenetio/RoboND-Kinematics-Project/raw/master/misc_images/geometry.png" alt="替代文字"></a></p>
+<figure data-type="image" tabindex="7"><a href="https://github.com/zenetio/RoboND-Kinematics-Project/blob/master/misc_images/geometry.png"><img src="https://github.com/zenetio/RoboND-Kinematics-Project/raw/master/misc_images/geometry.png" alt="替代文字" loading="lazy"></a></figure>
 <p>图7。</p>
 <p>使用臂的一些几何特性，q1，q2和q3的值非常严格，如图7所示</p>
 <p>q1角度可以从手臂在平面X0-Y0上的投影中找到，我们得到：</p>
 <p>theta1 = atan2（Wc [ 1 ]，Wc [ 0 ]）</p>
 <p>我们可以从下面的图7和图8得到theta2和theta3。</p>
-<p><a href="https://github.com/zenetio/RoboND-Kinematics-Project/blob/master/misc_images/misc3.png"><img src="https://github.com/zenetio/RoboND-Kinematics-Project/raw/master/misc_images/misc3.png" alt="替代文字"></a></p>
+<figure data-type="image" tabindex="8"><a href="https://github.com/zenetio/RoboND-Kinematics-Project/blob/master/misc_images/misc3.png"><img src="https://github.com/zenetio/RoboND-Kinematics-Project/raw/master/misc_images/misc3.png" alt="替代文字" loading="lazy"></a></figure>
 <p>图8。</p>
-<p>＃使用几何计算三角形边
-side_a = 1.501
-side_b = sqrt（ pow（（sqrt（Wc [ 0 ] * Wc [ 0 ] + Wc [ 1 ] * Wc [ 1 ]） - 0.35）， 2） + pow（（ Wc [ 2 ] - 0.75）， 2））
-side_c = 1.25
-＃使用几何来计算三角形角度
-angle_a = acos（（side_b）* side_b + side_c * side_c - side_a * side_a）/（2  * side_b * side_c））
-angle_b = acos（（side_a * side_a + side_c * side_c - side_b * side_b）/（2  * side_a * side_c））
-＃ calculate theta2
-theta2 = np.pi /  2。- angle_a - atan2（Wc [2 ] -  0.75，SQRT（WC [ 0 ] * Wc中[ 0 ] + Wc中[ 1 ] * Wc中[ 1 ]）-  0.35）
-＃计算theta3
+<p>＃使用几何计算三角形边<br>
+side_a = 1.501<br>
+side_b = sqrt（ pow（（sqrt（Wc [ 0 ] * Wc [ 0 ] + Wc [ 1 ] * Wc [ 1 ]） - 0.35）， 2） + pow（（ Wc [ 2 ] - 0.75）， 2））<br>
+side_c = 1.25<br>
+＃使用几何来计算三角形角度<br>
+angle_a = acos（（side_b）* side_b + side_c * side_c - side_a * side_a）/（2  * side_b * side_c））<br>
+angle_b = acos（（side_a * side_a + side_c * side_c - side_b * side_b）/（2  * side_a * side_c））<br>
+＃ calculate theta2<br>
+theta2 = np.pi /  2。- angle_a - atan2（Wc [2 ] -  0.75，SQRT（WC [ 0 ] * Wc中[ 0 ] + Wc中[ 1 ] * Wc中[ 1 ]）-  0.35）<br>
+＃计算theta3<br>
 theta3 = np.pi /  2。-（angle_b +  0.036）</p>
 <p>最后，使用旋转矩阵R3_6和更多几何属性，我们可以找到剩余角度q4，q5和q6。</p>
-<p>＃使用旋转矩阵来计算剩余的关节角度
-＃从变换矩阵我们可以提取的旋转矩阵
-R0_3 = oClass.T0_3 [ 0： 3， 0： 3 ]
-R0_3 = R0_3.evalf（潜艇= {Q1：theta1，Q2：theta2， Q3：theta3}）
-R3_6 = R0_3.T * Rot_G＃现在得到欧拉从旋转矩阵角度＃计算theta4
+<p>＃使用旋转矩阵来计算剩余的关节角度<br>
+＃从变换矩阵我们可以提取的旋转矩阵<br>
+R0_3 = oClass.T0_3 [ 0： 3， 0： 3 ]<br>
+R0_3 = R0_3.evalf（潜艇= {Q1：theta1，Q2：theta2， Q3：theta3}）<br>
+R3_6 = R0_3.T * Rot_G＃现在得到欧拉从旋转矩阵角度＃计算theta4<br>
 theta4 = ATAN2（R3_6 [ 2， 2 ]， - R3_6 [ 0</p>
-<p>，2 ]）
-＃计算theta5
-theta5 = ATAN2（SQRT（R3_6 [ 0，2 ] * R3_6 [ 0，2 ] + R3_6 [ 2，2 ] * R3_6 [ 2，2 ]），R3_6 [ 1，2 ]）
-＃计算theta6
-theta6 = ATAN2（- R3_6 [ 1，1 ]，R3_6 [ 1，0 ]）
-＃因为该模型具有某些奇点，我们可以考虑
-如果（SIN（theta5）&lt;  0）：
-theta4 = ATAN2（- R3_6 [ 2，2 ]，R3_6 [ 0，2 ]）
+<p>，2 ]）<br>
+＃计算theta5<br>
+theta5 = ATAN2（SQRT（R3_6 [ 0，2 ] * R3_6 [ 0，2 ] + R3_6 [ 2，2 ] * R3_6 [ 2，2 ]），R3_6 [ 1，2 ]）<br>
+＃计算theta6<br>
+theta6 = ATAN2（- R3_6 [ 1，1 ]，R3_6 [ 1，0 ]）<br>
+＃因为该模型具有某些奇点，我们可以考虑<br>
+如果（SIN（theta5）&lt;  0）：<br>
+theta4 = ATAN2（- R3_6 [ 2，2 ]，R3_6 [ 0，2 ]）<br>
 theta6 = ATAN2（R3_6 [ 1，1 ]，- R3_6 [ 1，0 ]）</p>
 <h3 id="-7"><a href="https://github.com/zenetio/RoboND-Kinematics-Project#5-project-implementation"></a>5.项目实施</h3>
 <ul>
@@ -321,7 +321,7 @@ theta6 = ATAN2（R3_6 [ 1，1 ]，- R3_6 [ 1，0 ]）</p>
 <p>然后这两个变化降低了抓手未能保持对象的概率。</p>
 <p>另一个挑战是找到一个解决方案，以避免在循环内运行符号代码来管理从手臂接收到的姿势。符号变量的计算需要很长时间，主要是因为我们有很多矩阵运算。因此，例如，考虑完成符号操作60秒，然后乘以50,60,100个迭代，您将获得大量的计算时间。在最后，这将是每个周期无法接受的时间。</p>
 <p>为了解决这个问题，我创建了一个类来管理所有符号变量和计算的创建。然后我执行了一次类代码，创建了一个被序列化并保存到磁盘的对象。所以，在项目中我<code>IK_server.py</code>只需要加载（反序列化）对象代码。这种方法只需几分之一秒，这意味着在循环中管理FK和IK分析的快速计算时间。</p>
-<p><a href="https://github.com/zenetio/RoboND-Kinematics-Project/blob/master/misc_images/last_try.png"><img src="https://github.com/zenetio/RoboND-Kinematics-Project/raw/master/misc_images/last_try.png" alt="替代文字"></a></p>
+<figure data-type="image" tabindex="9"><a href="https://github.com/zenetio/RoboND-Kinematics-Project/blob/master/misc_images/last_try.png"><img src="https://github.com/zenetio/RoboND-Kinematics-Project/raw/master/misc_images/last_try.png" alt="替代文字" loading="lazy"></a></figure>
 <p>图9。</p>
 <p>图9显示了10次尝试后的最终过程。请注意，框中有3个引脚，下拉框中有8个引脚。一个是第11周期，不得考虑。但是其他2个都在盒子里，因为即使夹子姿势是正确的，它也不能将物体保持在夹子中。</p>
 <p>因此，我们可以得出结论，FK和IK计算中的误差非常低，如果我们有更好的抓手操作，我们可以在10次尝试中达到100％。</p>
@@ -333,7 +333,7 @@ theta6 = ATAN2（R3_6 [ 1，1 ]，- R3_6 [ 1，0 ]）</p>
             
               <div class="next-post">
                 <div class="next">下一篇</div>
-                <a href="https://blog.bioprinting.site/post/AKuuLRT2E">
+                <a href="https://lizhenzhublog.github.io/post/AKuuLRT2E/">
                   <h3 class="post-title">
                     ROS-IGTL-Bridge：使用ROS环境进行图像引导治疗的开放式网络接口
                   </h3>

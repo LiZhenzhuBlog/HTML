@@ -9,8 +9,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="https://blog.bioprinting.site/favicon.ico?v=1587555135577">
-<link rel="stylesheet" href="https://blog.bioprinting.site/styles/main.css">
+<link rel="shortcut icon" href="https://lizhenzhublog.github.io/favicon.ico?v=1591694069327">
+<link rel="stylesheet" href="https://lizhenzhublog.github.io/styles/main.css">
 
 
 
@@ -28,8 +28,8 @@
       <div class="sidebar" :class="{ 'full-height': menuVisible }">
   <div class="top-container" data-aos="fade-right">
     <div class="top-header-container">
-      <a class="site-title-container" href="https://blog.bioprinting.site">
-        <img src="https://blog.bioprinting.site/images/avatar.png?v=1587555135577" class="site-logo">
+      <a class="site-title-container" href="https://lizhenzhublog.github.io">
+        <img src="https://lizhenzhublog.github.io/images/avatar.png?v=1591694069327" class="site-logo">
         <h1 class="site-title">Li Zhenzhu, Ph.D</h1>
       </a>
       <div class="menu-btn" @click="menuVisible = !menuVisible">
@@ -148,11 +148,11 @@
 <li>下午1:30 - 1：40：开场白和介绍（Junichi Tokuda）</li>
 <li>下午1:40至下午2:30：特邀演讲
 <ul>
-<li>下午1:40 :( Stanley Herrel）</li>
-<li>下午1:50 :( Nobuhiko Hata）</li>
-<li>下午2:00 :( Axel Krieger）</li>
+<li>下午1:40 😦 Stanley Herrel）</li>
+<li>下午1:50 😦 Nobuhiko Hata）</li>
+<li>下午2:00 😦 Axel Krieger）</li>
 <li>下午2:10 :(格雷戈里菲舍尔）</li>
-<li>下午2:20 :( Tamas Ungi）</li>
+<li>下午2:20 😦 Tamas Ungi）</li>
 </ul>
 </li>
 <li>下午2:30 - 下午3:00：教程第1节</li>
@@ -264,32 +264,32 @@
 <li>Ubuntu 16.04 + ROS Kinetic Kame</li>
 </ul>
 <p>首先，在本地计算机中安装OpenIGTLink。有关详细说明，请访问<a href="http://openigtlink.org/">http://openigtlink.org/</a>。在以下指令中，我们假设OpenIGTLink库的构建目录位于：〜/ igtl / OpenIGTLink-build</p>
-<p><code>$ cd <your OpenIGTLink directory>
-$ git clone https://github.com/openigtlink/OpenIGTLink.git
-$ mkdir OpenIGTLink-build
-$ cd OpenIGTLink-build
-$ cmake -DBUILD_SHARED_LIBS:BOOL=ON ../OpenIGTLink
+<p><code>$ cd <your OpenIGTLink directory><br>
+$ git clone https://github.com/openigtlink/OpenIGTLink.git<br>
+$ mkdir OpenIGTLink-build<br>
+$ cd OpenIGTLink-build<br>
+$ cmake -DBUILD_SHARED_LIBS:BOOL=ON ../OpenIGTLink<br>
 $ make</code></p>
 <p>安装<a href="http://wiki.ros.org/">ROS</a>并按照标准<a href="http://wiki.ros.org/catkin/Tutorials/create_a_workspace">ROS说明</a>创建ROS工作区（如有必要）。</p>
-<p><code>$ mkdir -p ~/catkin_ws/src
-$ cd ~/catkin_ws
-$ catkin_make
+<p><code>$ mkdir -p ~/catkin_ws/src<br>
+$ cd ~/catkin_ws<br>
+$ catkin_make<br>
 $ source devel/setup.bash</code></p>
 <p>ROS-IGTL-Bridge需要VTK。您可以使用apt-get安装它：</p>
 <p><code>$ sudo apt-get install libvtk6-dev</code></p>
 <p>然后从GitHub下载ros_igtl_bridge包：</p>
-<p><code>$ cd ~/catkin_ws/src
+<p><code>$ cd ~/catkin_ws/src<br>
 $ git clone https://github.com/openigtlink/ROS-IGTL-Bridge</code></p>
 <p>并在工作区目录中执行catkin_make：</p>
-<p><code>$ cd ~/catkin_ws/
+<p><code>$ cd ~/catkin_ws/<br>
 $ catkin_make --cmake-args -DOpenIGTLink_DIR:PATH=<your OpenIGTLink directory>/OpenIGTLink-build</code></p>
 <p>要运行网桥，请键入：</p>
 <p><code>$ roslaunch ros_igtl_bridge bridge.launch</code></p>
 <p>如果已设置桥接，则可以启动与[3D Slicer]（<a href="https://www.slicer.org/">https://www.slicer.org/</a>）进行通信的测试程序：</p>
 <p><code>$ roslaunch ros_igtl_bridge test.launch</code></p>
 <p>可以编辑启动文件并在文件中设置IP和端口。通过调整参数RIB_type将节点作为服务器或客户端运行。打开文件并取消注释行：</p>
-<p><code>$ <!--param name="RIB_server_ip" value="111.111.111.111" type="str"/-->
-$ <!--param name="RIB_port" value="18944" type="int"/-->
+<p><code>$ <!--param name="RIB_server_ip" value="111.111.111.111" type="str"/--><br>
+$ <!--param name="RIB_port" value="18944" type="int"/--><br>
 $ <!--param name="RIB_type" value="client" type="str"/--></code></p>
 <p>该节点可以作为服务器或客户端运行。如果您执行了测试程序，该节点将发送带有随机翻译的“ROS_IGTL_Test_Transform”，随机的“ROS_IGTL_Test_Point”，包含20个点的随机“ROS_IGTL_Test_Pointcloud”，“ROS_IGTL_Test_String”和“ROS_IGTL_Test_PolyData”，这是一个渲染模型。 3D Slicer MRHead样本数据。从3D切片器接收的任何数据都由桥节点发布到ROS主题并由测试节点显示。</p>
 <h2 id="-7"><a href="https://github.com/openigtlink/ROS-IGTL-Bridge#references"></a>参考</h2>
@@ -314,13 +314,13 @@ $ <!--param name="RIB_type" value="client" type="str"/--></code></p>
 <p>我们的Dockerfile可以在<a href="https://github.com/rosmed/docker-ros-igtl">GitHub上获得</a>，它的图像在<a href="https://cloud.docker.com/u/rosmed/repository/docker/rosmed/docker-ros-igtl">Docker Hub上发布</a>。</p>
 <h2 id="-8"><a href="https://github.com/rosmed/rosmed.github.io/wiki/DockerROS#building-docker-image-not-needed"></a>构建Docker镜像（不需要）</h2>
 <p>要使用修改后的Dockerfile构建Docker镜像，请运行以下命令：</p>
-<p><code>$ cd <working directory>
-$ git clone https://github.com/rosmed/docker-ros-igtl
-$ cd docker-ros-igtl
+<p><code>$ cd <working directory><br>
+$ git clone https://github.com/rosmed/docker-ros-igtl<br>
+$ cd docker-ros-igtl<br>
 $ docker build -t docker-ros-igtl .</code></p>
 <h2 id="-9"><a href="https://github.com/rosmed/rosmed.github.io/wiki/DockerROS#running-docker-image"></a>运行Docker镜像</h2>
 <p>要执行docker镜像，请调用以下命令：</p>
-<p><code>$ docker pull docker pull rosmed/docker-ros-igtl
+<p><code>$ docker pull docker pull rosmed/docker-ros-igtl<br>
 $ docker run -it --rm -p 6080:80 rosmed/docker-ros-igtl</code></p>
 <p>在此示例中，docker容器上的Web端口将映射到主机上的端口6080。' - rm'选项将在终止时删除容器。</p>
 <h1 id="connecting_slicer_and_ros">Connecting_Slicer_and_ROS</h1>
@@ -361,8 +361,8 @@ $ docker run -it --rm -p 6080:80 rosmed/docker-ros-igtl</code></p>
 <li>链接的转换矩阵（* .h5）</li>
 </ul>
 <p>解压缩zip文件。在Linux / Mac上的终端上，可以通过以下方式完成：</p>
-<p><code>$ unzip SlicerScene-ISMR19.zip
-Archive:  SlicerScene-ISMR19.zip
+<p><code>$ unzip SlicerScene-ISMR19.zip<br>
+Archive:  SlicerScene-ISMR19.zip<br>
 inflating: SlicerScene/MRI.nrrd<br>
 inflating: SlicerScene/Scene-ISMR19.mrml<br>
 inflating: SlicerScene/Scene-ISMR19.png<br>
@@ -416,16 +416,16 @@ inflating: SlicerScene/wrist_3_link.h5</code></p>
 <h1 id="-12"><a href="https://github.com/rosmed/rosmed.github.io/wiki/ROS_Robot#installing-ros-packages"></a>安装ROS包</h1>
 <p>（如果使用本教程中提供的Docker镜像设置ROS环境，则可以跳过此步骤。）</p>
 <p>在ROS计算机上，我们打开一个终端并将两个ROS包复制到katkin工作区：</p>
-<p><code>cd ~/catkin_ws/src
-git clone https://github.com/rosmed/ismr19_description
-git clone https://github.com/rosmed/ismr19_moveit
+<p><code>cd ~/catkin_ws/src<br>
+git clone https://github.com/rosmed/ismr19_description<br>
+git clone https://github.com/rosmed/ismr19_moveit<br>
 git clone https://github.com/rosmed/ismr19_control</code></p>
 <p>此外，我们还复制了IGTL Exporter，它通过ROS-IGTL-Bridge将机器人链接的转换流式传输到3D Slicer。</p>
-<p><code>cd ~/catkin_ws/src
+<p><code>cd ~/catkin_ws/src<br>
 git clone https://github.com/tokjun/ros_bx_robot_bridge</code></p>
 <p>然后，运行catkin_make</p>
-<p><code>cd ~/catkin_ws
-catkin_make
+<p><code>cd ~/catkin_ws<br>
+catkin_make<br>
 source devel/setup.bash</code></p>
 <h1 id="-13"><a href="https://github.com/rosmed/rosmed.github.io/wiki/ROS_Robot#launching-the-ros-packages"></a>启动ROS包</h1>
 <p>！以下步骤将被修改 - 不确定我们是否将使用demo.launch !!</p>
@@ -433,14 +433,14 @@ source devel/setup.bash</code></p>
 <p><code>roslaunch ismr19_moveit demo.launch</code></p>
 <h1 id="-14"><a href="https://github.com/rosmed/rosmed.github.io/wiki/ROS_Robot#launching-igtl-exporter"></a>启动IGTL Exporter</h1>
 <p>要启动IGTL导出器，请打开另一个终端并运行以下命令：</p>
-<p><code>cd ~/catkin_ws
-source devel/setup.bash
+<p><code>cd ~/catkin_ws<br>
+source devel/setup.bash<br>
 rosrun bx_robot_bridge igtl_exporter.py</code></p>
 <h1 id="-15"><a href="https://github.com/rosmed/rosmed.github.io/wiki/ROS_Robot#loading-patient-model"></a>加载患者模型</h1>
 <p>我们将加载患者的表面模型。首先，我们下载模型：</p>
-<p><code>cd ~
-mkdir models
-cd models
+<p><code>cd ~<br>
+mkdir models<br>
+cd models<br>
 wget -O ismr19.scene https://bit.ly/2OpSdKM</code></p>
 <p>从rviz中，打开“MotionPlanning”框中的“Scene Objects”选项卡，单击“Current Scene Objects”部分右下方区域的“Import From Text”按钮，选择下载的文件（“ismr19.scene”） ）在“导入场景几何体”对话框中，单击“打开”按钮。头骨模型出现在3D查看器上。</p>
 <p>看到头骨后，单击“发布场景”按钮。</p>
@@ -464,16 +464,16 @@ wget -O ismr19.scene https://bit.ly/2OpSdKM</code></p>
 <p>首先，我们从Linux上的终端（使用ROS）启动roscore：</p>
 <p><code>roscore</code></p>
 <p>然后我们启动了ROS-IGTL-Bridge。打开另一个终端，然后运行以下命令：</p>
-<p><code>cd ~/catkin_ws
-source devel/setup.bash
-roslaunch ros_igtl_bridge bridge.launch
-..
-[ROS-IGTL-Bridge] Please type &lt;1&gt; or &lt;2&gt; to run node as OpenIGTLink client or server
-1 : Server
+<p><code>cd ~/catkin_ws<br>
+source devel/setup.bash<br>
+roslaunch ros_igtl_bridge bridge.launch<br>
+..<br>
+[ROS-IGTL-Bridge] Please type &lt;1&gt; or &lt;2&gt; to run node as OpenIGTLink client or server<br>
+1 : Server<br>
 2 : Client</code></p>
 <p>终端将提示选择类型（服务器或客户端），然后选择主机信息（两种情况下的端口号，如果网桥作为服务器启动，则为IP）。在本教程中，我们将桥接器作为服务器运行并使用端口18944.还可以编辑启动文件并在文件中设置IP和端口。通过调整参数RIB_type将节点作为服务器或客户端运行。打开文件并取消注释行：</p>
-<p><code>$ <!--param name="RIB_server_ip" value="111.111.111.111" type="str"/-->
-$ <!--param name="RIB_port" value="18944" type="int"/-->
+<p><code>$ <!--param name="RIB_server_ip" value="111.111.111.111" type="str"/--><br>
+$ <!--param name="RIB_port" value="18944" type="int"/--><br>
 $ <!--param name="RIB_type" value="client" type="str"/--></code></p>
 <p>桥接器准备就绪后，打开3D Slicer（如果尚未打开），打开OpenIGTLinkIF模块（模块菜单 - &gt;“IGT” - &gt;“OpenIGTLinkIF”）。然后单击“连接器”列表下的“+”按钮创建一个新节点，并从“属性”部分进行配置，如下所示：</p>
 <ul>
@@ -486,8 +486,8 @@ $ <!--param name="RIB_type" value="client" type="str"/--></code></p>
 </ul>
 <p>配置连接器后，单击“活动”复选框。如果3D Slicer成功连接到ROS-IGTL-Bridge，则OpenIGTLinkIF的连接器列表上的状态字段将显示为“ON”。</p>
 <p>在Linux（使用ROS）上打开一个新终端，然后运行以下命令：</p>
-<p><code>cd ~/catkin_ws
-source devel/setup.bash
+<p><code>cd ~/catkin_ws<br>
+source devel/setup.bash<br>
 roslaunch ros_igtl_bridge test.launch</code></p>
 <p>测试节点发送带有随机翻译的“ROS_IGTL_Test_Transform”，随机的“ROS_IGTL_Test_Point”，包括20个点的随机“ROS_IGTL_Test_Pointcloud”，“ROS_IGTL_Test_String”和“ROS_IGTL_Test_PolyData”。您可以在OpenIGTLinkIF模块的“I / O配置”中确认它们。（确保展开“场景” - &gt;“IGTLConnector1” - &gt;“IN”）。</p>
 <p>这些数据将显示在3D Slicer上。在3D Slicer显示患者的表面模型之前，可能需要几秒到一分钟。</p>
@@ -501,41 +501,41 @@ roslaunch ros_igtl_bridge test.launch</code></p>
 <p>请按照<a href="http://wiki.ros.org/kinetic/Installation/Ubuntu">安装页面</a>。</p>
 <h3 id="-21"><a href="https://github.com/rosmed/rosmed.github.io/wiki/ROS_Environment#installing-ros-kinetic"></a>安装ROS Kinetic</h3>
 <p>然后我们安装其他软件包，包括ROS-Industrial，MoveIt！，Universal Robot和libvtk6-dev。从终端，</p>
-<p><code>sudo rosdep update -y
-sudo apt-get update -y
-sudo apt-get dist-upgrade -y
-sudo apt-get install -y ros-kinetic-industrial-core
-sudo apt-get install -y ros-kinetic-universal-robot
-sudo apt-get install -y ros-kinetic-moveit
-sudo apt-get install -y ros-kinetic-moveit-visual-tools
+<p><code>sudo rosdep update -y<br>
+sudo apt-get update -y<br>
+sudo apt-get dist-upgrade -y<br>
+sudo apt-get install -y ros-kinetic-industrial-core<br>
+sudo apt-get install -y ros-kinetic-universal-robot<br>
+sudo apt-get install -y ros-kinetic-moveit<br>
+sudo apt-get install -y ros-kinetic-moveit-visual-tools<br>
 sudo apt-get install libvtk6-dev</code></p>
 <h3 id="-22"><a href="https://github.com/rosmed/rosmed.github.io/wiki/ROS_Environment#building-openigtlink"></a>构建OpenIGTLink</h3>
 <p>ROS-IGTL-Bridge依赖于OpenIGTLink库。我们在〜/ igtl / OpenIGTLink下安装libary的源文件，并在〜/ igtl / OpenIGTLink-build下构建文件</p>
-<p><code>cd ~
-mkdir igtl
-cd igtl
-git clone https://github.com/openigtlink/OpenIGTLink.git
-mkdir OpenIGTLink-build
-cd OpenIGTLink-build
-cmake -DBUILD_SHARED_LIBS:BOOL=ON ../OpenIGTLink
+<p><code>cd ~<br>
+mkdir igtl<br>
+cd igtl<br>
+git clone https://github.com/openigtlink/OpenIGTLink.git<br>
+mkdir OpenIGTLink-build<br>
+cd OpenIGTLink-build<br>
+cmake -DBUILD_SHARED_LIBS:BOOL=ON ../OpenIGTLink<br>
 make</code></p>
 <h3 id="-23"><a href="https://github.com/rosmed/rosmed.github.io/wiki/ROS_Environment#installing-ros-igtl-bridge"></a>安装ROS-IGTL-Bridge</h3>
 <p>首先，设置catkin工作目录（如果尚未设置）。我们将使用标准的ROS工作区“catkin_ws”。如果您已有现有的，我们建议您在本教程的持续时间内将其移至其他位置</p>
 <p><code>mv ~/catkin_ws ~/catkin_ws_old</code></p>
 <p>然后，继续创建一个干净的工作区</p>
-<p><code>mkdir -p ~/catkin_ws/src
-cd ~/catkin_ws
-catkin_make
+<p><code>mkdir -p ~/catkin_ws/src<br>
+cd ~/catkin_ws<br>
+catkin_make<br>
 source devel/setup.bash</code></p>
 <p>然后从github存储库中获取代码：</p>
-<p><code>cd ~/catkin_ws/src
+<p><code>cd ~/catkin_ws/src<br>
 git clone https://github.com/openigtlink/ROS-IGTL-Bridge</code></p>
 <p>要构建ROS-IGTL-Bridge，请运行</p>
-<p><code>cd ~/catkin_ws/
+<p><code>cd ~/catkin_ws/<br>
 catkin_make --cmake-args -DOpenIGTLink_DIR:PATH=~/igtl/OpenIGTLink-build</code></p>
 <h2 id="-24"><a href="https://github.com/rosmed/rosmed.github.io/wiki/ROS_Environment#option-2-installing-ros-using-docker"></a>[选项2]使用Docker安装ROS</h2>
 <p>必须在安装之前安装<a href="https://www.docker.com/">Docker</a>。要安装教程的Docker镜像，请打开终端并运行以下命令：</p>
-<p><code>sudo docker pull rosmed/docker-ros-igtl
+<p><code>sudo docker pull rosmed/docker-ros-igtl<br>
 sudo docker run -it --rm -p 6080:80 -p 28944:18944 rosmed/docker-ros-igtl</code></p>
 <p>在此示例中，docker容器上的HTTP端口（端口80）和OpenIGTLink端口（端口18944）分别映射到主机上的端口6080和28944。' - rm'选项将在终止时删除容器。</p>
 <p>要访问桌面，请在同一台计算机上打开Web浏览器（与HTML5兼容），然后在地址栏中键入以下地址：</p>
@@ -547,7 +547,7 @@ sudo docker run -it --rm -p 6080:80 -p 28944:18944 rosmed/docker-ros-igtl</code>
             
               <div class="tag-container">
                 
-                  <a href="https://blog.bioprinting.site/tag/bigbridgerobot" class="tag">
+                  <a href="https://lizhenzhublog.github.io/tag/bigbridgerobot/" class="tag">
                     BigBridgeRobot
                   </a>
                 
@@ -556,7 +556,7 @@ sudo docker run -it --rm -p 6080:80 -p 28944:18944 rosmed/docker-ros-igtl</code>
             
               <div class="next-post">
                 <div class="next">下一篇</div>
-                <a href="https://blog.bioprinting.site/post/9WyZd7kxa">
+                <a href="https://lizhenzhublog.github.io/post/9WyZd7kxa/">
                   <h3 class="post-title">
                     机械臂类似UR5
                   </h3>

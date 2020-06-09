@@ -9,8 +9,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="https://blog.bioprinting.site/favicon.ico?v=1587555135577">
-<link rel="stylesheet" href="https://blog.bioprinting.site/styles/main.css">
+<link rel="shortcut icon" href="https://lizhenzhublog.github.io/favicon.ico?v=1591694069327">
+<link rel="stylesheet" href="https://lizhenzhublog.github.io/styles/main.css">
 
 
 
@@ -28,8 +28,8 @@
       <div class="sidebar" :class="{ 'full-height': menuVisible }">
   <div class="top-container" data-aos="fade-right">
     <div class="top-header-container">
-      <a class="site-title-container" href="https://blog.bioprinting.site">
-        <img src="https://blog.bioprinting.site/images/avatar.png?v=1587555135577" class="site-logo">
+      <a class="site-title-container" href="https://lizhenzhublog.github.io">
+        <img src="https://lizhenzhublog.github.io/images/avatar.png?v=1591694069327" class="site-logo">
         <h1 class="site-title">Li Zhenzhu, Ph.D</h1>
       </a>
       <div class="menu-btn" @click="menuVisible = !menuVisible">
@@ -143,50 +143,50 @@
 <h2 id="2方法">2方法</h2>
 <h3 id="21-ros-igtl-bridge节点">2.1 ROS-IGTL-Bridge节点</h3>
 <p>我们软件界面的核心组件是名为ROS-IGTL-Bridge的ROS节点。ROS-IGTL-Bridge作为基于ROS的系统中的节点之一，与3D Slicer或配备有套接字接口的其他外部医学图像计算软件建立TCP / IP套接字连接。它可以配置为作为TCP / IP服务器或客户端运行。ROS提供了由多个节点组成的图形架构，这些节点通过对等网络连接并将数据一起处理。节点可以将ROS消息发布到给定_主题_，以及其他节点可以通过订阅主题来接收消息。ROS-IGTL-Bridge节点将ROS消息转换为OpenIGTLink消息，并通过TCP / IP连接将其发送到外部软件。它还接收OpenIGTLink消息，将其转换为ROS消息，并将其发布到ROS网络中（<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/figure/F1/">图1</a>）。</p>
-<p><a href="https://www.ncbi.nlm.nih.gov/core/lw/2.0/html/tileshop_pmc/tileshop_pmc_inline.html?title=Click%20on%20image%20to%20zoom&amp;p=PMC3&amp;id=5543207_nihms883782f1.jpg"><img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/bin/nihms883782f1.jpg" alt="包含图片，插图等的外部文件。对象名称为nihms883782f1.jpg" title="点击图片放大"></a></p>
+<figure data-type="image" tabindex="1"><a href="https://www.ncbi.nlm.nih.gov/core/lw/2.0/html/tileshop_pmc/tileshop_pmc_inline.html?title=Click%20on%20image%20to%20zoom&amp;p=PMC3&amp;id=5543207_nihms883782f1.jpg"><img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/bin/nihms883782f1.jpg" alt="包含图片，插图等的外部文件。对象名称为nihms883782f1.jpg" title="点击图片放大" loading="lazy"></a></figure>
 <p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/figure/F1/">图。1</a></p>
 <p>ROS-IGTL-Bridge作为支持图像导入，图像处理，手术计划和手术导航的医学图像计算软件（左）之间的消息接口，以及提供运动学计算，传感，模拟，运动规划和计算机的ROS环境。愿景（右）。</p>
 <p>该界面支持在图像引导和机器人辅助治疗的背景下常用的数据类型。支持的数据类型将在下一节中列出。</p>
 <p>ROS-IGTL-Bridge节点进程由两个独立的POSIX线程组成，允许同时发送和接收数据（<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/figure/F2/">图2</a>）。每个消息类型实现了用于OpenIGTLink通信的消息序列化和反序列化的方法作为回调函数，并由两个线程调用。通过OpenIGTLink连接接收的传入消息由消息的头信息评估，并发布到ROS网络中相应的ROS-Topic。</p>
-<p><a href="https://www.ncbi.nlm.nih.gov/core/lw/2.0/html/tileshop_pmc/tileshop_pmc_inline.html?title=Click%20on%20image%20to%20zoom&amp;p=PMC3&amp;id=5543207_nihms883782f2.jpg"><img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/bin/nihms883782f2.jpg" alt="包含图片，插图等的外部文件。对象名称为nihms883782f2.jpg" title="点击图片放大"></a></p>
+<figure data-type="image" tabindex="2"><a href="https://www.ncbi.nlm.nih.gov/core/lw/2.0/html/tileshop_pmc/tileshop_pmc_inline.html?title=Click%20on%20image%20to%20zoom&amp;p=PMC3&amp;id=5543207_nihms883782f2.jpg"><img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/bin/nihms883782f2.jpg" alt="包含图片，插图等的外部文件。对象名称为nihms883782f2.jpg" title="点击图片放大" loading="lazy"></a></figure>
 <p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/figure/F2/">图2</a></p>
 <p>桥接数据处理由两个独立的POSIX线程组成。线程“接收”（左）通过评估头信息并执行消息转换来处理传入的Open-IGTLink消息，随后将数据发布到相应的ROS主题。同时，线程“发送”在订阅的ROS主题上的先前触发的回调之后发送传出消息（右）。</p>
 <p>ROS网络中创建的主题标记为OUT表示传出数据，IN表示传入数据。通过使用启动文件并设置参数服务器IP，端口和客户端/服务器标志，可以轻松配置ROS-IGTL-Bridge节点。此外，自主测试节点ROS-IGTL-Test可用于通过发送虚拟数据并在订阅的ROS主题上可视化接收的数据来评估功能。在测试例程期间，发送随机变换，点，包含20个点的点云，字符串和样本vtkPolyData模型。</p>
 <h3 id="22-ros-igtl-bridge支持的消息类型">2.2 ROS-IGTL-Bridge支持的消息类型</h3>
 <p>ROS-IGTL-Bridge支持IGT应用中经常使用的各种类型的数据。支持的类型包括字符串，变换，图像，多边形数据和点。以下段落详细介绍了支持的OpenIGT-Link消息以及ROS中的相应主题。为了确定从OpenIGTLink消息到相应ROS消息的转换方法，ROS-IGTL-Bridge使用OpenIGTLink消息的标题部分，该消息提供元数据，包括类型名称，设备名称，时间戳，正文大小和包状态（<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/figure/F3/">图3</a>）。</p>
-<p><a href="https://www.ncbi.nlm.nih.gov/core/lw/2.0/html/tileshop_pmc/tileshop_pmc_inline.html?title=Click%20on%20image%20to%20zoom&amp;p=PMC3&amp;id=5543207_nihms883782f3.jpg"><img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/bin/nihms883782f3.jpg" alt="包含图片，插图等的外部文件。对象名称为nihms883782f3.jpg" title="点击图片放大"></a></p>
+<figure data-type="image" tabindex="3"><a href="https://www.ncbi.nlm.nih.gov/core/lw/2.0/html/tileshop_pmc/tileshop_pmc_inline.html?title=Click%20on%20image%20to%20zoom&amp;p=PMC3&amp;id=5543207_nihms883782f3.jpg"><img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/bin/nihms883782f3.jpg" alt="包含图片，插图等的外部文件。对象名称为nihms883782f3.jpg" title="点击图片放大" loading="lazy"></a></figure>
 <p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/figure/F3/">图3</a></p>
 <p>OpenIGTLink消息的基本结构由通用头信息组成，包括数据类型，名称，时间戳，大小和包状态以及特定于数据类型的主体部分。</p>
 <h4 id="221字符串">2.2.1字符串</h4>
 <p>设备和外部图像计算软件之间的字符串消息交换允许发送和接收命令或状态更新。因此，外部软件的图形用户界面可以扩展为显示诸如关于接收数据的确认之类的信息，或者提供用于控制所用设备的指令（<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/figure/F4/">图4</a>）。</p>
-<p><a href="https://www.ncbi.nlm.nih.gov/core/lw/2.0/html/tileshop_pmc/tileshop_pmc_inline.html?title=Click%20on%20image%20to%20zoom&amp;p=PMC3&amp;id=5543207_nihms883782f4.jpg"><img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/bin/nihms883782f4.jpg" alt="包含图片，插图等的外部文件。对象名称为nihms883782f4.jpg" title="点击图片放大"></a></p>
+<figure data-type="image" tabindex="4"><a href="https://www.ncbi.nlm.nih.gov/core/lw/2.0/html/tileshop_pmc/tileshop_pmc_inline.html?title=Click%20on%20image%20to%20zoom&amp;p=PMC3&amp;id=5543207_nihms883782f4.jpg"><img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/bin/nihms883782f4.jpg" alt="包含图片，插图等的外部文件。对象名称为nihms883782f4.jpg" title="点击图片放大" loading="lazy"></a></figure>
 <p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/figure/F4/">图4</a></p>
 <p>OpenIGTLink和ROS-IGTL-Bridge的字符串消息中的相应数据字段。</p>
 <h4 id="222变换">2.2.2变换</h4>
 <p>变换消息可以包含表示设备，兴趣对象等的位置和方向的线性变换，由连接到ROS的传感器测量，或者在外部图像计算软件上生成。消息可用于监视工具，设备和对象的位置和方向，或向设备提供规划数据。OpenIGTLink igtlTransformMessage由4 <em>×</em> 4矩阵表示，并转换为ROS消息类型几何msgs / Transform，包含用于平移的向量和用于方向的四元数（<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/figure/F5/">图5</a>）。</p>
-<p><a href="https://www.ncbi.nlm.nih.gov/core/lw/2.0/html/tileshop_pmc/tileshop_pmc_inline.html?title=Click%20on%20image%20to%20zoom&amp;p=PMC3&amp;id=5543207_nihms883782f5.jpg"><img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/bin/nihms883782f5.jpg" alt="包含图片，插图等的外部文件。对象名称为nihms883782f5.jpg" title="点击图片放大"></a></p>
+<figure data-type="image" tabindex="5"><a href="https://www.ncbi.nlm.nih.gov/core/lw/2.0/html/tileshop_pmc/tileshop_pmc_inline.html?title=Click%20on%20image%20to%20zoom&amp;p=PMC3&amp;id=5543207_nihms883782f5.jpg"><img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/bin/nihms883782f5.jpg" alt="包含图片，插图等的外部文件。对象名称为nihms883782f5.jpg" title="点击图片放大" loading="lazy"></a></figure>
 <p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/figure/F5/">图5</a></p>
 <p>Open-IGTLink和ROS-IGTL-Bridge的转换消息中的相应数据字段。ROS标准数据类型_几何msgs / Transform_包含作为3元素向量的转换和作为四元数的旋转。</p>
 <h4 id="223图像">2.2.3图像</h4>
 <p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/figure/F6/">图6</a>显示了相应图像消息的属性。图像由3D空间中每个维度的大小和间距参数组成。数据存储在具有图像尺寸大小的8位数组中。可以使用IGTL VIDEO OUT主题从ROS发送2D视频流，该主题支持常见的ROS消息类型传感器msgs / Image。因此，摄像机数据可以直接转发到网桥，不需要额外的消息转换。</p>
-<p><a href="https://www.ncbi.nlm.nih.gov/core/lw/2.0/html/tileshop_pmc/tileshop_pmc_inline.html?title=Click%20on%20image%20to%20zoom&amp;p=PMC3&amp;id=5543207_nihms883782f6.jpg"><img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/bin/nihms883782f6.jpg" alt="包含图片，插图等的外部文件。对象名称为nihms883782f6.jpg" title="点击图片放大"></a></p>
+<figure data-type="image" tabindex="6"><a href="https://www.ncbi.nlm.nih.gov/core/lw/2.0/html/tileshop_pmc/tileshop_pmc_inline.html?title=Click%20on%20image%20to%20zoom&amp;p=PMC3&amp;id=5543207_nihms883782f6.jpg"><img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/bin/nihms883782f6.jpg" alt="包含图片，插图等的外部文件。对象名称为nihms883782f6.jpg" title="点击图片放大" loading="lazy"></a></figure>
 <p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/figure/F6/">图6</a></p>
 <p>OpenIGTLink和ROS-IGTL-Bridge图像消息中的相应数据字段。消息包含卷的元信息，包括大小和间距以及像素数据。</p>
 <h4 id="224多边形数据">2.2.4多边形数据</h4>
 <p>多边形数据消息允许传输由点和附加表面信息组成的3D模型。多边形，三角形条带，线条或顶点表示网格的结构。由于缺少ROS中的vtkPolyData消息的显式等价物，因此提供了将vtkPolyData转换为ros igtl bridge :: igtlpolydata消息的方法。</p>
 <h4 id="225点">2.2.5点</h4>
 <p>点消息包括3D点数据，允许发送和获取目标点作为机器人的移动目的地，操纵器的位置或地标坐标用于登记目的或者还有点云和点列表形式的传感器数据（<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/figure/F8/">图8</a>）。此外，网桥能够以IGTL POINTCLOUD OUT主题上发布的几何msgs / Point形式发送点云。</p>
-<p><a href="https://www.ncbi.nlm.nih.gov/core/lw/2.0/html/tileshop_pmc/tileshop_pmc_inline.html?title=Click%20on%20image%20to%20zoom&amp;p=PMC3&amp;id=5543207_nihms883782f8.jpg"><img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/bin/nihms883782f8.jpg" alt="包含图片，插图等的外部文件。对象名称为nihms883782f8.jpg" title="点击图片放大"></a></p>
+<figure data-type="image" tabindex="7"><a href="https://www.ncbi.nlm.nih.gov/core/lw/2.0/html/tileshop_pmc/tileshop_pmc_inline.html?title=Click%20on%20image%20to%20zoom&amp;p=PMC3&amp;id=5543207_nihms883782f8.jpg"><img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/bin/nihms883782f8.jpg" alt="包含图片，插图等的外部文件。对象名称为nihms883782f8.jpg" title="点击图片放大" loading="lazy"></a></figure>
 <p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/figure/F8/">图8</a></p>
 <p>OpenIGTLink和ROS-IGTL-Bridge的点消息中的相应数据字段。_geometry msgs / Point_包含_点_的x，y和z坐标。</p>
 <h3 id="23系统配置和消息方案">2.3系统配置和消息方案</h3>
 <p>使用不同的消息类型取决于系统配置和操作IGT设置所需的消息方案。<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/figure/F10/">图10</a>显示了两个代表性的系统配置，作为使用ROS-IGTL-Bridge的示例应用程序。</p>
-<p><a href="https://www.ncbi.nlm.nih.gov/core/lw/2.0/html/tileshop_pmc/tileshop_pmc_inline.html?title=Click%20on%20image%20to%20zoom&amp;p=PMC3&amp;id=5543207_nihms883782f10.jpg"><img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/bin/nihms883782f10.jpg" alt="包含图片，插图等的外部文件。对象名称为nihms883782f10.jpg" title="点击图片放大"></a></p>
+<figure data-type="image" tabindex="8"><a href="https://www.ncbi.nlm.nih.gov/core/lw/2.0/html/tileshop_pmc/tileshop_pmc_inline.html?title=Click%20on%20image%20to%20zoom&amp;p=PMC3&amp;id=5543207_nihms883782f10.jpg"><img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/bin/nihms883782f10.jpg" alt="包含图片，插图等的外部文件。对象名称为nihms883782f10.jpg" title="点击图片放大" loading="lazy"></a></figure>
 <p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/figure/F10/">图10</a></p>
 <p>显示ROS-IGTL-Bridge功能的示例设置。（a）机器人和跟踪系统连接到ROS，并由3D Slicer通过ROS-IGTL-Bridge控制。使用OpenIGTLink接口将成像设备直接连接到3D Slicer。（b）机器人和成像设备（超声波）连接到由ROS操作的机器人，并由3D切片机通过ROS-IGTL桥控制。</p>
 <p>第一个示例IGT设置包括机器人和跟踪系统，这两个系统都由ROS使用已经存在的ROS节点来操作。跟踪系统用于跟踪机器人的末端执行器。外部成像装置，例如光学相干断层扫描（OCT），超声或MRI，连接到医学图像计算平台，如3D切片器，其提供用于处理和可视化这种医学数据的方法（<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/figure/F10/">图10a）。</a>）。通过桥接ROS消息环境和医学图像计算平台，功能集可以有效地相互补充。使用桥的字符串消息转换来交换命令和状态更新，因此可以使用外科手术规划工具的用户界面来操作系统。转换消息允许获得连续刷新的跟踪数据或在六个自由度中命令某个位置。机器人模型数据可以作为多边形数据模型传输，以在3D切片机中可视化。可以将跟踪设备的原始点云或图像数据转发到图像处理平台，以便定位机器人位置或执行路径规划。</p>
 <p>第二示例表示机器人引导的成像装置，其可能是附接到机器人末端执行器的超声探头（<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/figure/F10/">图10b）</a>）。机器人和成像设备由可下载的标准ROS节点控制，允许在所需设置中进行简单集成。为了在生成的ROS消息环境中访问或发布数据，使用ROS-IGTL-Bridge节点建立与诸如3D Slicer之类的外部手术计划平台的通信。因此，机器人控制以及图像设备命令和响应可以通过网桥作为字符串消息传输。另外，可以将作为点或转换消息的定位命令发送到ROS环境。获取的图像数据被转发到控制机器人的计划软件作为图像或点云消息，因此，图像处理和可视化方法可用于比较术中与术前数据。<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/figure/F9/">图9</a> 示出了ROS环境和手术计划平台之间可能的通信协议，同时在被命令到特定点位置之后执行图像采集。</p>
-<p><a href="https://www.ncbi.nlm.nih.gov/core/lw/2.0/html/tileshop_pmc/tileshop_pmc_inline.html?title=Click%20on%20image%20to%20zoom&amp;p=PMC3&amp;id=5543207_nihms883782f9.jpg"><img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/bin/nihms883782f9.jpg" alt="包含图片，插图等的外部文件。对象名称为nihms883782f9.jpg" title="点击图片放大"></a></p>
+<figure data-type="image" tabindex="9"><a href="https://www.ncbi.nlm.nih.gov/core/lw/2.0/html/tileshop_pmc/tileshop_pmc_inline.html?title=Click%20on%20image%20to%20zoom&amp;p=PMC3&amp;id=5543207_nihms883782f9.jpg"><img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/bin/nihms883782f9.jpg" alt="包含图片，插图等的外部文件。对象名称为nihms883782f9.jpg" title="点击图片放大" loading="lazy"></a></figure>
 <p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/figure/F9/">图9</a></p>
 <p>使用ROS IGTL桥作为网络接口的手术计划软件和ROS操作机器人之间可能的通信协议。初始化机器人，命令移动到一个点并获取具有附加变换信息的图像数据。最后，机器人关闭了。</p>
 <p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/" title="转到此页面的其他部分">去：</a></p>
@@ -282,7 +282,7 @@
 <p>星号（*）表示某些消息未传递给收件人。</p>
 <p>为了演示高帧率数据传输，转换消息成功地以1000 fps从ROS测试节点传输到IGTL测试服务器。当消息以另一个方向传输时，数据传输成功达到900 fps。</p>
 <p>在多数据传输的附加演示中，由超过60万个点和23万个面组成的多边形数据模型成功地从ROS转移到3D切片器，反之亦然。转移的多边形数据在两种环境中都成功可视化（<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/figure/F11/">图11</a>）。</p>
-<p><a href="https://www.ncbi.nlm.nih.gov/core/lw/2.0/html/tileshop_pmc/tileshop_pmc_inline.html?title=Click%20on%20image%20to%20zoom&amp;p=PMC3&amp;id=5543207_nihms883782f11.jpg"><img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/bin/nihms883782f11.jpg" alt="包含图片，插图等的外部文件。对象名称为nihms883782f11.jpg" title="点击图片放大"></a></p>
+<figure data-type="image" tabindex="10"><a href="https://www.ncbi.nlm.nih.gov/core/lw/2.0/html/tileshop_pmc/tileshop_pmc_inline.html?title=Click%20on%20image%20to%20zoom&amp;p=PMC3&amp;id=5543207_nihms883782f11.jpg"><img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/bin/nihms883782f11.jpg" alt="包含图片，插图等的外部文件。对象名称为nihms883782f11.jpg" title="点击图片放大" loading="lazy"></a></figure>
 <p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/figure/F11/">图11</a></p>
 <p>交换的vtkPolyData模型从样本数据生成，该样本数据在ROS侧（左侧）的vtkRenderWindow中可视化，并在3D Slicer场景（右侧）中进行比较。</p>
 <p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/" title="转到此页面的其他部分">去：</a></p>
@@ -290,16 +290,16 @@
 <h3 id="41-igt快速原型教育平台">4.1 IGT快速原型/教育平台</h3>
 <p>使用3D Slicer，ROS和Lego Mindstorms EV3对概念验证图像引导机械手系统进行了原型设计。Lego Mindstorms已被用于教育背景下的IGT相关项目[ <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/#R22">22</a> ]以及硬件/软件测试平台[ <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/#R23">23</a> ]。该项目的目标有两个：（1）利用可扩展的软件系统为医疗机器人创建头脑风暴工具，促进从原型到研究和商业级系统的无缝转换; （2）为学生，工程师和科学家创建一个教育工具，以学习图像引导和医疗机器人。</p>
 <p>该系统模仿手术机器人，其致动其末端执行器以跟随在手术导航软件上的3D医学图像（例如，CT，MRI）上定义的物理空间中的轨迹。可以通过3D图形监控该过程。该系统由一个主动的三自由度（DoF）并行链接机械手，控制砖，ROS主计算机和运行ROS主服务器和导航软件3D Slicer的导航计算机组成。控制计算机模块（Lego EV3可编程砖块）通过无线网络上的ROS主服务器与导航软件通信。我们使用大脑的MR图像和从图像创建的2D体模执行模拟程序。通过用其末端执行器物理地触摸它们来记录预定义地标的坐标，将操纵器登记到模型中，<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/figure/F12/">图12</a>）。</p>
-<p><a href="https://www.ncbi.nlm.nih.gov/core/lw/2.0/html/tileshop_pmc/tileshop_pmc_inline.html?title=Click%20on%20image%20to%20zoom&amp;p=PMC3&amp;id=5543207_nihms883782f12.jpg"><img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/bin/nihms883782f12.jpg" alt="包含图片，插图等的外部文件。对象名称为nihms883782f12.jpg" title="点击图片放大"></a></p>
+<figure data-type="image" tabindex="11"><a href="https://www.ncbi.nlm.nih.gov/core/lw/2.0/html/tileshop_pmc/tileshop_pmc_inline.html?title=Click%20on%20image%20to%20zoom&amp;p=PMC3&amp;id=5543207_nihms883782f12.jpg"><img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/bin/nihms883782f12.jpg" alt="包含图片，插图等的外部文件。对象名称为nihms883782f12.jpg" title="点击图片放大" loading="lazy"></a></figure>
 <p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/figure/F12/">图12</a></p>
 <p>使用3D切片器中的点配准算法在2D样本数据上匹配定义的和物理的界标。</p>
 <p>然后，使用先前定义的从3D切片机传送到控制砖的轨迹点，执行2D体模上的绘制过程（<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/figure/F13/">图13a</a>）（<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/figure/F13/">图13b</a>）。这个模拟程序表明，这个基于乐高的系统可用于构建具有研究或商业级架构的机器人系统，并模拟真实的临床工作流程，使其成为快速原型设计和教育的理想工具。</p>
-<p><a href="https://www.ncbi.nlm.nih.gov/core/lw/2.0/html/tileshop_pmc/tileshop_pmc_inline.html?title=Click%20on%20image%20to%20zoom&amp;p=PMC3&amp;id=5543207_nihms883782f13.jpg"><img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/bin/nihms883782f13.jpg" alt="包含图片，插图等的外部文件。对象名称为nihms883782f13.jpg" title="点击图片放大"></a></p>
+<figure data-type="image" tabindex="12"><a href="https://www.ncbi.nlm.nih.gov/core/lw/2.0/html/tileshop_pmc/tileshop_pmc_inline.html?title=Click%20on%20image%20to%20zoom&amp;p=PMC3&amp;id=5543207_nihms883782f13.jpg"><img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/bin/nihms883782f13.jpg" alt="包含图片，插图等的外部文件。对象名称为nihms883782f13.jpg" title="点击图片放大" loading="lazy"></a></figure>
 <p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/figure/F13/">图13</a></p>
 <p>使用Lego Mindstorms构建的机器人手臂遵循2D体模（a）上的轨迹，该轨迹先前在3D切片器（b）中成功进行了图像到患者注册后的计划。</p>
 <h3 id="42使用kuka-lwr进行自主缝合">4.2使用KUKA LWR进行自主缝合</h3>
 <p>目的是测试ROS-IGTL-Bridge在规划和引导自主手术机器人方面的可行性。使用开发的ROS-IGTL-Bridge，我们开始改进智能组织自主机器人（STAR）的软件系统，该机器人使用KUKA LWR机器人。STAR包括基于商用腹腔镜Endo360°（EndoEvolution，Raynham）工具的机器人缝合工具，使用ROS实现图形用户界面（GUI）和相机集成的自定义控制，以及实时开放式机器人控制软件（OROCOS）控制[ <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/#R11">11</a>，<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/#R24">24</a> ]。虽然我们使用STAR证明了卓越的一致性和爆破压力，但是42.2％的缝线需要手动操作员调整，与手动和远程操作机器人手术相比，手术时间更长[<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/#R7">7</a> ]。需要操作员调整的大多数错过的缝线放置是由全光相机的噪声点云数据引起的，特别是沿着深度轴，这在ROS提供的二维缝线计划中是不明显的。通过使用ROS-IGTL-Bridge升级STAR，我们能够将3D点云从STAR转移到Slicer进行点云可视化（<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/figure/F14/">图14</a>）。这可以改善缝合位置的3D规划工作流程，更大的自主性和更短的手术时间。</p>
-<p><a href="https://www.ncbi.nlm.nih.gov/core/lw/2.0/html/tileshop_pmc/tileshop_pmc_inline.html?title=Click%20on%20image%20to%20zoom&amp;p=PMC3&amp;id=5543207_nihms883782f14.jpg"><img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/bin/nihms883782f14.jpg" alt="包含图片，插图等的外部文件。对象名称为nihms883782f14.jpg" title="点击图片放大"></a></p>
+<figure data-type="image" tabindex="13"><a href="https://www.ncbi.nlm.nih.gov/core/lw/2.0/html/tileshop_pmc/tileshop_pmc_inline.html?title=Click%20on%20image%20to%20zoom&amp;p=PMC3&amp;id=5543207_nihms883782f14.jpg"><img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/bin/nihms883782f14.jpg" alt="包含图片，插图等的外部文件。对象名称为nihms883782f14.jpg" title="点击图片放大" loading="lazy"></a></figure>
 <p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/figure/F14/">图14</a></p>
 <p>图为猪肠道吻合术（左），当前STAR缝合计划（中），以及使用3D切片机实现3D调整的缝合计划（右图）。</p>
 <p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/" title="转到此页面的其他部分">去：</a></p>
@@ -311,7 +311,7 @@
 <p>一些研究已经证明了使用OpenIGTLink桥接两个研究平台的想法。特别是，OpenIGTLink已被广泛用于桥接数据抓取软件和可视化/用户交互软件，用于医学图像计算研究。Papademetris，Tokuda _等人_使用OpenIGTLink将商业导航系统与外部研究平台（包括3D Slicer [ <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/#R19">19</a> ]和BioImage Suite [ <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/#R26">26</a> ]）联系起来。图像引导外科工具包（IGSTK）[ <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/#R27">27</a> ]，一个开放的软件平台提供与跟踪和成像设备的连接，支承OpenIGTLink跟踪和成像数据输出到其它平台，比如3D切片机和MITK [ <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/#R28">28</a>，<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/#R29">29</a>]。最近，Lasso _等人_使用OpenIGTLink将其数据抓取软件PLUS与外部可视化软件桥接，以流式跟踪和超声图像数据[ <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/#R30">30</a> ]。Clarkson _等人_开发了一个基于OpenIGTLink的消息库NiftyLink，用于集成数据抓取软件和用于可视化/用户交互的最终用户应用程序[ <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/#R15">15</a> ]。其他开源软件包，例如CustusX [ <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/#R31">31</a> ]，IBIS [ <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/#R32">32</a> ]和MeVisLab [ <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/#R18">18</a> ]，也适用于OpenIGTLink，以利用社区中现有的现有软件基础架构。</p>
 <p>OpenIGTLink还被用于桥接医学图像计算领域之外的平台。医疗机器人平台CISST库提供了一个OpenIGTLink桥，可将图像可视化软件集成到医疗机器人应用中[ <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/#R33">33</a> ]。OpenIGTLink还与基于ROS的机器人系统一起用于腹腔镜介入治疗[ <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/#R34">34</a> ]。ROS-IGTL-Bridge是对那些旨在扩展医学图像计算领域中的成功模型的先前工作的概括，并且具有促进医学机器人和医学图像计算之间的工程资源共享的潜力。</p>
 <p>ROS-IGTL-Bridge的源代码，指令和测试程序在GitHub [ <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/#R35">35</a> ]中作为开源软件提供。可以使用基于CMake的构建系统Catkin编译和安装代码。</p>
-<p><a href="https://www.ncbi.nlm.nih.gov/core/lw/2.0/html/tileshop_pmc/tileshop_pmc_inline.html?title=Click%20on%20image%20to%20zoom&amp;p=PMC3&amp;id=5543207_nihms883782f7.jpg"><img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/bin/nihms883782f7.jpg" alt="包含图片，插图等的外部文件。对象名称为nihms883782f7.jpg" title="点击图片放大"></a></p>
+<figure data-type="image" tabindex="14"><a href="https://www.ncbi.nlm.nih.gov/core/lw/2.0/html/tileshop_pmc/tileshop_pmc_inline.html?title=Click%20on%20image%20to%20zoom&amp;p=PMC3&amp;id=5543207_nihms883782f7.jpg"><img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/bin/nihms883782f7.jpg" alt="包含图片，插图等的外部文件。对象名称为nihms883782f7.jpg" title="点击图片放大" loading="lazy"></a></figure>
 <p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/figure/F7/">图7</a></p>
 <p>OpenIGT-Link和ROS-IGTL-Bridge的poly数据消息中的相应数据字段。考虑的属性包括_名称，点，多边形，条带，线_和_顶点_。</p>
 <p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543207/" title="转到此页面的其他部分">去：</a></p>
@@ -322,7 +322,7 @@
             
               <div class="tag-container">
                 
-                  <a href="https://blog.bioprinting.site/tag/blog" class="tag">
+                  <a href="https://lizhenzhublog.github.io/tag/blog/" class="tag">
                     Blog
                   </a>
                 
@@ -331,7 +331,7 @@
             
               <div class="next-post">
                 <div class="next">下一篇</div>
-                <a href="https://blog.bioprinting.site/post/euxBg5taN">
+                <a href="https://lizhenzhublog.github.io/post/euxBg5taN/">
                   <h3 class="post-title">
                     青岛参加全国第三次数字医学会议山东省第四次数字医学会
                   </h3>

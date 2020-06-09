@@ -1,19 +1,205 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-    <id>https://blog.bioprinting.site</id>
+    <id>https://lizhenzhublog.github.io</id>
     <title>Li Zhenzhu, Ph.D</title>
-    <updated>2020-04-22T11:45:18.335Z</updated>
+    <updated>2020-06-09T09:14:48.089Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
-    <link rel="alternate" href="https://blog.bioprinting.site"/>
-    <link rel="self" href="https://blog.bioprinting.site/atom.xml"/>
+    <link rel="alternate" href="https://lizhenzhublog.github.io"/>
+    <link rel="self" href="https://lizhenzhublog.github.io/atom.xml"/>
     <subtitle>Binzhou Medical University Hospital, Email: timeanddoctor@gmail.com.</subtitle>
-    <logo>https://blog.bioprinting.site/images/avatar.png</logo>
-    <icon>https://blog.bioprinting.site/favicon.ico</icon>
+    <logo>https://lizhenzhublog.github.io/images/avatar.png</logo>
+    <icon>https://lizhenzhublog.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Li Zhenzhu, Ph.D</rights>
     <entry>
+        <title type="html"><![CDATA[Python+OpenCV录制双目摄像头视频]]></title>
+        <id>https://lizhenzhublog.github.io/post/dL-YnYF3i/</id>
+        <link href="https://lizhenzhublog.github.io/post/dL-YnYF3i/">
+        </link>
+        <updated>2020-04-22T12:52:47.000Z</updated>
+        <content type="html"><![CDATA[<ul>
+<li>第一个例子<br>
+说起来录制视频，我们可能有很多的软件，但是比较坑的是，好像很少的软件支持能够同时录制两个摄像头的视频，于是我们用python自己写一个。要是OpenCV+python<br>
+https://github.com/anonymouslycn/bjtu_BinocularCameraRecord</li>
+</ul>
+<pre><code>import cv2
+import numpy as np
+from PyQt5.QtWidgets import (QMainWindow, QApplication, QFileDialog)
+import threading
+import threadpool 
+from CvPyGui import ImageCvQtContainer
+from CvPyGui.ui import gui
+
+
+#UI
+
+class Image(QWidget):
+ &quot;&quot;&quot;Common base for the images&quot;&quot;&quot;
+ 
+ def __init__(self, name, label):
+ super().__init__()
+ 
+ # Label (frame) where the original image will be located, with scaling
+ self.frame_lbl = label
+ 
+ def updateImage(self, opencv_rgb_image):
+ 
+ self.cv_img_rgb = opencv_rgb_image
+ 
+ height, width, channel = self.cv_img_rgb.shape
+ bytesPerLine = 3 * width
+ self.q_image = QImage(self.cv_img_rgb.data, width,
+  height, bytesPerLine, QImage.Format_RGB888)
+ 
+ self.frame_lbl.setPixmap(QPixmap.fromImage(self.q_image))
+ 
+ def saveImage(self):
+ # Function for saving the processed image
+ 
+ filter = &quot;Images (*.png *.jpg)&quot;
+ 
+ image_path, _ = QFileDialog.getSaveFileName(self, filter=filter)
+ 
+ cv_img_bgr = cv2.cvtColor(
+ self.cv_img_rgb, cv2.COLOR_RGB2BGR)
+ cv2.imwrite(image_path, cv_img_bgr)
+ 
+ #获取视频
+cap = cv2.VideoCapture(int(text))
+cap.set(6 ,cv2.VideoWriter_fourcc('M', 'J', 'P', 'G') );
+cap.set(3,w);
+cap.set(4,h);
+global update1
+update1 = 1
+global shotmark1
+ret, frame = cap.read()
+
+
+</code></pre>
+<p>这样就能够获取到一帧图像了，其中cap.set()函数用来设置相机的参数，本来应该有宏定义的，但是在python里面老是报错，直接用数字替代了，其中3就是获取视频的宽度像素，4是高度，这个要和摄像头手册上的参数一致。一般的Webcam有两种图像获取格式：一种是YUV2格式这种事10bit回传的数据，理论上质量更好，但是有个很大的问题是分辨率高的时候，帧率就会变得十分低。另一种格式是MJPEG格式，这个是使用了压缩技术得到的视频流。通过这个格式，手册上说在1920x1080分辨率下都能获得30fps的表现，而YUV2只有5fps（后来发现，这个就是坑爹的，信了就怪了）。cap.set(6 ,cv2.VideoWriter_fourcc(‘M', ‘J', ‘P', ‘G') );这个参数就是使用MJPEG格式来读取摄像头的数据。</p>
+<p>多线程</p>
+<p>刚才我们呢也提到了，cap.read()这个函数是获取到了一帧图像，但是呢。我们要的是动画啊，要是写个循环的话，又会吧进程卡死在循环中，照成假死的状态，所以对于图像的绘制，一定要使用多线程技术。在这里我不仅要吐槽一下了。学了好多年计算机，讲了很多串行算法和编程，一讲到多线程，无非就是打印个Hello World！，根本就没有什么实践，理论倒是学了很多，感觉用的时候头真的好大！</p>
+<p>其实这里的多线程也没有什么是吧，就是起调一下。但是要注意的是要控制线程的退出，在python这个我引入的多线程包里面，贼坑的是没有外界控制线程退出的办法！所以，我设置了一个全局变量，使用判断全局变量的值来判断是否让子线程继续下去。</p>
+<p>结尾</p>
+<p>实际上，还有分辨率/帧率设置功能呢，只不过懒得写了！！！</p>
+<ul>
+<li>另一例子</li>
+</ul>
+<pre><code>import cv2
+
+cap = cv2.VideoCapture(0) #默认大小
+# cap.set(3,1080)
+# cap.set(4,720)
+cv2.namedWindow(cv2.WINDOW_NORMAL)#任意调节大小
+
+#显示
+import cv2
+
+# 初始化摄像头
+cap = cv2.VideoCapture(0)
+
+while cap.isOpened():
+    # 采集一帧一帧的图像数据
+    isSuccess,frame = cap.read()
+    # 实时的将采集到的数据显示到界面上
+    if isSuccess:
+        cv2.imshow(&quot;My Capture&quot;,frame)
+    # 实现按下“q”键退出程序
+    if cv2.waitKey(1)&amp;0xFF == ord('q'):
+        break
+
+# 释放摄像头资源
+cap.release()
+cv2.destoryAllWindows()
+</code></pre>
+<p>录制视频</p>
+<pre><code># coding:utf-8
+import sys
+
+reload(sys)
+sys.setdefaultencoding('utf8')
+#    __author__ = '郭 璞'
+#    __date__ = '2016/9/7'
+#    __Desc__ = 使用Python借助opencv实现对图像的读取，写入
+
+import cv2
+import numpy as np
+# 选取摄像头，0为笔记本内置的摄像头，1,2···为外接的摄像头
+cap = cv2.VideoCapture(0)
+# cap.set(3,1080)
+# cap.set(4,720)
+
+# 为保存视频做准备
+fourcc = cv2.cv.CV_FOURCC(&quot;D&quot;, &quot;I&quot;, &quot;B&quot;, &quot; &quot;)
+# 第三个参数则是镜头快慢的，20为正常，小于二十为慢镜头
+out = cv2.VideoWriter('output2.avi', fourcc,3.0,(640,480))
+while True:
+    # 一帧一帧的获取图像
+    ret,frame = cap.read()
+    if ret == True:
+        frame = cv2.flip(frame, 1)
+        # 在帧上进行操作
+        # gray = cv2.cvtColor(frame,cv2.COLOR_BGR2GRAY)
+        # 开始保存视频
+        out.write(frame)
+        # 显示结果帧
+        cv2.imshow(&quot;frame&quot;, frame)
+        if cv2.waitKey(1) &amp; 0xFF == ord('q'):
+            break
+    else:
+        break
+# 释放摄像头资源
+cap.release()
+out.release()
+cv2.destroyAllWindows()
+</code></pre>
+<ul>
+<li>另一个例子，我电脑上可以实现的</li>
+</ul>
+<pre><code>import numpy as np
+import cv2
+
+cap = cv2.VideoCapture(0)
+
+fourcc = cv2.VideoWriter_fourcc(*'XVID')
+#out = cv2.VideoWriter('output.mp4',fourcc, 30.0, (640,480))  #设置分辨率
+
+
+# 获取捕获的分辨率
+# propId可以直接写数字，也可以用OpenCV的符号表示
+width, height = cap.get(3), cap.get(4)
+print(width, height)
+out = cv2.VideoWriter('output.mp4',fourcc, 30.0, (int(width),int(height)))
+'''
+# 以原分辨率的一倍来捕获
+cap.set(cv2.CAP_PROP_FRAME_WIDTH, width * 2)
+cap.set(cv2.CAP_PROP_FRAME_HEIGHT, height * 2)
+'''
+
+
+while(cap.isOpened()):
+    ret, frame = cap.read()
+    if ret==True:
+        frame = cv2.flip(frame,1)
+#        out.write(cv2.cvtColor(frame, cv2.COLOR_RGB2BGR))   将视频转换为灰色的源
+        out.write(frame)
+
+        cv2.imshow('frame', frame)
+        if cv2.waitKey(1) &amp; 0xFF == ord('1'):
+            break
+    else:
+        break
+
+cap.release()
+out.release()
+cv2.destroyAllWindows()
+
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
         <title type="html"><![CDATA[如何将视频转换为图片]]></title>
-        <id>https://blog.bioprinting.site/post/dx7xPaKP-</id>
-        <link href="https://blog.bioprinting.site/post/dx7xPaKP-">
+        <id>https://lizhenzhublog.github.io/post/dx7xPaKP-/</id>
+        <link href="https://lizhenzhublog.github.io/post/dx7xPaKP-/">
         </link>
         <updated>2020-04-22T11:30:05.000Z</updated>
         <content type="html"><![CDATA[<ul>
@@ -48,8 +234,8 @@ int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
     </entry>
     <entry>
         <title type="html"><![CDATA[另一个完整的例子]]></title>
-        <id>https://blog.bioprinting.site/post/QAHUqM6yQ</id>
-        <link href="https://blog.bioprinting.site/post/QAHUqM6yQ">
+        <id>https://lizhenzhublog.github.io/post/QAHUqM6yQ/</id>
+        <link href="https://lizhenzhublog.github.io/post/QAHUqM6yQ/">
         </link>
         <updated>2020-04-22T11:10:21.000Z</updated>
         <content type="html"><![CDATA[<ul>
@@ -98,7 +284,7 @@ plt.show()
 <ul>
 <li>2.现在，可以使用棋盘上的所有图像进行相机校准。两个功能是必需的：</li>
 </ul>
-<p>第一个将检测所有图像上的标记和。
+<p>第一个将检测所有图像上的标记和。<br>
 第二秒将继续检测到的标记以估计相机校准数据。</p>
 <pre><code>def read_chessboards(images):
     &quot;&quot;&quot;
@@ -309,8 +495,8 @@ c = np.array(corners).astype(np.float64).reshape(44,4,2)
     </entry>
     <entry>
         <title type="html"><![CDATA[机器视觉2 创建标记并识别]]></title>
-        <id>https://blog.bioprinting.site/post/O_TkJInMU</id>
-        <link href="https://blog.bioprinting.site/post/O_TkJInMU">
+        <id>https://lizhenzhublog.github.io/post/O_TkJInMU/</id>
+        <link href="https://lizhenzhublog.github.io/post/O_TkJInMU/">
         </link>
         <updated>2020-04-22T11:00:59.000Z</updated>
         <content type="html"><![CDATA[<ul>
@@ -367,8 +553,8 @@ plt.show()
     </entry>
     <entry>
         <title type="html"><![CDATA[机器视觉]]></title>
-        <id>https://blog.bioprinting.site/post/XMhGzY5TR</id>
-        <link href="https://blog.bioprinting.site/post/XMhGzY5TR">
+        <id>https://lizhenzhublog.github.io/post/XMhGzY5TR/</id>
+        <link href="https://lizhenzhublog.github.io/post/XMhGzY5TR/">
         </link>
         <updated>2020-04-22T10:23:31.000Z</updated>
         <content type="html"><![CDATA[<p><strong>Aruco</strong></p>
@@ -429,8 +615,8 @@ plt.show()
     </entry>
     <entry>
         <title type="html"><![CDATA[儿童脑干肿瘤及手术入路]]></title>
-        <id>https://blog.bioprinting.site/post/2IgPVMzQH</id>
-        <link href="https://blog.bioprinting.site/post/2IgPVMzQH">
+        <id>https://lizhenzhublog.github.io/post/2IgPVMzQH/</id>
+        <link href="https://lizhenzhublog.github.io/post/2IgPVMzQH/">
         </link>
         <updated>2019-10-05T11:42:04.000Z</updated>
         <content type="html"><![CDATA[<h3 id="目的">目的</h3>
@@ -464,39 +650,39 @@ plt.show()
 <h2 id="患者和方法">患者和方法</h2>
 <p>1991年至2011年，圣保罗联邦大学神经外科和儿科肿瘤研究所对303名18岁以下脑干肿瘤患者进行了治疗。其中，本文的第一作者对207进行了手术治疗。其余96例为弥漫性肿瘤。在这里，我们描述了手术方法和相关的外部/内部解剖学要点。</p>
 <p>脑干分为三个部分：中脑，脑桥和延髓。为了选择最有效，最安全的去除病变的方法，我们将脑干分为七个部分（图  <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/figure/Fig1/">1e</a>）。</p>
-<p><a href="https://www.ncbi.nlm.nih.gov/core/lw/2.0/html/tileshop_pmc/tileshop_pmc_inline.html?title=Click%20on%20image%20to%20zoom&amp;p=PMC3&amp;id=4564452_381_2015_2799_Fig1_HTML.jpg"><img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/bin/381_2015_2799_Fig1_HTML.jpg" alt="包含图片，插图等的外部文件。对象名称为381_2015_2799_Fig1_HTML.jpg" title="点击图片放大"></a></p>
+<figure data-type="image" tabindex="1"><a href="https://www.ncbi.nlm.nih.gov/core/lw/2.0/html/tileshop_pmc/tileshop_pmc_inline.html?title=Click%20on%20image%20to%20zoom&amp;p=PMC3&amp;id=4564452_381_2015_2799_Fig1_HTML.jpg"><img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/bin/381_2015_2799_Fig1_HTML.jpg" alt="包含图片，插图等的外部文件。对象名称为381_2015_2799_Fig1_HTML.jpg" title="点击图片放大" loading="lazy"></a></figure>
 <p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/figure/Fig1/?report=objectonly">在单独的窗口中打开</a></p>
 <p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/figure/Fig1/">图。1</a></p>
 <p><strong>一个</strong>。脑干表面解剖。脑干分为三个部分：中脑，脑桥和延髓。中脑受视道（OT）与小脑之间的沟的限制较高，而受脑脊髓沟（Pon。Mes。Sulc。）的限制较低。桥位于上方的桥脑脑沟和下方的桥脑髓沟之间（Pont。Med。Sulc。）。延髓从桥状沟延伸至C1神经根的出口区。<strong>b</strong>，**c **<strong><em>，</em></strong> <strong>d</strong>脑干血管化。椎动脉（VA）汇合在一起，形成桥椎沟水平的基底动脉。基底动脉（BA）在脑桥脑沟水平处引起后脑动脉（PCA）。小脑具有三个表面：腱膜，岩膜和枕下。小脑和延髓的枕下表面由小脑后下动脉（PICA）提供。小脑和脑桥的椎体表面由AICA和基底动脉穿孔器提供，而小脑的中脑和腱膜表面由小脑上动脉（SCA）分支提供。<strong>Ë</strong>脑干又分为七个部分：腹侧，中央和背侧中脑。腹桥和背桥; 和腹和背髓质。<strong>f</strong>根据内侧马鞭草（ML）的病程对脑干进行解剖划分。在ML的前面可以认为是腹侧脑干，而在内侧的lemniscus后面可以视为背侧脑干</p>
 <p>中脑分为三个部分：前，中和后。前段由黑质向后定界。中脑从黑质延伸到渡槽。后部仅限于四边形板。桥被分为两个部分：前部和后部，或腹侧和背侧。同样，延髓被分为前壁和后壁，或腹侧和背侧。对脑干外部和内部解剖结构的详细了解对于避免手术方法中的发病至关重要。</p>
 <h3 id="中脑">中脑</h3>
 <p>中脑通过视道和脑梗之间的沟与二脑分开，而脑桥沟则与中脑分开。在解剖学上，三个结构应当广泛认可中脑：位于脑前外侧部的锥体束，所述第三和第四颅神经[细胞核<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/#CR63">63</a> ]（图  <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/figure/Fig1/">1</a>和<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/figure/Fig2/">and2a）。</a><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/figure/Fig2/">2a</a>）。第三颅神经的核水平在上丘的下半部和下丘的上半部。滑车核位于下丘的下半部尾侧。这些核位于中线附近，平均在外侧中脑沟表面内侧9.5 mm处。中脑外侧沟从内侧膝状体向下延伸到脑桥脑沟以下。该沟被认为是腹外侧中脑的后极限。第三颅神经沿着中脑的整个中央部分有很长的路程，而第四颅神经的内在部分较小，并且贯穿对侧小脑间脑裂隙。第三颅神经从中脑梗的内侧沟流出，并向动眼三角形移动，进入其进入海绵窦。中脑通过中脑穿孔的基底动脉分支接受血液供应。它们分为前内侧，前外侧，外侧和后分支。前内侧分支分为外侧和内侧。内侧分支供应红色核，导水管周围的灰质以及第三和第四颅神经核。外侧分支供应内侧的圆盘菌，黑质和上小脑梗。前脑中脑动脉被称为小脑分支，并供应小腿，黑质和内侧韧带。它们来自许多动脉，包括胶状，后脉络膜内侧，后交通动脉，小脑上动脉和脉络膜前动脉。后动脉由小脑上动脉的分支和胶状动脉形成，并形成一个累及四头肌板的神经丛[<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/#CR55">55</a> ]。</p>
-<p><a href="https://www.ncbi.nlm.nih.gov/core/lw/2.0/html/tileshop_pmc/tileshop_pmc_inline.html?title=Click%20on%20image%20to%20zoom&amp;p=PMC3&amp;id=4564452_381_2015_2799_Fig2_HTML.jpg"><img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/bin/381_2015_2799_Fig2_HTML.jpg" alt="包含图片，插图等的外部文件。对象名称为381_2015_2799_Fig2_HTML.jpg" title="点击图片放大"></a></p>
+<figure data-type="image" tabindex="2"><a href="https://www.ncbi.nlm.nih.gov/core/lw/2.0/html/tileshop_pmc/tileshop_pmc_inline.html?title=Click%20on%20image%20to%20zoom&amp;p=PMC3&amp;id=4564452_381_2015_2799_Fig2_HTML.jpg"><img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/bin/381_2015_2799_Fig2_HTML.jpg" alt="包含图片，插图等的外部文件。对象名称为381_2015_2799_Fig2_HTML.jpg" title="点击图片放大" loading="lazy"></a></figure>
 <p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/figure/Fig2/">图2</a></p>
 <p><strong>一</strong>中脑的动眼神经的水平示意图。黑质和lemanscus内侧是中脑腹侧（<em>前</em>）和中部之间的边界，而大脑输水管的水平是中脑中央（<em>蓝色</em>）和背侧（<em>后部</em>）（<em>绿色</em>）之间的边界。腹中脑的皮质脊髓束（<em>黄色</em>）（<em>红色</em>）; 中枢（<em>蓝色</em>）和背中脑的CN III（<em>黄色</em>）和IV（<em>红色</em>）的核和进程。<strong>b</strong>中脑的侧面图。腹侧（前）中脑，包含皮质脊髓束（CST），位于内侧盘球菌（ML）和黑质前面。中央的中脑包含红色，动眼神经和滑车核，位于中部圆盘菌和渡槽之间。由上侧（SC）和下侧结肠（IC）组成的背中（<em>后</em>）中脑位于大脑导水管的后面。CN III和IV的核正好位于渡槽的腹侧。<strong>c</strong>中脑前视图。_1_周期性运动进入区的内侧为CN III的出口点，外侧为皮质脊髓束（CST）。<strong>d</strong> 周围运动区受大脑后动脉（PCA）的限制，受小脑上动脉（SCA）的限制</p>
 <h3 id="前中脑">前中脑</h3>
 <p>中脑前部的肿瘤通常沿两个方向生长：朝向第三脑室和朝向椎间盘水箱。对于生长到第三脑室的肿瘤，使用了跨孔，经call，经脉络膜或经孔的方法。当病变的大小小于2 cm时，可以使用与超声抽吸器相连的神经内窥镜切除肿瘤，其中大多数是低度星形细胞瘤（图  <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/figure/Fig3/">3</a>）。当这些肿瘤向椎间盘水箱生长时，通常会出现韦伯综合征（第三颅神经损伤和对侧偏瘫）（图  <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/figure/Fig4/">4</a>）。</p>
-<p><a href="https://www.ncbi.nlm.nih.gov/core/lw/2.0/html/tileshop_pmc/tileshop_pmc_inline.html?title=Click%20on%20image%20to%20zoom&amp;p=PMC3&amp;id=4564452_381_2015_2799_Fig3_HTML.jpg"><img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/bin/381_2015_2799_Fig3_HTML.jpg" alt="包含图片，插图等的外部文件。对象名称为381_2015_2799_Fig3_HTML.jpg" title="点击图片放大"></a></p>
+<figure data-type="image" tabindex="3"><a href="https://www.ncbi.nlm.nih.gov/core/lw/2.0/html/tileshop_pmc/tileshop_pmc_inline.html?title=Click%20on%20image%20to%20zoom&amp;p=PMC3&amp;id=4564452_381_2015_2799_Fig3_HTML.jpg"><img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/bin/381_2015_2799_Fig3_HTML.jpg" alt="包含图片，插图等的外部文件。对象名称为381_2015_2799_Fig3_HTML.jpg" title="点击图片放大" loading="lazy"></a></figure>
 <p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/figure/Fig3/">图3</a></p>
 <p><strong>一</strong>内窥镜访问位于中脑的前部和上部分肿瘤。<strong>b</strong>一名8岁的颅内高压患者。病变存在于中脑的前部和上部地形中。<strong>c</strong>在内镜下彻底清除病变并进行脑导水管通畅后的3年随访。诊断为低度星形细胞瘤。<strong>d</strong>。大脑中部及完全切除后外生性肿瘤的术中内窥镜检查。通过门罗的孔后，在第三脑室的底部看到并去除了病变</p>
-<p><a href="https://www.ncbi.nlm.nih.gov/core/lw/2.0/html/tileshop_pmc/tileshop_pmc_inline.html?title=Click%20on%20image%20to%20zoom&amp;p=PMC3&amp;id=4564452_381_2015_2799_Fig4_HTML.jpg"><img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/bin/381_2015_2799_Fig4_HTML.jpg" alt="包含图片，插图等的外部文件。对象名称为381_2015_2799_Fig4_HTML.jpg" title="点击图片放大"></a></p>
+<figure data-type="image" tabindex="4"><a href="https://www.ncbi.nlm.nih.gov/core/lw/2.0/html/tileshop_pmc/tileshop_pmc_inline.html?title=Click%20on%20image%20to%20zoom&amp;p=PMC3&amp;id=4564452_381_2015_2799_Fig4_HTML.jpg"><img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/bin/381_2015_2799_Fig4_HTML.jpg" alt="包含图片，插图等的外部文件。对象名称为381_2015_2799_Fig4_HTML.jpg" title="点击图片放大" loading="lazy"></a></figure>
 <p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/figure/Fig4/">图4</a></p>
 <p><strong>a</strong>，<strong>b</strong> 4岁女孩患有右Weber综合征，其实性/囊性中脑前病变，向椎间盘池扩展。<strong>c</strong>，<strong>d的</strong> 6年随访显示，额眶眶骨入路（上皮星形细胞瘤）全切除</p>
 <p>经中枢神经的途径可通过经典的翼状,、眶额front合zy或颞temporal途径来接近中脑的前部和前外侧病变。通过这些途径，可以通过颞极方法（颞下或颞下颞下）结合方法。Sano在1980年描述了颞极方法[ <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/#CR58">58</a> ]。它允许在后上方向的颞叶上开放并可视化前外侧椎间窝。另一种使用的方法是颞下颞叶，如Krause在1911年所描述的[ <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/#CR36">36</a>]。这种方法增加了由于拉贝复合体的静脉损伤而引起的静脉梗死的风险，以及由于沿腱弓ci裂引起的第三和第四次颅神经损伤而引起的眼瘫。另一方面，这种方法可以很好地观察切牙空间。切口可确保基底动脉，椎间盘池，脑干和脑桥腹侧表面良好暴露。Bricolo和Turazzi [ <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/#CR7">7</a> ] 描述了一个进入前外侧中脑的“相当安全”的进入区域，因为皮质脊髓束的纤维仅占据了花梗的中间五分之三（图  <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/figure/Fig2/">2c）。</a>）。该狭窄的窗口在上方由大脑后动脉界定，在下方由小脑上动脉界定，在内侧由颅神经III和基底动脉出现，在外侧由锥体束界定（图  <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/figure/Fig5/">5</a>）。这里的肿瘤通常是外生的，因此不必进入脑干，并且可以在病变的出口处切开肿瘤。在局灶性肿瘤的情况下，需要切开脑干，可使用菱形手术刀。不使用双极凝血。平行于第三颅神经切开切口，以防止锥体束损伤。以这种方式进入被称为周运动。此策略必须格外小心，以免损伤红色核，锥体束和动眼神经。</p>
-<p><a href="https://www.ncbi.nlm.nih.gov/core/lw/2.0/html/tileshop_pmc/tileshop_pmc_inline.html?title=Click%20on%20image%20to%20zoom&amp;p=PMC3&amp;id=4564452_381_2015_2799_Fig5_HTML.jpg"><img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/bin/381_2015_2799_Fig5_HTML.jpg" alt="包含图片，插图等的外部文件。对象名称为381_2015_2799_Fig5_HTML.jpg" title="点击图片放大"></a></p>
+<figure data-type="image" tabindex="5"><a href="https://www.ncbi.nlm.nih.gov/core/lw/2.0/html/tileshop_pmc/tileshop_pmc_inline.html?title=Click%20on%20image%20to%20zoom&amp;p=PMC3&amp;id=4564452_381_2015_2799_Fig5_HTML.jpg"><img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/bin/381_2015_2799_Fig5_HTML.jpg" alt="包含图片，插图等的外部文件。对象名称为381_2015_2799_Fig5_HTML.jpg" title="点击图片放大" loading="lazy"></a></figure>
 <p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/figure/Fig5/">图5</a></p>
 <p><strong>一个</strong>。一名7岁的患有复视和右侧动眼神经麻痹的患者。MRI显示局灶性和固有病变与中脑第三神经的固有进程平行。<strong>b</strong>。完全切除后5年的随访，无残留病变</p>
 <h3 id="中脑-2">中脑</h3>
 <p>位于中脑中部的肿瘤也可以沿两个方向生长：朝向松果体区域或进入第四脑室。当它们向第四脑室生长时，采用枕下cip骨入路。它们生长时朝向松果体区，我们使用在1911 [由克劳斯建议的路径<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/#CR37">37</a>]和普及斯坦因[ <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/#CR60">60</a> ]，这是枕下幕上入路线（图  <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/figure/Fig6/">6</a>和<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/figure/Fig7/">和7），</a><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/figure/Fig7/">7</a>），进一步分为中位数或次中位数。这种方法通常使患者处于坐姿。进行广泛的后颅窝开颅手术，并切除C1弓。这种方法允许小脑的广泛运动。在Vermian静脉凝结后，小脑下降以允许进入中脑。当病变位于内侧时，我们也会使小脑前中央静脉凝固。当病变位于外侧时，无需凝固该静脉（图  <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/figure/Fig8/">8）。</a>）。在该区域应小心，因为第四颅神经位于下丘的正下方。对于有外生性病变的患者，无需切开脑干，我们可以直接接近肿瘤，除了小海绵状瘤，我们使用了三种通路：上，下周围胶体和通过中脑沟。</p>
-<p><a href="https://www.ncbi.nlm.nih.gov/core/lw/2.0/html/tileshop_pmc/tileshop_pmc_inline.html?title=Click%20on%20image%20to%20zoom&amp;p=PMC3&amp;id=4564452_381_2015_2799_Fig6_HTML.jpg"><img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/bin/381_2015_2799_Fig6_HTML.jpg" alt="包含图片，插图等的外部文件。对象名称为381_2015_2799_Fig6_HTML.jpg" title="点击图片放大"></a></p>
+<figure data-type="image" tabindex="6"><a href="https://www.ncbi.nlm.nih.gov/core/lw/2.0/html/tileshop_pmc/tileshop_pmc_inline.html?title=Click%20on%20image%20to%20zoom&amp;p=PMC3&amp;id=4564452_381_2015_2799_Fig6_HTML.jpg"><img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/bin/381_2015_2799_Fig6_HTML.jpg" alt="包含图片，插图等的外部文件。对象名称为381_2015_2799_Fig6_HTML.jpg" title="点击图片放大" loading="lazy"></a></figure>
 <p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/figure/Fig6/?report=objectonly">在单独的窗口中打开</a></p>
 <p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/figure/Fig6/">图6</a></p>
 <p><strong>一个</strong>。肿瘤位于中脑中央，并向松果体区域生长。<strong>b</strong>幕下race上小脑入路。<strong>c</strong>通过腹下sup上小脑途径的松果体区域的解剖图。_SC_上丘，_IC_下丘</p>
-<p><a href="https://www.ncbi.nlm.nih.gov/core/lw/2.0/html/tileshop_pmc/tileshop_pmc_inline.html?title=Click%20on%20image%20to%20zoom&amp;p=PMC3&amp;id=4564452_381_2015_2799_Fig7_HTML.jpg"><img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/bin/381_2015_2799_Fig7_HTML.jpg" alt="包含图片，插图等的外部文件。对象名称为381_2015_2799_Fig7_HTML.jpg" title="点击图片放大"></a></p>
+<figure data-type="image" tabindex="7"><a href="https://www.ncbi.nlm.nih.gov/core/lw/2.0/html/tileshop_pmc/tileshop_pmc_inline.html?title=Click%20on%20image%20to%20zoom&amp;p=PMC3&amp;id=4564452_381_2015_2799_Fig7_HTML.jpg"><img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/bin/381_2015_2799_Fig7_HTML.jpg" alt="包含图片，插图等的外部文件。对象名称为381_2015_2799_Fig7_HTML.jpg" title="点击图片放大" loading="lazy"></a></figure>
 <p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/figure/Fig7/?report=objectonly">在单独的窗口中打开</a></p>
 <p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/figure/Fig7/">图7</a></p>
 <p><strong>a</strong>，<strong>b</strong>通过中央下ten上小脑入路切除了中脑中央的一个实体囊性肿瘤，其中g的增强朝向松果体区域生长。<strong>c</strong>，<strong>d</strong>十年随访没有发现病变的证据，这是一个毛细血管星形细胞瘤</p>
-<p><a href="https://www.ncbi.nlm.nih.gov/core/lw/2.0/html/tileshop_pmc/tileshop_pmc_inline.html?title=Click%20on%20image%20to%20zoom&amp;p=PMC3&amp;id=4564452_381_2015_2799_Fig8_HTML.jpg"><img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/bin/381_2015_2799_Fig8_HTML.jpg" alt="包含图片，插图等的外部文件。对象名称为381_2015_2799_Fig8_HTML.jpg" title="点击图片放大"></a></p>
+<figure data-type="image" tabindex="8"><a href="https://www.ncbi.nlm.nih.gov/core/lw/2.0/html/tileshop_pmc/tileshop_pmc_inline.html?title=Click%20on%20image%20to%20zoom&amp;p=PMC3&amp;id=4564452_381_2015_2799_Fig8_HTML.jpg"><img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/bin/381_2015_2799_Fig8_HTML.jpg" alt="包含图片，插图等的外部文件。对象名称为381_2015_2799_Fig8_HTML.jpg" title="点击图片放大" loading="lazy"></a></figure>
 <p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/figure/Fig8/">图8</a></p>
 <p><strong>一</strong>中脑的侧视图。中脑外侧沟（LMS）在中脑表面延伸，从上方的内侧膝状体（MGB）延伸至下方的脑桥脑沟（Pont。Mes。Sulc。）。LMS沿着内侧马鞭草（ML）的外侧边缘延伸。<strong>b</strong> ML将中脑分为腹侧（<em>前</em>）和背侧（<em>后</em>）部分。通过LMS进入时的神经关键结构是前中脑的皮质脊髓束，中脑（盖骨）中枢的红色，动眼和滑车核，后上（_后背）上_丘的核。） 中脑。动眼神经核在中线位于上丘的下半部和下丘的上半部，而滑车核在中线上位于下丘的下半部。<strong>c</strong>沿中脑外侧沟经下sup上小脑途径到达中脑中央的侧部病变。<strong>d</strong>完全切除后五年随访，无病变迹象，细胞性星形细胞瘤</p>
 <p>从关节周围进入点，可以进入两个“安全区”：在下大脑以下或中枢神经下或在滑车神经上或在关节上神经上方的中脑切口。在颈上方法中，在上睑上方正好做一个横向切口，并应由导水管限制。这种方法的进一步扩展会损害颅神经III和IV的神经核，以及内侧纵筋膜。通过颈下通路，在滑车神经与下丘的下缘之间进行横向切口。至于上上路，比脑导水管更深的切口会损伤第三和第四颅神经的核以及内侧纵筋膜。</p>
@@ -505,16 +691,16 @@ plt.show()
 <h3 id="后背中脑">后（背）中脑</h3>
 <p>后脑或四肢后板是大脑输水管后的中脑部分的名称。四边形板的肿瘤是最小的脑瘤，有可能杀死脑积水患者。它们约占脑干小儿肿瘤的5％[ <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/#CR24">24</a> ]。它们通常是惰性病变，其治疗仅限于脑积水的治疗。大多数时候，这些肿瘤在T1加权图像上是等强度的，而在T2加权图像上是高强度的。多达19％的病例可能进行了lin增强MRI检查[ <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/#CR23">23</a> ]。</p>
 <p>脑积水最好通过内镜第三脑室造口术治疗[ <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/#CR38">38</a> ]。由于活检区域远端有出血的可能，应避免内镜活检（图  <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/figure/Fig9/">9</a>），大多数此类病变为低度星形细胞瘤，例如毛细胞性和非星形细胞性星形细胞瘤，混合性神经胶质瘤和极少数更具侵略性的肿瘤作为间变性星形细胞瘤[ <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/#CR50">50</a> ]。</p>
-<p><a href="https://www.ncbi.nlm.nih.gov/core/lw/2.0/html/tileshop_pmc/tileshop_pmc_inline.html?title=Click%20on%20image%20to%20zoom&amp;p=PMC3&amp;id=4564452_381_2015_2799_Fig9_HTML.jpg"><img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/bin/381_2015_2799_Fig9_HTML.jpg" alt="包含图片，插图等的外部文件。对象名称为381_2015_2799_Fig9_HTML.jpg" title="点击图片放大"></a></p>
+<figure data-type="image" tabindex="9"><a href="https://www.ncbi.nlm.nih.gov/core/lw/2.0/html/tileshop_pmc/tileshop_pmc_inline.html?title=Click%20on%20image%20to%20zoom&amp;p=PMC3&amp;id=4564452_381_2015_2799_Fig9_HTML.jpg"><img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/bin/381_2015_2799_Fig9_HTML.jpg" alt="包含图片，插图等的外部文件。对象名称为381_2015_2799_Fig9_HTML.jpg" title="点击图片放大" loading="lazy"></a></figure>
 <p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/figure/Fig9/?report=objectonly">在单独的窗口中打开</a></p>
 <p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/figure/Fig9/">图9</a></p>
 <p>内镜活检四头肌钢板病变-上皮星形胶质细胞瘤后脑室内出血</p>
 <p>一些肿瘤可能会生长并需要手术。在这种情况下，已经使用了两种类型的方法：当它们向第三脑室生长时，选择了小脑上fra肌下肌上神经支配途径（图  <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/figure/Fig11/">11</a>）。然而，如果它们向第四脑室的上部生长，则首选由Poppen [ <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/#CR51">51</a> ] 提出并经Ausman [ <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/#CR3">3</a> ] 修改的经枕后入路（图  <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/figure/Fig10/">10</a>）。经颅枕后入路由Horrax于1937年首次描述[ <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/#CR28">28</a> ]，由Poppen于1968年提出[ <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/#CR51">51</a> ]，并于1971年由Jameson推广<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/#CR30"> [30]。</a>]。已经描述了几种手术位置，例如坐着，俯卧，协和和四分之三俯卧。Ausmann（1988）[ <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/#CR3">3</a> ]描述了经枕后入路，四分之三的俯卧位，病变侧向下，冠状平面与地板成45度角，头部弯曲30度和15度仰角。这使得枕叶在重力的作用下掉落，因此脑部回缩的需求减少，并且因枕叶回缩而导致同名偏盲的风险也降低了。这种方法可以很好地观察松果体区域，中脑的后外侧表面，小脑的腱膜表面，call体的脾脏以及第三脑室的后三分之一。</p>
-<p><a href="https://www.ncbi.nlm.nih.gov/core/lw/2.0/html/tileshop_pmc/tileshop_pmc_inline.html?title=Click%20on%20image%20to%20zoom&amp;p=PMC3&amp;id=4564452_381_2015_2799_Fig10_HTML.jpg"><img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/bin/381_2015_2799_Fig10_HTML.jpg" alt="包含图片，插图等的外部文件。对象名称为381_2015_2799_Fig10_HTML.jpg" title="点击图片放大"></a></p>
+<figure data-type="image" tabindex="10"><a href="https://www.ncbi.nlm.nih.gov/core/lw/2.0/html/tileshop_pmc/tileshop_pmc_inline.html?title=Click%20on%20image%20to%20zoom&amp;p=PMC3&amp;id=4564452_381_2015_2799_Fig10_HTML.jpg"><img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/bin/381_2015_2799_Fig10_HTML.jpg" alt="包含图片，插图等的外部文件。对象名称为381_2015_2799_Fig10_HTML.jpg" title="点击图片放大" loading="lazy"></a></figure>
 <p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/figure/Fig10/?report=objectonly">在单独的窗口中打开</a></p>
 <p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/figure/Fig10/">图10</a></p>
 <p>四头肌板中的<strong>一个</strong>肿瘤向第四脑室生长。<strong>b</strong>经枕后入路。<strong>c</strong>枕骨右后视图。松果体和脾脏暴露。<strong>d</strong>。四头肌板状肿瘤生长至第四脑室，通过经枕骨入路手术。<strong>e</strong>。病变完全切除后9年的术后影像学检查，未显示肿瘤的证据，这是毛细血管星形细胞瘤</p>
-<p><a href="https://www.ncbi.nlm.nih.gov/core/lw/2.0/html/tileshop_pmc/tileshop_pmc_inline.html?title=Click%20on%20image%20to%20zoom&amp;p=PMC3&amp;id=4564452_381_2015_2799_Fig11_HTML.jpg"><img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/bin/381_2015_2799_Fig11_HTML.jpg" alt="包含图片，插图等的外部文件。对象名称为381_2015_2799_Fig11_HTML.jpg" title="点击图片放大"></a></p>
+<figure data-type="image" tabindex="11"><a href="https://www.ncbi.nlm.nih.gov/core/lw/2.0/html/tileshop_pmc/tileshop_pmc_inline.html?title=Click%20on%20image%20to%20zoom&amp;p=PMC3&amp;id=4564452_381_2015_2799_Fig11_HTML.jpg"><img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/bin/381_2015_2799_Fig11_HTML.jpg" alt="包含图片，插图等的外部文件。对象名称为381_2015_2799_Fig11_HTML.jpg" title="点击图片放大" loading="lazy"></a></figure>
 <p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/figure/Fig11/?report=objectonly">在单独的窗口中打开</a></p>
 <p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/figure/Fig11/">图11</a></p>
 <p><strong>一个</strong>后验（<em>背</em>）中脑由一对上级（SC）和下丘（IC）的。在上丘的上边缘的正上方制作横颈上切口（<em>1</em>）。鞘膜下切口（<em>2</em>）在CN IV与下丘的下边缘之间横向指向。<strong>b</strong>进一步解剖背（后）中脑。重要的标志是大脑导水管，它位于中线内侧纵筋膜（MLF），动眼神经和滑车核的后面。红色核从下丘的中层延伸到第三脑室的侧壁。<strong>C</strong>朝第三和第四脑室生长的大肿瘤的卡通，可以通过合并下in上小脑然后再进行枕下小脑入路来接近。<strong>d</strong>一名5岁患者的四头肌板的大型毛细细胞星形细胞瘤，向着第三脑室和第四脑室生长，通过合并的小脑下-下肌腱膜和telovelar通路穿过菱形窝。<strong>e</strong>术后MRI扫描显示完全切除</p>
@@ -524,37 +710,37 @@ plt.show()
 <h3 id="庞斯">庞斯</h3>
 <p>多数桥脑肿瘤是弥漫性的。因此，切除手术是无益的，并建议进行化学疗法/放射疗法。神经外科医生必须区分局灶性，低度外生性和弥漫性肿瘤，患者才能从手术中受益。</p>
 <p>桥位于桥上脑桥和桥下脑桥之间。桥脑桥在内侧盘区被分为两部分，分别为前，后或腹侧和背侧。桥包含锥体束，比中脑的锥体束更位于内侧和前方，以及三叉神经，外展肌，面部神经和前庭脉络神经和核。因此，必须了解脑桥中第五，第六和第七颅神经的内在和外在解剖结构（图  <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/figure/Fig12/">12</a>）。</p>
-<p><a href="https://www.ncbi.nlm.nih.gov/core/lw/2.0/html/tileshop_pmc/tileshop_pmc_inline.html?title=Click%20on%20image%20to%20zoom&amp;p=PMC3&amp;id=4564452_381_2015_2799_Fig12_HTML.jpg"><img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/bin/381_2015_2799_Fig12_HTML.jpg" alt="包含图片，插图等的外部文件。对象名称为381_2015_2799_Fig12_HTML.jpg" title="点击图片放大"></a></p>
+<figure data-type="image" tabindex="12"><a href="https://www.ncbi.nlm.nih.gov/core/lw/2.0/html/tileshop_pmc/tileshop_pmc_inline.html?title=Click%20on%20image%20to%20zoom&amp;p=PMC3&amp;id=4564452_381_2015_2799_Fig12_HTML.jpg"><img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/bin/381_2015_2799_Fig12_HTML.jpg" alt="包含图片，插图等的外部文件。对象名称为381_2015_2799_Fig12_HTML.jpg" title="点击图片放大" loading="lazy"></a></figure>
 <p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/figure/Fig12/">图12</a></p>
 <p><strong>一个</strong>。脑桥的皮质脊髓束的地形（<em>黄色</em>）。VI（<em>绿色</em>）和VII（<em>橙色</em> / <em>红色</em>）颅对的核和过程。<strong>b</strong>侧面图。位于内侧马鞭草（ML）前面的腹桥和位于ML后面的背桥已经暴露。<strong>c</strong> pons的前视图。三角肌上（<em>1</em>）和三叉神经周围（<em>2）</em>）安全进入区用于位于腹桥的病变。在脊椎脑沟下方4 mm处做上神经上切口，矢状位与CN III的出口相同。三叉神经周围的切口位于CN V的进入区域的中间，并位于CN V和CN VII之间。<strong>d</strong>腹桥的侧面图。处于危险状态的神经关键结构是皮质脊髓束，三叉神经运动核和CN V–VIII的桥脑段</p>
 <p>面神经围绕第六神经核行进。当通过菱形窝接近肿瘤时，必须很好地建立这种关系。三个动脉组为桥提供血液：前内侧，外侧和背侧。前内侧动脉来自基底动脉和末端椎动脉分支。这些动脉可滋养中上睑板（包括锥体束），内侧马鞭草，内侧纵向筋膜，网状结构和外展核。小脑上动脉（SCA），小脑前下动脉（AICA）和桥脑长动脉产生了穿孔侧支。它们提供小脑上皮梗，中央被膜束，列氏菌侧，蓝斑，运动和感觉三叉神经主要核，外展核，面核，上橄榄核，桥状网状核，盘生侧和锥体束。SCA终末分支包括脑桥的后动脉供应。他们灌注上小脑梗，三叉神经的中脑核和蓝斑[<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/#CR55">55</a> ]（图  <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/figure/Fig13/">13</a>）。</p>
-<p><a href="https://www.ncbi.nlm.nih.gov/core/lw/2.0/html/tileshop_pmc/tileshop_pmc_inline.html?title=Click%20on%20image%20to%20zoom&amp;p=PMC3&amp;id=4564452_381_2015_2799_Fig13_HTML.jpg"><img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/bin/381_2015_2799_Fig13_HTML.jpg" alt="包含图片，插图等的外部文件。对象名称为381_2015_2799_Fig13_HTML.jpg" title="点击图片放大"></a></p>
+<figure data-type="image" tabindex="13"><a href="https://www.ncbi.nlm.nih.gov/core/lw/2.0/html/tileshop_pmc/tileshop_pmc_inline.html?title=Click%20on%20image%20to%20zoom&amp;p=PMC3&amp;id=4564452_381_2015_2799_Fig13_HTML.jpg"><img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/bin/381_2015_2799_Fig13_HTML.jpg" alt="包含图片，插图等的外部文件。对象名称为381_2015_2799_Fig13_HTML.jpg" title="点击图片放大" loading="lazy"></a></figure>
 <p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/figure/Fig13/">图13</a></p>
 <p><strong>a</strong>后乙状结肠入路可用于三叉神经上和三叉神经进入区。<strong>b</strong>前乙状突入路为三叉神经上缘和三叉神经进入区提供了良好的暴露</p>
 <h3 id="前桥">前桥</h3>
 <p>前桥和上桥的肿瘤可使用眶额front合途径进行，这是Jane等人描述的眶上颅骨开颅术的一种改进。1982年[ <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/#CR31">31</a> ]。第三颅神经是该方法的关键参考点。为了暴露桥的上部，有必要用腱鞘自由边缘的硬膜切开术解剖椎间孔和桥前池。入口点是原始的。在中脑桥脑沟下方从第三至第五颅神经的直线上切一个4毫米的垂直切口; 因此，我们将这种进入途径命名为“ supratrigeminal”。我们已经将该途径用于上腹部损伤，而没有额外的患者发病率（图  <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/figure/Fig14/">14</a>）。</p>
-<p><a href="https://www.ncbi.nlm.nih.gov/core/lw/2.0/html/tileshop_pmc/tileshop_pmc_inline.html?title=Click%20on%20image%20to%20zoom&amp;p=PMC3&amp;id=4564452_381_2015_2799_Fig14_HTML.jpg"><img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/bin/381_2015_2799_Fig14_HTML.jpg" alt="包含图片，插图等的外部文件。对象名称为381_2015_2799_Fig14_HTML.jpg" title="点击图片放大"></a></p>
+<figure data-type="image" tabindex="14"><a href="https://www.ncbi.nlm.nih.gov/core/lw/2.0/html/tileshop_pmc/tileshop_pmc_inline.html?title=Click%20on%20image%20to%20zoom&amp;p=PMC3&amp;id=4564452_381_2015_2799_Fig14_HTML.jpg"><img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/bin/381_2015_2799_Fig14_HTML.jpg" alt="包含图片，插图等的外部文件。对象名称为381_2015_2799_Fig14_HTML.jpg" title="点击图片放大" loading="lazy"></a></figure>
 <p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/figure/Fig14/?report=objectonly">在单独的窗口中打开</a></p>
 <p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/figure/Fig14/">图14</a></p>
 <p><strong>a</strong>，<strong>b</strong> 8个月大的患者，在桥的前部和上半部有较大病变，通过眶上front行经上原肌进入区进入。<strong>c</strong>，<strong>d</strong>病变完全切除后6个月的术后随访</p>
 <p>对于位于脑桥前部和下部的病变，或对于腹侧病变，已使用了乙状结肠前入路（图  <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/figure/Fig15/">15</a>）。在脑桥的切口是在第五和第七颅神经的出现点之间纵向进行的。但是，该走廊太窄，仅适合活组织检查或清除其中的海绵状瘤。这种方法可以通过枕骨旁正中途径或岩相途径来实现。在脑桥的前入路中，第五神经出现周围的区域是一个安全区域，该区域应在距中线1 cm处打开1 cm宽，但应注意不要太前移以避免皮质脊髓束。</p>
-<p><a href="https://www.ncbi.nlm.nih.gov/core/lw/2.0/html/tileshop_pmc/tileshop_pmc_inline.html?title=Click%20on%20image%20to%20zoom&amp;p=PMC3&amp;id=4564452_381_2015_2799_Fig15_HTML.jpg"><img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/bin/381_2015_2799_Fig15_HTML.jpg" alt="包含图片，插图等的外部文件。对象名称为381_2015_2799_Fig15_HTML.jpg" title="点击图片放大"></a></p>
+<figure data-type="image" tabindex="15"><a href="https://www.ncbi.nlm.nih.gov/core/lw/2.0/html/tileshop_pmc/tileshop_pmc_inline.html?title=Click%20on%20image%20to%20zoom&amp;p=PMC3&amp;id=4564452_381_2015_2799_Fig15_HTML.jpg"><img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/bin/381_2015_2799_Fig15_HTML.jpg" alt="包含图片，插图等的外部文件。对象名称为381_2015_2799_Fig15_HTML.jpg" title="点击图片放大" loading="lazy"></a></figure>
 <p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/figure/Fig15/?report=objectonly">在单独的窗口中打开</a></p>
 <p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/figure/Fig15/">图15</a></p>
 <p><strong>a</strong>，<strong>b</strong> 10岁四肢轻瘫患者。肿瘤采用前乙状结肠入路手术。<strong>c</strong>，<strong>d</strong>完全切除后10年的术后控制，无肿瘤迹象</p>
 <h3 id="后桥">后桥</h3>
 <p>桥后病变通过菱形窝进入（图  <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/figure/Fig16/">16</a>）。优越和后脑桥病变由telovelar路线访问，也称为小脑延髓裂入[ <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/#CR42">42</a>，<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/#CR43">43</a>，<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/#CR46">46</a> ]。面神经上方脑干的开口称为上颌三角，由内侧纵向筋膜（即中沟）在内侧定义，由面神经尾部（以面部胶原作为参考）定义，由外侧上小脑梗。这个三角形大约是1 cm <sup>2</sup>。尽管这是一个安全的进入三角形，但谨慎地建议在表面上进行双极刺激以定位面神经的走向，这可能由于肿瘤的生长而偏离了方向。进入该区域的距离必须始终距中线2毫米，以保持内侧纵筋膜。但是，与部分面神经受累相比，该束损伤后的恢复非常快。</p>
-<p><a href="https://www.ncbi.nlm.nih.gov/core/lw/2.0/html/tileshop_pmc/tileshop_pmc_inline.html?title=Click%20on%20image%20to%20zoom&amp;p=PMC3&amp;id=4564452_381_2015_2799_Fig16_HTML.jpg"><img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/bin/381_2015_2799_Fig16_HTML.jpg" alt="包含图片，插图等的外部文件。对象名称为381_2015_2799_Fig16_HTML.jpg" title="点击图片放大"></a></p>
+<figure data-type="image" tabindex="16"><a href="https://www.ncbi.nlm.nih.gov/core/lw/2.0/html/tileshop_pmc/tileshop_pmc_inline.html?title=Click%20on%20image%20to%20zoom&amp;p=PMC3&amp;id=4564452_381_2015_2799_Fig16_HTML.jpg"><img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/bin/381_2015_2799_Fig16_HTML.jpg" alt="包含图片，插图等的外部文件。对象名称为381_2015_2799_Fig16_HTML.jpg" title="点击图片放大" loading="lazy"></a></figure>
 <p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/figure/Fig16/?report=objectonly">在单独的窗口中打开</a></p>
 <p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/figure/Fig16/">图16</a></p>
 <p>脑桥皮质脊髓束<strong>的</strong>地形图（<em>黄色</em>）。CN VI（<em>绿色</em>）和VII（<em>橙色</em> / <em>红色</em>）颅对的核和过程。<strong>b</strong>由CN VI核和CN VII的桥脑内节段产生的面部丘疹是第四脑室底部最重要的标志。<strong>c</strong>有四个避免损坏的重要结构：内侧纵筋膜（MLF），中央被膜束（CTT），三叉神经中脑（TMT）和脊柱（TST）。<strong>d</strong>后脑干安全区：_1个_胶束周围，_2 __个_筋膜上，_3个_界面，_4个_侧沟局限，_5个_下面部和_6个_中部。<strong>e</strong>面上进入区（<em>2</em>）的上方是含CN IV的腓肠葡萄膜缘，下方是面部胶束（FC），内侧是纵向纵筋膜（MLF），外侧是龈沟，外侧沟。<strong>f上</strong>中央凹，是由沟沟形成的凹陷，呈三角形（<em>绿色三角形</em>）。该三角形的顶点与面部眼睑的最上边缘在相同的轴向水平处。三叉神经运动核（<em>黄色圆圈</em>）位于该三角形的上外侧边缘的较深点。<strong>g</strong>面下进入区的上方是面部胶原，下方是舌下（CN XII）三角形，内侧是纵向纵束（MLF），中间是CN VII核和歧核。<strong>^ h</strong>。中枕下入路被用来到达第四脑室的底部。<strong>我</strong>切开了Telovelar交界处。<strong>j</strong>暴露于第四脑室的地板</p>
 <p>该形貌在上，横向方向略微缩回，而应尽可能避免在尾端方向缩回（图  <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/figure/Fig17/">17</a>）。</p>
-<p><a href="https://www.ncbi.nlm.nih.gov/core/lw/2.0/html/tileshop_pmc/tileshop_pmc_inline.html?title=Click%20on%20image%20to%20zoom&amp;p=PMC3&amp;id=4564452_381_2015_2799_Fig17_HTML.jpg"><img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/bin/381_2015_2799_Fig17_HTML.jpg" alt="包含图片，插图等的外部文件。对象名称为381_2015_2799_Fig17_HTML.jpg" title="点击图片放大"></a></p>
+<figure data-type="image" tabindex="17"><a href="https://www.ncbi.nlm.nih.gov/core/lw/2.0/html/tileshop_pmc/tileshop_pmc_inline.html?title=Click%20on%20image%20to%20zoom&amp;p=PMC3&amp;id=4564452_381_2015_2799_Fig17_HTML.jpg"><img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/bin/381_2015_2799_Fig17_HTML.jpg" alt="包含图片，插图等的外部文件。对象名称为381_2015_2799_Fig17_HTML.jpg" title="点击图片放大" loading="lazy"></a></figure>
 <p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/figure/Fig17/?report=objectonly">在单独的窗口中打开</a></p>
 <p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/figure/Fig17/">图17</a></p>
 <p><strong>a</strong>，<strong>b</strong>桥上和后桥肿瘤通过枕下小脑门入路进入，并通过point上三角进入桥脑。星形细胞瘤II级。<strong>c</strong>，<strong>d</strong>术后控制显示总切除</p>
 <p>对于后部和下部病变，使用经下三角肌（图<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/figure/Fig18/">18</a>）的颈下途径，该三角肌  以内侧边界为内侧纵束，并以延髓纹尾部为界，面神经以外侧为界。</p>
-<p><a href="https://www.ncbi.nlm.nih.gov/core/lw/2.0/html/tileshop_pmc/tileshop_pmc_inline.html?title=Click%20on%20image%20to%20zoom&amp;p=PMC3&amp;id=4564452_381_2015_2799_Fig18_HTML.jpg"><img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/bin/381_2015_2799_Fig18_HTML.jpg" alt="包含图片，插图等的外部文件。对象名称为381_2015_2799_Fig18_HTML.jpg" title="点击图片放大"></a></p>
+<figure data-type="image" tabindex="18"><a href="https://www.ncbi.nlm.nih.gov/core/lw/2.0/html/tileshop_pmc/tileshop_pmc_inline.html?title=Click%20on%20image%20to%20zoom&amp;p=PMC3&amp;id=4564452_381_2015_2799_Fig18_HTML.jpg"><img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/bin/381_2015_2799_Fig18_HTML.jpg" alt="包含图片，插图等的外部文件。对象名称为381_2015_2799_Fig18_HTML.jpg" title="点击图片放大" loading="lazy"></a></figure>
 <p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/figure/Fig18/?report=objectonly">在单独的窗口中打开</a></p>
 <p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/figure/Fig18/">图18</a></p>
 <p><strong>a</strong>，<strong>b</strong> 5岁的桥脑病变患者通过面下入路接近。<strong>c</strong>，<strong>d</strong> 8年随访。星形细胞瘤</p>
@@ -565,16 +751,16 @@ plt.show()
 <p>因此，对于pons，我们有以下“安全区”：原始肌上，三叉神经周围，肌上，基底下，界面以及通过侧沟限界。</p>
 <h3 id="髓质">髓质</h3>
 <p>延髓是脑干的最尾部，它通过球囊沟与脑桥分开（图  <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/figure/Fig19/">19）。</a>）。延髓的下限是腹面的金字塔形肉瘤和大孔。后表面是尖顶。它从椎动脉和脊柱前动脉的分支接收血液供应。前外侧穿孔动脉浸润锥体束和下橄榄核。外侧动脉是小脑后下动脉（PICA），小脑前小动脉（AICA）以及椎动脉和基底动脉的分支，它们灌注小脑下花梗，脊髓丘脑束，脊髓小脑中央束，椎管，视网膜迷走神经的背运动核，孤束核和束道，以及舌下，前庭，耳蜗，楔形和big义核。卵状和楔形的核，后区域和迷走神经，<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/#CR55">55</a> ]。</p>
-<p><a href="https://www.ncbi.nlm.nih.gov/core/lw/2.0/html/tileshop_pmc/tileshop_pmc_inline.html?title=Click%20on%20image%20to%20zoom&amp;p=PMC3&amp;id=4564452_381_2015_2799_Fig19_HTML.jpg"><img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/bin/381_2015_2799_Fig19_HTML.jpg" alt="包含图片，插图等的外部文件。对象名称为381_2015_2799_Fig19_HTML.jpg" title="点击图片放大"></a></p>
+<figure data-type="image" tabindex="19"><a href="https://www.ncbi.nlm.nih.gov/core/lw/2.0/html/tileshop_pmc/tileshop_pmc_inline.html?title=Click%20on%20image%20to%20zoom&amp;p=PMC3&amp;id=4564452_381_2015_2799_Fig19_HTML.jpg"><img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/bin/381_2015_2799_Fig19_HTML.jpg" alt="包含图片，插图等的外部文件。对象名称为381_2015_2799_Fig19_HTML.jpg" title="点击图片放大" loading="lazy"></a></figure>
 <p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/figure/Fig19/">图19</a></p>
 <p>橄榄状髓质<strong>的</strong>示意图，其中存在IX，X（<em>绿色和粉红色</em>），XI和XII（<em>红色</em>）颅对，以及皮质脊髓束道（<em>黄色</em>）的形貌与pons和中脑相比 <strong>b</strong>腹髓质。腹侧髓质的安全进入区是食管前和食管后沟。橄榄前沟位于橄榄和金字塔之间，而金字塔是CST所在的地方。橄榄上凹陷的凹陷，即上眼窝突节，正好位于面部和前庭静脉神经与脑干交界处的下方。舌咽，迷走神经和副神经离开橄榄核正下方的延髓，位于橄榄和小脑小脑梗（ICP）之间。舌下根沿着小窝前沟离开延髓。<strong>c</strong>远侧入路用于卵巢前和后沟。<strong>d</strong>背髓质。后中位（PMS），中位（PIS）和后外侧（PLS）沟已被建议作为安全进入区。枕下正中入路</p>
 <h3 id="延髓前">延髓前</h3>
 <p>髓质可能是最难接近的结构，因为位于其中的IX至XII颅神经对的细胞核密度很高。位于髓质前部的病变可通过远侧入路进入。最初由Heros [ <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/#CR27">27</a> ]和George等人描述了这种方法。[ <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/#CR21">21</a> ]在颅脑交界处。根据要切除的con的部位，方法有很多变化：trans突、,上和para旁暴露[ <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/#CR56">56</a> ]。对于儿童，可以在不去除the的情况下进入髓质的前部（图  <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/figure/Fig20/">20）。</a>）。齿状韧带靠近椎动脉入口的部分有助于髓质的活动性，因此侧向进入变得更容易，因为它避免了开放opening。访问脑干可以是前橄榄，后橄榄，或有时通过橄榄体，优选地在后-橄榄沟（图  <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/figure/Fig20/">20</a>和<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/figure/Fig21/">AND21）。</a><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/figure/Fig21/">21</a>）。可以通过前外侧沟进入延髓。该进入区沿乳腺前沟，位于尾部舌下和头侧C1小根之间。它位于锥体束附近，靠近椎体折返处，仅应用于胞外病变[ <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/#CR9">9</a><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/#CR9"></a>]。橄榄后沟是一个安全的进入区域。据雷卡尔德等。[ <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/#CR53">53</a> ]，橄榄体在颅尾轴上提供大约13.5 mm的手术空间，在横轴上提供大约7 mm的空间，在前闻轴上提供大约2.5 mm的手术空间。进入区穿过橄榄后沟，位于橄榄和小舌根下腹腹面至舌咽和迷走神经小根之间[ <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/#CR53">53</a> ]。</p>
-<p><a href="https://www.ncbi.nlm.nih.gov/core/lw/2.0/html/tileshop_pmc/tileshop_pmc_inline.html?title=Click%20on%20image%20to%20zoom&amp;p=PMC3&amp;id=4564452_381_2015_2799_Fig20_HTML.jpg"><img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/bin/381_2015_2799_Fig20_HTML.jpg" alt="包含图片，插图等的外部文件。对象名称为381_2015_2799_Fig20_HTML.jpg" title="点击图片放大"></a></p>
+<figure data-type="image" tabindex="20"><a href="https://www.ncbi.nlm.nih.gov/core/lw/2.0/html/tileshop_pmc/tileshop_pmc_inline.html?title=Click%20on%20image%20to%20zoom&amp;p=PMC3&amp;id=4564452_381_2015_2799_Fig20_HTML.jpg"><img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/bin/381_2015_2799_Fig20_HTML.jpg" alt="包含图片，插图等的外部文件。对象名称为381_2015_2799_Fig20_HTML.jpg" title="点击图片放大" loading="lazy"></a></figure>
 <p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/figure/Fig20/?report=objectonly">在单独的窗口中打开</a></p>
 <p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/figure/Fig20/">图20</a></p>
 <p><strong>a</strong>，<strong>b</strong> 2岁患者发展为四肢瘫痪。存在髓质前部的大肿瘤。远侧入路和经橄榄石切入点用于切除细胞性星形细胞瘤。<strong>c</strong>，<strong>d</strong>十一年随访，未显示肿瘤证据</p>
-<p><a href="https://www.ncbi.nlm.nih.gov/core/lw/2.0/html/tileshop_pmc/tileshop_pmc_inline.html?title=Click%20on%20image%20to%20zoom&amp;p=PMC3&amp;id=4564452_381_2015_2799_Fig21_HTML.jpg"><img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/bin/381_2015_2799_Fig21_HTML.jpg" alt="包含图片，插图等的外部文件。对象名称为381_2015_2799_Fig21_HTML.jpg" title="点击图片放大"></a></p>
+<figure data-type="image" tabindex="21"><a href="https://www.ncbi.nlm.nih.gov/core/lw/2.0/html/tileshop_pmc/tileshop_pmc_inline.html?title=Click%20on%20image%20to%20zoom&amp;p=PMC3&amp;id=4564452_381_2015_2799_Fig21_HTML.jpg"><img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/bin/381_2015_2799_Fig21_HTML.jpg" alt="包含图片，插图等的外部文件。对象名称为381_2015_2799_Fig21_HTML.jpg" title="点击图片放大" loading="lazy"></a></figure>
 <p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/figure/Fig21/">图21</a></p>
 <p><strong>a</strong>，<strong>b</strong>在第四脑室有外生性延伸的颈髓肿瘤。术后5年的<strong>c</strong>，<strong>d</strong> MRI无肿瘤迹象</p>
 <h3 id="后延髓">后延髓</h3>
@@ -619,23 +805,23 @@ plt.show()
 </tr>
 </tbody>
 </table>
-<p>高血压性
-脑室（10）
--震颤（2） |
-| 半正中（12） | 中脑外侧沟 |
-| ten下上臂小脑结合Telovelar入路（6） | 颈上和/或颈下 | 没有 |
-| 后方（9） | 枕骨下颌（8） | 外生性病变 | 没有 |
-| ten下上臂小脑结合小脑入路（1） |
-| 庞斯（72） | 前部（11） | Fronto-obito go行transylvian方法（3） | 三叉神经上（3） | 没有 |
-| 乙状结肠（8） | 原始的（8） | 没有 |
-| 后方（61） | 枕下颅骨开颅手术，采用小脑入路（61） | 面部上的（45） | -MLFI（6）- 
-面部轻瘫（3）- 
-死亡（1） |
-| 界面（3） | -MLFI *（2） |
-| 面下（13） | 面部轻瘫（9） |
-| 灯泡（51） | 前部（11） | 远侧方法（11） | Transolivar | 没有 |
-| 后方（40） | 枕骨下开颅配合Telovelar入路（40） | 中线 | -死亡（3）-呼吸
-和吞咽障碍（9）
+<p>高血压性<br>
+脑室（10）<br>
+-震颤（2） |<br>
+| 半正中（12） | 中脑外侧沟 |<br>
+| ten下上臂小脑结合Telovelar入路（6） | 颈上和/或颈下 | 没有 |<br>
+| 后方（9） | 枕骨下颌（8） | 外生性病变 | 没有 |<br>
+| ten下上臂小脑结合小脑入路（1） |<br>
+| 庞斯（72） | 前部（11） | Fronto-obito go行transylvian方法（3） | 三叉神经上（3） | 没有 |<br>
+| 乙状结肠（8） | 原始的（8） | 没有 |<br>
+| 后方（61） | 枕下颅骨开颅手术，采用小脑入路（61） | 面部上的（45） | -MLFI（6）- <br>
+面部轻瘫（3）- <br>
+死亡（1） |<br>
+| 界面（3） | -MLFI *（2） |<br>
+| 面下（13） | 面部轻瘫（9） |<br>
+| 灯泡（51） | 前部（11） | 远侧方法（11） | Transolivar | 没有 |<br>
+| 后方（40） | 枕骨下开颅配合Telovelar入路（40） | 中线 | -死亡（3）-呼吸<br>
+和吞咽障碍（9）<br>
 -声带不协调（2） |</p>
 <p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/table/Tab1/?report=objectonly">在单独的窗口中打开</a></p>
 <p>_MLFI_内侧纵筋膜损伤</p>
@@ -668,7 +854,7 @@ plt.show()
 <p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/" title="转到此页面的其他部分">去：</a></p>
 <h2 id="结论-2">结论</h2>
 <p>脑干手术是神经外科中最困难的手术之一，尤其是对于小儿神经外科医生，因为儿童时期脑干肿瘤比成人时期更为常见。尽管使用束线照相术的影像学已显着发展，但它们仍未显示脑干内部的核和神经通路。解剖解剖由Klingler的的技术，研究白纤维，帮助神经外科医生在规划的手术方法[三维建筑设计<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/#CR1">1</a>，<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/#CR34">34</a>]。在脑干中有11个先前描述的“安全进入区”：牙周运动，外侧中脑沟，下颌入路，上颌上入路，三叉神经，上颌面，界面，下颌面，外侧沟限，唇周和后中沟。我们的三名患者使用了一个新的安全进入区，即“上原始区”，用于接近桥上和桥上病变。图  <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/figure/Fig22/">22</a>总结了接近安全区域的算法。也许在不久的将来，随着高分辨率7 Tesla MRI的改进，或另一种类型的成像能够显示出由于肿瘤的作用而导致的脑干结构中的精确偏差，再加上更有效的电生理监测系统，这类手术可能会变得更简单，发病率更低。当前，对脑干的内在/外在解剖学的更准确的了解与更先进的工具（如高分辨率显微镜和尖端较薄的超声吸气器）相关联，已使我们能够从任何患者中去除大量具有可接受的死亡率和发病率的脑干肿瘤在这个奇妙的大脑结构中的地形。</p>
-<p><img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/bin/381_2015_2799_Fig22_HTML.jpg" alt="包含图片，插图等的外部文件。对象名称为381_2015_2799_Fig22_HTML.jpg" title="包含图片，插图等的外部文件。对象名称为381_2015_2799_Fig22_HTML.jpg"></p>
+<figure data-type="image" tabindex="22"><img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/bin/381_2015_2799_Fig22_HTML.jpg" alt="包含图片，插图等的外部文件。对象名称为381_2015_2799_Fig22_HTML.jpg" title="包含图片，插图等的外部文件。对象名称为381_2015_2799_Fig22_HTML.jpg" loading="lazy"></figure>
 <p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/figure/Fig22/">图22</a></p>
 <p>接近安全区的算法</p>
 <p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4564452/" title="转到此页面的其他部分">去：</a></p>
@@ -682,19 +868,19 @@ plt.show()
     </entry>
     <entry>
         <title type="html"><![CDATA[颞下入路]]></title>
-        <id>https://blog.bioprinting.site/post/1SM-ibZ3Z</id>
-        <link href="https://blog.bioprinting.site/post/1SM-ibZ3Z">
+        <id>https://lizhenzhublog.github.io/post/1SM-ibZ3Z/</id>
+        <link href="https://lizhenzhublog.github.io/post/1SM-ibZ3Z/">
         </link>
         <updated>2019-10-05T05:48:06.000Z</updated>
         <content type="html"><![CDATA[<p>这个技术是指颞下keyhole开颅经硬膜外入路显露颞骨上面。这种颞下入路的变型之目的是打开IAC，显露面神经、上前庭神经、耳蜗神经和下前庭神经。</p>
 <p>https://v.qq.com/x/page/n0354yj00dq.html#</p>
-<p><img src="http://www.medtion.com/uploads/1/image/public/201608/20160810152908_29gfjyt5ia.jpg" alt="" title="1.webp.jpg"></p>
+<figure data-type="image" tabindex="1"><img src="http://www.medtion.com/uploads/1/image/public/201608/20160810152908_29gfjyt5ia.jpg" alt="" title="1.webp.jpg" loading="lazy"></figure>
 <p><strong>图示经颞下开颅显露内听道。在仔细去除内听道顶壁后，显露面神经、上前庭神经、耳蜗神经和下前庭神经</strong></p>
 <p>在弓状隆起处仔细辨认岩浅大神经和上半规管后，整个内听道的走行就可准确的勾画出来，这样有利于避免损伤敏感脆弱的前庭耳蜗结构。按照William F. House和Ugo Fisch的方法标记“蓝线”。用小磨钻（磨除时注意要不断地持续冲水）部分去除弓状隆起的浅表骨质。弓状隆起的下方即为上半规管。“蓝线”和岩大神经共同勾画出内听道的走行。</p>
-<p><strong><img src="http://www.medtion.com/uploads/1/image/public/201608/20160810152923_km06oc7wk7.jpg" alt="" title="2.webp.jpg"></strong></p>
+<p><strong><img src="http://www.medtion.com/uploads/1/image/public/201608/20160810152923_km06oc7wk7.jpg" alt="" title="2.webp.jpg" loading="lazy"></strong></p>
 <p><strong>左侧。在辨认GSPN和蓝线（即上半规管）后，就可准确的勾画出IAC的走行。</strong></p>
-<p><img src="http://www.medtion.com/uploads/1/image/public/201608/20160810152945_kp29xeatke.jpg" alt="" title="3.webp.jpg"></p>
-<p><img src="http://www.medtion.com/uploads/1/image/public/201608/20160810152945_ljbwfgqr8x.jpg" alt="" title="4.webp.jpg"></p>
+<figure data-type="image" tabindex="2"><img src="http://www.medtion.com/uploads/1/image/public/201608/20160810152945_kp29xeatke.jpg" alt="" title="3.webp.jpg" loading="lazy"></figure>
+<figure data-type="image" tabindex="3"><img src="http://www.medtion.com/uploads/1/image/public/201608/20160810152945_ljbwfgqr8x.jpg" alt="" title="4.webp.jpg" loading="lazy"></figure>
 <p>位于IAC内并向CPA生长的小听神经瘤（直径&lt;5mm），可用这个手术入路切除之。当肿瘤完全位于内听道内时，尤为适合。这个手术入路的目的是：在完成肿瘤全切的同时，保护听力维持在术前水平以及正常的面神经功能。有时，前庭功能也能保留。</p>
 <p>如上所述，颞下入路的优势在于可以提供显露内听道的途径。而如果将开颅的范围向前延伸，打开颞颅底硬脑膜后，就可显露鞍上和桥小脑结构。</p>
 <p><strong>手术技术</strong></p>
@@ -702,63 +888,63 @@ plt.show()
 <p>全麻后，放置腰大池引流管。硬膜外操作前的最重要的步骤就是充分释放脑脊液，以降低颞叶的张力。除了放腰大池引流外，还有一种方法--在从硬膜外牵拉、抬高颞叶前，先在硬膜脑上切开一小口，释放脑脊液。</p>
 <p>面神经肌电图是最基本的术中监测，有利于安全显露内听道的硬脑膜。通常，从解剖上比较容易识别面神经，而术中监测可确保在肿瘤切除过程中面神经能得以无损伤保护。</p>
 <p>患者仰卧位，头部上抬高于胸骨平面，同侧肩部垫高；Mayfield头架固定，单钉置于额部，可避免其妨碍手术操作。</p>
-<p><img src="http://www.medtion.com/uploads/1/image/public/201608/20160810153010_r5u2lcc27i.jpg" alt="" title="5.webp.jpg"></p>
+<figure data-type="image" tabindex="4"><img src="http://www.medtion.com/uploads/1/image/public/201608/20160810153010_r5u2lcc27i.jpg" alt="" title="5.webp.jpg" loading="lazy"></figure>
 <p>Step 1：头部抬高，高于胸部，以利于颅内静脉回流，并可有效的减轻颈部结构压力。与颞下前、后入路相比，头部抬高的角度应更大，这样可更好的显露IAC。</p>
-<p><img src="http://www.medtion.com/uploads/1/image/public/201608/20160810153037_1kjct8vl9p.jpg" alt="" title="6.webp.jpg"></p>
+<figure data-type="image" tabindex="5"><img src="http://www.medtion.com/uploads/1/image/public/201608/20160810153037_1kjct8vl9p.jpg" alt="" title="6.webp.jpg" loading="lazy"></figure>
 <p>Step 2：随后，将头部向对侧旋转80°。这时，IAC的方向应是垂直的，这样方便解剖定位和手术操作。</p>
-<p><img src="http://www.medtion.com/uploads/1/image/public/201608/20160810153050_ek6m8xlgpy.jpg" alt="" title="7.webp.jpg"></p>
+<figure data-type="image" tabindex="6"><img src="http://www.medtion.com/uploads/1/image/public/201608/20160810153050_ek6m8xlgpy.jpg" alt="" title="7.webp.jpg" loading="lazy"></figure>
 <p>Step 3：头部侧屈10°-15°，有利于依靠重力牵拉颞叶。与颞下前、后入路相比，这种硬膜外路径所需要的侧屈角度可小一些，方便IAC的显露。</p>
-<p><img src="http://www.medtion.com/uploads/1/image/public/201608/20160810153102_korsqejhhp.jpg" alt="" title="8.webp.jpg"></p>
+<figure data-type="image" tabindex="7"><img src="http://www.medtion.com/uploads/1/image/public/201608/20160810153102_korsqejhhp.jpg" alt="" title="8.webp.jpg" loading="lazy"></figure>
 <p>Step 4：与颞下前、后入路一样，头部后伸10°，这可使术者操作舒适。此外，轻微的后伸还可避免气道、喉部和颈部血管受到过度挤压。</p>
 <p><strong>2. 解剖标记和定位</strong></p>
 <p>这个手术入路需要掌握的关键解剖结构有：眶外侧缘、颧弓、关节结节、外耳道、乳突和乳突上嵴。注意：耳颞神经和颞浅动脉的走行。</p>
-<p><strong><img src="http://www.medtion.com/uploads/1/image/public/201608/20160810153226_ugvf3v4r26.jpg" alt="" title="9.webp.jpg"></strong></p>
+<p><strong><img src="http://www.medtion.com/uploads/1/image/public/201608/20160810153226_ugvf3v4r26.jpg" alt="" title="9.webp.jpg" loading="lazy"></strong></p>
 <p><strong>图示颞颧区关键解剖结构和开颅位置。骨窗中心应置于EAC水平，皮肤切口位于耳前、颞浅动脉后方。</strong></p>
-<p><img src="http://www.medtion.com/uploads/1/image/public/201608/20160810153247_wrx6tlfvho.jpg" alt="" title="10.webp.jpg"></p>
+<figure data-type="image" tabindex="8"><img src="http://www.medtion.com/uploads/1/image/public/201608/20160810153247_wrx6tlfvho.jpg" alt="" title="10.webp.jpg" loading="lazy"></figure>
 <p>标记关键解剖结构后，就可确定手术切口和开颅位置。骨窗的基底对应于乳突上嵴；骨窗的中心对应着EAC。骨窗面积约25x25mm，需充分显露IAC；直型手术切口长约5cm，位于耳前，避免损伤耳颞神经和颞浅动脉。</p>
 <p><strong>3. 开颅</strong></p>
-<p><img src="http://www.medtion.com/uploads/1/image/public/201608/20160810153510_gat44q8xmw.jpg" alt="" title="11.webp.jpg"></p>
+<figure data-type="image" tabindex="9"><img src="http://www.medtion.com/uploads/1/image/public/201608/20160810153510_gat44q8xmw.jpg" alt="" title="11.webp.jpg" loading="lazy"></figure>
 <p>Step 1：左侧。耳屏前直切口，分离颞浅动脉和耳颞神经，然后向前牵开并保护之。</p>
-<p><img src="http://www.medtion.com/uploads/1/image/public/201608/20160810153544_9p22clgi9m.jpg" alt="" title="12.webp.jpg"></p>
+<figure data-type="image" tabindex="10"><img src="http://www.medtion.com/uploads/1/image/public/201608/20160810153544_9p22clgi9m.jpg" alt="" title="12.webp.jpg" loading="lazy"></figure>
 <p>Step 2：乳突牵开器牵开。”Y”型切开颞肌筋膜，显露颞肌。注意：将颞浅动脉向前方移位牵开。</p>
-<p><img src="http://www.medtion.com/uploads/1/image/public/201608/20160810153602_elxu1tkyy5.jpg" alt="" title="13.webp.jpg"></p>
+<figure data-type="image" tabindex="11"><img src="http://www.medtion.com/uploads/1/image/public/201608/20160810153602_elxu1tkyy5.jpg" alt="" title="13.webp.jpg" loading="lazy"></figure>
 <p>Step 3：如图所示牵开、固定筋膜，显露颞肌。</p>
-<p><img src="http://www.medtion.com/uploads/1/image/public/201608/20160810153622_hq8c2ufcyq.jpg" alt="" title="14.webp.jpg"></p>
+<figure data-type="image" tabindex="12"><img src="http://www.medtion.com/uploads/1/image/public/201608/20160810153622_hq8c2ufcyq.jpg" alt="" title="14.webp.jpg" loading="lazy"></figure>
 <p>Step 4：钝性剥离子从下方乳突上嵴和颧弓处剥离颞肌，显露颞骨鳞部。颞肌后部通常较薄，因而没必要切开即可充分显露颞骨。</p>
-<p><img src="http://www.medtion.com/uploads/1/image/public/201608/20160810153650_jq0e9xjklp.jpg" alt="" title="15.webp.jpg"></p>
+<figure data-type="image" tabindex="13"><img src="http://www.medtion.com/uploads/1/image/public/201608/20160810153650_jq0e9xjklp.jpg" alt="" title="15.webp.jpg" loading="lazy"></figure>
 <p>Step 5：于乳突上嵴后部钻孔一个，即打开中颅窝。</p>
-<p><img src="http://www.medtion.com/uploads/1/image/public/201608/20160810153714_vhgh0mty4x.jpg" alt="" title="16.webp.jpg"></p>
+<figure data-type="image" tabindex="14"><img src="http://www.medtion.com/uploads/1/image/public/201608/20160810153714_vhgh0mty4x.jpg" alt="" title="16.webp.jpg" loading="lazy"></figure>
 <p>Step 6：适当扩大骨孔，铣刀先自后向前、与颧弓平行铣开颅骨。</p>
-<p><img src="http://www.medtion.com/uploads/1/image/public/201608/20160810153754_isct1fvbro.jpg" alt="" title="17.webp.jpg"></p>
+<figure data-type="image" tabindex="15"><img src="http://www.medtion.com/uploads/1/image/public/201608/20160810153754_isct1fvbro.jpg" alt="" title="17.webp.jpg" loading="lazy"></figure>
 <p>Step 7：再从骨孔处“C”型游离骨瓣，宽约25mm、高约25mm。这里要注意，骨瓣高度必须保证2.5cm，方可良好显露内听道。此操作要注意避免损伤硬脑膜。</p>
-<p><img src="http://www.medtion.com/uploads/1/image/public/201608/20160810153811_y8wujqr7e8.jpg" alt="" title="18.webp.jpg"></p>
+<figure data-type="image" tabindex="16"><img src="http://www.medtion.com/uploads/1/image/public/201608/20160810153811_y8wujqr7e8.jpg" alt="" title="18.webp.jpg" loading="lazy"></figure>
 <p>Step 8：如术前未放置腰大池引流，那么就需在硬脑膜上切一小口，打开脑皮层表面的蛛网膜下腔，释放脑脊液。如此，可最大程度的降低颞叶牵拉的力度。去除骨瓣后，小磨钻磨除骨窗下缘的内板（此部操作应注意保护好硬脑膜），这样可增加手术视角和操作自由度。如乳突气房开放，应严密封堵。</p>
-<p><img src="http://www.medtion.com/uploads/1/image/public/201608/20160810153827_wus7wl694d.jpg" alt="" title="19.webp.jpg"></p>
+<figure data-type="image" tabindex="17"><img src="http://www.medtion.com/uploads/1/image/public/201608/20160810153827_wus7wl694d.jpg" alt="" title="19.webp.jpg" loading="lazy"></figure>
 <p>Step 9：仔细剥离颅底硬脑膜，并牵开，显露中颅窝底。</p>
 <p><strong>4. 硬膜外-硬膜下操作</strong></p>
-<p><strong><img src="http://www.medtion.com/uploads/1/image/public/201608/20160810153856_okbip6rlck.jpg" alt="" title="20.webp.jpg"></strong></p>
+<p><strong><img src="http://www.medtion.com/uploads/1/image/public/201608/20160810153856_okbip6rlck.jpg" alt="" title="20.webp.jpg" loading="lazy"></strong></p>
 <p>Step 1：左侧。新鲜尸体标本。牵开硬脑膜后，显露岩浅大神经（GSPN）。仔细游离GSPN，于其前缘可见MMA及棘孔。</p>
-<p><img src="http://www.medtion.com/uploads/1/image/public/201608/20160810153915_12362rxmg1.jpg" alt="" title="21.webp.jpg"></p>
+<figure data-type="image" tabindex="18"><img src="http://www.medtion.com/uploads/1/image/public/201608/20160810153915_12362rxmg1.jpg" alt="" title="21.webp.jpg" loading="lazy"></figure>
 <p>Step 2：进一步牵开硬脑膜，显露岩骨嵴和弓状隆起。用小磨钻部分磨除覆盖上半规管的薄层骨质，目的是为了精准定位。上半规管蓝线（结合岩大神经）可精确的界定内听道的走行。</p>
-<p><img src="http://www.medtion.com/uploads/1/image/public/201608/20160810153934_h51607svob.jpg" alt="" title="22.webp.jpg"></p>
+<figure data-type="image" tabindex="19"><img src="http://www.medtion.com/uploads/1/image/public/201608/20160810153934_h51607svob.jpg" alt="" title="22.webp.jpg" loading="lazy"></figure>
 <p>Step 3：根据上述的解剖定位，小磨钻打开IAC。注意：蓝线、GSPN和磨钻方向之间的相互关系。</p>
-<p><img src="http://www.medtion.com/uploads/1/image/public/201608/20160810154000_g70xwiujfj.jpg" alt="" title="23.webp.jpg"></p>
+<figure data-type="image" tabindex="20"><img src="http://www.medtion.com/uploads/1/image/public/201608/20160810154000_g70xwiujfj.jpg" alt="" title="23.webp.jpg" loading="lazy"></figure>
 <p>Step 4：显露IAC硬脑膜和后颅窝，显微椎板咬骨钳去除深部骨质。</p>
-<p><img src="http://www.medtion.com/uploads/1/image/public/201608/20160810154017_lbf0kr8be6.jpg" alt="" title="24.webp.jpg"></p>
+<figure data-type="image" tabindex="21"><img src="http://www.medtion.com/uploads/1/image/public/201608/20160810154017_lbf0kr8be6.jpg" alt="" title="24.webp.jpg" loading="lazy"></figure>
 <p>Step 5：打开硬脑膜即可见前庭上神经和面神经。注意观察AICA的环襻，背景亦可见脑干，颞下入路最大的优势就在于——可清楚的显露IAC及其内容物。</p>
-<p><img src="http://www.medtion.com/uploads/1/image/public/201608/20160810154035_hwsb2jh08x.jpg" alt="" title="25.webp.jpg"></p>
+<figure data-type="image" tabindex="22"><img src="http://www.medtion.com/uploads/1/image/public/201608/20160810154035_hwsb2jh08x.jpg" alt="" title="25.webp.jpg" loading="lazy"></figure>
 <p>Step 6：向前进一步磨除岩尖，即可显露脑干的外侧面。注意观察：外展神经穿行于Dorello管。特别需要注意的是：勿损伤耳蜗。</p>
-<p><img src="http://www.medtion.com/uploads/1/image/public/201608/20160810154054_r11m64blxo.jpg" alt="" title="26.webp.jpg"></p>
+<figure data-type="image" tabindex="23"><img src="http://www.medtion.com/uploads/1/image/public/201608/20160810154054_r11m64blxo.jpg" alt="" title="26.webp.jpg" loading="lazy"></figure>
 <p>Step 7：打开颞下硬脑膜，切开小脑幕，显露环池结构。注意观察：Dandy岩静脉，用显微剪刀分离滑车神经周围的蛛网膜。</p>
-<p><img src="http://www.medtion.com/uploads/1/image/public/201608/20160810154114_ybrllmhjfx.jpg" alt="" title="27.webp.jpg"></p>
+<figure data-type="image" tabindex="24"><img src="http://www.medtion.com/uploads/1/image/public/201608/20160810154114_ybrllmhjfx.jpg" alt="" title="27.webp.jpg" loading="lazy"></figure>
 <p>Step 8：继续向前分离，进入桥脑的腹外侧面。注意观察：滑车、三叉神经以及BA。</p>
-<p><img src="http://www.medtion.com/uploads/1/image/public/201608/20160810154139_cl5aid7yp6.jpg" alt="" title="28.webp.jpg"></p>
+<figure data-type="image" tabindex="25"><img src="http://www.medtion.com/uploads/1/image/public/201608/20160810154139_cl5aid7yp6.jpg" alt="" title="28.webp.jpg" loading="lazy"></figure>
 <p>Step 9：切除Dandy岩静脉后，可充分显露动眼、滑车和三叉神经。注意观察：BA主干以及SCA双干。</p>
-<p><img src="http://www.medtion.com/uploads/1/image/public/201608/20160810154157_a77ntvhir6.jpg" alt="" title="29.webp.jpg"></p>
+<figure data-type="image" tabindex="26"><img src="http://www.medtion.com/uploads/1/image/public/201608/20160810154157_a77ntvhir6.jpg" alt="" title="29.webp.jpg" loading="lazy"></figure>
 <p>Step 10：观察BA顶端的SCA及P1段、动眼和滑车神经。</p>
-<p><img src="http://www.medtion.com/uploads/1/image/public/201608/20160810154216_b7btk5m4gt.jpg" alt="" title="30.webp.jpg"></p>
+<figure data-type="image" tabindex="27"><img src="http://www.medtion.com/uploads/1/image/public/201608/20160810154216_b7btk5m4gt.jpg" alt="" title="30.webp.jpg" loading="lazy"></figure>
 <p>Step 11：切除岩尖、分开小脑幕后，显露桥脑前外侧面。充分显露BA主干、从AICA到SCA、动眼神经、滑车神经、三叉神经以及外展神经。</p>
-<p><img src="http://www.medtion.com/uploads/1/image/public/201608/20160810154235_uf5cgvtk1r.jpg" alt="" title="31.webp.jpg"></p>
+<figure data-type="image" tabindex="28"><img src="http://www.medtion.com/uploads/1/image/public/201608/20160810154235_uf5cgvtk1r.jpg" alt="" title="31.webp.jpg" loading="lazy"></figure>
 <p>Step 12：再向后方探查，观察三叉、外展和面听神经之间的关系。</p>
 <p><strong>5. 关颅</strong></p>
 <p>完成颅内操作后，硬膜下生理盐水冲洗。此处硬脑膜水密缝合几乎不可能，但也需仔细缝合，有助于后颅窝硬脑膜重建。颞肌及筋膜的严密缝合可有效的避免术后脑脊液漏，并可封堵内听道骨缺损。部分病例还可于硬膜外使用腹部脂肪修补。钛片固定骨瓣。彻底止血后，间断缝合颞肌、筋膜，皮内连续缝合头皮。因切口较小，不必也不推荐放置引流管，以避免术后脑脊液漏。</p>
@@ -805,11 +991,11 @@ plt.show()
 <ul>
 <li>术前花时间做好计划、设计好手术体位。</li>
 </ul>
-<p><img src="http://www.medtion.com/uploads/1/image/public/201608/20160810154345_9eyda2as69.jpg" alt="" title="32.webp.jpg"></p>
+<figure data-type="image" tabindex="29"><img src="http://www.medtion.com/uploads/1/image/public/201608/20160810154345_9eyda2as69.jpg" alt="" title="32.webp.jpg" loading="lazy"></figure>
 <ul>
 <li>头部旋转80°可良好显露IAC。</li>
 </ul>
-<p><img src="http://www.medtion.com/uploads/1/image/public/201608/20160810154415_fwwt12oct2.jpg" alt="" title="33.webp.jpg"></p>
+<figure data-type="image" tabindex="30"><img src="http://www.medtion.com/uploads/1/image/public/201608/20160810154415_fwwt12oct2.jpg" alt="" title="33.webp.jpg" loading="lazy"></figure>
 <ul>
 <li>
 <p>与颞下前、颞下后入路对比，这种硬膜外入路需要侧屈的角度更小、抬高的角度更大。</p>
@@ -821,35 +1007,35 @@ plt.show()
 <p>耳前直切口，注意保护好颞浅动脉和耳颞神经。</p>
 </li>
 </ul>
-<p><img src="http://www.medtion.com/uploads/1/image/public/201608/20160810154443_fa8t7bcan5.jpg" alt="" title="34.webp.jpg"></p>
+<figure data-type="image" tabindex="31"><img src="http://www.medtion.com/uploads/1/image/public/201608/20160810154443_fa8t7bcan5.jpg" alt="" title="34.webp.jpg" loading="lazy"></figure>
 <ul>
 <li>“Y”型切开颞肌筋膜，如图所示牵开固定。其中，基底筋膜瓣（颧弓侧）还可用于硬膜修补。</li>
 </ul>
-<p><img src="http://www.medtion.com/uploads/1/image/public/201608/20160810154506_lh9hifh1r9.jpg" alt="" title="35.webp.jpg"></p>
+<figure data-type="image" tabindex="32"><img src="http://www.medtion.com/uploads/1/image/public/201608/20160810154506_lh9hifh1r9.jpg" alt="" title="35.webp.jpg" loading="lazy"></figure>
 <ul>
 <li>绝大多数情况下，颞肌的剥离都可使用钝性剥离子完成，不需切开颞肌。</li>
 </ul>
-<p><img src="http://www.medtion.com/uploads/1/image/public/201608/20160810154534_a424s0l34i.jpg" alt="" title="36.webp.jpg"></p>
+<figure data-type="image" tabindex="33"><img src="http://www.medtion.com/uploads/1/image/public/201608/20160810154534_a424s0l34i.jpg" alt="" title="36.webp.jpg" loading="lazy"></figure>
 <ul>
 <li>游离骨瓣步骤：1. 颅骨钻孔；2. 平行于乳突上嵴和颧弓铣开颞底颅骨；3. 半弧形游离骨瓣。</li>
 </ul>
-<p><img src="http://www.medtion.com/uploads/1/image/public/201608/20160810154555_2xc5m2tqc0.jpg" alt="" title="37.webp.jpg"></p>
+<figure data-type="image" tabindex="34"><img src="http://www.medtion.com/uploads/1/image/public/201608/20160810154555_2xc5m2tqc0.jpg" alt="" title="37.webp.jpg" loading="lazy"></figure>
 <ul>
 <li>骨窗高度至少2.5cm（从颧弓处测量），这样方可获得内听道的充分显露。</li>
 </ul>
-<p><img src="http://www.medtion.com/uploads/1/image/public/201608/20160810154623_hsxdy2nknl.jpg" alt="" title="38.webp.jpg"></p>
+<figure data-type="image" tabindex="35"><img src="http://www.medtion.com/uploads/1/image/public/201608/20160810154623_hsxdy2nknl.jpg" alt="" title="38.webp.jpg" loading="lazy"></figure>
 <ul>
 <li>磨除骨窗颞底的内板，此步骤重要性在于增大手术视角和操作自由度。</li>
 </ul>
-<p><img src="http://www.medtion.com/uploads/1/image/public/201608/20160810154652_sx9njlqqvm.jpg" alt="" title="39.webp.jpg"></p>
+<figure data-type="image" tabindex="36"><img src="http://www.medtion.com/uploads/1/image/public/201608/20160810154652_sx9njlqqvm.jpg" alt="" title="39.webp.jpg" loading="lazy"></figure>
 <ul>
 <li>如乳突气房开放不可避免，需仔细封堵。封堵材料可用骨蜡、筋膜瓣或颞肌。</li>
 </ul>
-<p><img src="http://www.medtion.com/uploads/1/image/public/201608/20160810154724_b5ndihay51.jpg" alt="" title="40.webp.jpg"></p>
+<figure data-type="image" tabindex="37"><img src="http://www.medtion.com/uploads/1/image/public/201608/20160810154724_b5ndihay51.jpg" alt="" title="40.webp.jpg" loading="lazy"></figure>
 <ul>
 <li>为尽可能降低颞叶的牵拉力度，可在硬脑膜上切开一小口，打开皮层蛛网膜下腔。也可在术前放置腰大池引流。</li>
 </ul>
-<p><img src="http://www.medtion.com/uploads/1/image/public/201608/20160810154759_t16robdqgw.jpg" alt="" title="41.webp.jpg"></p>
+<figure data-type="image" tabindex="38"><img src="http://www.medtion.com/uploads/1/image/public/201608/20160810154759_t16robdqgw.jpg" alt="" title="41.webp.jpg" loading="lazy"></figure>
 <ul>
 <li>
 <p>使用“蓝线”技术，精确定位内听道走行。</p>
@@ -864,7 +1050,7 @@ plt.show()
 <p>如术后发生脑脊液鼻漏，可放置腰大池引流。</p>
 </li>
 </ul>
-<p><img src="http://www.medtion.com/uploads/1/image/public/201608/20160810154826_y1t083ruen.jpg" alt="" title="42.webp.jpg"></p>
+<figure data-type="image" tabindex="39"><img src="http://www.medtion.com/uploads/1/image/public/201608/20160810154826_y1t083ruen.jpg" alt="" title="42.webp.jpg" loading="lazy"></figure>
 <ul>
 <li>
 <p>骨孔处用钛片固定、封堵。</p>
@@ -877,8 +1063,8 @@ plt.show()
     </entry>
     <entry>
         <title type="html"><![CDATA[从一个py中运行另一个带参数的py]]></title>
-        <id>https://blog.bioprinting.site/post/6F7PaKHq4</id>
-        <link href="https://blog.bioprinting.site/post/6F7PaKHq4">
+        <id>https://lizhenzhublog.github.io/post/6F7PaKHq4/</id>
+        <link href="https://lizhenzhublog.github.io/post/6F7PaKHq4/">
         </link>
         <updated>2019-07-08T12:15:16.000Z</updated>
         <content type="html"><![CDATA[<pre><code>import sys
@@ -933,23 +1119,23 @@ if __name__=='__main__':
 <p>1）从命令行调用wc_query_test.py：</p>
 <p><code>~/PycharmProjects/webctrl$ python wc_query_test.py -u aawrg -p wgAWER -n YWERGAEWR</code></p>
 <p>2）从命令行编译和调用wc_query_test：</p>
-<p><code>~/PycharmProjects/webctrl$ pyinstaller --distpath dist/. wc_query_test.py
+<p><code>~/PycharmProjects/webctrl$ pyinstaller --distpath dist/. wc_query_test.py<br>
 ~/PycharmProjects/webctrl$ ./dist/wc_query_test/wc_query_test -u aawrg -p wgAWER -n YWERGAEWR</code></p>
 <p>3）从另一个python脚本调用wc_query_test，该脚本进入模块类型用法的方向：</p>
-<p><code>import wc_query_test
-myDictonary = {'username':'wsdl', 'password':'aaaaaa', 'node':'/trees/geographic', 'url':'https://my.server.de'}
+<p><code>import wc_query_test<br>
+myDictonary = {'username':'wsdl', 'password':'aaaaaa', 'node':'/trees/geographic', 'url':'https://my.server.de'}<br>
 wc_query_test.main(myDictonary)</code></p>
 <p>所有三个版本都会产生与预期相同的输出，例如：</p>
-<p><code>~/PycharmProjects/webctrl$ ./dist/wc_query_test/wc_query_test -u aawrg -p wgAWER -n YWERGAEWR
-Username: aawrg
-Node: YWERGAEWR
+<p><code>~/PycharmProjects/webctrl$ ./dist/wc_query_test/wc_query_test -u aawrg -p wgAWER -n YWERGAEWR<br>
+Username: aawrg<br>
+Node: YWERGAEWR<br>
 URL: https://webctrl.rz-berlin.mpg.de</code></p>
 ]]></content>
     </entry>
     <entry>
         <title type="html"><![CDATA[numpy_stl简介]]></title>
-        <id>https://blog.bioprinting.site/post/5OyTRhe_F</id>
-        <link href="https://blog.bioprinting.site/post/5OyTRhe_F">
+        <id>https://lizhenzhublog.github.io/post/5OyTRhe_F/</id>
+        <link href="https://lizhenzhublog.github.io/post/5OyTRhe_F/">
         </link>
         <updated>2019-06-28T09:49:05.000Z</updated>
         <content type="html"><![CDATA[<h1 id="欢迎来到numpy-stl的文档">欢迎来到numpy-stl的文档！</h1>
@@ -1037,8 +1223,8 @@ URL: https://webctrl.rz-berlin.mpg.de</code></p>
 <h2 id="快速入门">快速入门</h2>
 </li>
 <li>
-<p>Quickstart
-import numpy
+<p>Quickstart<br>
+import numpy<br>
 from stl import mesh</p>
 </li>
 </ul>
@@ -1046,60 +1232,60 @@ from stl import mesh</p>
 <p>your_mesh = mesh.Mesh.from_file('some_file.stl')</p>
 <h1 id="or-creating-a-new-mesh-make-sure-not-to-overwrite-the-mesh-import-by">Or creating a new mesh (make sure not to overwrite the <code>mesh</code> import by</h1>
 <h1 id="naming-it-mesh">naming it <code>mesh</code>):</h1>
-<p>VERTICE_COUNT = 100
-data = numpy.zeros(VERTICE_COUNT, dtype=mesh.Mesh.dtype)
+<p>VERTICE_COUNT = 100<br>
+data = numpy.zeros(VERTICE_COUNT, dtype=mesh.Mesh.dtype)<br>
 your_mesh = mesh.Mesh(data, remove_empty_areas=False)</p>
 <h1 id="the-mesh-normals-calculated-automatically">The mesh normals (calculated automatically)</h1>
 <p>your_mesh.normals</p>
 <h1 id="the-mesh-vectors">The mesh vectors</h1>
 <p>your_mesh.v0, your_mesh.v1, your_mesh.v2</p>
 <h1 id="accessing-individual-points-concatenation-of-v0-v1-and-v2-in-triplets">Accessing individual points (concatenation of v0, v1 and v2 in triplets)</h1>
-<p>assert (your_mesh.points[0][0:3] == your_mesh.v0[0]).all()
-assert (your_mesh.points[0][3:6] == your_mesh.v1[0]).all()
-assert (your_mesh.points[0][6:9] == your_mesh.v2[0]).all()
+<p>assert (your_mesh.points[0][0:3] == your_mesh.v0[0]).all()<br>
+assert (your_mesh.points[0][3:6] == your_mesh.v1[0]).all()<br>
+assert (your_mesh.points[0][6:9] == your_mesh.v2[0]).all()<br>
 assert (your_mesh.points[1][0:3] == your_mesh.v0[1]).all()</p>
-<p>your_mesh.save('new_stl_file.stl')
+<p>your_mesh.save('new_stl_file.stl')<br>
 Plotting using matplotlib is equally easy:</p>
-<p>from stl import mesh
-from mpl_toolkits import mplot3d
+<p>from stl import mesh<br>
+from mpl_toolkits import mplot3d<br>
 from matplotlib import pyplot</p>
 <h1 id="create-a-new-plot">Create a new plot</h1>
-<p>figure = pyplot.figure()
+<p>figure = pyplot.figure()<br>
 axes = mplot3d.Axes3D(figure)</p>
 <h1 id="load-the-stl-files-and-add-the-vectors-to-the-plot">Load the STL files and add the vectors to the plot</h1>
-<p>your_mesh = mesh.Mesh.from_file('tests/stl_binary/HalfDonut.stl')
+<p>your_mesh = mesh.Mesh.from_file('tests/stl_binary/HalfDonut.stl')<br>
 axes.add_collection3d(mplot3d.art3d.Poly3DCollection(your_mesh.vectors))</p>
 <h1 id="auto-scale-to-the-mesh-size">Auto scale to the mesh size</h1>
-<p>scale = your_mesh.points.flatten(-1)
+<p>scale = your_mesh.points.flatten(-1)<br>
 axes.auto_scale_xyz(scale, scale, scale)</p>
 <h1 id="show-the-plot-to-the-screen">Show the plot to the screen</h1>
-<p>pyplot.show()
-Modifying Mesh objects
-from stl import mesh
-import math
+<p>pyplot.show()<br>
+Modifying Mesh objects<br>
+from stl import mesh<br>
+import math<br>
 import numpy</p>
 <h1 id="create-3-faces-of-a-cube">Create 3 faces of a cube</h1>
 <p>data = numpy.zeros(6, dtype=mesh.Mesh.dtype)</p>
 <h1 id="top-of-the-cube">Top of the cube</h1>
-<p>data['vectors'][0] = numpy.array([[0, 1, 1],
-[1, 0, 1],
-[0, 0, 1]])
-data['vectors'][1] = numpy.array([[1, 0, 1],
-[0, 1, 1],
+<p>data['vectors'][0] = numpy.array([[0, 1, 1],<br>
+[1, 0, 1],<br>
+[0, 0, 1]])<br>
+data['vectors'][1] = numpy.array([[1, 0, 1],<br>
+[0, 1, 1],<br>
 [1, 1, 1]])</p>
 <h1 id="right-face">Right face</h1>
-<p>data['vectors'][2] = numpy.array([[1, 0, 0],
-[1, 0, 1],
-[1, 1, 0]])
-data['vectors'][3] = numpy.array([[1, 1, 1],
-[1, 0, 1],
+<p>data['vectors'][2] = numpy.array([[1, 0, 0],<br>
+[1, 0, 1],<br>
+[1, 1, 0]])<br>
+data['vectors'][3] = numpy.array([[1, 1, 1],<br>
+[1, 0, 1],<br>
 [1, 1, 0]])</p>
 <h1 id="left-face">Left face</h1>
-<p>data['vectors'][4] = numpy.array([[0, 0, 0],
-[1, 0, 0],
-[1, 0, 1]])
-data['vectors'][5] = numpy.array([[0, 0, 0],
-[0, 0, 1],
+<p>data['vectors'][4] = numpy.array([[0, 0, 0],<br>
+[1, 0, 0],<br>
+[1, 0, 1]])<br>
+data['vectors'][5] = numpy.array([[0, 0, 0],<br>
+[0, 0, 1],<br>
 [1, 0, 1]])</p>
 <h1 id="since-the-cube-faces-are-from-0-to-1-we-can-move-it-to-the-middle-by">Since the cube faces are from 0 to 1 we can move it to the middle by</h1>
 <h1 id="substracting-5">substracting .5</h1>
@@ -1113,232 +1299,232 @@ data['vectors'][5] = numpy.array([[0, 0, 0],
 <h1 id="rotate-90-degrees-over-the-x-axis">Rotate 90 degrees over the X axis</h1>
 <p>meshes[2].rotate([0.5, 0.0, 0.0], math.radians(90))</p>
 <h1 id="translate-2-points-over-the-x-and-y-points">Translate 2 points over the X and Y points</h1>
-<p>meshes[2].x += 2
+<p>meshes[2].x += 2<br>
 meshes[2].y += 2</p>
 <h1 id="rotate-90-degrees-over-the-x-and-y-axis">Rotate 90 degrees over the X and Y axis</h1>
-<p>meshes[3].rotate([0.5, 0.0, 0.0], math.radians(90))
+<p>meshes[3].rotate([0.5, 0.0, 0.0], math.radians(90))<br>
 meshes[3].rotate([0.0, 0.5, 0.0], math.radians(90))</p>
 <h1 id="translate-2-points-over-the-y-axis">Translate 2 points over the Y axis</h1>
 <p>meshes[3].y += 2</p>
 <h1 id="optionally-render-the-rotated-cube-faces">Optionally render the rotated cube faces</h1>
-<p>from matplotlib import pyplot
+<p>from matplotlib import pyplot<br>
 from mpl_toolkits import mplot3d</p>
 <h1 id="create-a-new-plot-2">Create a new plot</h1>
-<p>figure = pyplot.figure()
+<p>figure = pyplot.figure()<br>
 axes = mplot3d.Axes3D(figure)</p>
 <h1 id="render-the-cube-faces">Render the cube faces</h1>
-<p>for m in meshes:
+<p>for m in meshes:<br>
 axes.add_collection3d(mplot3d.art3d.Poly3DCollection(m.vectors))</p>
 <h1 id="auto-scale-to-the-mesh-size-2">Auto scale to the mesh size</h1>
-<p>scale = numpy.concatenate([m.points for m in meshes]).flatten(-1)
+<p>scale = numpy.concatenate([m.points for m in meshes]).flatten(-1)<br>
 axes.auto_scale_xyz(scale, scale, scale)</p>
 <h1 id="show-the-plot-to-the-screen-2">Show the plot to the screen</h1>
-<p>pyplot.show()
-Extending Mesh objects
-from stl import mesh
-import math
+<p>pyplot.show()<br>
+Extending Mesh objects<br>
+from stl import mesh<br>
+import math<br>
 import numpy</p>
 <h1 id="create-3-faces-of-a-cube-2">Create 3 faces of a cube</h1>
 <p>data = numpy.zeros(6, dtype=mesh.Mesh.dtype)</p>
 <h1 id="top-of-the-cube-2">Top of the cube</h1>
-<p>data['vectors'][0] = numpy.array([[0, 1, 1],
-[1, 0, 1],
-[0, 0, 1]])
-data['vectors'][1] = numpy.array([[1, 0, 1],
-[0, 1, 1],
+<p>data['vectors'][0] = numpy.array([[0, 1, 1],<br>
+[1, 0, 1],<br>
+[0, 0, 1]])<br>
+data['vectors'][1] = numpy.array([[1, 0, 1],<br>
+[0, 1, 1],<br>
 [1, 1, 1]])</p>
 <h1 id="right-face-2">Right face</h1>
-<p>data['vectors'][2] = numpy.array([[1, 0, 0],
-[1, 0, 1],
-[1, 1, 0]])
-data['vectors'][3] = numpy.array([[1, 1, 1],
-[1, 0, 1],
+<p>data['vectors'][2] = numpy.array([[1, 0, 0],<br>
+[1, 0, 1],<br>
+[1, 1, 0]])<br>
+data['vectors'][3] = numpy.array([[1, 1, 1],<br>
+[1, 0, 1],<br>
 [1, 1, 0]])</p>
 <h1 id="left-face-2">Left face</h1>
-<p>data['vectors'][4] = numpy.array([[0, 0, 0],
-[1, 0, 0],
-[1, 0, 1]])
-data['vectors'][5] = numpy.array([[0, 0, 0],
-[0, 0, 1],
+<p>data['vectors'][4] = numpy.array([[0, 0, 0],<br>
+[1, 0, 0],<br>
+[1, 0, 1]])<br>
+data['vectors'][5] = numpy.array([[0, 0, 0],<br>
+[0, 0, 1],<br>
 [1, 0, 1]])</p>
 <h1 id="since-the-cube-faces-are-from-0-to-1-we-can-move-it-to-the-middle-by-2">Since the cube faces are from 0 to 1 we can move it to the middle by</h1>
 <h1 id="substracting-5-2">substracting .5</h1>
 <p>data['vectors'] -= .5</p>
-<p>cube_back = mesh.Mesh(data.copy())
+<p>cube_back = mesh.Mesh(data.copy())<br>
 cube_front = mesh.Mesh(data.copy())</p>
 <h1 id="rotate-90-degrees-over-the-x-axis-followed-by-the-y-axis-followed-by-the">Rotate 90 degrees over the X axis followed by the Y axis followed by the</h1>
 <h1 id="x-axis">X axis</h1>
-<p>cube_back.rotate([0.5, 0.0, 0.0], math.radians(90))
-cube_back.rotate([0.0, 0.5, 0.0], math.radians(90))
+<p>cube_back.rotate([0.5, 0.0, 0.0], math.radians(90))<br>
+cube_back.rotate([0.0, 0.5, 0.0], math.radians(90))<br>
 cube_back.rotate([0.5, 0.0, 0.0], math.radians(90))</p>
-<p>cube = mesh.Mesh(numpy.concatenate([
-cube_back.data.copy(),
-cube_front.data.copy(),
+<p>cube = mesh.Mesh(numpy.concatenate([<br>
+cube_back.data.copy(),<br>
+cube_front.data.copy(),<br>
 ]))</p>
 <h1 id="optionally-render-the-rotated-cube-faces-2">Optionally render the rotated cube faces</h1>
-<p>from matplotlib import pyplot
+<p>from matplotlib import pyplot<br>
 from mpl_toolkits import mplot3d</p>
 <h1 id="create-a-new-plot-3">Create a new plot</h1>
-<p>figure = pyplot.figure()
+<p>figure = pyplot.figure()<br>
 axes = mplot3d.Axes3D(figure)</p>
 <h1 id="render-the-cube">Render the cube</h1>
 <p>axes.add_collection3d(mplot3d.art3d.Poly3DCollection(cube.vectors))</p>
 <h1 id="auto-scale-to-the-mesh-size-3">Auto scale to the mesh size</h1>
-<p>scale = cube_back.points.flatten(-1)
+<p>scale = cube_back.points.flatten(-1)<br>
 axes.auto_scale_xyz(scale, scale, scale)</p>
 <h1 id="show-the-plot-to-the-screen-3">Show the plot to the screen</h1>
-<p>pyplot.show()
-Creating Mesh objects from a list of vertices and faces
-import numpy as np
+<p>pyplot.show()<br>
+Creating Mesh objects from a list of vertices and faces<br>
+import numpy as np<br>
 from stl import mesh</p>
 <h1 id="define-the-8-vertices-of-the-cube">Define the 8 vertices of the cube</h1>
 <p>vertices = np.array([<br>
-[-1, -1, -1],
-[+1, -1, -1],
-[+1, +1, -1],
-[-1, +1, -1],
-[-1, -1, +1],
-[+1, -1, +1],
-[+1, +1, +1],
+[-1, -1, -1],<br>
+[+1, -1, -1],<br>
+[+1, +1, -1],<br>
+[-1, +1, -1],<br>
+[-1, -1, +1],<br>
+[+1, -1, +1],<br>
+[+1, +1, +1],<br>
 [-1, +1, +1]])</p>
 <h1 id="define-the-12-triangles-composing-the-cube">Define the 12 triangles composing the cube</h1>
 <p>faces = np.array([<br>
-[0,3,1],
-[1,3,2],
-[0,4,7],
-[0,7,3],
-[4,5,6],
-[4,6,7],
-[5,1,2],
-[5,2,6],
-[2,3,6],
-[3,7,6],
-[0,1,5],
+[0,3,1],<br>
+[1,3,2],<br>
+[0,4,7],<br>
+[0,7,3],<br>
+[4,5,6],<br>
+[4,6,7],<br>
+[5,1,2],<br>
+[5,2,6],<br>
+[2,3,6],<br>
+[3,7,6],<br>
+[0,1,5],<br>
 [0,5,4]])</p>
 <h1 id="create-the-mesh">Create the mesh</h1>
-<p>cube = mesh.Mesh(np.zeros(faces.shape[0], dtype=mesh.Mesh.dtype))
-for i, f in enumerate(faces):
-for j in range(3):
+<p>cube = mesh.Mesh(np.zeros(faces.shape[0], dtype=mesh.Mesh.dtype))<br>
+for i, f in enumerate(faces):<br>
+for j in range(3):<br>
 cube.vectors[i][j] = vertices[f[j],:]</p>
 <h1 id="write-the-mesh-to-file-cubestl">Write the mesh to file &quot;cube.stl&quot;</h1>
-<p>cube.save('cube.stl')
-Evaluating Mesh properties (Volume, Center of gravity, Inertia)
-import numpy as np
+<p>cube.save('cube.stl')<br>
+Evaluating Mesh properties (Volume, Center of gravity, Inertia)<br>
+import numpy as np<br>
 from stl import mesh</p>
 <h1 id="using-an-existing-closed-stl-file">Using an existing closed stl file:</h1>
 <p>your_mesh = mesh.Mesh.from_file('some_file.stl')</p>
-<p>volume, cog, inertia = your_mesh.get_mass_properties()
-print(&quot;Volume                                  = {0}&quot;.format(volume))
-print(&quot;Position of the center of gravity (COG) = {0}&quot;.format(cog))
-print(&quot;Inertia matrix at expressed at the COG  = {0}&quot;.format(inertia[0,:]))
-print(&quot;                                          {0}&quot;.format(inertia[1,:]))
-print(&quot;                                          {0}&quot;.format(inertia[2,:]))
-Combining multiple STL files
-import math
-import stl
-from stl import mesh
+<p>volume, cog, inertia = your_mesh.get_mass_properties()<br>
+print(&quot;Volume                                  = {0}&quot;.format(volume))<br>
+print(&quot;Position of the center of gravity (COG) = {0}&quot;.format(cog))<br>
+print(&quot;Inertia matrix at expressed at the COG  = {0}&quot;.format(inertia[0,:]))<br>
+print(&quot;                                          {0}&quot;.format(inertia[1,:]))<br>
+print(&quot;                                          {0}&quot;.format(inertia[2,:]))<br>
+Combining multiple STL files<br>
+import math<br>
+import stl<br>
+from stl import mesh<br>
 import numpy</p>
 <h1 id="find-the-max-dimensions-so-we-can-know-the-bounding-box-getting-the-height">find the max dimensions, so we can know the bounding box, getting the height,</h1>
 <h1 id="width-length-because-these-are-the-step-size">width, length (because these are the step size)...</h1>
-<p>def find_mins_maxs(obj):
-minx = maxx = miny = maxy = minz = maxz = None
-for p in obj.points:
-# p contains (x, y, z)
-if minx is None:
-minx = p[stl.Dimension.X]
-maxx = p[stl.Dimension.X]
-miny = p[stl.Dimension.Y]
-maxy = p[stl.Dimension.Y]
-minz = p[stl.Dimension.Z]
-maxz = p[stl.Dimension.Z]
-else:
-maxx = max(p[stl.Dimension.X], maxx)
-minx = min(p[stl.Dimension.X], minx)
-maxy = max(p[stl.Dimension.Y], maxy)
-miny = min(p[stl.Dimension.Y], miny)
-maxz = max(p[stl.Dimension.Z], maxz)
-minz = min(p[stl.Dimension.Z], minz)
+<p>def find_mins_maxs(obj):<br>
+minx = maxx = miny = maxy = minz = maxz = None<br>
+for p in obj.points:<br>
+# p contains (x, y, z)<br>
+if minx is None:<br>
+minx = p[stl.Dimension.X]<br>
+maxx = p[stl.Dimension.X]<br>
+miny = p[stl.Dimension.Y]<br>
+maxy = p[stl.Dimension.Y]<br>
+minz = p[stl.Dimension.Z]<br>
+maxz = p[stl.Dimension.Z]<br>
+else:<br>
+maxx = max(p[stl.Dimension.X], maxx)<br>
+minx = min(p[stl.Dimension.X], minx)<br>
+maxy = max(p[stl.Dimension.Y], maxy)<br>
+miny = min(p[stl.Dimension.Y], miny)<br>
+maxz = max(p[stl.Dimension.Z], maxz)<br>
+minz = min(p[stl.Dimension.Z], minz)<br>
 return minx, maxx, miny, maxy, minz, maxz</p>
-<p>def translate(_solid, step, padding, multiplier, axis):
-if axis == 'x':
-items = [0, 3, 6]
-elif axis == 'y':
-items = [1, 4, 7]
-elif axis == 'z':
-items = [2, 5, 8]
-for p in _solid.points:
-# point items are ((x, y, z), (x, y, z), (x, y, z))
-for i in range(3):
+<p>def translate(_solid, step, padding, multiplier, axis):<br>
+if axis == 'x':<br>
+items = [0, 3, 6]<br>
+elif axis == 'y':<br>
+items = [1, 4, 7]<br>
+elif axis == 'z':<br>
+items = [2, 5, 8]<br>
+for p in _solid.points:<br>
+# point items are ((x, y, z), (x, y, z), (x, y, z))<br>
+for i in range(3):<br>
 p[items[i]] += (step * multiplier) + (padding * multiplier)</p>
-<p>def copy_obj(obj, dims, num_rows, num_cols, num_layers):
-w, l, h = dims
-copies = []
-for layer in range(num_layers):
-for row in range(num_rows):
-for col in range(num_cols):
-# skip the position where original being copied is
-if row == 0 and col == 0 and layer == 0:
-continue
-_copy = mesh.Mesh(obj.data.copy())
-# pad the space between objects by 10% of the dimension being
-# translated
-if col != 0:
-translate(_copy, w, w / 10., col, 'x')
-if row != 0:
-translate(_copy, l, l / 10., row, 'y')
-if layer != 0:
-translate(_copy, h, h / 10., layer, 'z')
-copies.append(_copy)
+<p>def copy_obj(obj, dims, num_rows, num_cols, num_layers):<br>
+w, l, h = dims<br>
+copies = []<br>
+for layer in range(num_layers):<br>
+for row in range(num_rows):<br>
+for col in range(num_cols):<br>
+# skip the position where original being copied is<br>
+if row == 0 and col == 0 and layer == 0:<br>
+continue<br>
+_copy = mesh.Mesh(obj.data.copy())<br>
+# pad the space between objects by 10% of the dimension being<br>
+# translated<br>
+if col != 0:<br>
+translate(_copy, w, w / 10., col, 'x')<br>
+if row != 0:<br>
+translate(_copy, l, l / 10., row, 'y')<br>
+if layer != 0:<br>
+translate(_copy, h, h / 10., layer, 'z')<br>
+copies.append(_copy)<br>
 return copies</p>
 <h1 id="using-an-existing-stl-file-2">Using an existing stl file:</h1>
 <p>main_body = mesh.Mesh.from_file('ball_and_socket_simplified_-_main_body.stl')</p>
 <h1 id="rotate-along-y">rotate along Y</h1>
 <p>main_body.rotate([0.0, 0.5, 0.0], math.radians(90))</p>
-<p>minx, maxx, miny, maxy, minz, maxz = find_mins_maxs(main_body)
-w1 = maxx - minx
-l1 = maxy - miny
-h1 = maxz - minz
+<p>minx, maxx, miny, maxy, minz, maxz = find_mins_maxs(main_body)<br>
+w1 = maxx - minx<br>
+l1 = maxy - miny<br>
+h1 = maxz - minz<br>
 copies = copy_obj(main_body, (w1, l1, h1), 2, 2, 1)</p>
 <h1 id="i-wanted-to-add-another-related-stl-to-the-final-stl">I wanted to add another related STL to the final STL</h1>
-<p>twist_lock = mesh.Mesh.from_file('ball_and_socket_simplified_-_twist_lock.stl')
-minx, maxx, miny, maxy, minz, maxz = find_mins_maxs(twist_lock)
-w2 = maxx - minx
-l2 = maxy - miny
-h2 = maxz - minz
-translate(twist_lock, w1, w1 / 10., 3, 'x')
-copies2 = copy_obj(twist_lock, (w2, l2, h2), 2, 2, 1)
-combined = mesh.Mesh(numpy.concatenate([main_body.data, twist_lock.data] +
-[copy.data for copy in copies] +
+<p>twist_lock = mesh.Mesh.from_file('ball_and_socket_simplified_-_twist_lock.stl')<br>
+minx, maxx, miny, maxy, minz, maxz = find_mins_maxs(twist_lock)<br>
+w2 = maxx - minx<br>
+l2 = maxy - miny<br>
+h2 = maxz - minz<br>
+translate(twist_lock, w1, w1 / 10., 3, 'x')<br>
+copies2 = copy_obj(twist_lock, (w2, l2, h2), 2, 2, 1)<br>
+combined = mesh.Mesh(numpy.concatenate([main_body.data, twist_lock.data] +<br>
+[copy.data for copy in copies] +<br>
 [copy.data for copy in copies2]))</p>
 <p>combined.save('combined.stl', mode=stl.Mode.ASCII)  # save as ASCII</p>
 <ul>
 <li>
 <h2 id="testsstl_corruption-module">tests.stl_corruption module</h2>
-<p>from <strong>future</strong> import print_function
-import pytest
+<p>from <strong>future</strong> import print_function<br>
+import pytest<br>
 import struct</p>
 <p>from stl import mesh</p>
-<p>_STL_FILE = '''
-solid test.stl
-facet normal -0.014565 0.073223 -0.002897
-outer loop
-vertex 0.399344 0.461940 1.044090
-vertex 0.500000 0.500000 1.500000
-vertex 0.576120 0.500000 1.117320
-endloop
-endfacet
-endsolid test.stl
+<p>_STL_FILE = '''<br>
+solid test.stl<br>
+facet normal -0.014565 0.073223 -0.002897<br>
+outer loop<br>
+vertex 0.399344 0.461940 1.044090<br>
+vertex 0.500000 0.500000 1.500000<br>
+vertex 0.576120 0.500000 1.117320<br>
+endloop<br>
+endfacet<br>
+endsolid test.stl<br>
 '''.lstrip()</p>
-<p>def test_valid_ascii(tmpdir, speedups):
-tmp_file = tmpdir.join('tmp.stl')
-with tmp_file.open('w+') as fh:
-fh.write(_STL_FILE)
-fh.seek(0)
+<p>def test_valid_ascii(tmpdir, speedups):<br>
+tmp_file = tmpdir.join('tmp.stl')<br>
+with tmp_file.open('w+') as fh:<br>
+fh.write(_STL_FILE)<br>
+fh.seek(0)<br>
 mesh.Mesh.from_file(str(tmp_file), fh=fh, speedups=speedups)</p>
-<p>def test_ascii_with_missing_name(tmpdir, speedups):
-tmp_file = tmpdir.join('tmp.stl')
-with tmp_file.open('w+') as fh:
-# Split the file into lines
+<p>def test_ascii_with_missing_name(tmpdir, speedups):<br>
+tmp_file = tmpdir.join('tmp.stl')<br>
+with tmp_file.open('w+') as fh:<br>
+# Split the file into lines<br>
 lines = _STL_FILE.splitlines()</p>
 <pre><code>    # Remove everything except solid
     lines[0] = lines[0].split()[0]
@@ -1348,17 +1534,17 @@ lines = _STL_FILE.splitlines()</p>
     fh.seek(0)
     mesh.Mesh.from_file(str(tmp_file), fh=fh, speedups=speedups)
 </code></pre>
-<p>def test_ascii_with_blank_lines(tmpdir, speedups):
-_stl_file = '''
+<p>def test_ascii_with_blank_lines(tmpdir, speedups):<br>
+_stl_file = '''<br>
 solid test.stl</p>
 <p>facet normal -0.014565 0.073223 -0.002897</p>
 <p>outer loop</p>
-<p>vertex 0.399344 0.461940 1.044090
+<p>vertex 0.399344 0.461940 1.044090<br>
 vertex 0.500000 0.500000 1.500000</p>
 <p>vertex 0.576120 0.500000 1.117320</p>
 <p>endloop</p>
 <p>endfacet</p>
-<p>endsolid test.stl
+<p>endsolid test.stl<br>
 '''.lstrip()</p>
 <pre><code>tmp_file = tmpdir.join('tmp.stl')
 with tmp_file.open('w+') as fh:
@@ -1366,12 +1552,12 @@ with tmp_file.open('w+') as fh:
     fh.seek(0)
     mesh.Mesh.from_file(str(tmp_file), fh=fh, speedups=speedups)
 </code></pre>
-<p>def test_incomplete_ascii_file(tmpdir, speedups):
-tmp_file = tmpdir.join('tmp.stl')
-with tmp_file.open('w+') as fh:
-fh.write('solid some_file.stl')
-fh.seek(0)
-with pytest.raises(AssertionError):
+<p>def test_incomplete_ascii_file(tmpdir, speedups):<br>
+tmp_file = tmpdir.join('tmp.stl')<br>
+with tmp_file.open('w+') as fh:<br>
+fh.write('solid some_file.stl')<br>
+fh.seek(0)<br>
+with pytest.raises(AssertionError):<br>
 mesh.Mesh.from_file(str(tmp_file), fh=fh, speedups=speedups)</p>
 <pre><code>for offset in (-20, 82, 100):
     with tmp_file.open('w+') as fh:
@@ -1380,14 +1566,14 @@ mesh.Mesh.from_file(str(tmp_file), fh=fh, speedups=speedups)</p>
         with pytest.raises(AssertionError):
             mesh.Mesh.from_file(str(tmp_file), fh=fh, speedups=speedups)
 </code></pre>
-<p>def test_corrupt_ascii_file(tmpdir, speedups):
-tmp_file = tmpdir.join('tmp.stl')
-with tmp_file.open('w+') as fh:
-fh.write(_STL_FILE)
-fh.seek(40)
-print('####\n' * 100, file=fh)
-fh.seek(0)
-with pytest.raises(AssertionError):
+<p>def test_corrupt_ascii_file(tmpdir, speedups):<br>
+tmp_file = tmpdir.join('tmp.stl')<br>
+with tmp_file.open('w+') as fh:<br>
+fh.write(_STL_FILE)<br>
+fh.seek(40)<br>
+print('####\n' * 100, file=fh)<br>
+fh.seek(0)<br>
+with pytest.raises(AssertionError):<br>
 mesh.Mesh.from_file(str(tmp_file), fh=fh, speedups=speedups)</p>
 <pre><code>with tmp_file.open('w+') as fh:
     fh.write(_STL_FILE)
@@ -1399,12 +1585,12 @@ mesh.Mesh.from_file(str(tmp_file), fh=fh, speedups=speedups)</p>
     with pytest.raises(AssertionError):
         mesh.Mesh.from_file(str(tmp_file), fh=fh, speedups=speedups)
 </code></pre>
-<p>def test_corrupt_binary_file(tmpdir, speedups):
-tmp_file = tmpdir.join('tmp.stl')
-with tmp_file.open('w+') as fh:
-fh.write('#########\n' * 8)
-fh.write('#\0\0\0')
-fh.seek(0)
+<p>def test_corrupt_binary_file(tmpdir, speedups):<br>
+tmp_file = tmpdir.join('tmp.stl')<br>
+with tmp_file.open('w+') as fh:<br>
+fh.write('#########\n' * 8)<br>
+fh.write('#\0\0\0')<br>
+fh.seek(0)<br>
 mesh.Mesh.from_file(str(tmp_file), fh=fh, speedups=speedups)</p>
 <pre><code>with tmp_file.open('w+') as fh:
     fh.write('#########\n' * 9)
@@ -1423,9 +1609,9 @@ with tmp_file.open('w+') as fh:
 <h2 id="teststest_commandline-module">tests.test_commandline module</h2>
 <p>import sys</p>
 <p>from stl import main</p>
-<p>def test_main(ascii_file, binary_file, tmpdir, speedups):
-original_argv = sys.argv[:]
-args_pre = ['stl']
+<p>def test_main(ascii_file, binary_file, tmpdir, speedups):<br>
+original_argv = sys.argv[:]<br>
+args_pre = ['stl']<br>
 args_post = [str(tmpdir.join('output.stl'))]</p>
 <pre><code>if not speedups:
     args_pre.append('-s')
@@ -1442,7 +1628,7 @@ try:
 finally:
     sys.argv[:] = original_argv
 </code></pre>
-<p>def test_args(ascii_file, tmpdir):
+<p>def test_args(ascii_file, tmpdir):<br>
 parser = main._get_parser('')</p>
 <pre><code>def _get_name(*args):
     return main._get_name(parser.parse_args(list(map(str, args))))
@@ -1452,39 +1638,39 @@ assert _get_name('-', tmpdir.join('binary.stl')).endswith('binary.stl')
 assert _get_name(ascii_file, '-').endswith('HalfDonut.stl')
 assert _get_name('-', '-')
 </code></pre>
-<p>def test_ascii(binary_file, tmpdir, speedups):
-original_argv = sys.argv[:]
-try:
-sys.argv[:] = [
-'stl',
-'-s' if not speedups else '',
-binary_file,
-str(tmpdir.join('ascii.stl')),
-]
-try:
-main.to_ascii()
-except SystemExit:
-pass
-finally:
+<p>def test_ascii(binary_file, tmpdir, speedups):<br>
+original_argv = sys.argv[:]<br>
+try:<br>
+sys.argv[:] = [<br>
+'stl',<br>
+'-s' if not speedups else '',<br>
+binary_file,<br>
+str(tmpdir.join('ascii.stl')),<br>
+]<br>
+try:<br>
+main.to_ascii()<br>
+except SystemExit:<br>
+pass<br>
+finally:<br>
 sys.argv[:] = original_argv</p>
-<p>def test_binary(ascii_file, tmpdir, speedups):
-original_argv = sys.argv[:]
-try:
-sys.argv[:] = [
-'stl',
-'-s' if not speedups else '',
-ascii_file,
-str(tmpdir.join('binary.stl')),
-]
-try:
-main.to_binary()
-except SystemExit:
-pass
-finally:
+<p>def test_binary(ascii_file, tmpdir, speedups):<br>
+original_argv = sys.argv[:]<br>
+try:<br>
+sys.argv[:] = [<br>
+'stl',<br>
+'-s' if not speedups else '',<br>
+ascii_file,<br>
+str(tmpdir.join('binary.stl')),<br>
+]<br>
+try:<br>
+main.to_binary()<br>
+except SystemExit:<br>
+pass<br>
+finally:<br>
 sys.argv[:] = original_argv</p>
 <h2 id="teststest_convert-module">tests.test_convert module</h2>
 <h1 id="import-os">import os</h1>
-<p>import pytest
+<p>import pytest<br>
 import tempfile</p>
 <p>from stl import stl</p>
 <p>def <em>test_conversion(from</em>, to, mode, speedups):</p>
@@ -1512,13 +1698,13 @@ import tempfile</p>
 
             assert dest.strip() == expected.strip()
 </code></pre>
-<p>def test_ascii_to_binary(ascii_path, binary_path, speedups):
-_test_conversion(ascii_path, binary_path, mode=stl.BINARY,
+<p>def test_ascii_to_binary(ascii_path, binary_path, speedups):<br>
+_test_conversion(ascii_path, binary_path, mode=stl.BINARY,<br>
 speedups=speedups)</p>
-<p>def test_binary_to_ascii(ascii_path, binary_path, speedups):
-_test_conversion(binary_path, ascii_path, mode=stl.ASCII,
+<p>def test_binary_to_ascii(ascii_path, binary_path, speedups):<br>
+_test_conversion(binary_path, ascii_path, mode=stl.ASCII,<br>
 speedups=speedups)</p>
-<p>def test_stl_mesh(ascii_file, tmpdir, speedups):
+<p>def test_stl_mesh(ascii_file, tmpdir, speedups):<br>
 tmp_file = tmpdir.join('tmp.stl')</p>
 <pre><code>mesh = stl.StlMesh(ascii_file, speedups=speedups)
 with pytest.raises(ValueError):
@@ -1529,13 +1715,13 @@ mesh.save(str(tmp_file), update_normals=False)
 </code></pre>
 <h2 id="teststest_mesh-module">tests.test_mesh module</h2>
 <p>import numpy</p>
-<p>from stl.mesh import Mesh
-from stl.base import BaseMesh
+<p>from stl.mesh import Mesh<br>
+from stl.base import BaseMesh<br>
 from stl.base import RemoveDuplicates</p>
-<p>def test_units_1d():
-data = numpy.zeros(1, dtype=Mesh.dtype)
-data['vectors'][0] = numpy.array([[0, 0, 0],
-[1, 0, 0],
+<p>def test_units_1d():<br>
+data = numpy.zeros(1, dtype=Mesh.dtype)<br>
+data['vectors'][0] = numpy.array([[0, 0, 0],<br>
+[1, 0, 0],<br>
 [2, 0, 0]])</p>
 <pre><code>mesh = Mesh(data, remove_empty_areas=False)
 mesh.update_units()
@@ -1544,13 +1730,13 @@ assert mesh.areas == 0
 assert (mesh.normals == [0, 0, 0]).all()
 assert (mesh.units == [0, 0, 0]).all()
 </code></pre>
-<p>def test_units_2d():
-data = numpy.zeros(2, dtype=Mesh.dtype)
-data['vectors'][0] = numpy.array([[0, 0, 0],
-[1, 0, 0],
-[0, 1, 0]])
-data['vectors'][1] = numpy.array([[1, 0, 0],
-[0, 1, 0],
+<p>def test_units_2d():<br>
+data = numpy.zeros(2, dtype=Mesh.dtype)<br>
+data['vectors'][0] = numpy.array([[0, 0, 0],<br>
+[1, 0, 0],<br>
+[0, 1, 0]])<br>
+data['vectors'][1] = numpy.array([[1, 0, 0],<br>
+[0, 1, 0],<br>
 [1, 1, 0]])</p>
 <pre><code>mesh = Mesh(data, remove_empty_areas=False)
 mesh.update_units()
@@ -1562,10 +1748,10 @@ assert (mesh.normals == [[0, 0, 1.],
 assert (mesh.units == [[0, 0, 1],
                        [0, 0, -1]]).all()
 </code></pre>
-<p>def test_units_3d():
-data = numpy.zeros(1, dtype=Mesh.dtype)
-data['vectors'][0] = numpy.array([[0, 0, 0],
-[1, 0, 0],
+<p>def test_units_3d():<br>
+data = numpy.zeros(1, dtype=Mesh.dtype)<br>
+data['vectors'][0] = numpy.array([[0, 0, 0],<br>
+[1, 0, 0],<br>
 [0, 1, 1.]])</p>
 <pre><code>mesh = Mesh(data, remove_empty_areas=False)
 mesh.update_units()
@@ -1579,25 +1765,25 @@ assert units[0] == 0
 assert (units[1] + .5 * 2 ** .5) &lt; 0.0001
 assert (units[2] - .5 * 2 ** .5) &lt; 0.0001
 </code></pre>
-<p>def test_duplicate_polygons():
-data = numpy.zeros(6, dtype=Mesh.dtype)
-data['vectors'][0] = numpy.array([[1, 0, 0],
-[0, 0, 0],
-[0, 0, 0]])
-data['vectors'][1] = numpy.array([[2, 0, 0],
-[0, 0, 0],
-[0, 0, 0]])
-data['vectors'][2] = numpy.array([[0, 0, 0],
-[0, 0, 0],
-[0, 0, 0]])
-data['vectors'][3] = numpy.array([[2, 0, 0],
-[0, 0, 0],
-[0, 0, 0]])
-data['vectors'][4] = numpy.array([[1, 0, 0],
-[0, 0, 0],
-[0, 0, 0]])
-data['vectors'][5] = numpy.array([[0, 0, 0],
-[0, 0, 0],
+<p>def test_duplicate_polygons():<br>
+data = numpy.zeros(6, dtype=Mesh.dtype)<br>
+data['vectors'][0] = numpy.array([[1, 0, 0],<br>
+[0, 0, 0],<br>
+[0, 0, 0]])<br>
+data['vectors'][1] = numpy.array([[2, 0, 0],<br>
+[0, 0, 0],<br>
+[0, 0, 0]])<br>
+data['vectors'][2] = numpy.array([[0, 0, 0],<br>
+[0, 0, 0],<br>
+[0, 0, 0]])<br>
+data['vectors'][3] = numpy.array([[2, 0, 0],<br>
+[0, 0, 0],<br>
+[0, 0, 0]])<br>
+data['vectors'][4] = numpy.array([[1, 0, 0],<br>
+[0, 0, 0],<br>
+[0, 0, 0]])<br>
+data['vectors'][5] = numpy.array([[0, 0, 0],<br>
+[0, 0, 0],<br>
 [0, 0, 0]])</p>
 <pre><code>mesh = Mesh(data)
 assert mesh.data.size == 6
@@ -1643,22 +1829,22 @@ assert (mesh.vectors[2] == numpy.array([[0, 0, 0],
                                         [0, 0, 0],
                                         [0, 0, 0]])).all()
 </code></pre>
-<p>def test_remove_all_duplicate_polygons():
-data = numpy.zeros(5, dtype=Mesh.dtype)
-data['vectors'][0] = numpy.array([[0, 0, 0],
-[0, 0, 0],
-[0, 0, 0]])
-data['vectors'][1] = numpy.array([[1, 0, 0],
-[0, 0, 0],
-[0, 0, 0]])
-data['vectors'][2] = numpy.array([[2, 0, 0],
-[0, 0, 0],
-[0, 0, 0]])
-data['vectors'][3] = numpy.array([[3, 0, 0],
-[0, 0, 0],
-[0, 0, 0]])
-data['vectors'][4] = numpy.array([[3, 0, 0],
-[0, 0, 0],
+<p>def test_remove_all_duplicate_polygons():<br>
+data = numpy.zeros(5, dtype=Mesh.dtype)<br>
+data['vectors'][0] = numpy.array([[0, 0, 0],<br>
+[0, 0, 0],<br>
+[0, 0, 0]])<br>
+data['vectors'][1] = numpy.array([[1, 0, 0],<br>
+[0, 0, 0],<br>
+[0, 0, 0]])<br>
+data['vectors'][2] = numpy.array([[2, 0, 0],<br>
+[0, 0, 0],<br>
+[0, 0, 0]])<br>
+data['vectors'][3] = numpy.array([[3, 0, 0],<br>
+[0, 0, 0],<br>
+[0, 0, 0]])<br>
+data['vectors'][4] = numpy.array([[3, 0, 0],<br>
+[0, 0, 0],<br>
 [0, 0, 0]])</p>
 <pre><code>mesh = Mesh(data, remove_duplicate_polygons=False)
 assert mesh.data.size == 5
@@ -1677,16 +1863,16 @@ assert (mesh.vectors[2] == numpy.array([[2, 0, 0],
                                         [0, 0, 0],
                                         [0, 0, 0]])).all()
 </code></pre>
-<p>def test_empty_areas():
-data = numpy.zeros(3, dtype=Mesh.dtype)
-data['vectors'][0] = numpy.array([[0, 0, 0],
-[1, 0, 0],
-[0, 1, 0]])
-data['vectors'][1] = numpy.array([[1, 0, 0],
-[0, 1, 0],
-[1, 0, 0]])
-data['vectors'][2] = numpy.array([[1, 0, 0],
-[0, 1, 0],
+<p>def test_empty_areas():<br>
+data = numpy.zeros(3, dtype=Mesh.dtype)<br>
+data['vectors'][0] = numpy.array([[0, 0, 0],<br>
+[1, 0, 0],<br>
+[0, 1, 0]])<br>
+data['vectors'][1] = numpy.array([[1, 0, 0],<br>
+[0, 1, 0],<br>
+[1, 0, 0]])<br>
+data['vectors'][2] = numpy.array([[1, 0, 0],<br>
+[0, 1, 0],<br>
 [1, 0, 0]])</p>
 <pre><code>mesh = Mesh(data, remove_empty_areas=False)
 assert mesh.data.size == 3
@@ -1694,11 +1880,11 @@ assert mesh.data.size == 3
 mesh = Mesh(data, remove_empty_areas=True)
 assert mesh.data.size == 1
 </code></pre>
-<p>def test_base_mesh():
-data = numpy.zeros(10, dtype=BaseMesh.dtype)
-mesh = BaseMesh(data, remove_empty_areas=False)
-# Increment vector 0 item 0
-mesh.v0[0] += 1
+<p>def test_base_mesh():<br>
+data = numpy.zeros(10, dtype=BaseMesh.dtype)<br>
+mesh = BaseMesh(data, remove_empty_areas=False)<br>
+# Increment vector 0 item 0<br>
+mesh.v0[0] += 1<br>
 mesh.v1[0] += 2</p>
 <pre><code># Check item 0 (contains v0, v1 and v2)
 assert (mesh[0] == numpy.array(
@@ -1728,50 +1914,50 @@ mesh.v0[:] = mesh.v1[:] = mesh.v2[:] = 0
 assert mesh.points.sum() == 0.0
 </code></pre>
 <h2 id="teststest_multiple-module">tests.test_multiple module</h2>
-<p>from stl import mesh
+<p>from stl import mesh<br>
 from stl.utils import b</p>
-<p>_STL_FILE = b('''
-solid test.stl
-facet normal -0.014565 0.073223 -0.002897
-outer loop
-vertex 0.399344 0.461940 1.044090
-vertex 0.500000 0.500000 1.500000
-vertex 0.576120 0.500000 1.117320
-endloop
-endfacet
-endsolid test.stl
+<p>_STL_FILE = b('''<br>
+solid test.stl<br>
+facet normal -0.014565 0.073223 -0.002897<br>
+outer loop<br>
+vertex 0.399344 0.461940 1.044090<br>
+vertex 0.500000 0.500000 1.500000<br>
+vertex 0.576120 0.500000 1.117320<br>
+endloop<br>
+endfacet<br>
+endsolid test.stl<br>
 '''.lstrip())</p>
-<p>def test_single_stl(tmpdir, speedups):
-tmp_file = tmpdir.join('tmp.stl')
-with tmp_file.open('wb+') as fh:
-fh.write(_STL_FILE)
-fh.seek(0)
-for m in mesh.Mesh.from_multi_file(
-str(tmp_file), fh=fh, speedups=speedups):
+<p>def test_single_stl(tmpdir, speedups):<br>
+tmp_file = tmpdir.join('tmp.stl')<br>
+with tmp_file.open('wb+') as fh:<br>
+fh.write(_STL_FILE)<br>
+fh.seek(0)<br>
+for m in mesh.Mesh.from_multi_file(<br>
+str(tmp_file), fh=fh, speedups=speedups):<br>
 pass</p>
-<p>def test_multiple_stl(tmpdir, speedups):
-tmp_file = tmpdir.join('tmp.stl')
-with tmp_file.open('wb+') as fh:
-for _ in range(10):
-fh.write(_STL_FILE)
-fh.seek(0)
-for i, m in enumerate(mesh.Mesh.from_multi_file(
-str(tmp_file), fh=fh, speedups=speedups)):
+<p>def test_multiple_stl(tmpdir, speedups):<br>
+tmp_file = tmpdir.join('tmp.stl')<br>
+with tmp_file.open('wb+') as fh:<br>
+for _ in range(10):<br>
+fh.write(_STL_FILE)<br>
+fh.seek(0)<br>
+for i, m in enumerate(mesh.Mesh.from_multi_file(<br>
+str(tmp_file), fh=fh, speedups=speedups)):<br>
 assert m.name == b'test.stl'</p>
 <pre><code>    assert i == 9
 </code></pre>
-<p>def test_single_stl_file(tmpdir, speedups):
-tmp_file = tmpdir.join('tmp.stl')
-with tmp_file.open('wb+') as fh:
-fh.write(_STL_FILE)
-fh.seek(0)
-for m in mesh.Mesh.from_multi_file(
-str(tmp_file), speedups=speedups):
+<p>def test_single_stl_file(tmpdir, speedups):<br>
+tmp_file = tmpdir.join('tmp.stl')<br>
+with tmp_file.open('wb+') as fh:<br>
+fh.write(_STL_FILE)<br>
+fh.seek(0)<br>
+for m in mesh.Mesh.from_multi_file(<br>
+str(tmp_file), speedups=speedups):<br>
 pass</p>
-<p>def test_multiple_stl_file(tmpdir, speedups):
-tmp_file = tmpdir.join('tmp.stl')
-with tmp_file.open('wb+') as fh:
-for _ in range(10):
+<p>def test_multiple_stl_file(tmpdir, speedups):<br>
+tmp_file = tmpdir.join('tmp.stl')<br>
+with tmp_file.open('wb+') as fh:<br>
+for _ in range(10):<br>
 fh.write(_STL_FILE)</p>
 <pre><code>    fh.seek(0)
     for i, m in enumerate(mesh.Mesh.from_multi_file(
@@ -1781,11 +1967,11 @@ fh.write(_STL_FILE)</p>
     assert i == 9
 </code></pre>
 <h2 id="teststest_rotate-module">tests.test_rotate module</h2>
-<p>import math
+<p>import math<br>
 import numpy</p>
 <p>from stl.mesh import Mesh</p>
-<p>def test_rotation():
-# Create 6 faces of a cube
+<p>def test_rotation():<br>
+# Create 6 faces of a cube<br>
 data = numpy.zeros(6, dtype=Mesh.dtype)</p>
 <pre><code># Top of the cube
 data['vectors'][0] = numpy.array([[0, 1, 1],
@@ -1834,8 +2020,8 @@ assert (mesh.vectors == numpy.array([
     [[0, 0, 1], [0, 0, 0], [0, 1, 0]],
 ])).all()
 </code></pre>
-<p>def test_rotation_over_point():
-# Create a single face
+<p>def test_rotation_over_point():<br>
+# Create a single face<br>
 data = numpy.zeros(1, dtype=Mesh.dtype)</p>
 <pre><code>data['vectors'][0] = numpy.array([[1, 0, 0],
                                   [0, 1, 0],
@@ -1848,8 +2034,8 @@ assert (mesh.vectors == numpy.array([[1, -4, -6],
                                      [0, -5, -6],
                                      [0, -4, -7]])).all()
 </code></pre>
-<p>def test_no_rotation():
-# Create a single face
+<p>def test_no_rotation():<br>
+# Create a single face<br>
 data = numpy.zeros(1, dtype=Mesh.dtype)</p>
 <pre><code>data['vectors'][0] = numpy.array([[0, 1, 1],
                                   [1, 0, 1],
@@ -1867,11 +2053,11 @@ mesh.rotate([0.0, 0.0, 0.0], math.radians(90))
 assert (mesh.vectors == numpy.array([
     [[0, 1, 1], [1, 0, 1], [0, 0, 1]]])).all()
 </code></pre>
-<p>def test_no_translation():
-# Create a single face
-data = numpy.zeros(1, dtype=Mesh.dtype)
-data['vectors'][0] = numpy.array([[0, 1, 1],
-[1, 0, 1],
+<p>def test_no_translation():<br>
+# Create a single face<br>
+data = numpy.zeros(1, dtype=Mesh.dtype)<br>
+data['vectors'][0] = numpy.array([[0, 1, 1],<br>
+[1, 0, 1],<br>
 [0, 0, 1]])</p>
 <pre><code>mesh = Mesh(data, remove_empty_areas=False)
 assert (mesh.vectors == numpy.array([
@@ -1882,11 +2068,11 @@ mesh.translate([0.0, 0.0, 0.0])
 assert (mesh.vectors == numpy.array([
     [[0, 1, 1], [1, 0, 1], [0, 0, 1]]])).all()
 </code></pre>
-<p>def test_translation():
-# Create a single face
-data = numpy.zeros(1, dtype=Mesh.dtype)
-data['vectors'][0] = numpy.array([[0, 1, 1],
-[1, 0, 1],
+<p>def test_translation():<br>
+# Create a single face<br>
+data = numpy.zeros(1, dtype=Mesh.dtype)<br>
+data['vectors'][0] = numpy.array([[0, 1, 1],<br>
+[1, 0, 1],<br>
 [0, 0, 1]])</p>
 <pre><code>mesh = Mesh(data, remove_empty_areas=False)
 assert (mesh.vectors == numpy.array([
@@ -1897,11 +2083,11 @@ mesh.translate([1.0, 2.0, 3.0])
 assert (mesh.vectors == numpy.array([
     [[1, 3, 4], [2, 2, 4], [1, 2, 4]]])).all()
 </code></pre>
-<p>def test_no_transformation():
-# Create a single face
-data = numpy.zeros(1, dtype=Mesh.dtype)
-data['vectors'][0] = numpy.array([[0, 1, 1],
-[1, 0, 1],
+<p>def test_no_transformation():<br>
+# Create a single face<br>
+data = numpy.zeros(1, dtype=Mesh.dtype)<br>
+data['vectors'][0] = numpy.array([[0, 1, 1],<br>
+[1, 0, 1],<br>
 [0, 0, 1]])</p>
 <pre><code>mesh = Mesh(data, remove_empty_areas=False)
 assert (mesh.vectors == numpy.array([
@@ -1913,11 +2099,11 @@ assert (mesh.vectors == numpy.array([
     [[0, 1, 1], [1, 0, 1], [0, 0, 1]]])).all()
 assert numpy.all(mesh.areas == 0.5)
 </code></pre>
-<p>def test_transformation():
-# Create a single face
-data = numpy.zeros(1, dtype=Mesh.dtype)
-data['vectors'][0] = numpy.array([[0, 1, 1],
-[1, 0, 1],
+<p>def test_transformation():<br>
+# Create a single face<br>
+data = numpy.zeros(1, dtype=Mesh.dtype)<br>
+data['vectors'][0] = numpy.array([[0, 1, 1],<br>
+[1, 0, 1],<br>
 [0, 0, 1]])</p>
 <pre><code>mesh = Mesh(data, remove_empty_areas=False)
 assert (mesh.vectors == numpy.array([
@@ -1937,11 +2123,11 @@ assert numpy.all(mesh.areas == 0.5)</code></pre>
     </entry>
     <entry>
         <title type="html"><![CDATA[matplotlib绘图注意]]></title>
-        <id>https://blog.bioprinting.site/post/HOPBFrX0u</id>
-        <link href="https://blog.bioprinting.site/post/HOPBFrX0u">
+        <id>https://lizhenzhublog.github.io/post/HOPBFrX0u/</id>
+        <link href="https://lizhenzhublog.github.io/post/HOPBFrX0u/">
         </link>
         <updated>2019-06-26T11:59:40.000Z</updated>
-        <content type="html"><![CDATA[<p>https://wizardforcel.gitbooks.io/matplotlib-user-guide/7.3.html
+        <content type="html"><![CDATA[<p>https://wizardforcel.gitbooks.io/matplotlib-user-guide/7.3.html<br>
 https://www.guofei.site</p>
 <p>转载请注明出处：</p>
 <p><a href="http://www.cnblogs.com/darkknightzh/p/6182474.html">http://www.cnblogs.com/darkknightzh/p/6182474.html</a></p>
@@ -1949,289 +2135,147 @@ https://www.guofei.site</p>
 <p><a href="http://matplotlib.org/examples/pylab_examples/ginput_demo.html">http://matplotlib.org/examples/pylab_examples/ginput_demo.html</a></p>
 <p><a href="http://stackoverflow.com/questions/12760797/imshowimg-cmap-cm-gray-shows-a-white-for-128-value">http://stackoverflow.com/questions/12760797/imshowimg-cmap-cm-gray-shows-a-white-for-128-value</a></p>
 <p>1. 获得鼠标点击位置——使用ginput函数：</p>
-<p><a title="复制代码"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></p>
-<p>import matplotlib.pyplot as plt
+<p><a title="复制代码"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码" loading="lazy"></a></p>
+<p>import matplotlib.pyplot as plt<br>
 import numpy as np</p>
-<p>x=range(1,10)
-y=[2*v for v in x]
-print(x, y)
-plt.plot(x, y)
-pos=plt.ginput(3)
-print(pos)
-<a title="复制代码"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></p>
-<p><img src="https://images2015.cnblogs.com/blog/682463/201612/682463-20161215111214808-689851759.png" alt=""></p>
+<p>x=range(1,10)<br>
+y=[2*v for v in x]<br>
+print(x, y)<br>
+plt.plot(x, y)<br>
+pos=plt.ginput(3)<br>
+print(pos)<br>
+<a title="复制代码"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码" loading="lazy"></a></p>
+<figure data-type="image" tabindex="1"><img src="https://images2015.cnblogs.com/blog/682463/201612/682463-20161215111214808-689851759.png" alt="" loading="lazy"></figure>
 <p>那三个红色的十字为鼠标点击的位置，显示如下：</p>
-<p><img src="https://images2015.cnblogs.com/blog/682463/201612/682463-20161215111244026-2011598343.png" alt=""></p>
+<figure data-type="image" tabindex="2"><img src="https://images2015.cnblogs.com/blog/682463/201612/682463-20161215111244026-2011598343.png" alt="" loading="lazy"></figure>
 <p>2. 显示灰度图像：</p>
 <p>默认imshow显示的是彩色图像：</p>
-<p><img src="https://images2015.cnblogs.com/blog/682463/201612/682463-20161215111345448-1894828896.png" alt=""></p>
+<figure data-type="image" tabindex="3"><img src="https://images2015.cnblogs.com/blog/682463/201612/682463-20161215111345448-1894828896.png" alt="" loading="lazy"></figure>
 <p>需要显示灰度图像时，可以使用plt.get_cmap：</p>
-<p><a title="复制代码"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></p>
-<p>import matplotlib.pyplot as plt
+<p><a title="复制代码"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码" loading="lazy"></a></p>
+<p>import matplotlib.pyplot as plt<br>
 import Image</p>
-<p>im = Image.open(&quot;th.jpg&quot;)
-plt.imshow(im, cmap = plt.get_cmap(&quot;gray&quot;))
-pos=plt.ginput(3)
-print(pos)
-<a title="复制代码"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></p>
-<p><img src="https://images2015.cnblogs.com/blog/682463/201612/682463-20161215111416542-1864257153.png" alt=""></p>
+<p>im = Image.open(&quot;th.jpg&quot;)<br>
+plt.imshow(im, cmap = plt.get_cmap(&quot;gray&quot;))<br>
+pos=plt.ginput(3)<br>
+print(pos)<br>
+<a title="复制代码"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码" loading="lazy"></a></p>
+<figure data-type="image" tabindex="4"><img src="https://images2015.cnblogs.com/blog/682463/201612/682463-20161215111416542-1864257153.png" alt="" loading="lazy"></figure>
 <p>可以使用vmin和vmax来达到和matlab的imshow中[]一样的效果，将小于vmin的量化成黑色，大于vmax的量化成白色：</p>
 <p>plt.imshow(im, cmap = plt.get_cmap(&quot;gray&quot;), vmin = 100, vmax = 150)</p>
-<p><img src="https://images2015.cnblogs.com/blog/682463/201612/682463-20161215111456901-1192492061.png" alt=""></p>
+<figure data-type="image" tabindex="5"><img src="https://images2015.cnblogs.com/blog/682463/201612/682463-20161215111456901-1192492061.png" alt="" loading="lazy"></figure>
 <p>那三个红色的十字为鼠标点击的位置，显示如下：</p>
-<p><img src="https://images2015.cnblogs.com/blog/682463/201612/682463-20161215111519261-443664761.png" alt=""></p>
+<figure data-type="image" tabindex="6"><img src="https://images2015.cnblogs.com/blog/682463/201612/682463-20161215111519261-443664761.png" alt="" loading="lazy"></figure>
 <p>由上面可见，直接plot的话，左下角是坐标原点；使用imshow时，是左上角为坐标原点。对于图像来说，和图像的坐标一样，不用转换，可以直接使用</p>
-<p>使用matplotlib交互绘图****
+<p>使用matplotlib交互绘图****<br>
 加载图片，点击左键选中图片上的点并绘出横轴纵轴垂线，确定后点击右键打印出当前坐标：</p>
 <p>#!/usr/bin/python</p>
 <h1 id="codingutf-8">coding:utf-8</h1>
-<p>from matplotlib import pyplot as plt
+<p>from matplotlib import pyplot as plt<br>
 import cv2</p>
-<p>def on_press(event):
-if event.button==1:
-ax.scatter(event.xdata, event.ydata)
-plt.plot([event.xdata, event.xdata], [event.ydata, 600])
-plt.plot([event.xdata, 0], [event.ydata, event.ydata])
-fig.canvas.draw()
-elif event.button==3:
-print(&quot;x,y=&quot;,event.xdata, event.ydata)
-if <strong>name</strong> == &quot;<strong>main</strong>&quot;:
-img = cv2.imread('01.png')
-cv2.imshow(&quot;src&quot;, img)
-fig = plt.figure()
-fig.canvas.mpl_connect(&quot;button_press_event&quot;, on_press)
-ax = fig.add_subplot(111)
-ax.imshow(img)
-plt.axis(&quot;off&quot;)
+<p>def on_press(event):<br>
+if event.button<mark>1:<br>
+ax.scatter(event.xdata, event.ydata)<br>
+plt.plot([event.xdata, event.xdata], [event.ydata, 600])<br>
+plt.plot([event.xdata, 0], [event.ydata, event.ydata])<br>
+fig.canvas.draw()<br>
+elif event.button</mark>3:<br>
+print(&quot;x,y=&quot;,event.xdata, event.ydata)<br>
+if <strong>name</strong> == &quot;<strong>main</strong>&quot;:<br>
+img = cv2.imread('01.png')<br>
+cv2.imshow(&quot;src&quot;, img)<br>
+fig = plt.figure()<br>
+fig.canvas.mpl_connect(&quot;button_press_event&quot;, on_press)<br>
+ax = fig.add_subplot(111)<br>
+ax.imshow(img)<br>
+plt.axis(&quot;off&quot;)<br>
 plt.show()</p>
-<p>输出：
+<p>输出：<br>
 原图01.png：</p>
 <p>点击左键选点，并绘出横轴纵轴垂线：</p>
-<h2 id="点击右键输出当前点的坐标xy-50127130681818176-20148636363636365">点击右键输出当前点的坐标：
+<h2 id="点击右键输出当前点的坐标xy-50127130681818176-20148636363636365">点击右键输出当前点的坐标：<br>
 (‘x,y=’, 501.27130681818176, 201.48636363636365)</h2>
-<p>作者：阿卡蒂奥
-来源：CSDN
-原文：https://blog.csdn.net/akadiao/article/details/79761790
+<p>作者：阿卡蒂奥<br>
+来源：CSDN<br>
+原文：https://blog.csdn.net/akadiao/article/details/79761790<br>
 版权声明：本文为博主原创文章，转载请附上博文链接！</p>
 <p>这篇文章的目的出于实验的需要,我需要对图片上的部分区域做出涂抹标记,本来是选择用opencv做交互的，但在需要进行图像的输出以及鼠标时间添加时，opencv出现错误。</p>
 <p>解决方案网上有很多，尝试以后依然bug，这里先做一个记录,有时间再来处理。错误报告如下:</p>
-<p>OpenCV Error: Unspecified error (The function is not implemented. Rebuild the library with Windows, GTK+ 2.x or Carbon support. If you are on Ubuntu or Debian, install libgtk2.0-dev and pkg-config, then re-run cmake or configure script) in cvShowImage, file -------src-dir-------/opencv-2.4.10/modules/highgui/src/window.cpp, line 501
-Traceback (most recent call last):
-File &quot;test.py&quot;, line 20, in <module>
-cv2.imshow('img',img)
+<p>OpenCV Error: Unspecified error (The function is not implemented. Rebuild the library with Windows, GTK+ 2.x or Carbon support. If you are on Ubuntu or Debian, install libgtk2.0-dev and pkg-config, then re-run cmake or configure script) in cvShowImage, file -------src-dir-------/opencv-2.4.10/modules/highgui/src/window.cpp, line 501<br>
+Traceback (most recent call last):<br>
+File &quot;test.py&quot;, line 20, in <module><br>
+cv2.imshow('img',img)<br>
 cv2.error: -------src-dir-------/opencv-2.4.10/modules/highgui/src/window.cpp:501: error: (-2) The function is not implemented. Rebuild the library with Windows, GTK+ 2.x or Carbon support. If you are on Ubuntu or Debian, install libgtk2.0-dev and pkg-config, then re-run cmake or configure script in function cvShowImage</p>
 <p>这里我们切换另一种解决方案，利用python的matplotlib库完成图像的输出以及鼠标事件的添加。</p>
 <p>点击图片，在图像中鼠标对应位置画点：</p>
 <h1 id="codingutf-8-2">coding=utf-8</h1>
-<p>from matplotlib import pyplot as plt
+<p>from matplotlib import pyplot as plt<br>
 import cv2</p>
-<p>def on_press(event):
-if event.inaxes == None:
-print &quot;none&quot;
-return
-#在鼠标的当前位置绘制一个点
-ax.scatter(event.xdata, event.ydata）
-#更新画板
+<p>def on_press(event):<br>
+if event.inaxes == None:<br>
+print &quot;none&quot;<br>
+return<br>
+#在鼠标的当前位置绘制一个点<br>
+ax.scatter(event.xdata, event.ydata）<br>
+#更新画板<br>
 fig.canvas.draw()</p>
-<p>if <strong>name</strong> == &quot;<strong>main</strong>&quot;:
-fileN = r'./0107_1.3.6.1.4.1.14519.5.2.1.6279.6001.263660956768649083933159084365.bmp'
-img = cv2.imread(fileN)
-cv2.imshow('img',img)
-fig = py.figure()
-fig.canvas.mpl_connect(&quot;button_press_event&quot;, on_press)
-ax = fig.add_subplot(121)
-ax1 = fig.add_subplot(122)
-ax.imshow(img)
-ax1.imshow(img)
-plt.axis(&quot;off&quot;)
+<p>if <strong>name</strong> == &quot;<strong>main</strong>&quot;:<br>
+fileN = r'./0107_1.3.6.1.4.1.14519.5.2.1.6279.6001.263660956768649083933159084365.bmp'<br>
+img = cv2.imread(fileN)<br>
+cv2.imshow('img',img)<br>
+fig = py.figure()<br>
+fig.canvas.mpl_connect(&quot;button_press_event&quot;, on_press)<br>
+ax = fig.add_subplot(121)<br>
+ax1 = fig.add_subplot(122)<br>
+ax.imshow(img)<br>
+ax1.imshow(img)<br>
+plt.axis(&quot;off&quot;)<br>
 plt.show()</p>
 <p>先来简单解释一下代码的含义：</p>
-<p>fig.canvas.mpl_connect(&quot;button_press_event&quot;, on_press)#在这个figure上加点击事件，点击后的情况在自己写的on_press()方法里
-def on_press(event):
-event.inaxes.figure.canvas.draw()#用于图片刷新
-event.x#事件的坐标用于其他按钮点击和figure点击发生冲突时判断返回
+<p>fig.canvas.mpl_connect(&quot;button_press_event&quot;, on_press)#在这个figure上加点击事件，点击后的情况在自己写的on_press()方法里<br>
+def on_press(event):<br>
+event.inaxes.figure.canvas.draw()#用于图片刷新<br>
+event.x#事件的坐标用于其他按钮点击和figure点击发生冲突时判断返回<br>
 event.xdata,event.ydata#鼠标点击的位置，与上面那个坐标表示形式不同</p>
 <p>最后的输出结果入下图。我们得到了非常奇怪的结果，如果你自己亲自动手试的话体会应该会更有体会，两边的图像本来应该一样大，但在第一次绘制点的时候，左侧图像出现了闪动，然后尺寸的比例突然发生了变化。</p>
 <p>是的，图像尺寸没有发生变化，但尺寸的比例的确变了，这里我们要做的就是关闭自动变化的尺度比例。</p>
-<p>if <strong>name</strong> == &quot;<strong>main</strong>&quot;:
-fileN = r'./0107_1.3.6.1.4.1.14519.5.2.1.6279.6001.263660956768649083933159084365.bmp'
-img = cv2.imread(fileN)
-cv2.imshow('img',img)
-fig = py.figure()
-fig.canvas.mpl_connect(&quot;button_press_event&quot;, on_press)
-ax = fig.add_subplot(121)
-ax1 = fig.add_subplot(122)
-ax.imshow(img)
-ax1.imshow(img)
-#关闭自动尺度适配
-ax.set_autoscale_on(False)
-plt.axis(&quot;off&quot;)
-plt.show()
+<p>if <strong>name</strong> == &quot;<strong>main</strong>&quot;:<br>
+fileN = r'./0107_1.3.6.1.4.1.14519.5.2.1.6279.6001.263660956768649083933159084365.bmp'<br>
+img = cv2.imread(fileN)<br>
+cv2.imshow('img',img)<br>
+fig = py.figure()<br>
+fig.canvas.mpl_connect(&quot;button_press_event&quot;, on_press)<br>
+ax = fig.add_subplot(121)<br>
+ax1 = fig.add_subplot(122)<br>
+ax.imshow(img)<br>
+ax1.imshow(img)<br>
+#关闭自动尺度适配<br>
+ax.set_autoscale_on(False)<br>
+plt.axis(&quot;off&quot;)<br>
+plt.show()<br>
 当然，我们可以改变绘制标记的样式：</p>
-<p>ax.scatter(x,y,c='k',s=25,alpha=1.0,marker='o')
-#T:散点的颜色
-#s：散点的大小
+<p>ax.scatter(x,y,c='k',s=25,alpha=1.0,marker='o')<br>
+#T:散点的颜色<br>
+#s：散点的大小<br>
 #alpha:是透明程度</p>
 <p>现在我们能够在图像上进行标记了，但这样还不够，程序需要获取这些标记点。</p>
 <p>实际上fig.canvas.mpl_connect(&quot;button_press_event&quot;, on_press)能够进行自定义的多参数传递，如果在每次绘制的时候将数据保存在外部传入的列表中，那么当画板被销毁时，我们就能获取到原来所有的绘制点。</p>
 <p>这里介绍两种使用方法：</p>
-<p>def on_key(event, arg1, arg2, arg3):
-pass
+<p>def on_key(event, arg1, arg2, arg3):<br>
+pass<br>
 canvas.mpl_connect('key_press_event', lambda event: on_key(event, plt1, plt2, plt3))</p>
 <p>和</p>
-<p>def on_key(event, args_list):
-pass
+<p>def on_key(event, args_list):<br>
+pass<br>
 fig.canvas.mpl_connect('key_press_event', lambda event: on_key(event, [plt1, plt2, plt3]))</p>
 <p>这里需要注意的是scatter绘制的点，实际上并没有大小的概念，这个点实质是一个坐标。</p>
 <p>如果需要绘制有实际面积的圆形的标记，可以使用matplotlib.patches.Circle</p>
 <p>具体的使用如下：</p>
 <p>from matplotlib.patches import Circle</p>
-<h2 id="fig-pltfigureax-figadd_subplot111cir-circlexy-eventxdata-eventydatafacecolor-black-edgecolorblackradius10-alpha10axadd_patchcir">fig = plt.figure()
-ax = fig.add_subplot(111)
-cir = Circle(xy = (event.xdata, event.ydata),facecolor = 'black', edgecolor='black',radius=10, alpha=1.0)
+<h2 id="fig-pltfigureax-figadd_subplot111cir-circlexy-eventxdata-eventydatafacecolor-black-edgecolorblackradius10-alpha10axadd_patchcir">fig = plt.figure()<br>
+ax = fig.add_subplot(111)<br>
+cir = Circle(xy = (event.xdata, event.ydata),facecolor = 'black', edgecolor='black',radius=10, alpha=1.0)<br>
 ax.add_patch(cir)</h2>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[TK 窗口]]></title>
-        <id>https://blog.bioprinting.site/post/XnzyCJy-A</id>
-        <link href="https://blog.bioprinting.site/post/XnzyCJy-A">
-        </link>
-        <updated>2019-06-13T12:45:35.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="python下用tkinter进行gui编程"><a href="https://www.cnblogs.com/fuyunbiyi/archive/2012/06/13/2548497.html">Python下用Tkinter进行GUI编程</a></h1>
-<p><code>Python可用的GUI编程的包很多，Tkinter也是其中一个半标准的工具包。</code></p>
-<p><code>作为一个老牌的Python GUI工具包（皮皮书屋里找了本书，竟然是2001年的),它由Tk GUI包装而来。在Windows版里面已经包括了，不用单独下载。</code></p>
-<p><code>用Tkinter实现一个简单的GUI程序,单击click按钮时会在终端打印出’hello world’：</code></p>
-<p><a title="复制代码"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></p>
-<p><strong>author</strong> = 'fyby'
-from Tkinter import *   #引入Tkinter工具包
-def hello():
-print('hello world!')</p>
-<p>win = Tk()  #定义一个窗体
-win.title('Hello World')    #定义窗体标题
-win.geometry('400x200')     #定义窗体的大小，是400X200像素</p>
-<p>btn = Button(win, text='Click me', command=hello)
-#注意这个地方，不要写成hello(),如果是hello()的话，
-#会在mainloop中调用hello函数，</p>
-<h1 id="而不是单击button按钮时出发事件">而不是单击button按钮时出发事件</h1>
-<p>btn.pack(expand=YES, fill=BOTH) #将按钮pack，充满整个窗体(只有pack的组件实例才能显示)</p>
-<p>mainloop() #进入主循环，程序运行
-<a title="复制代码"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></p>
-<p><img src="https://images.cnblogs.com/cnblogs_com/fuyunbiyi/201206/201206132114189135.png" alt="image" title="image"></p>
-<p><code>当我们写一个较大的程序时，最好将代码分成一个或者是几个类，再看一下Hello World例子</code></p>
-<p><a title="复制代码"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></p>
-<p>#-<em>- encoding=UTF-8 -</em>-
-<strong>author</strong> = 'fyby'
-from Tkinter import *
-class App:
-def <strong>init</strong>(self, master):
-#构造函数里传入一个父组件(master),创建一个Frame组件并显示
-frame = Frame(master)
-frame.pack()
-#创建两个button，并作为frame的一部分
-self.button = Button(frame, text=&quot;QUIT&quot;, fg=&quot;red&quot;, command=frame.quit)
-self.button.pack(side=LEFT) #此处side为LEFT表示将其放置 到frame剩余空间的最左方
-self.hi_there = Button(frame, text=&quot;Hello&quot;, command=self.say_hi)
-self.hi_there.pack(side=LEFT)</p>
-<pre><code>def say_hi(self):
-    print &quot;hi there, this is a class example!&quot;
-</code></pre>
-<p>win = Tk()
-app = App(win)
-win.mainloop()
-<a title="复制代码"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></p>
-<p><img src="https://images.cnblogs.com/cnblogs_com/fuyunbiyi/201206/201206132114208428.png" alt="image" title="image"></p>
-<p>看完了上面两个无聊的Hello World例子，再来看一个稍微Perfect点的东西吧。Menu组件，自己画一个像样点的程序外壳。</p>
-<p><a title="复制代码"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></p>
-<p>#-<em>- encoding=UTF-8 -</em>-
-<strong>author</strong> = 'fyby'
-from Tkinter import *</p>
-<p>root = Tk()</p>
-<p>def hello():
-print('hello')</p>
-<h1 id="创建一个导航菜单">创建一个导航菜单</h1>
-<p>menubar = Menu(root)
-menubar.add_command(label=&quot;Hello!&quot;, command=hello)
-menubar.add_command(label=&quot;Quit!&quot;,command=root.quit)</p>
-<p>root.config(menu=menubar)</p>
-<p>mainloop()
-<a title="复制代码"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></p>
-<p><img src="https://images.cnblogs.com/cnblogs_com/fuyunbiyi/201206/201206132114217481.png" alt="image" title="image"></p>
-<p>这个程序还是有点无趣，因为我们只是创建了一个顶级的导航菜单，点击后只是在终端中输出hello而已，下面来创建一个下拉菜单，这样才像一个正儿八经的应用<img src="https://images.cnblogs.com/cnblogs_com/fuyunbiyi/201206/201206132114226675.png" alt="大笑">在下面的这个例子中，会创建三个顶级菜单，每个顶级菜单中都有下拉菜单（用add_command方法创建，最后用add_cascade方法加入到上级菜单中去），为每个下拉选项都绑定一个hello函数，在终端中打印出hello.</p>
-<p>root.quit是退出这个Tk的实例。</p>
-<p><a title="复制代码"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></p>
-<p>#-<em>- encoding=UTF-8 -</em>-
-<strong>author</strong> = 'fyby'
-from Tkinter import *
-root = Tk()</p>
-<p>def hello():
-print('hello')</p>
-<p>def about():
-print('我是开发者')</p>
-<p>menubar = Menu(root)</p>
-<p>#创建下拉菜单File，然后将其加入到顶级的菜单栏中
-filemenu = Menu(menubar,tearoff=0)
-filemenu.add_command(label=&quot;Open&quot;, command=hello)
-filemenu.add_command(label=&quot;Save&quot;, command=hello)
-filemenu.add_separator()
-filemenu.add_command(label=&quot;Exit&quot;, command=root.quit)
-menubar.add_cascade(label=&quot;File&quot;, menu=filemenu)</p>
-<p>#创建另一个下拉菜单Edit
-editmenu = Menu(menubar, tearoff=0)
-editmenu.add_command(label=&quot;Cut&quot;, command=hello)
-editmenu.add_command(label=&quot;Copy&quot;, command=hello)
-editmenu.add_command(label=&quot;Paste&quot;, command=hello)
-menubar.add_cascade(label=&quot;Edit&quot;,menu=editmenu)
-#创建下拉菜单Help
-helpmenu = Menu(menubar, tearoff=0)
-helpmenu.add_command(label=&quot;About&quot;, command=about)
-menubar.add_cascade(label=&quot;Help&quot;, menu=helpmenu)</p>
-<p>#显示菜单
-root.config(menu=menubar)</p>
-<p>mainloop()
-<a title="复制代码"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></p>
-<p><img src="https://images.cnblogs.com/cnblogs_com/fuyunbiyi/201206/201206132114235727.png" alt="image" title="image"></p>
-<p>写了这一些，差不多对Tkinter有了一个大体的印象了。在Python中用Tkinter绘制GUI界面还是蛮简单的。再把上面的例子扩展一下，和Label标签结合，当单击about的时候，在窗体上打印About的内容，而不是在终端输出。将about函数稍微修改一下。单击about以后将会调用about函数渲染frame绘制一个标签并显示其内容。
-def about():
-w = Label(root,text=&quot;开发者感谢名单\nfuyunbiyi\nfyby尚未出现的女朋友\nhttp://www.programup.com网站&quot;)
-w.pack(side=TOP)</p>
-<p><img src="https://images.cnblogs.com/cnblogs_com/fuyunbiyi/201206/201206132114252054.png" alt="image" title="image"></p>
-<p>关于Tkinter更多的内容，参考<a href="http://www.programup.com/wiki/beginning_tkinter/">http://www.programup.com/wiki/beginning_tkinter/</a>，例子原型主要来自于该网站，还有一本书（就是文章开头提到过的那那本01年的书，<a href="http://www.ppurl.com/2012/02/python%E4%B8%8Etkinter%E7%BC%96%E7%A8%8B.html">http://www.ppurl.com/2012/02/python%E4%B8%8Etkinter%E7%BC%96%E7%A8%8B.html</a>)。还有，国内的书记得《征服Python》中好像也有关于Tkinter的例子，在VeryCD上应该可以找的到<img src="https://images.cnblogs.com/cnblogs_com/fuyunbiyi/201206/201206132114264039.png" alt="大声笑">。</p>
-<p>分类: <a href="https://www.cnblogs.com/fuyunbiyi/category/368825.html">读书笔记</a></p>
-<p><a id="green_channel_digg"></a>好文要顶 <a id="green_channel_follow"></a>关注我 <a id="green_channel_favorite"></a>收藏该文 <a id="green_channel_weibo" title="分享至新浪微博"></a><img src="https://common.cnblogs.com/images/icon_weibo_24.png" alt=""> <a id="green_channel_wechat" title="分享至微信"></a><img src="https://common.cnblogs.com/images/wechat.png" alt=""></p>
-<p><a href="https://home.cnblogs.com/u/fuyunbiyi/"><img src="https://pic.cnblogs.com/face/u370835.jpg?id=24210832" alt=""></a>
-<a href="https://home.cnblogs.com/u/fuyunbiyi/">浮云比翼</a>
-<a href="https://home.cnblogs.com/u/fuyunbiyi/followees">关注 - 19</a>
-<a href="https://home.cnblogs.com/u/fuyunbiyi/followers">粉丝 - 78</a></p>
-<p><a>+加关注</a></p>
-<p>2</p>
-<p>0</p>
-<p><a href="https://www.cnblogs.com/fuyunbiyi/archive/2012/06/03/2532750.html">« </a>上一篇：<a href="https://www.cnblogs.com/fuyunbiyi/archive/2012/06/03/2532750.html" title="发布于2012-06-03 15:06">6月3日——回首一个半月</a>
-<a href="https://www.cnblogs.com/fuyunbiyi/archive/2012/07/31/2617419.html">» </a>下一篇：<a href="https://www.cnblogs.com/fuyunbiyi/archive/2012/07/31/2617419.html" title="发布于2012-07-31 21:32">学生终究要面对社会</a></p>
-<p>posted @ 2012-06-13 21:14 <a href="https://www.cnblogs.com/fuyunbiyi/">浮云比翼</a> 阅读(27174) 评论(5) <a href="https://i.cnblogs.com/EditPosts.aspx?postid=2548497">编辑</a> <a href="https://www.cnblogs.com/fuyunbiyi/archive/2012/06/13/2548497.html">收藏</a></p>
-<p><a name="!comments"></a></p>
-<p>评论列表</p>
-<p><a href="https://www.cnblogs.com/fuyunbiyi/archive/2012/06/13/2548497.html#2479400">#1楼</a><a id="comment_anchor_2479400" name="2479400"></a> 2012-09-23 15:42 <a href="https://www.cnblogs.com/hollyspirit/">hollyspirit</a> <a href="http://msg.cnblogs.com/send/hollyspirit" title="发送站内短消息"> </a></p>
-<p>很好的学习材料。</p>
-<p><a class="comment_digg">支持(0)</a><a class="comment_bury">反对(0)</a></p>
-<p><a href="https://www.cnblogs.com/fuyunbiyi/archive/2012/06/13/2548497.html#2501081">#2楼</a><a id="comment_anchor_2501081" name="2501081"></a> 2012-10-22 17:01 <a href="http://home.cnblogs.com/u/438131/">prayer163</a> <a href="http://msg.cnblogs.com/send/prayer163" title="发送站内短消息"> </a></p>
-<p>请问您这句：
-filemenu = Menu(menubar,tearoff=0)</p>
-<p>里面tearoff是什么含义？</p>
-<p>我该如何、在哪里能查到这些参数的意义呢？ 谢谢！</p>
-<p><a class="comment_digg">支持(1)</a><a class="comment_bury">反对(0)</a></p>
-<p><a href="https://www.cnblogs.com/fuyunbiyi/archive/2012/06/13/2548497.html#2502107">#3楼</a><a id="comment_anchor_2502107" name="2502107"></a>[楼主] 2012-10-22 20:15 <a href="https://www.cnblogs.com/fuyunbiyi/">浮云比翼</a> <a href="http://msg.cnblogs.com/send/%E6%B5%AE%E4%BA%91%E6%AF%94%E7%BF%BC" title="发送站内短消息"> </a></p>
-<p><a href="https://www.cnblogs.com/fuyunbiyi/archive/2012/06/13/2548497.html#2501081" title="查看所回复的评论">@</a> prayer163
-tearoff=0指的是不分开，就是说你所添加的submenu不能弹出新窗口，如果你想要使用哪种点击一下能弹出一个新窗口显示一些目录的话可以设置tearoff=1。
-其实完全可以自己动手试一下的，例如，将filemenu = Menu(menubar,tearoff=0)改成filemenu = Menu(menubar,tearoff=1)，这时你再点击filemenu的时候，会看到下拉目录里面有一条线，然后点击这条线，就会弹出一个新的窗口显示这一些的下拉菜单了。
-相关资料可以参考<a href="http://www.tutorialspoint.com/python/tk_menu.htm">http://www.tutorialspoint.com/python/tk_menu.htm</a></p>
-<p>但是这上面说的参数说明也都比较笼统，还是自己试验一下比较好一些。</p>
-<p><a class="comment_digg">支持(1)</a><a class="comment_bury">反对(0)</a></p>
-<p><a href="https://www.cnblogs.com/fuyunbiyi/archive/2012/06/13/2548497.html#2502110">#4楼</a><a id="comment_anchor_2502110" name="2502110"></a>[楼主] 2012-10-22 20:21 <a href="https://www.cnblogs.com/fuyunbiyi/">浮云比翼</a> <a href="http://msg.cnblogs.com/send/%E6%B5%AE%E4%BA%91%E6%AF%94%E7%BF%BC" title="发送站内短消息"> </a></p>
-<p><a href="https://www.cnblogs.com/fuyunbiyi/archive/2012/06/13/2548497.html#2501081" title="查看所回复的评论">@</a> prayer163
-<img src="https://pic002.cnblogs.com/images/2012/370835/2012102220204555.png" alt=""></p>
-<p>点了以后就是这样的</p>
-<p><img src="https://pic002.cnblogs.com/images/2012/370835/2012102220205355.png" alt=""></p>
 ]]></content>
     </entry>
 </feed>

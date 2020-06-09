@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>Python+OpenCV录制双目摄像头视频 | Li Zhenzhu, Ph.D</title>
+<meta name="description" content="Binzhou Medical University Hospital, Email: timeanddoctor@gmail.com.">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://lizhenzhublog.github.io/favicon.ico?v=1591694069327">
+<link rel="stylesheet" href="https://lizhenzhublog.github.io/styles/main.css">
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://lizhenzhublog.github.io">
+        <img src="https://lizhenzhublog.github.io/images/avatar.png?v=1591694069327" class="site-logo">
+        <h1 class="site-title">Li Zhenzhu, Ph.D</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            Home
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            Archives
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            Tags
+          </a>
+        
+      
+        
+          <a href="/paper" class="site-nav">
+            Paper
+          </a>
+        
+      
+        
+          <a href="/3dprinting" class="site-nav">
+            3D printing
+          </a>
+        
+      
+        
+          <a href="/bigbridgerobot" class="site-nav">
+            BigBridgeRobot
+          </a>
+        
+      
+        
+          <a href="/business" class="site-nav">
+            Business
+          </a>
+        
+      
+        
+          <a href="https://blog.bioprinting.site/post/meeting/" class="site-nav">
+            Training
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      Binzhou Medical University Hospital, Email: timeanddoctor@gmail.com.
+    </div>
+    <div class="site-footer">
+      Powered by Li Zhenzhu
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">Python+OpenCV录制双目摄像头视频</h2>
+            <div class="post-date">2020-04-22</div>
+            
+              <div class="feature-container" style="background-image: url('http://06.imgmini.eastday.com/mobile/20180109/9aa16ed6f6ca8b9217c8703c7e3b70bf_wmk.jpeg')">
+              </div>
+            
+            <div class="post-content">
+              <ul>
+<li>第一个例子<br>
+说起来录制视频，我们可能有很多的软件，但是比较坑的是，好像很少的软件支持能够同时录制两个摄像头的视频，于是我们用python自己写一个。要是OpenCV+python<br>
+https://github.com/anonymouslycn/bjtu_BinocularCameraRecord</li>
+</ul>
+<pre><code>import cv2
+import numpy as np
+from PyQt5.QtWidgets import (QMainWindow, QApplication, QFileDialog)
+import threading
+import threadpool 
+from CvPyGui import ImageCvQtContainer
+from CvPyGui.ui import gui
+
+
+#UI
+
+class Image(QWidget):
+ &quot;&quot;&quot;Common base for the images&quot;&quot;&quot;
+ 
+ def __init__(self, name, label):
+ super().__init__()
+ 
+ # Label (frame) where the original image will be located, with scaling
+ self.frame_lbl = label
+ 
+ def updateImage(self, opencv_rgb_image):
+ 
+ self.cv_img_rgb = opencv_rgb_image
+ 
+ height, width, channel = self.cv_img_rgb.shape
+ bytesPerLine = 3 * width
+ self.q_image = QImage(self.cv_img_rgb.data, width,
+  height, bytesPerLine, QImage.Format_RGB888)
+ 
+ self.frame_lbl.setPixmap(QPixmap.fromImage(self.q_image))
+ 
+ def saveImage(self):
+ # Function for saving the processed image
+ 
+ filter = &quot;Images (*.png *.jpg)&quot;
+ 
+ image_path, _ = QFileDialog.getSaveFileName(self, filter=filter)
+ 
+ cv_img_bgr = cv2.cvtColor(
+ self.cv_img_rgb, cv2.COLOR_RGB2BGR)
+ cv2.imwrite(image_path, cv_img_bgr)
+ 
+ #获取视频
+cap = cv2.VideoCapture(int(text))
+cap.set(6 ,cv2.VideoWriter_fourcc('M', 'J', 'P', 'G') );
+cap.set(3,w);
+cap.set(4,h);
+global update1
+update1 = 1
+global shotmark1
+ret, frame = cap.read()
+
+
+</code></pre>
+<p>这样就能够获取到一帧图像了，其中cap.set()函数用来设置相机的参数，本来应该有宏定义的，但是在python里面老是报错，直接用数字替代了，其中3就是获取视频的宽度像素，4是高度，这个要和摄像头手册上的参数一致。一般的Webcam有两种图像获取格式：一种是YUV2格式这种事10bit回传的数据，理论上质量更好，但是有个很大的问题是分辨率高的时候，帧率就会变得十分低。另一种格式是MJPEG格式，这个是使用了压缩技术得到的视频流。通过这个格式，手册上说在1920x1080分辨率下都能获得30fps的表现，而YUV2只有5fps（后来发现，这个就是坑爹的，信了就怪了）。cap.set(6 ,cv2.VideoWriter_fourcc(‘M', ‘J', ‘P', ‘G') );这个参数就是使用MJPEG格式来读取摄像头的数据。</p>
+<p>多线程</p>
+<p>刚才我们呢也提到了，cap.read()这个函数是获取到了一帧图像，但是呢。我们要的是动画啊，要是写个循环的话，又会吧进程卡死在循环中，照成假死的状态，所以对于图像的绘制，一定要使用多线程技术。在这里我不仅要吐槽一下了。学了好多年计算机，讲了很多串行算法和编程，一讲到多线程，无非就是打印个Hello World！，根本就没有什么实践，理论倒是学了很多，感觉用的时候头真的好大！</p>
+<p>其实这里的多线程也没有什么是吧，就是起调一下。但是要注意的是要控制线程的退出，在python这个我引入的多线程包里面，贼坑的是没有外界控制线程退出的办法！所以，我设置了一个全局变量，使用判断全局变量的值来判断是否让子线程继续下去。</p>
+<p>结尾</p>
+<p>实际上，还有分辨率/帧率设置功能呢，只不过懒得写了！！！</p>
+<ul>
+<li>另一例子</li>
+</ul>
+<pre><code>import cv2
+
+cap = cv2.VideoCapture(0) #默认大小
+# cap.set(3,1080)
+# cap.set(4,720)
+cv2.namedWindow(cv2.WINDOW_NORMAL)#任意调节大小
+
+#显示
+import cv2
+
+# 初始化摄像头
+cap = cv2.VideoCapture(0)
+
+while cap.isOpened():
+    # 采集一帧一帧的图像数据
+    isSuccess,frame = cap.read()
+    # 实时的将采集到的数据显示到界面上
+    if isSuccess:
+        cv2.imshow(&quot;My Capture&quot;,frame)
+    # 实现按下“q”键退出程序
+    if cv2.waitKey(1)&amp;0xFF == ord('q'):
+        break
+
+# 释放摄像头资源
+cap.release()
+cv2.destoryAllWindows()
+</code></pre>
+<p>录制视频</p>
+<pre><code># coding:utf-8
+import sys
+
+reload(sys)
+sys.setdefaultencoding('utf8')
+#    __author__ = '郭 璞'
+#    __date__ = '2016/9/7'
+#    __Desc__ = 使用Python借助opencv实现对图像的读取，写入
+
+import cv2
+import numpy as np
+# 选取摄像头，0为笔记本内置的摄像头，1,2···为外接的摄像头
+cap = cv2.VideoCapture(0)
+# cap.set(3,1080)
+# cap.set(4,720)
+
+# 为保存视频做准备
+fourcc = cv2.cv.CV_FOURCC(&quot;D&quot;, &quot;I&quot;, &quot;B&quot;, &quot; &quot;)
+# 第三个参数则是镜头快慢的，20为正常，小于二十为慢镜头
+out = cv2.VideoWriter('output2.avi', fourcc,3.0,(640,480))
+while True:
+    # 一帧一帧的获取图像
+    ret,frame = cap.read()
+    if ret == True:
+        frame = cv2.flip(frame, 1)
+        # 在帧上进行操作
+        # gray = cv2.cvtColor(frame,cv2.COLOR_BGR2GRAY)
+        # 开始保存视频
+        out.write(frame)
+        # 显示结果帧
+        cv2.imshow(&quot;frame&quot;, frame)
+        if cv2.waitKey(1) &amp; 0xFF == ord('q'):
+            break
+    else:
+        break
+# 释放摄像头资源
+cap.release()
+out.release()
+cv2.destroyAllWindows()
+</code></pre>
+<ul>
+<li>另一个例子，我电脑上可以实现的</li>
+</ul>
+<pre><code>import numpy as np
+import cv2
+
+cap = cv2.VideoCapture(0)
+
+fourcc = cv2.VideoWriter_fourcc(*'XVID')
+#out = cv2.VideoWriter('output.mp4',fourcc, 30.0, (640,480))  #设置分辨率
+
+
+# 获取捕获的分辨率
+# propId可以直接写数字，也可以用OpenCV的符号表示
+width, height = cap.get(3), cap.get(4)
+print(width, height)
+out = cv2.VideoWriter('output.mp4',fourcc, 30.0, (int(width),int(height)))
+'''
+# 以原分辨率的一倍来捕获
+cap.set(cv2.CAP_PROP_FRAME_WIDTH, width * 2)
+cap.set(cv2.CAP_PROP_FRAME_HEIGHT, height * 2)
+'''
+
+
+while(cap.isOpened()):
+    ret, frame = cap.read()
+    if ret==True:
+        frame = cv2.flip(frame,1)
+#        out.write(cv2.cvtColor(frame, cv2.COLOR_RGB2BGR))   将视频转换为灰色的源
+        out.write(frame)
+
+        cv2.imshow('frame', frame)
+        if cv2.waitKey(1) &amp; 0xFF == ord('1'):
+            break
+    else:
+        break
+
+cap.release()
+out.release()
+cv2.destroyAllWindows()
+
+</code></pre>
+
+            </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://lizhenzhublog.github.io/post/dx7xPaKP-/">
+                  <h3 class="post-title">
+                    如何将视频转换为图片
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script type="application/javascript">
+
+AOS.init();
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+
+  </body>
+</html>

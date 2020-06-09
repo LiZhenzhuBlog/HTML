@@ -9,8 +9,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="https://blog.bioprinting.site/favicon.ico?v=1587555135577">
-<link rel="stylesheet" href="https://blog.bioprinting.site/styles/main.css">
+<link rel="shortcut icon" href="https://lizhenzhublog.github.io/favicon.ico?v=1591694069327">
+<link rel="stylesheet" href="https://lizhenzhublog.github.io/styles/main.css">
 
 
 
@@ -28,8 +28,8 @@
       <div class="sidebar" :class="{ 'full-height': menuVisible }">
   <div class="top-container" data-aos="fade-right">
     <div class="top-header-container">
-      <a class="site-title-container" href="https://blog.bioprinting.site">
-        <img src="https://blog.bioprinting.site/images/avatar.png?v=1587555135577" class="site-logo">
+      <a class="site-title-container" href="https://lizhenzhublog.github.io">
+        <img src="https://lizhenzhublog.github.io/images/avatar.png?v=1591694069327" class="site-logo">
         <h1 class="site-title">Li Zhenzhu, Ph.D</h1>
       </a>
       <div class="menu-btn" @click="menuVisible = !menuVisible">
@@ -126,111 +126,111 @@
 <p><code>Python可用的GUI编程的包很多，Tkinter也是其中一个半标准的工具包。</code></p>
 <p><code>作为一个老牌的Python GUI工具包（皮皮书屋里找了本书，竟然是2001年的),它由Tk GUI包装而来。在Windows版里面已经包括了，不用单独下载。</code></p>
 <p><code>用Tkinter实现一个简单的GUI程序,单击click按钮时会在终端打印出’hello world’：</code></p>
-<p><a title="复制代码"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></p>
-<p><strong>author</strong> = 'fyby'
-from Tkinter import *   #引入Tkinter工具包
-def hello():
+<p><a title="复制代码"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码" loading="lazy"></a></p>
+<p><strong>author</strong> = 'fyby'<br>
+from Tkinter import *   #引入Tkinter工具包<br>
+def hello():<br>
 print('hello world!')</p>
-<p>win = Tk()  #定义一个窗体
-win.title('Hello World')    #定义窗体标题
+<p>win = Tk()  #定义一个窗体<br>
+win.title('Hello World')    #定义窗体标题<br>
 win.geometry('400x200')     #定义窗体的大小，是400X200像素</p>
-<p>btn = Button(win, text='Click me', command=hello)
-#注意这个地方，不要写成hello(),如果是hello()的话，
+<p>btn = Button(win, text='Click me', command=hello)<br>
+#注意这个地方，不要写成hello(),如果是hello()的话，<br>
 #会在mainloop中调用hello函数，</p>
 <h1 id="而不是单击button按钮时出发事件">而不是单击button按钮时出发事件</h1>
 <p>btn.pack(expand=YES, fill=BOTH) #将按钮pack，充满整个窗体(只有pack的组件实例才能显示)</p>
-<p>mainloop() #进入主循环，程序运行
-<a title="复制代码"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></p>
-<p><img src="https://images.cnblogs.com/cnblogs_com/fuyunbiyi/201206/201206132114189135.png" alt="image" title="image"></p>
+<p>mainloop() #进入主循环，程序运行<br>
+<a title="复制代码"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码" loading="lazy"></a></p>
+<figure data-type="image" tabindex="1"><img src="https://images.cnblogs.com/cnblogs_com/fuyunbiyi/201206/201206132114189135.png" alt="image" title="image" loading="lazy"></figure>
 <p><code>当我们写一个较大的程序时，最好将代码分成一个或者是几个类，再看一下Hello World例子</code></p>
-<p><a title="复制代码"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></p>
-<p>#-<em>- encoding=UTF-8 -</em>-
-<strong>author</strong> = 'fyby'
-from Tkinter import *
-class App:
-def <strong>init</strong>(self, master):
-#构造函数里传入一个父组件(master),创建一个Frame组件并显示
-frame = Frame(master)
-frame.pack()
-#创建两个button，并作为frame的一部分
-self.button = Button(frame, text=&quot;QUIT&quot;, fg=&quot;red&quot;, command=frame.quit)
-self.button.pack(side=LEFT) #此处side为LEFT表示将其放置 到frame剩余空间的最左方
-self.hi_there = Button(frame, text=&quot;Hello&quot;, command=self.say_hi)
+<p><a title="复制代码"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码" loading="lazy"></a></p>
+<p>#-<em>- encoding=UTF-8 -</em>-<br>
+<strong>author</strong> = 'fyby'<br>
+from Tkinter import *<br>
+class App:<br>
+def <strong>init</strong>(self, master):<br>
+#构造函数里传入一个父组件(master),创建一个Frame组件并显示<br>
+frame = Frame(master)<br>
+frame.pack()<br>
+#创建两个button，并作为frame的一部分<br>
+self.button = Button(frame, text=&quot;QUIT&quot;, fg=&quot;red&quot;, command=frame.quit)<br>
+self.button.pack(side=LEFT) #此处side为LEFT表示将其放置 到frame剩余空间的最左方<br>
+self.hi_there = Button(frame, text=&quot;Hello&quot;, command=self.say_hi)<br>
 self.hi_there.pack(side=LEFT)</p>
 <pre><code>def say_hi(self):
     print &quot;hi there, this is a class example!&quot;
 </code></pre>
-<p>win = Tk()
-app = App(win)
-win.mainloop()
-<a title="复制代码"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></p>
-<p><img src="https://images.cnblogs.com/cnblogs_com/fuyunbiyi/201206/201206132114208428.png" alt="image" title="image"></p>
+<p>win = Tk()<br>
+app = App(win)<br>
+win.mainloop()<br>
+<a title="复制代码"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码" loading="lazy"></a></p>
+<figure data-type="image" tabindex="2"><img src="https://images.cnblogs.com/cnblogs_com/fuyunbiyi/201206/201206132114208428.png" alt="image" title="image" loading="lazy"></figure>
 <p>看完了上面两个无聊的Hello World例子，再来看一个稍微Perfect点的东西吧。Menu组件，自己画一个像样点的程序外壳。</p>
-<p><a title="复制代码"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></p>
-<p>#-<em>- encoding=UTF-8 -</em>-
-<strong>author</strong> = 'fyby'
+<p><a title="复制代码"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码" loading="lazy"></a></p>
+<p>#-<em>- encoding=UTF-8 -</em>-<br>
+<strong>author</strong> = 'fyby'<br>
 from Tkinter import *</p>
 <p>root = Tk()</p>
-<p>def hello():
+<p>def hello():<br>
 print('hello')</p>
 <h1 id="创建一个导航菜单">创建一个导航菜单</h1>
-<p>menubar = Menu(root)
-menubar.add_command(label=&quot;Hello!&quot;, command=hello)
+<p>menubar = Menu(root)<br>
+menubar.add_command(label=&quot;Hello!&quot;, command=hello)<br>
 menubar.add_command(label=&quot;Quit!&quot;,command=root.quit)</p>
 <p>root.config(menu=menubar)</p>
-<p>mainloop()
-<a title="复制代码"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></p>
-<p><img src="https://images.cnblogs.com/cnblogs_com/fuyunbiyi/201206/201206132114217481.png" alt="image" title="image"></p>
-<p>这个程序还是有点无趣，因为我们只是创建了一个顶级的导航菜单，点击后只是在终端中输出hello而已，下面来创建一个下拉菜单，这样才像一个正儿八经的应用<img src="https://images.cnblogs.com/cnblogs_com/fuyunbiyi/201206/201206132114226675.png" alt="大笑">在下面的这个例子中，会创建三个顶级菜单，每个顶级菜单中都有下拉菜单（用add_command方法创建，最后用add_cascade方法加入到上级菜单中去），为每个下拉选项都绑定一个hello函数，在终端中打印出hello.</p>
+<p>mainloop()<br>
+<a title="复制代码"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码" loading="lazy"></a></p>
+<figure data-type="image" tabindex="3"><img src="https://images.cnblogs.com/cnblogs_com/fuyunbiyi/201206/201206132114217481.png" alt="image" title="image" loading="lazy"></figure>
+<p>这个程序还是有点无趣，因为我们只是创建了一个顶级的导航菜单，点击后只是在终端中输出hello而已，下面来创建一个下拉菜单，这样才像一个正儿八经的应用<img src="https://images.cnblogs.com/cnblogs_com/fuyunbiyi/201206/201206132114226675.png" alt="大笑" loading="lazy">在下面的这个例子中，会创建三个顶级菜单，每个顶级菜单中都有下拉菜单（用add_command方法创建，最后用add_cascade方法加入到上级菜单中去），为每个下拉选项都绑定一个hello函数，在终端中打印出hello.</p>
 <p>root.quit是退出这个Tk的实例。</p>
-<p><a title="复制代码"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></p>
-<p>#-<em>- encoding=UTF-8 -</em>-
-<strong>author</strong> = 'fyby'
-from Tkinter import *
+<p><a title="复制代码"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码" loading="lazy"></a></p>
+<p>#-<em>- encoding=UTF-8 -</em>-<br>
+<strong>author</strong> = 'fyby'<br>
+from Tkinter import *<br>
 root = Tk()</p>
-<p>def hello():
+<p>def hello():<br>
 print('hello')</p>
-<p>def about():
+<p>def about():<br>
 print('我是开发者')</p>
 <p>menubar = Menu(root)</p>
-<p>#创建下拉菜单File，然后将其加入到顶级的菜单栏中
-filemenu = Menu(menubar,tearoff=0)
-filemenu.add_command(label=&quot;Open&quot;, command=hello)
-filemenu.add_command(label=&quot;Save&quot;, command=hello)
-filemenu.add_separator()
-filemenu.add_command(label=&quot;Exit&quot;, command=root.quit)
+<p>#创建下拉菜单File，然后将其加入到顶级的菜单栏中<br>
+filemenu = Menu(menubar,tearoff=0)<br>
+filemenu.add_command(label=&quot;Open&quot;, command=hello)<br>
+filemenu.add_command(label=&quot;Save&quot;, command=hello)<br>
+filemenu.add_separator()<br>
+filemenu.add_command(label=&quot;Exit&quot;, command=root.quit)<br>
 menubar.add_cascade(label=&quot;File&quot;, menu=filemenu)</p>
-<p>#创建另一个下拉菜单Edit
-editmenu = Menu(menubar, tearoff=0)
-editmenu.add_command(label=&quot;Cut&quot;, command=hello)
-editmenu.add_command(label=&quot;Copy&quot;, command=hello)
-editmenu.add_command(label=&quot;Paste&quot;, command=hello)
-menubar.add_cascade(label=&quot;Edit&quot;,menu=editmenu)
-#创建下拉菜单Help
-helpmenu = Menu(menubar, tearoff=0)
-helpmenu.add_command(label=&quot;About&quot;, command=about)
+<p>#创建另一个下拉菜单Edit<br>
+editmenu = Menu(menubar, tearoff=0)<br>
+editmenu.add_command(label=&quot;Cut&quot;, command=hello)<br>
+editmenu.add_command(label=&quot;Copy&quot;, command=hello)<br>
+editmenu.add_command(label=&quot;Paste&quot;, command=hello)<br>
+menubar.add_cascade(label=&quot;Edit&quot;,menu=editmenu)<br>
+#创建下拉菜单Help<br>
+helpmenu = Menu(menubar, tearoff=0)<br>
+helpmenu.add_command(label=&quot;About&quot;, command=about)<br>
 menubar.add_cascade(label=&quot;Help&quot;, menu=helpmenu)</p>
-<p>#显示菜单
+<p>#显示菜单<br>
 root.config(menu=menubar)</p>
-<p>mainloop()
-<a title="复制代码"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></p>
-<p><img src="https://images.cnblogs.com/cnblogs_com/fuyunbiyi/201206/201206132114235727.png" alt="image" title="image"></p>
-<p>写了这一些，差不多对Tkinter有了一个大体的印象了。在Python中用Tkinter绘制GUI界面还是蛮简单的。再把上面的例子扩展一下，和Label标签结合，当单击about的时候，在窗体上打印About的内容，而不是在终端输出。将about函数稍微修改一下。单击about以后将会调用about函数渲染frame绘制一个标签并显示其内容。
-def about():
-w = Label(root,text=&quot;开发者感谢名单\nfuyunbiyi\nfyby尚未出现的女朋友\nhttp://www.programup.com网站&quot;)
+<p>mainloop()<br>
+<a title="复制代码"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码" loading="lazy"></a></p>
+<figure data-type="image" tabindex="4"><img src="https://images.cnblogs.com/cnblogs_com/fuyunbiyi/201206/201206132114235727.png" alt="image" title="image" loading="lazy"></figure>
+<p>写了这一些，差不多对Tkinter有了一个大体的印象了。在Python中用Tkinter绘制GUI界面还是蛮简单的。再把上面的例子扩展一下，和Label标签结合，当单击about的时候，在窗体上打印About的内容，而不是在终端输出。将about函数稍微修改一下。单击about以后将会调用about函数渲染frame绘制一个标签并显示其内容。<br>
+def about():<br>
+w = Label(root,text=&quot;开发者感谢名单\nfuyunbiyi\nfyby尚未出现的女朋友\nhttp://www.programup.com网站&quot;)<br>
 w.pack(side=TOP)</p>
-<p><img src="https://images.cnblogs.com/cnblogs_com/fuyunbiyi/201206/201206132114252054.png" alt="image" title="image"></p>
-<p>关于Tkinter更多的内容，参考<a href="http://www.programup.com/wiki/beginning_tkinter/">http://www.programup.com/wiki/beginning_tkinter/</a>，例子原型主要来自于该网站，还有一本书（就是文章开头提到过的那那本01年的书，<a href="http://www.ppurl.com/2012/02/python%E4%B8%8Etkinter%E7%BC%96%E7%A8%8B.html">http://www.ppurl.com/2012/02/python%E4%B8%8Etkinter%E7%BC%96%E7%A8%8B.html</a>)。还有，国内的书记得《征服Python》中好像也有关于Tkinter的例子，在VeryCD上应该可以找的到<img src="https://images.cnblogs.com/cnblogs_com/fuyunbiyi/201206/201206132114264039.png" alt="大声笑">。</p>
+<figure data-type="image" tabindex="5"><img src="https://images.cnblogs.com/cnblogs_com/fuyunbiyi/201206/201206132114252054.png" alt="image" title="image" loading="lazy"></figure>
+<p>关于Tkinter更多的内容，参考<a href="http://www.programup.com/wiki/beginning_tkinter/">http://www.programup.com/wiki/beginning_tkinter/</a>，例子原型主要来自于该网站，还有一本书（就是文章开头提到过的那那本01年的书，<a href="http://www.ppurl.com/2012/02/python%E4%B8%8Etkinter%E7%BC%96%E7%A8%8B.html">http://www.ppurl.com/2012/02/python%E4%B8%8Etkinter%E7%BC%96%E7%A8%8B.html</a>)。还有，国内的书记得《征服Python》中好像也有关于Tkinter的例子，在VeryCD上应该可以找的到<img src="https://images.cnblogs.com/cnblogs_com/fuyunbiyi/201206/201206132114264039.png" alt="大声笑" loading="lazy">。</p>
 <p>分类: <a href="https://www.cnblogs.com/fuyunbiyi/category/368825.html">读书笔记</a></p>
-<p><a id="green_channel_digg"></a>好文要顶 <a id="green_channel_follow"></a>关注我 <a id="green_channel_favorite"></a>收藏该文 <a id="green_channel_weibo" title="分享至新浪微博"></a><img src="https://common.cnblogs.com/images/icon_weibo_24.png" alt=""> <a id="green_channel_wechat" title="分享至微信"></a><img src="https://common.cnblogs.com/images/wechat.png" alt=""></p>
-<p><a href="https://home.cnblogs.com/u/fuyunbiyi/"><img src="https://pic.cnblogs.com/face/u370835.jpg?id=24210832" alt=""></a>
-<a href="https://home.cnblogs.com/u/fuyunbiyi/">浮云比翼</a>
-<a href="https://home.cnblogs.com/u/fuyunbiyi/followees">关注 - 19</a>
+<p><a id="green_channel_digg"></a>好文要顶 <a id="green_channel_follow"></a>关注我 <a id="green_channel_favorite"></a>收藏该文 <a id="green_channel_weibo" title="分享至新浪微博"></a><img src="https://common.cnblogs.com/images/icon_weibo_24.png" alt="" loading="lazy"> <a id="green_channel_wechat" title="分享至微信"></a><img src="https://common.cnblogs.com/images/wechat.png" alt="" loading="lazy"></p>
+<p><a href="https://home.cnblogs.com/u/fuyunbiyi/"><img src="https://pic.cnblogs.com/face/u370835.jpg?id=24210832" alt="" loading="lazy"></a><br>
+<a href="https://home.cnblogs.com/u/fuyunbiyi/">浮云比翼</a><br>
+<a href="https://home.cnblogs.com/u/fuyunbiyi/followees">关注 - 19</a><br>
 <a href="https://home.cnblogs.com/u/fuyunbiyi/followers">粉丝 - 78</a></p>
 <p><a>+加关注</a></p>
 <p>2</p>
 <p>0</p>
-<p><a href="https://www.cnblogs.com/fuyunbiyi/archive/2012/06/03/2532750.html">« </a>上一篇：<a href="https://www.cnblogs.com/fuyunbiyi/archive/2012/06/03/2532750.html" title="发布于2012-06-03 15:06">6月3日——回首一个半月</a>
+<p><a href="https://www.cnblogs.com/fuyunbiyi/archive/2012/06/03/2532750.html">« </a>上一篇：<a href="https://www.cnblogs.com/fuyunbiyi/archive/2012/06/03/2532750.html" title="发布于2012-06-03 15:06">6月3日——回首一个半月</a><br>
 <a href="https://www.cnblogs.com/fuyunbiyi/archive/2012/07/31/2617419.html">» </a>下一篇：<a href="https://www.cnblogs.com/fuyunbiyi/archive/2012/07/31/2617419.html" title="发布于2012-07-31 21:32">学生终究要面对社会</a></p>
 <p>posted @ 2012-06-13 21:14 <a href="https://www.cnblogs.com/fuyunbiyi/">浮云比翼</a> 阅读(27174) 评论(5) <a href="https://i.cnblogs.com/EditPosts.aspx?postid=2548497">编辑</a> <a href="https://www.cnblogs.com/fuyunbiyi/archive/2012/06/13/2548497.html">收藏</a></p>
 <p><a name="!comments"></a></p>
@@ -239,29 +239,29 @@ w.pack(side=TOP)</p>
 <p>很好的学习材料。</p>
 <p><a class="comment_digg">支持(0)</a><a class="comment_bury">反对(0)</a></p>
 <p><a href="https://www.cnblogs.com/fuyunbiyi/archive/2012/06/13/2548497.html#2501081">#2楼</a><a id="comment_anchor_2501081" name="2501081"></a> 2012-10-22 17:01 <a href="http://home.cnblogs.com/u/438131/">prayer163</a> <a href="http://msg.cnblogs.com/send/prayer163" title="发送站内短消息"> </a></p>
-<p>请问您这句：
+<p>请问您这句：<br>
 filemenu = Menu(menubar,tearoff=0)</p>
 <p>里面tearoff是什么含义？</p>
 <p>我该如何、在哪里能查到这些参数的意义呢？ 谢谢！</p>
 <p><a class="comment_digg">支持(1)</a><a class="comment_bury">反对(0)</a></p>
 <p><a href="https://www.cnblogs.com/fuyunbiyi/archive/2012/06/13/2548497.html#2502107">#3楼</a><a id="comment_anchor_2502107" name="2502107"></a>[楼主] 2012-10-22 20:15 <a href="https://www.cnblogs.com/fuyunbiyi/">浮云比翼</a> <a href="http://msg.cnblogs.com/send/%E6%B5%AE%E4%BA%91%E6%AF%94%E7%BF%BC" title="发送站内短消息"> </a></p>
-<p><a href="https://www.cnblogs.com/fuyunbiyi/archive/2012/06/13/2548497.html#2501081" title="查看所回复的评论">@</a> prayer163
-tearoff=0指的是不分开，就是说你所添加的submenu不能弹出新窗口，如果你想要使用哪种点击一下能弹出一个新窗口显示一些目录的话可以设置tearoff=1。
-其实完全可以自己动手试一下的，例如，将filemenu = Menu(menubar,tearoff=0)改成filemenu = Menu(menubar,tearoff=1)，这时你再点击filemenu的时候，会看到下拉目录里面有一条线，然后点击这条线，就会弹出一个新的窗口显示这一些的下拉菜单了。
+<p><a href="https://www.cnblogs.com/fuyunbiyi/archive/2012/06/13/2548497.html#2501081" title="查看所回复的评论">@</a> prayer163<br>
+tearoff=0指的是不分开，就是说你所添加的submenu不能弹出新窗口，如果你想要使用哪种点击一下能弹出一个新窗口显示一些目录的话可以设置tearoff=1。<br>
+其实完全可以自己动手试一下的，例如，将filemenu = Menu(menubar,tearoff=0)改成filemenu = Menu(menubar,tearoff=1)，这时你再点击filemenu的时候，会看到下拉目录里面有一条线，然后点击这条线，就会弹出一个新的窗口显示这一些的下拉菜单了。<br>
 相关资料可以参考<a href="http://www.tutorialspoint.com/python/tk_menu.htm">http://www.tutorialspoint.com/python/tk_menu.htm</a></p>
 <p>但是这上面说的参数说明也都比较笼统，还是自己试验一下比较好一些。</p>
 <p><a class="comment_digg">支持(1)</a><a class="comment_bury">反对(0)</a></p>
 <p><a href="https://www.cnblogs.com/fuyunbiyi/archive/2012/06/13/2548497.html#2502110">#4楼</a><a id="comment_anchor_2502110" name="2502110"></a>[楼主] 2012-10-22 20:21 <a href="https://www.cnblogs.com/fuyunbiyi/">浮云比翼</a> <a href="http://msg.cnblogs.com/send/%E6%B5%AE%E4%BA%91%E6%AF%94%E7%BF%BC" title="发送站内短消息"> </a></p>
-<p><a href="https://www.cnblogs.com/fuyunbiyi/archive/2012/06/13/2548497.html#2501081" title="查看所回复的评论">@</a> prayer163
-<img src="https://pic002.cnblogs.com/images/2012/370835/2012102220204555.png" alt=""></p>
+<p><a href="https://www.cnblogs.com/fuyunbiyi/archive/2012/06/13/2548497.html#2501081" title="查看所回复的评论">@</a> prayer163<br>
+<img src="https://pic002.cnblogs.com/images/2012/370835/2012102220204555.png" alt="" loading="lazy"></p>
 <p>点了以后就是这样的</p>
-<p><img src="https://pic002.cnblogs.com/images/2012/370835/2012102220205355.png" alt=""></p>
+<figure data-type="image" tabindex="6"><img src="https://pic002.cnblogs.com/images/2012/370835/2012102220205355.png" alt="" loading="lazy"></figure>
 
             </div>
             
               <div class="tag-container">
                 
-                  <a href="https://blog.bioprinting.site/tag/i0M-lnfJB" class="tag">
+                  <a href="https://lizhenzhublog.github.io/tag/i0M-lnfJB/" class="tag">
                     myself
                   </a>
                 
@@ -270,7 +270,7 @@ tearoff=0指的是不分开，就是说你所添加的submenu不能弹出新窗�
             
               <div class="next-post">
                 <div class="next">下一篇</div>
-                <a href="https://blog.bioprinting.site/post/BI_VpZjOp">
+                <a href="https://lizhenzhublog.github.io/post/BI_VpZjOp/">
                   <h3 class="post-title">
                     PyAutoGui
                   </h3>
