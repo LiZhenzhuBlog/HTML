@@ -4,7 +4,7 @@
 <meta name="description" content="" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>通过使用3D打印头模型进行放射治疗固定化面膜成型 | Li Zhenzhu, Ph.D</title>
-<link rel="shortcut icon" href="https://lizhenzhublog.github.io/HTML/favicon.ico?v=1591698394096">
+<link rel="shortcut icon" href="https://lizhenzhublog.github.io/HTML/favicon.ico?v=1591698960802">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 <link rel="stylesheet" href="https://lizhenzhublog.github.io/HTML/styles/main.css">
 
@@ -18,7 +18,7 @@
       <div class="main-content">
         <div class="site-header">
   <a href="https://lizhenzhublog.github.io/HTML">
-  <img class="avatar" src="https://lizhenzhublog.github.io/HTML/images/avatar.png?v=1591698394096" alt="">
+  <img class="avatar" src="https://lizhenzhublog.github.io/HTML/images/avatar.png?v=1591698960802" alt="">
   </a>
   <h1 class="site-title">
     Li Zhenzhu, Ph.D
@@ -97,7 +97,7 @@
                 · 2019-02-14 ·
               </time>
               
-                <a href="https://lizhenzhublog.github.io/HTML/tag/printing/" class="post-tags">
+                <a href="https://lizhenzhublog.github.io/HTML/tag/printing" class="post-tags">
                   # printing
                 </a>
               
@@ -126,7 +126,7 @@
 <p>Patients referred for WBRT have had a prior diagnostic computed tomography (CT)-scan. Despite a prior CT scan, all patients undergo another simulation CT-scan (CT-sim), in which patients will be placed in a reproducible position to prepare for radiation treatments. Patients also endure a molding session to create a personalized plastic mask that secures the patient’s head in a fixed position during the CT-sim and radiation treatments. Alternate techniques to immobilize patients for WBRT, such as ones based on the use of strip tapes instead of thermoplastic masks, had previously been evaluated for claustrophobic patients.<sup><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6259067/#bibr4-1533033818809051">4</a></sup></p>
 <p>Novel applications of additive manufacturing (three-dimensional [3D]-printing) technology in radiotherapy have primarily been used to print brachytherapy applicators and bolus materials to improve radiation dose delivery.<sup><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6259067/#bibr5-1533033818809051">5</a></sup> A prior study has shown the feasibility of 3D-printing heads (3D-Head) and masks using CT-sim images.<sup><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6259067/#bibr6-1533033818809051">6</a></sup> However, the authors did not describe its practical utilization, radiation dosimetry, and implementation. With the widespread commercialization of 3D-printers, the cost of 3D-Head has now been reduced to approximately CAD100 (actual material and personnel cost from this study). This cost is expected to decrease as 3D-printer technology evolves, and will likely be considerably less than the cost of the CT-sim and molding session.</p>
 <p>We hypothesize that patient positions at CT scans can be reproduced using 3D-printer products, which would reduce the need of a CT-sim and molding session. The uptake of 3D-printer methodologies could liberate resources from Radiation Oncology departments and improve the patient experience by reducing visits, interventions, and waiting times (<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6259067/figure/fig1-1533033818809051/">Figure 1</a>).</p>
-<figure data-type="image" tabindex="1"><a href="https://www.ncbi.nlm.nih.gov/core/lw/2.0/html/tileshop_pmc/tileshop_pmc_inline.html?title=Click%20on%20image%20to%20zoom&amp;p=PMC3&amp;id=6259067_10.1177_1533033818809051-fig1.jpg"><img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6259067/bin/10.1177_1533033818809051-fig1.jpg" alt="An external file that holds a picture, illustration, etc.Object name is 10.1177_1533033818809051-fig1.jpg" title="Click on image to zoom" loading="lazy"></a></figure>
+<p><a href="https://www.ncbi.nlm.nih.gov/core/lw/2.0/html/tileshop_pmc/tileshop_pmc_inline.html?title=Click%20on%20image%20to%20zoom&amp;p=PMC3&amp;id=6259067_10.1177_1533033818809051-fig1.jpg"><img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6259067/bin/10.1177_1533033818809051-fig1.jpg" alt="An external file that holds a picture, illustration, etc.Object name is 10.1177_1533033818809051-fig1.jpg" title="Click on image to zoom"></a></p>
 <p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6259067/figure/fig1-1533033818809051/?report=objectonly">Open in a separate window</a></p>
 <p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6259067/figure/fig1-1533033818809051/">Figure 1.</a></p>
 <p>Current and proposed approaches for the elaboration of WBRT treatment. WBRT indicates whole brain radiotherapy.</p>
@@ -277,8 +277,8 @@
 <p>Digital imaging and communication in medicine (DICOM) images obtained from the CT-sim of 11 patients were exported from the local radiotherapy planning system (Eclipse, Varian Medical Systems, Inc, Palo Alto, California) to an open source program (3D-Slicer, <a href="http://www.slicer.org/">http://www.slicer.org</a>).<sup><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6259067/#bibr7-1533033818809051">7</a></sup>Autosegmentations of the head and neck rest contours were obtained by selecting for voxels with Hounsfield units (HU) between −650.00 and 2976.00. Subsequently, in another 3D modeling program (CATIA, Dassault Systèmes, Vélizy-Villacoublay, France), the contoured structures were processed to (1) smooth the exterior contours, (2) isolate the head and neck rest from the other auto-segmented structures (couch table), and (3) remove the structures within the head.</p>
 <h3 id="three-dimensional-model-design">Three-Dimensional Model Design</h3>
 <p>The process of design and fabrication of the 3D-Head and neck rests (3D-NRs) are shown in <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6259067/figure/fig2-1533033818809051/">Figure 2</a>. The 3D-NRs are printed separately as, in practice, patients would rest their heads on the 3D-NRs to reassume the position of the 3D-Heads.The 3D-Head and 3D-NRs interiors were 10% filled (<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6259067/figure/fig2-1533033818809051/">Figure 2</a>). Four matching pins and holes (1 cm diameter) were designed and added to the posterior aspect of the 3D-Heads and anterior aspect of the 3D-NRs, respectively (<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6259067/figure/fig2-1533033818809051/">Figure 2</a>). These pins and holes served to realign the 3D-Heads’ positions on the 3D-NRs to ensure an accurate reproduction of the original rotational position. The contours were converted into 3D-printing compatible STL files.</p>
-<figure data-type="image" tabindex="2"><img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6259067/bin/10.1177_1533033818809051-fig2.jpg" alt="An external file that holds a picture, illustration, etc.Object name is 10.1177_1533033818809051-fig2.jpg" title="An external file that holds a picture, illustration, etc.
-Object name is 10.1177_1533033818809051-fig2.jpg" loading="lazy"></figure>
+<p><img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6259067/bin/10.1177_1533033818809051-fig2.jpg" alt="An external file that holds a picture, illustration, etc.Object name is 10.1177_1533033818809051-fig2.jpg" title="An external file that holds a picture, illustration, etc.
+Object name is 10.1177_1533033818809051-fig2.jpg"></p>
 <p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6259067/figure/fig2-1533033818809051/?report=objectonly">Open in a separate window</a></p>
 <p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6259067/figure/fig2-1533033818809051/">Figure 2.</a></p>
 <p>3D-printing process. The printing time and amount of material used for 3D-printing was reduced by filling the head at 10% (A and B). The head (C) and neck rest were printed independently using polylactic acid filaments at 0.3 mm deposition thickness. Four pins and holes (D) were added to the head and neck rest to realign the 3D-printouts prior to thermoplastic masks molding. 3D indicates three-dimensional.</p>
@@ -286,7 +286,7 @@ Object name is 10.1177_1533033818809051-fig2.jpg" loading="lazy"></figure>
 <p>Three-dimensional-printing was done using the Big Builder Dual-Feed printer (Builder 3D Printers BV, Noordwijkerhout, the Netherlands), which utilized the fused deposition method from polylactic acid (PLA) filaments at 0.3-mm deposition thickness. The 3D-Heads were placed on their 3D-NRs (using the pin and hole system for alignment) on a flat table top to simulate a radiation therapy couch. Thermoplastic masks (Aquaplast RT, Orfit, Wijnegem, Belgium) that covered from the top of the 3D-Head to the chin were then molded onto the system as is standard practice for WBRT patients.</p>
 <h3 id="image-registration">Image Registration</h3>
 <p>The thermoplastic mask immobilized 3D-printed heads were CT scanned. The CT images were then imported into Eclipse for image segmentation of the surface, to be compared with the original patient images (<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6259067/figure/fig3-1533033818809051/">Figure 3</a>).</p>
-<figure data-type="image" tabindex="3"><a href="https://www.ncbi.nlm.nih.gov/core/lw/2.0/html/tileshop_pmc/tileshop_pmc_inline.html?title=Click%20on%20image%20to%20zoom&amp;p=PMC3&amp;id=6259067_10.1177_1533033818809051-fig3.jpg"><img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6259067/bin/10.1177_1533033818809051-fig3.jpg" alt="An external file that holds a picture, illustration, etc.Object name is 10.1177_1533033818809051-fig3.jpg" title="Click on image to zoom" loading="lazy"></a></figure>
+<p><a href="https://www.ncbi.nlm.nih.gov/core/lw/2.0/html/tileshop_pmc/tileshop_pmc_inline.html?title=Click%20on%20image%20to%20zoom&amp;p=PMC3&amp;id=6259067_10.1177_1533033818809051-fig3.jpg"><img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6259067/bin/10.1177_1533033818809051-fig3.jpg" alt="An external file that holds a picture, illustration, etc.Object name is 10.1177_1533033818809051-fig3.jpg" title="Click on image to zoom"></a></p>
 <p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6259067/figure/fig3-1533033818809051/?report=objectonly">Open in a separate window</a></p>
 <p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6259067/figure/fig3-1533033818809051/">Figure 3.</a></p>
 <p>Coregistration images. The surface volume, brain, and eyes of the original images were coregistered with the images obtained from the 3D-printout using 3D Slicer. The colors and volumes of the 2 sets of images are displayed in (A): The human surface contour is in green and the 3D-printout surface contour is in blue. The human brain volume is in yellow and the 3D-printout brain is in orange. The human eyes are in cyan blue and the 3D-printout eyes are in red. Small discrepancies between the 2 surface volumes are distinguished as blue contours beyond the green contours (B). Following coregistration, the dosimetry from the human plan was applied onto the 3D-printout volumes (C) to quantify the dosimetric differences to the brain and eyes. 3D indicates three-dimensional.</p>
@@ -372,7 +372,7 @@ Object name is 10.1177_1533033818809051-fig2.jpg" loading="lazy"></figure>
 </tbody>
 </table>
 <p>Abbreviations: DSC, dice similarity coefficients; SD, standard deviation; SEM, standard error of mean.</p>
-<figure data-type="image" tabindex="4"><a href="https://www.ncbi.nlm.nih.gov/core/lw/2.0/html/tileshop_pmc/tileshop_pmc_inline.html?title=Click%20on%20image%20to%20zoom&amp;p=PMC3&amp;id=6259067_10.1177_1533033818809051-fig4.jpg"><img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6259067/bin/10.1177_1533033818809051-fig4.jpg" alt="An external file that holds a picture, illustration, etc.Object name is 10.1177_1533033818809051-fig4.jpg" title="Click on image to zoom" loading="lazy"></a></figure>
+<p><a href="https://www.ncbi.nlm.nih.gov/core/lw/2.0/html/tileshop_pmc/tileshop_pmc_inline.html?title=Click%20on%20image%20to%20zoom&amp;p=PMC3&amp;id=6259067_10.1177_1533033818809051-fig4.jpg"><img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6259067/bin/10.1177_1533033818809051-fig4.jpg" alt="An external file that holds a picture, illustration, etc.Object name is 10.1177_1533033818809051-fig4.jpg" title="Click on image to zoom"></a></p>
 <p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6259067/figure/fig4-1533033818809051/?report=objectonly">Open in a separate window</a></p>
 <p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6259067/figure/fig4-1533033818809051/">Figure 4.</a></p>
 <p>Coregistration comparisons. Following translational (TR) or translational + rotational (TR+ROT) coregistrations, (A) the dice similarity coefficient, (B) accuracy, (C-E) Hausdorff distances, and (F) centroid vector differences from the original head were calculated.</p>
@@ -492,23 +492,23 @@ Object name is 10.1177_1533033818809051-fig2.jpg" loading="lazy"></figure>
 <p>Authors thank Dr Julien Cohen-Adad in allowing our team to use his laboratory’s 3D printer for this project.</p>
 <p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6259067/" title="Go to other sections in this page">Go to:</a></p>
 <h2 id="abbreviations">Abbreviations</h2>
-<p>| 3D | three-dimensional |<br>
-| ABS | acrylonitrile butadiene styrene |<br>
-| CT | computed tomography |<br>
-| DSC | dice similarity coefficients |<br>
-| HU | Hounsfield units |<br>
-| PLA | polylactic acid |<br>
-| PTV | planning target volume |<br>
-| ROT | rotational |<br>
-| SD | standard deviation |<br>
-| TR | translational |<br>
+<p>| 3D | three-dimensional |
+| ABS | acrylonitrile butadiene styrene |
+| CT | computed tomography |
+| DSC | dice similarity coefficients |
+| HU | Hounsfield units |
+| PLA | polylactic acid |
+| PTV | planning target volume |
+| ROT | rotational |
+| SD | standard deviation |
+| TR | translational |
 | WBRT | Whole brain radiotherapy. |</p>
 <p><strong>Authors’ Note:</strong> Quoc-Viêt Vincent Pham and Annie-Pier Lavallée, BEng, contributed equally. Ellis Mitrou, MSc and Philip Wong, MSc, MD, FRCPC contributed equally.</p>
 <p><strong>Declaration of Conflicting Interests:</strong> The author(s) declared no potential conflicts of interest with respect to the research, authorship, and/or publication of this article.</p>
 <p><strong>Funding:</strong> The author(s) disclosed receipt of the following financial support for the research, authorship, and/or publication of this article: This work was supported by funds from the Institut de Cancer de Montréal and the University of Montreal Department of Radiology, Radiation Oncology and Nuclear Medicine Support Professoral.</p>
-<p><strong>ORCID iD:</strong> Quoc-Viêt Vincent Pham <img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6259067/bin/10.1177_1533033818809051-img1.jpg" alt="An external file that holds a picture, illustration, etc.Object name is 10.1177_1533033818809051-img1.jpg" loading="lazy"> <a href="http://orcid.org/0000-0003-3383-2316">http://orcid.org/0000-0003-3383-2316</a></p>
-<p>David Roberge, MD, FRCPC <img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6259067/bin/10.1177_1533033818809051-img1.jpg" alt="An external file that holds a picture, illustration, etc.Object name is 10.1177_1533033818809051-img1.jpg" loading="lazy"> <a href="http://orcid.org/0000-0001-8747-648X">http://orcid.org/0000-0001-8747-648X</a></p>
-<p>Philip Wong, MSc, MD, FRCPC <img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6259067/bin/10.1177_1533033818809051-img1.jpg" alt="An external file that holds a picture, illustration, etc.Object name is 10.1177_1533033818809051-img1.jpg" loading="lazy"> <a href="http://orcid.org/0000-0002-7761-0283">http://orcid.org/0000-0002-7761-0283</a></p>
+<p><strong>ORCID iD:</strong> Quoc-Viêt Vincent Pham <img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6259067/bin/10.1177_1533033818809051-img1.jpg" alt="An external file that holds a picture, illustration, etc.Object name is 10.1177_1533033818809051-img1.jpg"> <a href="http://orcid.org/0000-0003-3383-2316">http://orcid.org/0000-0003-3383-2316</a></p>
+<p>David Roberge, MD, FRCPC <img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6259067/bin/10.1177_1533033818809051-img1.jpg" alt="An external file that holds a picture, illustration, etc.Object name is 10.1177_1533033818809051-img1.jpg"> <a href="http://orcid.org/0000-0001-8747-648X">http://orcid.org/0000-0001-8747-648X</a></p>
+<p>Philip Wong, MSc, MD, FRCPC <img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6259067/bin/10.1177_1533033818809051-img1.jpg" alt="An external file that holds a picture, illustration, etc.Object name is 10.1177_1533033818809051-img1.jpg"> <a href="http://orcid.org/0000-0002-7761-0283">http://orcid.org/0000-0002-7761-0283</a></p>
 <p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6259067/" title="Go to other sections in this page">Go to:</a></p>
 <h2 id="references">References</h2>
 <p>1. Canadian Cancer Statistics Advisory Committee. Canadian Cancer Statistics 2018. Toronto, Canada: Canadian Cancer Society; 2018. <a href="http://cancer.ca/Canadian-Cancer-Statistics-2018-EN">cancer.ca/Canadian-Cancer-Statistics-2018-EN</a>. Accessed October 19, 2018.</p>
@@ -531,7 +531,7 @@ Object name is 10.1177_1533033818809051-fig2.jpg" loading="lazy"></figure>
         
           <div class="next-post">
             <div class="next">下一篇</div>
-            <a href="https://lizhenzhublog.github.io/HTML/post/J6tk2zmlK/">
+            <a href="https://lizhenzhublog.github.io/HTML/post/J6tk2zmlK">
               <h3 class="post-title">
                 基于扩散加权磁共振成像的人丘脑核体内概率图谱
               </h3>

@@ -4,7 +4,7 @@
 <meta name="description" content="" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>DRR配准相关 | Li Zhenzhu, Ph.D</title>
-<link rel="shortcut icon" href="https://lizhenzhublog.github.io/HTML/favicon.ico?v=1591698394096">
+<link rel="shortcut icon" href="https://lizhenzhublog.github.io/HTML/favicon.ico?v=1591698960802">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 <link rel="stylesheet" href="https://lizhenzhublog.github.io/HTML/styles/main.css">
 
@@ -18,7 +18,7 @@
       <div class="main-content">
         <div class="site-header">
   <a href="https://lizhenzhublog.github.io/HTML">
-  <img class="avatar" src="https://lizhenzhublog.github.io/HTML/images/avatar.png?v=1591698394096" alt="">
+  <img class="avatar" src="https://lizhenzhublog.github.io/HTML/images/avatar.png?v=1591698960802" alt="">
   </a>
   <h1 class="site-title">
     Li Zhenzhu, Ph.D
@@ -97,7 +97,7 @@
                 · 2019-05-15 ·
               </time>
               
-                <a href="https://lizhenzhublog.github.io/HTML/tag/bigbridgerobot/" class="post-tags">
+                <a href="https://lizhenzhublog.github.io/HTML/tag/bigbridgerobot" class="post-tags">
                   # BigBridgeRobot
                 </a>
               
@@ -111,7 +111,7 @@
 <p>是否可以使用切片器创建模拟的X射线图像，类似于数字重建的射线照片，将3D模型作为输入而不是体积数据（即CT扫描）？我想象一个场景，其中一个或多个骨骼/植入物/工具等的3D模型（例如STL文件）可以放置在3D场景中，分配X射线衰减值，并模拟X射线图像？需要使用python的解决方案对我来说是可行的选择。</p>
 <p>我知道可以根据下面链接的帖子从CT扫描生成数字重建的射线照片，但是不确定是否可以使用更简化的有限数量结构的模型来进行，每个结构都有不断的X射线衰减。我知道可以将表面模型转换为体积数据，然后生成这些体积的DRR，但与直接计算射线三角形交叉点的东西相比，这似乎是一种相当低效的解决方案（计算上）。</p>
 <p>在此先感谢您的帮助！</p>
-<p><a href="https://sjc2.discourse-cdn.com/standard17/uploads/slicer/original/2X/c/cac1fb6dfe1d070cfc5b7e795b4cdbe3671aabc6.png" title="屏幕截图2018-06-26 at 9.00.22 PM.png"><img src="https://sjc2.discourse-cdn.com/standard17/uploads/slicer/optimized/2X/c/cac1fb6dfe1d070cfc5b7e795b4cdbe3671aabc6_2_562x500.png" alt="22％20PM" loading="lazy"></a><br>
+<p><a href="https://sjc2.discourse-cdn.com/standard17/uploads/slicer/original/2X/c/cac1fb6dfe1d070cfc5b7e795b4cdbe3671aabc6.png" title="屏幕截图2018-06-26 at 9.00.22 PM.png"><img src="https://sjc2.discourse-cdn.com/standard17/uploads/slicer/optimized/2X/c/cac1fb6dfe1d070cfc5b7e795b4cdbe3671aabc6_2_562x500.png" alt="22％20PM"></a>
 屏幕截图2018-06-26 at 9.00.22 PM.png1432×1274 148 KB</p>
 <p>尝试一下......似乎工作得相当好，但不确定它是否有资格作为“模拟”。</p>
 <p>使用Image Maker模块创建空图像卷。然后导入.stl文件或其他任何内容并转换为分段（分段模块 - &gt;导入模型）。使用线性衰减系数的值填充空图像体积中的体素（查看这些对于例如您感兴趣的光子能量的骨骼，软组织，肺组织......在这里我使用10 kVp并查找来自NIST数据库），用于每个组织; 您可以在GUI中编写脚本或使用Segmentations - &gt;“Mask Volume”和Add Scalar Volumes模块的组合。最后，完成线性衰减系数贴图（图像）后，使用简单滤镜模块 - &gt; MeanProjectionImageFilter或SumProjectionImageFilter。</p>
@@ -121,76 +121,76 @@
 <p><a href="https://discourse.slicer.org/u/hamburgerfinger">@Hamburgerfinger</a>的建议很好。生成二进制或分数卷并使用GPU渲染它也很好（在生成卷之后，GPU渲染器可能会以高帧速率渲染DRR图像）。</p>
 <p>获取类似DRR图像的最简单方法可能是使用Python设置厚切片显示。例如，将此代码片段复制粘贴到Python控制台中即可开始：</p>
 <p>最大强度投影：</p>
-<p><code>sliceNode = slicer.mrmlScene.GetNodeByID('vtkMRMLSliceNodeRed')<br>
-appLogic = slicer.app.applicationLogic()<br>
-sliceLogic = appLogic.GetSliceLogic(sliceNode)<br>
-sliceLayerLogic = sliceLogic.GetBackgroundLayer()<br>
-reslice = sliceLayerLogic.GetReslice()<br>
-reslice.SetSlabModeToMax()<br>
-reslice.SetSlabNumberOfSlices(600)<br>
-reslice.SetSlabSliceSpacingFraction(0.5)<br>
+<p><code>sliceNode = slicer.mrmlScene.GetNodeByID('vtkMRMLSliceNodeRed')
+appLogic = slicer.app.applicationLogic()
+sliceLogic = appLogic.GetSliceLogic(sliceNode)
+sliceLayerLogic = sliceLogic.GetBackgroundLayer()
+reslice = sliceLayerLogic.GetReslice()
+reslice.SetSlabModeToMax()
+reslice.SetSlabNumberOfSlices(600)
+reslice.SetSlabSliceSpacingFraction(0.5)
 sliceNode.Modified()</code></p>
 <p>CTChest示例数据集的结果：</p>
-<figure data-type="image" tabindex="1"><img src="https://sjc2.discourse-cdn.com/standard17/uploads/slicer/original/1X/c9eec191b459a546649043480efe82c708c1be57.png" alt="image_00036" loading="lazy"></figure>
+<p><img src="https://sjc2.discourse-cdn.com/standard17/uploads/slicer/original/1X/c9eec191b459a546649043480efe82c708c1be57.png" alt="image_00036"></p>
 <p>如果将slab模式更改为mean而不是max（<code>reslice.SetSlabModeToMean()</code>），则可以获得更多类似DRR的图像，但通常会使细节更难以查看。</p>
 <p>具有类似DRR的平均板模式的相同数据集：</p>
-<figure data-type="image" tabindex="2"><img src="https://sjc2.discourse-cdn.com/standard17/uploads/slicer/original/1X/a3202605d9b9d3621af76f9e347b6e423b7a71ce.png" alt="image_00035" loading="lazy"></figure>
+<p><img src="https://sjc2.discourse-cdn.com/standard17/uploads/slicer/original/1X/a3202605d9b9d3621af76f9e347b6e423b7a71ce.png" alt="image_00035"></p>
 <p><a href="http://slicer-devel-archive.65872.n3.nabble.com/Faster-slice-view-thick-slices-and-MIP-slice-view-mode-td4033264.html">在这里 </a>查看更多示例<a href="http://slicer-devel-archive.65872.n3.nabble.com/Faster-slice-view-thick-slices-and-MIP-slice-view-mode-td4033264.html">43</a>。</p>
 <p>为了在3D视图中更快地更新和显示，您可以配置体积渲染模块以显示最大强度投影（MIP）。对于最逼真的DRR渲染，您可以尝试使用Plastimatch扩展。</p>
 <h1 id="vtk中光线投射法实现体绘制转"><a href="https://www.cnblogs.com/yxnchinahlj/archive/2011/04/12/2013330.html">VTK中光线投射法实现体绘制【转】</a></h1>
 <p>VTK中光线投射法实现体绘制</p>
-<figure data-type="image" tabindex="3"><img src="http://hiphotos.baidu.com/hnulilei/pic/item/034f3116810e852f972b43ef.jpg" alt="" loading="lazy"></figure>
-<p>1、体绘制函数<br>
-VTK 为使用者提供了三种用于光线投射法的函数分别是：<br>
-等值面绘制函数（vtkVolumeRayCastIsosurfaceFunction）；<br>
-最大密度投影函数（vtkVolumeRayCastMIPFunction）；<br>
-合成体绘制函数（vtkVolumeRayCastCompositeFunction）<br>
+<p><img src="http://hiphotos.baidu.com/hnulilei/pic/item/034f3116810e852f972b43ef.jpg" alt=""></p>
+<p>1、体绘制函数
+VTK 为使用者提供了三种用于光线投射法的函数分别是：
+等值面绘制函数（vtkVolumeRayCastIsosurfaceFunction）；
+最大密度投影函数（vtkVolumeRayCastMIPFunction）；
+合成体绘制函数（vtkVolumeRayCastCompositeFunction）
 其中最常用的是合成体绘制函数，最大密度投影函数在显示血管影像方面有比较好的作用。但是如图所看到的，MIP函数没有空间立体感，也就是不能提供深度的信息。</p>
-<figure data-type="image" tabindex="4"><img src="http://hiphotos.baidu.com/hnulilei/pic/item/187de82391787879925807e9.jpg" alt="" loading="lazy"></figure>
-<p>2、不透明度映射函数<br>
-不透明度映射函数是设置光线方向上的灰度值及其不透明度映射。<br>
-vtkPiecewiseFunction *opacityTransferFunction = vtkPiecewiseFunction::New();<br>
-opacityTransferFunction-&gt;AddPoint(10, 0.0);//灰度值及不透明度值<br>
-opacityTransferFunction-&gt;AddPoint(50,0.1);<br>
-opacityTransferFunction-&gt;AddPoint(200 ,0.1);<br>
-opacityTransferFunction-&gt;AddPoint(2900,0.1);<br>
-opacityTransferFunction-&gt;AddPoint(2950,0.8);<br>
-opacityTransferFunction-&gt;AddPoint(3050,1);//不透明度值为1则为完全不透明<br>
+<p><img src="http://hiphotos.baidu.com/hnulilei/pic/item/187de82391787879925807e9.jpg" alt=""></p>
+<p>2、不透明度映射函数
+不透明度映射函数是设置光线方向上的灰度值及其不透明度映射。
+vtkPiecewiseFunction *opacityTransferFunction = vtkPiecewiseFunction::New();
+opacityTransferFunction-&gt;AddPoint(10, 0.0);//灰度值及不透明度值
+opacityTransferFunction-&gt;AddPoint(50,0.1);
+opacityTransferFunction-&gt;AddPoint(200 ,0.1);
+opacityTransferFunction-&gt;AddPoint(2900,0.1);
+opacityTransferFunction-&gt;AddPoint(2950,0.8);
+opacityTransferFunction-&gt;AddPoint(3050,1);//不透明度值为1则为完全不透明
 opacityTransferFunction-&gt;ClampingOff();</p>
-<p>3、颜色映射函数<br>
-颜色映射函数是设置灰度值与RGB颜色的映射。<br>
-vtkColorTransferFunction *colorTransferFunction = vtkColorTransferFunction::New();<br>
-colorTransferFunction-&gt;AddRGBPoint(0.0, 0.91, 0.65, 0.66); //灰度值及RGB颜色值<br>
-colorTransferFunction-&gt;AddRGBPoint(30.0, 0.91, 0.65, 0.66);<br>
-colorTransferFunction-&gt;AddRGBPoint(128.0, 0.91, 0.65, 0.66);<br>
-colorTransferFunction-&gt;AddRGBPoint(1200.0, 0.43, 0.43, 0.43);<br>
-colorTransferFunction-&gt;AddRGBPoint(1800.0, 0.43, 0.43, 0.43);<br>
-colorTransferFunction-&gt;AddRGBPoint(2950, .9, 0.0, 0.0);<br>
-colorTransferFunction-&gt;AddRGBPoint(3050, .9, 0.0, 0.0);<br>
+<p>3、颜色映射函数
+颜色映射函数是设置灰度值与RGB颜色的映射。
+vtkColorTransferFunction *colorTransferFunction = vtkColorTransferFunction::New();
+colorTransferFunction-&gt;AddRGBPoint(0.0, 0.91, 0.65, 0.66); //灰度值及RGB颜色值
+colorTransferFunction-&gt;AddRGBPoint(30.0, 0.91, 0.65, 0.66);
+colorTransferFunction-&gt;AddRGBPoint(128.0, 0.91, 0.65, 0.66);
+colorTransferFunction-&gt;AddRGBPoint(1200.0, 0.43, 0.43, 0.43);
+colorTransferFunction-&gt;AddRGBPoint(1800.0, 0.43, 0.43, 0.43);
+colorTransferFunction-&gt;AddRGBPoint(2950, .9, 0.0, 0.0);
+colorTransferFunction-&gt;AddRGBPoint(3050, .9, 0.0, 0.0);
 colorTransferFunction-&gt;ClampingOff();</p>
-<p>4、梯度变换函数<br>
-梯度变换函数设置灰度值变换的大小与不透明度之间的映射。<br>
-vtkPiecewiseFunction *gradient=vtkPiecewiseFunction::New();<br>
-gradient-&gt;AddPoint(50,.2);//灰度值变化梯度与不透明度的关系<br>
-gradient-&gt;AddPoint(1500,.7);<br>
-gradient-&gt;AddPoint(2000,.1);<br>
-5、体数据属性设置<br>
-vtkVolumeProperty <em>volumeProperty = vtkVolumeProperty::New();<br>
-volumeProperty-&gt;SetColor(colorTransferFunction);//载入颜色映射函数<br>
-volumeProperty-&gt;SetScalarOpacity(opacityTransferFunction);//载入不透明度映射<br>
-volumeProperty-&gt;SetGradientOpacity(gradient);//载入梯度映射<br>
-volumeProperty-&gt;ShadeOn();<br>
-volumeProperty-&gt;SetInterpolationTypeToLinear();//采用线性插值<br>
-6、光线投射函数设置及体绘制映射<br>
-本程序采用合成体绘制函数：<br>
-vtkVolumeRayCastCompositeFunction</em>compositeFunction=<br>
-vtkVolumeRayCastCompositeFunction::New();<br>
-vtkVolumeRayCastMapper *volumeMapper = vtkVolumeRayCastMapper::New();<br>
-volumeMapper-&gt;SetVolumeRayCastFunction(compositeFunction);//载入体绘制方法<br>
-volumeMapper-&gt;SetInput(append-&gt;GetOutput());//载入图像数据<br>
-volumeMapper-&gt;SetSampleDistance(.5);<br>
-vtkVolume *volume = vtkVolume::New();<br>
-volume-&gt;SetMapper(volumeMapper);//设置映射<br>
+<p>4、梯度变换函数
+梯度变换函数设置灰度值变换的大小与不透明度之间的映射。
+vtkPiecewiseFunction *gradient=vtkPiecewiseFunction::New();
+gradient-&gt;AddPoint(50,.2);//灰度值变化梯度与不透明度的关系
+gradient-&gt;AddPoint(1500,.7);
+gradient-&gt;AddPoint(2000,.1);
+5、体数据属性设置
+vtkVolumeProperty <em>volumeProperty = vtkVolumeProperty::New();
+volumeProperty-&gt;SetColor(colorTransferFunction);//载入颜色映射函数
+volumeProperty-&gt;SetScalarOpacity(opacityTransferFunction);//载入不透明度映射
+volumeProperty-&gt;SetGradientOpacity(gradient);//载入梯度映射
+volumeProperty-&gt;ShadeOn();
+volumeProperty-&gt;SetInterpolationTypeToLinear();//采用线性插值
+6、光线投射函数设置及体绘制映射
+本程序采用合成体绘制函数：
+vtkVolumeRayCastCompositeFunction</em>compositeFunction=
+vtkVolumeRayCastCompositeFunction::New();
+vtkVolumeRayCastMapper *volumeMapper = vtkVolumeRayCastMapper::New();
+volumeMapper-&gt;SetVolumeRayCastFunction(compositeFunction);//载入体绘制方法
+volumeMapper-&gt;SetInput(append-&gt;GetOutput());//载入图像数据
+volumeMapper-&gt;SetSampleDistance(.5);
+vtkVolume *volume = vtkVolume::New();
+volume-&gt;SetMapper(volumeMapper);//设置映射
 volume-&gt;SetProperty(volumeProperty);//设置属性</p>
 
             </div>
@@ -200,7 +200,7 @@ volume-&gt;SetProperty(volumeProperty);//设置属性</p>
         
           <div class="next-post">
             <div class="next">下一篇</div>
-            <a href="https://lizhenzhublog.github.io/HTML/post/z21-pFg7m/">
+            <a href="https://lizhenzhublog.github.io/HTML/post/z21-pFg7m">
               <h3 class="post-title">
                 Maddux机器人库
               </h3>

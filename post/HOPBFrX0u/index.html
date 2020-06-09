@@ -4,7 +4,7 @@
 <meta name="description" content="" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>matplotlib绘图注意 | Li Zhenzhu, Ph.D</title>
-<link rel="shortcut icon" href="https://lizhenzhublog.github.io/HTML/favicon.ico?v=1591698394096">
+<link rel="shortcut icon" href="https://lizhenzhublog.github.io/HTML/favicon.ico?v=1591698960802">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 <link rel="stylesheet" href="https://lizhenzhublog.github.io/HTML/styles/main.css">
 
@@ -18,7 +18,7 @@
       <div class="main-content">
         <div class="site-header">
   <a href="https://lizhenzhublog.github.io/HTML">
-  <img class="avatar" src="https://lizhenzhublog.github.io/HTML/images/avatar.png?v=1591698394096" alt="">
+  <img class="avatar" src="https://lizhenzhublog.github.io/HTML/images/avatar.png?v=1591698960802" alt="">
   </a>
   <h1 class="site-title">
     Li Zhenzhu, Ph.D
@@ -103,7 +103,7 @@
               </div>
             
             <div class="post-content">
-              <p>https://wizardforcel.gitbooks.io/matplotlib-user-guide/7.3.html<br>
+              <p>https://wizardforcel.gitbooks.io/matplotlib-user-guide/7.3.html
 https://www.guofei.site</p>
 <p>转载请注明出处：</p>
 <p><a href="http://www.cnblogs.com/darkknightzh/p/6182474.html">http://www.cnblogs.com/darkknightzh/p/6182474.html</a></p>
@@ -111,146 +111,146 @@ https://www.guofei.site</p>
 <p><a href="http://matplotlib.org/examples/pylab_examples/ginput_demo.html">http://matplotlib.org/examples/pylab_examples/ginput_demo.html</a></p>
 <p><a href="http://stackoverflow.com/questions/12760797/imshowimg-cmap-cm-gray-shows-a-white-for-128-value">http://stackoverflow.com/questions/12760797/imshowimg-cmap-cm-gray-shows-a-white-for-128-value</a></p>
 <p>1. 获得鼠标点击位置——使用ginput函数：</p>
-<p><a title="复制代码"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码" loading="lazy"></a></p>
-<p>import matplotlib.pyplot as plt<br>
+<p><a title="复制代码"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></p>
+<p>import matplotlib.pyplot as plt
 import numpy as np</p>
-<p>x=range(1,10)<br>
-y=[2*v for v in x]<br>
-print(x, y)<br>
-plt.plot(x, y)<br>
-pos=plt.ginput(3)<br>
-print(pos)<br>
-<a title="复制代码"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码" loading="lazy"></a></p>
-<figure data-type="image" tabindex="1"><img src="https://images2015.cnblogs.com/blog/682463/201612/682463-20161215111214808-689851759.png" alt="" loading="lazy"></figure>
+<p>x=range(1,10)
+y=[2*v for v in x]
+print(x, y)
+plt.plot(x, y)
+pos=plt.ginput(3)
+print(pos)
+<a title="复制代码"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></p>
+<p><img src="https://images2015.cnblogs.com/blog/682463/201612/682463-20161215111214808-689851759.png" alt=""></p>
 <p>那三个红色的十字为鼠标点击的位置，显示如下：</p>
-<figure data-type="image" tabindex="2"><img src="https://images2015.cnblogs.com/blog/682463/201612/682463-20161215111244026-2011598343.png" alt="" loading="lazy"></figure>
+<p><img src="https://images2015.cnblogs.com/blog/682463/201612/682463-20161215111244026-2011598343.png" alt=""></p>
 <p>2. 显示灰度图像：</p>
 <p>默认imshow显示的是彩色图像：</p>
-<figure data-type="image" tabindex="3"><img src="https://images2015.cnblogs.com/blog/682463/201612/682463-20161215111345448-1894828896.png" alt="" loading="lazy"></figure>
+<p><img src="https://images2015.cnblogs.com/blog/682463/201612/682463-20161215111345448-1894828896.png" alt=""></p>
 <p>需要显示灰度图像时，可以使用plt.get_cmap：</p>
-<p><a title="复制代码"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码" loading="lazy"></a></p>
-<p>import matplotlib.pyplot as plt<br>
+<p><a title="复制代码"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></p>
+<p>import matplotlib.pyplot as plt
 import Image</p>
-<p>im = Image.open(&quot;th.jpg&quot;)<br>
-plt.imshow(im, cmap = plt.get_cmap(&quot;gray&quot;))<br>
-pos=plt.ginput(3)<br>
-print(pos)<br>
-<a title="复制代码"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码" loading="lazy"></a></p>
-<figure data-type="image" tabindex="4"><img src="https://images2015.cnblogs.com/blog/682463/201612/682463-20161215111416542-1864257153.png" alt="" loading="lazy"></figure>
+<p>im = Image.open(&quot;th.jpg&quot;)
+plt.imshow(im, cmap = plt.get_cmap(&quot;gray&quot;))
+pos=plt.ginput(3)
+print(pos)
+<a title="复制代码"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></p>
+<p><img src="https://images2015.cnblogs.com/blog/682463/201612/682463-20161215111416542-1864257153.png" alt=""></p>
 <p>可以使用vmin和vmax来达到和matlab的imshow中[]一样的效果，将小于vmin的量化成黑色，大于vmax的量化成白色：</p>
 <p>plt.imshow(im, cmap = plt.get_cmap(&quot;gray&quot;), vmin = 100, vmax = 150)</p>
-<figure data-type="image" tabindex="5"><img src="https://images2015.cnblogs.com/blog/682463/201612/682463-20161215111456901-1192492061.png" alt="" loading="lazy"></figure>
+<p><img src="https://images2015.cnblogs.com/blog/682463/201612/682463-20161215111456901-1192492061.png" alt=""></p>
 <p>那三个红色的十字为鼠标点击的位置，显示如下：</p>
-<figure data-type="image" tabindex="6"><img src="https://images2015.cnblogs.com/blog/682463/201612/682463-20161215111519261-443664761.png" alt="" loading="lazy"></figure>
+<p><img src="https://images2015.cnblogs.com/blog/682463/201612/682463-20161215111519261-443664761.png" alt=""></p>
 <p>由上面可见，直接plot的话，左下角是坐标原点；使用imshow时，是左上角为坐标原点。对于图像来说，和图像的坐标一样，不用转换，可以直接使用</p>
-<p>使用matplotlib交互绘图****<br>
+<p>使用matplotlib交互绘图****
 加载图片，点击左键选中图片上的点并绘出横轴纵轴垂线，确定后点击右键打印出当前坐标：</p>
 <p>#!/usr/bin/python</p>
 <h1 id="codingutf-8">coding:utf-8</h1>
-<p>from matplotlib import pyplot as plt<br>
+<p>from matplotlib import pyplot as plt
 import cv2</p>
-<p>def on_press(event):<br>
-if event.button<mark>1:<br>
-ax.scatter(event.xdata, event.ydata)<br>
-plt.plot([event.xdata, event.xdata], [event.ydata, 600])<br>
-plt.plot([event.xdata, 0], [event.ydata, event.ydata])<br>
-fig.canvas.draw()<br>
-elif event.button</mark>3:<br>
-print(&quot;x,y=&quot;,event.xdata, event.ydata)<br>
-if <strong>name</strong> == &quot;<strong>main</strong>&quot;:<br>
-img = cv2.imread('01.png')<br>
-cv2.imshow(&quot;src&quot;, img)<br>
-fig = plt.figure()<br>
-fig.canvas.mpl_connect(&quot;button_press_event&quot;, on_press)<br>
-ax = fig.add_subplot(111)<br>
-ax.imshow(img)<br>
-plt.axis(&quot;off&quot;)<br>
+<p>def on_press(event):
+if event.button==1:
+ax.scatter(event.xdata, event.ydata)
+plt.plot([event.xdata, event.xdata], [event.ydata, 600])
+plt.plot([event.xdata, 0], [event.ydata, event.ydata])
+fig.canvas.draw()
+elif event.button==3:
+print(&quot;x,y=&quot;,event.xdata, event.ydata)
+if <strong>name</strong> == &quot;<strong>main</strong>&quot;:
+img = cv2.imread('01.png')
+cv2.imshow(&quot;src&quot;, img)
+fig = plt.figure()
+fig.canvas.mpl_connect(&quot;button_press_event&quot;, on_press)
+ax = fig.add_subplot(111)
+ax.imshow(img)
+plt.axis(&quot;off&quot;)
 plt.show()</p>
-<p>输出：<br>
+<p>输出：
 原图01.png：</p>
 <p>点击左键选点，并绘出横轴纵轴垂线：</p>
-<h2 id="点击右键输出当前点的坐标xy-50127130681818176-20148636363636365">点击右键输出当前点的坐标：<br>
+<h2 id="点击右键输出当前点的坐标xy-50127130681818176-20148636363636365">点击右键输出当前点的坐标：
 (‘x,y=’, 501.27130681818176, 201.48636363636365)</h2>
-<p>作者：阿卡蒂奥<br>
-来源：CSDN<br>
-原文：https://blog.csdn.net/akadiao/article/details/79761790<br>
+<p>作者：阿卡蒂奥
+来源：CSDN
+原文：https://blog.csdn.net/akadiao/article/details/79761790
 版权声明：本文为博主原创文章，转载请附上博文链接！</p>
 <p>这篇文章的目的出于实验的需要,我需要对图片上的部分区域做出涂抹标记,本来是选择用opencv做交互的，但在需要进行图像的输出以及鼠标时间添加时，opencv出现错误。</p>
 <p>解决方案网上有很多，尝试以后依然bug，这里先做一个记录,有时间再来处理。错误报告如下:</p>
-<p>OpenCV Error: Unspecified error (The function is not implemented. Rebuild the library with Windows, GTK+ 2.x or Carbon support. If you are on Ubuntu or Debian, install libgtk2.0-dev and pkg-config, then re-run cmake or configure script) in cvShowImage, file -------src-dir-------/opencv-2.4.10/modules/highgui/src/window.cpp, line 501<br>
-Traceback (most recent call last):<br>
-File &quot;test.py&quot;, line 20, in <module><br>
-cv2.imshow('img',img)<br>
+<p>OpenCV Error: Unspecified error (The function is not implemented. Rebuild the library with Windows, GTK+ 2.x or Carbon support. If you are on Ubuntu or Debian, install libgtk2.0-dev and pkg-config, then re-run cmake or configure script) in cvShowImage, file -------src-dir-------/opencv-2.4.10/modules/highgui/src/window.cpp, line 501
+Traceback (most recent call last):
+File &quot;test.py&quot;, line 20, in <module>
+cv2.imshow('img',img)
 cv2.error: -------src-dir-------/opencv-2.4.10/modules/highgui/src/window.cpp:501: error: (-2) The function is not implemented. Rebuild the library with Windows, GTK+ 2.x or Carbon support. If you are on Ubuntu or Debian, install libgtk2.0-dev and pkg-config, then re-run cmake or configure script in function cvShowImage</p>
 <p>这里我们切换另一种解决方案，利用python的matplotlib库完成图像的输出以及鼠标事件的添加。</p>
 <p>点击图片，在图像中鼠标对应位置画点：</p>
 <h1 id="codingutf-8-2">coding=utf-8</h1>
-<p>from matplotlib import pyplot as plt<br>
+<p>from matplotlib import pyplot as plt
 import cv2</p>
-<p>def on_press(event):<br>
-if event.inaxes == None:<br>
-print &quot;none&quot;<br>
-return<br>
-#在鼠标的当前位置绘制一个点<br>
-ax.scatter(event.xdata, event.ydata）<br>
-#更新画板<br>
+<p>def on_press(event):
+if event.inaxes == None:
+print &quot;none&quot;
+return
+#在鼠标的当前位置绘制一个点
+ax.scatter(event.xdata, event.ydata）
+#更新画板
 fig.canvas.draw()</p>
-<p>if <strong>name</strong> == &quot;<strong>main</strong>&quot;:<br>
-fileN = r'./0107_1.3.6.1.4.1.14519.5.2.1.6279.6001.263660956768649083933159084365.bmp'<br>
-img = cv2.imread(fileN)<br>
-cv2.imshow('img',img)<br>
-fig = py.figure()<br>
-fig.canvas.mpl_connect(&quot;button_press_event&quot;, on_press)<br>
-ax = fig.add_subplot(121)<br>
-ax1 = fig.add_subplot(122)<br>
-ax.imshow(img)<br>
-ax1.imshow(img)<br>
-plt.axis(&quot;off&quot;)<br>
+<p>if <strong>name</strong> == &quot;<strong>main</strong>&quot;:
+fileN = r'./0107_1.3.6.1.4.1.14519.5.2.1.6279.6001.263660956768649083933159084365.bmp'
+img = cv2.imread(fileN)
+cv2.imshow('img',img)
+fig = py.figure()
+fig.canvas.mpl_connect(&quot;button_press_event&quot;, on_press)
+ax = fig.add_subplot(121)
+ax1 = fig.add_subplot(122)
+ax.imshow(img)
+ax1.imshow(img)
+plt.axis(&quot;off&quot;)
 plt.show()</p>
 <p>先来简单解释一下代码的含义：</p>
-<p>fig.canvas.mpl_connect(&quot;button_press_event&quot;, on_press)#在这个figure上加点击事件，点击后的情况在自己写的on_press()方法里<br>
-def on_press(event):<br>
-event.inaxes.figure.canvas.draw()#用于图片刷新<br>
-event.x#事件的坐标用于其他按钮点击和figure点击发生冲突时判断返回<br>
+<p>fig.canvas.mpl_connect(&quot;button_press_event&quot;, on_press)#在这个figure上加点击事件，点击后的情况在自己写的on_press()方法里
+def on_press(event):
+event.inaxes.figure.canvas.draw()#用于图片刷新
+event.x#事件的坐标用于其他按钮点击和figure点击发生冲突时判断返回
 event.xdata,event.ydata#鼠标点击的位置，与上面那个坐标表示形式不同</p>
 <p>最后的输出结果入下图。我们得到了非常奇怪的结果，如果你自己亲自动手试的话体会应该会更有体会，两边的图像本来应该一样大，但在第一次绘制点的时候，左侧图像出现了闪动，然后尺寸的比例突然发生了变化。</p>
 <p>是的，图像尺寸没有发生变化，但尺寸的比例的确变了，这里我们要做的就是关闭自动变化的尺度比例。</p>
-<p>if <strong>name</strong> == &quot;<strong>main</strong>&quot;:<br>
-fileN = r'./0107_1.3.6.1.4.1.14519.5.2.1.6279.6001.263660956768649083933159084365.bmp'<br>
-img = cv2.imread(fileN)<br>
-cv2.imshow('img',img)<br>
-fig = py.figure()<br>
-fig.canvas.mpl_connect(&quot;button_press_event&quot;, on_press)<br>
-ax = fig.add_subplot(121)<br>
-ax1 = fig.add_subplot(122)<br>
-ax.imshow(img)<br>
-ax1.imshow(img)<br>
-#关闭自动尺度适配<br>
-ax.set_autoscale_on(False)<br>
-plt.axis(&quot;off&quot;)<br>
-plt.show()<br>
+<p>if <strong>name</strong> == &quot;<strong>main</strong>&quot;:
+fileN = r'./0107_1.3.6.1.4.1.14519.5.2.1.6279.6001.263660956768649083933159084365.bmp'
+img = cv2.imread(fileN)
+cv2.imshow('img',img)
+fig = py.figure()
+fig.canvas.mpl_connect(&quot;button_press_event&quot;, on_press)
+ax = fig.add_subplot(121)
+ax1 = fig.add_subplot(122)
+ax.imshow(img)
+ax1.imshow(img)
+#关闭自动尺度适配
+ax.set_autoscale_on(False)
+plt.axis(&quot;off&quot;)
+plt.show()
 当然，我们可以改变绘制标记的样式：</p>
-<p>ax.scatter(x,y,c='k',s=25,alpha=1.0,marker='o')<br>
-#T:散点的颜色<br>
-#s：散点的大小<br>
+<p>ax.scatter(x,y,c='k',s=25,alpha=1.0,marker='o')
+#T:散点的颜色
+#s：散点的大小
 #alpha:是透明程度</p>
 <p>现在我们能够在图像上进行标记了，但这样还不够，程序需要获取这些标记点。</p>
 <p>实际上fig.canvas.mpl_connect(&quot;button_press_event&quot;, on_press)能够进行自定义的多参数传递，如果在每次绘制的时候将数据保存在外部传入的列表中，那么当画板被销毁时，我们就能获取到原来所有的绘制点。</p>
 <p>这里介绍两种使用方法：</p>
-<p>def on_key(event, arg1, arg2, arg3):<br>
-pass<br>
+<p>def on_key(event, arg1, arg2, arg3):
+pass
 canvas.mpl_connect('key_press_event', lambda event: on_key(event, plt1, plt2, plt3))</p>
 <p>和</p>
-<p>def on_key(event, args_list):<br>
-pass<br>
+<p>def on_key(event, args_list):
+pass
 fig.canvas.mpl_connect('key_press_event', lambda event: on_key(event, [plt1, plt2, plt3]))</p>
 <p>这里需要注意的是scatter绘制的点，实际上并没有大小的概念，这个点实质是一个坐标。</p>
 <p>如果需要绘制有实际面积的圆形的标记，可以使用matplotlib.patches.Circle</p>
 <p>具体的使用如下：</p>
 <p>from matplotlib.patches import Circle</p>
-<h2 id="fig-pltfigureax-figadd_subplot111cir-circlexy-eventxdata-eventydatafacecolor-black-edgecolorblackradius10-alpha10axadd_patchcir">fig = plt.figure()<br>
-ax = fig.add_subplot(111)<br>
-cir = Circle(xy = (event.xdata, event.ydata),facecolor = 'black', edgecolor='black',radius=10, alpha=1.0)<br>
+<h2 id="fig-pltfigureax-figadd_subplot111cir-circlexy-eventxdata-eventydatafacecolor-black-edgecolorblackradius10-alpha10axadd_patchcir">fig = plt.figure()
+ax = fig.add_subplot(111)
+cir = Circle(xy = (event.xdata, event.ydata),facecolor = 'black', edgecolor='black',radius=10, alpha=1.0)
 ax.add_patch(cir)</h2>
 
             </div>
@@ -260,7 +260,7 @@ ax.add_patch(cir)</h2>
         
           <div class="next-post">
             <div class="next">下一篇</div>
-            <a href="https://lizhenzhublog.github.io/HTML/post/XnzyCJy-A/">
+            <a href="https://lizhenzhublog.github.io/HTML/post/XnzyCJy-A">
               <h3 class="post-title">
                 TK 窗口
               </h3>

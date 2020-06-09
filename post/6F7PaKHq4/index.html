@@ -4,7 +4,7 @@
 <meta name="description" content="" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>从一个py中运行另一个带参数的py | Li Zhenzhu, Ph.D</title>
-<link rel="shortcut icon" href="https://lizhenzhublog.github.io/HTML/favicon.ico?v=1591698394096">
+<link rel="shortcut icon" href="https://lizhenzhublog.github.io/HTML/favicon.ico?v=1591698960802">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 <link rel="stylesheet" href="https://lizhenzhublog.github.io/HTML/styles/main.css">
 
@@ -18,7 +18,7 @@
       <div class="main-content">
         <div class="site-header">
   <a href="https://lizhenzhublog.github.io/HTML">
-  <img class="avatar" src="https://lizhenzhublog.github.io/HTML/images/avatar.png?v=1591698394096" alt="">
+  <img class="avatar" src="https://lizhenzhublog.github.io/HTML/images/avatar.png?v=1591698960802" alt="">
   </a>
   <h1 class="site-title">
     Li Zhenzhu, Ph.D
@@ -97,7 +97,7 @@
                 · 2019-07-08 ·
               </time>
               
-                <a href="https://lizhenzhublog.github.io/HTML/tag/blog/" class="post-tags">
+                <a href="https://lizhenzhublog.github.io/HTML/tag/blog" class="post-tags">
                   # Blog
                 </a>
               
@@ -159,16 +159,16 @@ if __name__=='__main__':
 <p>1）从命令行调用wc_query_test.py：</p>
 <p><code>~/PycharmProjects/webctrl$ python wc_query_test.py -u aawrg -p wgAWER -n YWERGAEWR</code></p>
 <p>2）从命令行编译和调用wc_query_test：</p>
-<p><code>~/PycharmProjects/webctrl$ pyinstaller --distpath dist/. wc_query_test.py<br>
+<p><code>~/PycharmProjects/webctrl$ pyinstaller --distpath dist/. wc_query_test.py
 ~/PycharmProjects/webctrl$ ./dist/wc_query_test/wc_query_test -u aawrg -p wgAWER -n YWERGAEWR</code></p>
 <p>3）从另一个python脚本调用wc_query_test，该脚本进入模块类型用法的方向：</p>
-<p><code>import wc_query_test<br>
-myDictonary = {'username':'wsdl', 'password':'aaaaaa', 'node':'/trees/geographic', 'url':'https://my.server.de'}<br>
+<p><code>import wc_query_test
+myDictonary = {'username':'wsdl', 'password':'aaaaaa', 'node':'/trees/geographic', 'url':'https://my.server.de'}
 wc_query_test.main(myDictonary)</code></p>
 <p>所有三个版本都会产生与预期相同的输出，例如：</p>
-<p><code>~/PycharmProjects/webctrl$ ./dist/wc_query_test/wc_query_test -u aawrg -p wgAWER -n YWERGAEWR<br>
-Username: aawrg<br>
-Node: YWERGAEWR<br>
+<p><code>~/PycharmProjects/webctrl$ ./dist/wc_query_test/wc_query_test -u aawrg -p wgAWER -n YWERGAEWR
+Username: aawrg
+Node: YWERGAEWR
 URL: https://webctrl.rz-berlin.mpg.de</code></p>
 
             </div>
@@ -178,7 +178,7 @@ URL: https://webctrl.rz-berlin.mpg.de</code></p>
         
           <div class="next-post">
             <div class="next">下一篇</div>
-            <a href="https://lizhenzhublog.github.io/HTML/post/5OyTRhe_F/">
+            <a href="https://lizhenzhublog.github.io/HTML/post/5OyTRhe_F">
               <h3 class="post-title">
                 numpy_stl简介
               </h3>
