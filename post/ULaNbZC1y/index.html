@@ -3,7 +3,7 @@
     <meta charset="utf-8" />
 <meta name="description" content="" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>更改点的颜色 | Li Zhenzhu, Ph.D</title>
+<title>如何在slicer中沿着一条弧线移动 | Li Zhenzhu, Ph.D</title>
 <link rel="shortcut icon" href="https://lizhenzhublog.github.io/HTML/favicon.ico?v=1591845501191">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 <link rel="stylesheet" href="https://lizhenzhublog.github.io/HTML/styles/main.css">
@@ -90,7 +90,7 @@
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              更改点的颜色
+              如何在slicer中沿着一条弧线移动
             </h2>
             <div class="post-info">
               <time class="post-time">
@@ -104,13 +104,30 @@
             </div>
             
             <div class="post-content">
-              <p>更改点的颜色要注意了
-错误的代码：</p>
-<pre><code>markupNode = getNode('MarkupsCurve')
-displayNode = markupNode.GetDisplayNode()
-displayNode.SetColor([0,0,0])
+              <p>如何在slicer中沿着一条弧线移动</p>
+<pre><code># Load sample volume
+import SampleData
+sampleDataLogic = SampleData.SampleDataLogic()
+mrHead = sampleDataLogic.downloadMRHead()
+
+# Create transform and apply to sample volume
+transformNode = slicer.vtkMRMLTransformNode()
+slicer.mrmlScene.AddNode(transformNode)
+mrHead.SetAndObserveTransformNodeID(transformNode.GetID())
+
+# How to move a volume along a trajectory using a transform:
+import time
+import math
+transformMatrix = vtk.vtkMatrix4x4()
+for xPos in range(-30,30):
+  transformMatrix.SetElement(0,3, xPos)
+  transformMatrix.SetElement(1,3, math.sin(xPos)*10)
+  transformNode.SetMatrixTransformToParent(transformMatrix)
+  slicer.app.processEvents()
+  time.sleep(0.02)
+# Note: for longer animations use qt.QTimer.singleShot(100, callbackFunction)
+# instead of a for loop.
 </code></pre>
-<p>注意：Markups have Color and SelectedColor properties. SelectedColor is used if all control points are in “selected” state, which is the default. So, in most cases you want to use SetSelectedColor.</p>
 
             </div>
           </article>
@@ -119,9 +136,9 @@ displayNode.SetColor([0,0,0])
         
           <div class="next-post">
             <div class="next">下一篇</div>
-            <a href="https://lizhenzhublog.github.io/HTML/post/T7OLytblD">
+            <a href="https://lizhenzhublog.github.io/HTML/post/bEUc0fMT0">
               <h3 class="post-title">
-                3D Slicer的VMTK扩展
+                更改点的颜色
               </h3>
             </a>
           </div>  
