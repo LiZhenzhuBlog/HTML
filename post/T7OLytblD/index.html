@@ -1,0 +1,179 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>3D Slicer的VMTK扩展 | Li Zhenzhu, Ph.D</title>
+<link rel="shortcut icon" href="https://lizhenzhublog.github.io/HTML/favicon.ico?v=1591844789391">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="stylesheet" href="https://lizhenzhublog.github.io/HTML/styles/main.css">
+
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/moment.js/2.23.0/moment.min.js"></script>
+
+
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://lizhenzhublog.github.io/HTML">
+  <img class="avatar" src="https://lizhenzhublog.github.io/HTML/images/avatar.png?v=1591844789391" alt="">
+  </a>
+  <h1 class="site-title">
+    Li Zhenzhu, Ph.D
+  </h1>
+  <p class="site-description">
+    Binzhou Medical University Hospital, Email: timeanddoctor@gmail.com.
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          Home
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          Archives
+        </a>
+      
+    
+      
+        <a href="/paper" class="menu">
+          Paper
+        </a>
+      
+    
+      
+        <a href="/3dprinting" class="menu">
+          3D printing
+        </a>
+      
+    
+      
+        <a href="/bigbridgerobot" class="menu">
+          BigBridgeRobot
+        </a>
+      
+    
+      
+        <a href="/business" class="menu">
+          Business
+        </a>
+      
+    
+      
+        <a href="https://lizhenzhublog.github.io/HTML/post/meeting/" class="menu">
+          Training
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+      
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              3D Slicer的VMTK扩展
+            </h2>
+            <div class="post-info">
+              <time class="post-time">
+                · 2020-06-11 ·
+              </time>
+              
+                <a href="https://lizhenzhublog.github.io/HTML/tag/slicer" class="post-tags">
+                  # slicer
+                </a>
+              
+            </div>
+            
+              <div class="post-feature-image" style="background-image: url('https://camo.githubusercontent.com/28baec58b136a1987aa8119cdcaf9c751bde7d82/68747470733a2f2f696d672e796f75747562652e636f6d2f76692f63614575774a37704357732f302e6a7067')">
+              </div>
+            
+            <div class="post-content">
+              <p>此扩展使3D Slicer（www.slicer.org）中提供了血管建模工具包（VMTK，http：//www.vmtk.org/）。功能包括血管树分割和中心线提取。此处提供了有关血管分割和中心线提取的简短演示视频：https : //youtu.be/caEuwJ7pCWs</p>
+<!-- more --> 
+<h1 id="安装">安装</h1>
+<p>VMTK扩展可用于最新的3D Slicer版本（Slicer-4.10及更高版本）。安装3D Slicer，启动3D Slicer，然后在扩展管理器中安装SlicerVMTK扩展。</p>
+<h1 id="用法">用法</h1>
+<p>SlicerVMTK扩展提供以下模块-在模块列表的“血管建模工具包”类别中列出。</p>
+<h2 id="血管过滤">血管过滤</h2>
+<p>图像处理操作可增加管状结构的亮度并抑制其他形状（板和斑点）。该模块可用于预处理图像数据，以使血管分割更容易。</p>
+<h2 id="水平集细分">水平集细分</h2>
+<p>该模块可以根据图像分割血管树的单个血管分支（可以使用未处理或经过血管过滤的血管）。</p>
+<h2 id="中心线计算">中心线计算</h2>
+<p>从输入模型节点确定容器树中的中心线。单击“预览”按钮以快速验证输入模型和近似中心线计算。单击“开始”按钮进行完整的网络分析和所有输出的计算。</p>
+<p>所需输入：</p>
+<p>血管树模型：可以是任何树结构（不仅是血管树，还可以是气道等），可以在“段编辑器”模块中创建，也可以使用“级别集分割”模块创建。如果使用了细分编辑器，则必须通过在“数据”模块中的细分上单击鼠标右键，然后选择“将可见细分导出到模型”，将细分节点导出到模型节点。
+起点：包含单个点的标记基准节点，应将其放置在树的分支处
+输出：</p>
+<p>中心线模型：网络提取结果（无分支提取和合并）。点包含中心线点，“半径”点数据包含每个点的最大内切球半径。
+中心线端点：找到的起点和所有检测到的分支端点的坐标。
+Voronoi模型（可选）：输入模型的中间表面（中间表面包含的点与最近的表面点的距离等于q）
+曲线树角色（可选）：如果选择了标记曲线节点，则将从提取和合并的分支中创建曲线节点的层次结构。每个分支的CellId将保存到节点的名称中（也保存为节点属性），该名称可用于与中心线属性表的CellId列进行交叉引用。
+中心线属性（可选）：如果选择了表节点，则将为所有提取和合并的分支计算分支长度，平均半径，曲率，扭转和曲折度。</p>
+<h1 id="高级功能">高级功能：</h1>
+<h2 id="提取中心线的点坐标和半径">提取中心线的点坐标和半径</h2>
+<pre><code>c = getNode('CenterlineComputationModel')
+points = slicer.util.arrayFromModelPoints(c)
+radii = slicer.util.arrayFromModelPointData(c, 'Radius')
+for i, radius in enumerate(radii):
+  print(&quot;Point {0}: position={1}, radius={2}&quot;.format(i, points[i], radius))
+</code></pre>
+<h2 id="把中心线的点和线转换为三维的vtk">把中心线的点和线转换为三维的vtk</h2>
+<pre><code>centerlineModel = getNode('CenterlineComputationModel')
+centerlinePoly = centerlineModel.GetPolyData()
+
+# Get first point position:
+print(centerlinePoly.GetPoints().GetPoint(0))
+
+# Get point IDs of the first line segment
+pointIds = vtk.vtkIdList()
+centerlinePoly.GetLines().GetCell(0, pointIds)
+</code></pre>
+
+            </div>
+          </article>
+        </div>
+    
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://lizhenzhublog.github.io/HTML/post/qw9_t-Cwj">
+              <h3 class="post-title">
+                3D slicer 提取STL中心线
+              </h3>
+            </a>
+          </div>  
+        
+
+        
+    
+        <div class="site-footer">
+  Powered by Li Zhenzhu
+</div>
+
+<script>
+  hljs.initHighlightingOnLoad()
+</script>
+
+      </div>
+    </div>
+  </body>
+</html>

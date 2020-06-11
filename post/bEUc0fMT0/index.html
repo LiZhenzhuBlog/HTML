@@ -1,0 +1,143 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>更改点的颜色 | Li Zhenzhu, Ph.D</title>
+<link rel="shortcut icon" href="https://lizhenzhublog.github.io/HTML/favicon.ico?v=1591844789391">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="stylesheet" href="https://lizhenzhublog.github.io/HTML/styles/main.css">
+
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/moment.js/2.23.0/moment.min.js"></script>
+
+
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://lizhenzhublog.github.io/HTML">
+  <img class="avatar" src="https://lizhenzhublog.github.io/HTML/images/avatar.png?v=1591844789391" alt="">
+  </a>
+  <h1 class="site-title">
+    Li Zhenzhu, Ph.D
+  </h1>
+  <p class="site-description">
+    Binzhou Medical University Hospital, Email: timeanddoctor@gmail.com.
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          Home
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          Archives
+        </a>
+      
+    
+      
+        <a href="/paper" class="menu">
+          Paper
+        </a>
+      
+    
+      
+        <a href="/3dprinting" class="menu">
+          3D printing
+        </a>
+      
+    
+      
+        <a href="/bigbridgerobot" class="menu">
+          BigBridgeRobot
+        </a>
+      
+    
+      
+        <a href="/business" class="menu">
+          Business
+        </a>
+      
+    
+      
+        <a href="https://lizhenzhublog.github.io/HTML/post/meeting/" class="menu">
+          Training
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+      
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              更改点的颜色
+            </h2>
+            <div class="post-info">
+              <time class="post-time">
+                · 2020-06-11 ·
+              </time>
+              
+                <a href="https://lizhenzhublog.github.io/HTML/tag/slicer" class="post-tags">
+                  # slicer
+                </a>
+              
+            </div>
+            
+            <div class="post-content">
+              <p>更改点的颜色要注意了
+错误的代码：</p>
+<pre><code>markupNode = getNode('MarkupsCurve')
+displayNode = markupNode.GetDisplayNode()
+displayNode.SetColor([0,0,0])
+</code></pre>
+<p>注意：Markups have Color and SelectedColor properties. SelectedColor is used if all control points are in “selected” state, which is the default. So, in most cases you want to use SetSelectedColor.</p>
+
+            </div>
+          </article>
+        </div>
+    
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://lizhenzhublog.github.io/HTML/post/T7OLytblD">
+              <h3 class="post-title">
+                3D Slicer的VMTK扩展
+              </h3>
+            </a>
+          </div>  
+        
+
+        
+    
+        <div class="site-footer">
+  Powered by Li Zhenzhu
+</div>
+
+<script>
+  hljs.initHighlightingOnLoad()
+</script>
+
+      </div>
+    </div>
+  </body>
+</html>
