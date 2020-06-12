@@ -1,0 +1,415 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>ITK教程 python | Li Zhenzhu, Ph.D</title>
+<link rel="shortcut icon" href="https://lizhenzhublog.github.io/HTML/favicon.ico?v=1591940741476">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="stylesheet" href="https://lizhenzhublog.github.io/HTML/styles/main.css">
+
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/moment.js/2.23.0/moment.min.js"></script>
+
+
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://lizhenzhublog.github.io/HTML">
+  <img class="avatar" src="https://lizhenzhublog.github.io/HTML/images/avatar.png?v=1591940741476" alt="">
+  </a>
+  <h1 class="site-title">
+    Li Zhenzhu, Ph.D
+  </h1>
+  <p class="site-description">
+    Binzhou Medical University Hospital, Email: timeanddoctor@gmail.com.
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          Home
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          Archives
+        </a>
+      
+    
+      
+        <a href="/paper" class="menu">
+          Paper
+        </a>
+      
+    
+      
+        <a href="/3dprinting" class="menu">
+          3D printing
+        </a>
+      
+    
+      
+        <a href="/bigbridgerobot" class="menu">
+          BigBridgeRobot
+        </a>
+      
+    
+      
+        <a href="/business" class="menu">
+          Business
+        </a>
+      
+    
+      
+        <a href="https://lizhenzhublog.github.io/HTML/post/meeting/" class="menu">
+          Training
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+      
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              ITK教程 python
+            </h2>
+            <div class="post-info">
+              <time class="post-time">
+                · 2020-06-12 ·
+              </time>
+              
+                <a href="https://lizhenzhublog.github.io/HTML/tag/slicer" class="post-tags">
+                  # slicer
+                </a>
+              
+            </div>
+            
+            <div class="post-content">
+              <h1 id="打开一个图片并且标准转化保存图片">打开一个图片并且标准转化保存图片</h1>
+<pre><code>import itk
+import sys
+import vtk
+
+inputfilename=&quot;D:/DATA/small/0200.dcm&quot;
+outputfilename=&quot;D:/DATA/0200.png&quot;
+#
+# Reads a 2D image in with signed short (16bits/pixel) pixel type
+# and save it as unsigned char (8bits/pixel) pixel type
+#
+InputImageType  = itk.Image.SS2
+OutputImageType = itk.Image.UC2
+
+reader = itk.ImageFileReader[InputImageType].New()
+writer = itk.ImageFileWriter[OutputImageType].New()
+
+
+filter = itk.RescaleIntensityImageFilter[InputImageType, OutputImageType].New()
+filter.SetOutputMinimum( 0 )
+filter.SetOutputMaximum(255)
+
+filter.SetInput( reader.GetOutput() )
+writer.SetInput( filter.GetOutput() )
+
+reader.SetFileName(inputfilename )
+writer.SetFileName(outputfilename )
+
+writer.Update()
+</code></pre>
+<h1 id="itk打开后vtk查看">Itk打开后VTK查看</h1>
+<p>在上述代码中加入</p>
+<pre><code>ivfilter=itk.ImageToVTKImageFilter[OutputImageType].New()
+ivfilter.SetInput(filter.GetOutput())
+viewer=vtk.vtkImageViewer()
+iren=vtk.vtkRenderWindowInteractor()
+viewer.SetupInteractor(iren)
+viewer.SetInput(ivfilter.GetOutput())
+viewer.Render()
+viewer.SetColorWindow(255)
+viewer.SetColorLevel(128)
+iren.Start()
+</code></pre>
+<h1 id="itk-配准的例子">ITK 配准的例子</h1>
+<pre><code>from InsightToolkit import *
+from sys import argv
+
+fixedImageName=&quot;D:/DATA/Brain.png&quot;
+movingImageName=&quot;D:/DATA/Brainshifted13x17y.png&quot;
+outputImageName=&quot;D:/DATA/Brainresult2.png&quot;
+
+fixedImageReader  = itkImageFileReaderIF2_New()
+movingImageReader = itkImageFileReaderIF2_New()
+
+fixedImageReader.SetFileName(  fixedImageName )
+movingImageReader.SetFileName( movingImageName )
+
+fixedImageReader.Update()
+movingImageReader.Update()
+
+fixedImage  = fixedImageReader.GetOutput()
+movingImage = movingImageReader.GetOutput()
+
+#
+#  Instantiate the classes for the registration framework
+#
+registration = itkImageRegistrationMethodIF2IF2_New()
+imageMetric  = itkMeanSquaresImageToImageMetricIF2IF2_New()
+transform    = itkTranslationTransformD2_New()
+optimizer    = itkRegularStepGradientDescentOptimizer_New()
+interpolator = itkLinearInterpolateImageFunctionIF2D_New()
+
+
+registration.SetOptimizer(    optimizer.GetPointer()    )
+registration.SetTransform(    transform.GetPointer()    )
+registration.SetInterpolator( interpolator.GetPointer() )
+registration.SetMetric(       imageMetric.GetPointer()  )
+registration.SetFixedImage(  fixedImage  )
+registration.SetMovingImage( movingImage )
+
+registration.SetFixedImageRegion( fixedImage.GetBufferedRegion() )
+
+transform.SetIdentity()
+initialParameters = transform.GetParameters()
+
+registration.SetInitialTransformParameters( initialParameters )
+
+#
+# Iteration Observer
+#
+def iterationUpdate():
+    currentParameter = transform.GetParameters()
+    print &quot;M: %f   P: %f %f &quot; % ( optimizer.GetValue(),
+                        currentParameter.GetElement(0),
+                        currentParameter.GetElement(1) )
+
+iterationCommand = itkPyCommand_New()
+iterationCommand.SetCommandCallable( iterationUpdate )
+optimizer.AddObserver( itkIterationEvent(), iterationCommand.GetPointer() )
+
+
+
+#
+#  Define optimizer parameters
+#
+optimizer.SetMaximumStepLength(  4.00 )
+optimizer.SetMinimumStepLength(  0.01 )
+optimizer.SetNumberOfIterations( 200  )
+
+
+print &quot;Starting registration&quot;
+
+#
+#  Start the registration process
+#
+
+registration.Update()
+
+
+#
+# Get the final parameters of the transformation
+#
+finalParameters = registration.GetLastTransformParameters()
+
+print &quot;Final Registration Parameters &quot;
+print &quot;Translation X =  %f&quot; % (finalParameters.GetElement(0),)
+print &quot;Translation Y =  %f&quot; % (finalParameters.GetElement(1),)
+
+#
+# Now, we use the final transform for resampling the
+# moving image.
+#
+resampler = itkResampleImageFilterIF2IF2_New()
+resampler.SetTransform( transform.GetPointer()    )
+resampler.SetInput(     movingImage  )
+
+region = fixedImage.GetLargestPossibleRegion()
+
+resampler.SetSize( region.GetSize() )
+
+resampler.SetOutputSpacing( fixedImage.GetSpacing() )
+resampler.SetOutputOrigin(  fixedImage.GetOrigin()  )
+resampler.SetOutputDirection(  fixedImage.GetDirection()  )
+resampler.SetDefaultPixelValue( 100 )
+
+outputCast = itkRescaleIntensityImageFilterIF2IUC2_New()
+outputCast.SetOutputMinimum(      0  )
+outputCast.SetOutputMaximum(  255  )
+outputCast.SetInput(resampler.GetOutput())
+
+#
+#  Write the resampled image
+#
+writer = itkImageFileWriterIUC2_New()
+
+writer.SetFileName( outputImageName )
+writer.SetInput( outputCast.GetOutput() )
+writer.Update()
+print &quot;image registration has been finished&quot;
+</code></pre>
+<h2 id="usage">Usage</h2>
+<h3 id="basic-examples">Basic examples</h3>
+<p>Here is a simple python script that reads an image, applies a median image filter (radius of 2 pixels), and writes the resulting image in a file.</p>
+<pre><code>#!/usr/bin/env python
+
+import itk
+import sys
+
+input_filename = sys.argv[1]
+output_filename = sys.argv[2]
+
+image = itk.imread(input_filename)
+median = itk.MedianImageFilter.New(image, Radius = 2)
+itk.imwrite(median, output_filename)
+</code></pre>
+<p>There are two ways to instantiate filters with ITKPython:</p>
+<ul>
+<li>Implicit (recommended): ITK type information is automatically detected from the data. Typed filter objects and images are implicitly created.</li>
+</ul>
+<pre><code>
+ # Use `ImageFileReader` instead of the wrapping function `imread` to illustrate this example.
+reader = itk.ImageFileReader.New(FileName=input_filename)
+# Here we specify the filter input explicitly
+median = itk.MedianImageFilter.New(Input=reader.GetOutput())
+# Same as above but shortened. `Input` does not have to be specified.
+median = itk.MedianImageFilter.New(reader.GetOutput())
+# Same as above. `.GetOutput()` does not have to be specified.
+median = itk.MedianImageFilter.New(reader)
+
+*   Explicit: This can be useful if a filter cannot automatically select the type information (e.g. &lt;cite&gt;CastImageFilter&lt;/cite&gt;), or to detect type mismatch errors which can lead to cryptic error messages.
+
+Explicit instantiation of median image filter:
+
+ # Use `ImageFileReader` instead of the wrapping function `imread` to illustrate this example.
+reader = itk.ImageFileReader.New(FileName=input_filename)
+# Here we specify the filter input explicitly
+median = itk.MedianImageFilter.New(Input=reader.GetOutput())
+# Same as above but shortened. `Input` does not have to be specified.
+median = itk.MedianImageFilter.New(reader.GetOutput())
+# Same as above. `.GetOutput()` does not have to be specified.
+median = itk.MedianImageFilter.New(reader)
+
+Explicit instantiation of cast image filter:
+
+ image = itk.imread(input_filename)
+InputType = type(image)
+# Find input image dimension
+input_dimension = image.GetImageDimension()
+# Select float as output pixel type
+OutputType = itk.Image[itk.UC, input_dimension]
+castFilter = itk.CastImageFilter[InputType, OutputType].New()
+castFilter.SetInput(image)
+itk.imwrite(castFilter, output_filename)
+</code></pre>
+<h3 id="itk-python-types">ITK Python types</h3>
+<colgroup><col width="51%"><col width="49%"></colgroup>
+| C++ type | Python type |
+| --- | --- |
+| float | itk.F |
+| double | itk.D |
+| unsigned char | itk.UC |
+| std::complex<float> | itk.complex[itk.F] |
+<p>This list is not exhaustive and is only presented to illustrate the type names. The complete list of types can be found in the <a href="https://itk.org/ITKSoftwareGuide/html/Book1/ITKSoftwareGuide-Book1ch9.html#x48-1530009.5">ITK Software Guide</a>.</p>
+<p>Types can also be obtained from their name in the C programming language:</p>
+<p>itk.F == itk.ctype('float') # True</p>
+<h3 id="instantiate-an-itk-object">Instantiate an ITK object</h3>
+<p>There are two types of ITK objects. Most ITK objects (images, filters, adapters, …) are instantiated the following way:</p>
+<p>InputType = itk.Image[itk.F,3]
+OutputType = itk.Image[itk.F,3]
+median = itk.MedianImageFilter[InputType, OutputType].New()</p>
+<p>Some objects (matrix, vector, RGBPixel, …) do not require the attribute <cite>.New()</cite> to be added to instantiate them:</p>
+<p>pixel = itk.RGBPixel<a href="">itk.D</a></p>
+<p>In case of doubt, look at the attributes of the object you are trying to instantiate.</p>
+<h2 id="mixing-itk-and-numpy">Mixing ITK and NumPy</h2>
+<p>A common use case for using ITK in Python is to mingle NumPy and ITK operations on raster data. ITK provides a large number of I/O image formats and several sophisticated image processing algorithms not available in any other packages. The ability to intersperse that with numpy special purpose hacking provides a great tool for rapid prototyping.</p>
+<p>The following script shows how to integrate NumPy and ITK:</p>
+<pre><code>
+ import itk
+import numpy as np
+
+# Read input image
+itk_image = itk.imread(input_filename)
+
+# Run filters on itk.Image
+
+# View only of itk.Image, data is not copied
+np_view = itk.GetArrayViewFromImage(itk_image)
+
+# Copy of itk.Image, data is copied
+np_copy = itk.GetArrayFromImage(itk_image)
+
+# Do numpy stuff
+
+# Convert back to itk, view only, data is not copied
+itk_np_view = itk.GetImageViewFromArray(np_copy)
+
+# Convert back to itk, data is copied
+itk_np_copy = itk.GetImageFromArray(np_copy)
+
+# Save result
+itk.imwrite(itk_np_view, output_filename)
+</code></pre>
+<p>Similar functions are available to work with VNL vector and matrices:</p>
+<pre><code> # Vnl matrix from array
+arr = np.zeros([3,3], np.uint8)
+matrix = itk.GetVnlMatrixFromArray(arr)
+
+# Array from Vnl matrix
+arr = itk.GetArrayFromVnlMatrix(matrix)
+
+# Vnl vector from array
+vec = np.zeros([3], np.uint8)
+vnl_vector = itk.GetVnlVectorFromArray(vec)
+
+# Array from Vnl vector
+vec = itk.GetArrayFromVnlVector(vnl_vector)
+</code></pre>
+<h2 id="examples">Examples</h2>
+<p>Examples can be found in the <a href="https://itk.org/ITKExamples/src/index.html">ITKExamples project</a>.</p>
+
+            </div>
+          </article>
+        </div>
+    
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://lizhenzhublog.github.io/HTML/post/4xnWUQLST">
+              <h3 class="post-title">
+                slicer 中删除Node
+              </h3>
+            </a>
+          </div>  
+        
+
+        
+    
+        <div class="site-footer">
+  Powered by Li Zhenzhu
+</div>
+
+<script>
+  hljs.initHighlightingOnLoad()
+</script>
+
+      </div>
+    </div>
+  </body>
+</html>
