@@ -3,7 +3,7 @@
     <meta charset="utf-8" />
 <meta name="description" content="" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>3D slicer 提取STL中心线 | Li Zhenzhu, Ph.D</title>
+<title>slicer 中删除Node | Li Zhenzhu, Ph.D</title>
 <link rel="shortcut icon" href="https://lizhenzhublog.github.io/HTML/favicon.ico?v=1591939377468">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 <link rel="stylesheet" href="https://lizhenzhublog.github.io/HTML/styles/main.css">
@@ -90,11 +90,11 @@
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              3D slicer 提取STL中心线
+              slicer 中删除Node
             </h2>
             <div class="post-info">
               <time class="post-time">
-                · 2020-06-11 ·
+                · 2020-06-12 ·
               </time>
               
                 <a href="https://lizhenzhublog.github.io/HTML/tag/slicer" class="post-tags">
@@ -103,19 +103,9 @@
               
             </div>
             
-              <div class="post-feature-image" style="background-image: url('https://aws1.discourse-cdn.com/standard17/uploads/slicer/original/2X/d/dcc3837409b55533dbf93f543e94eb5cdf047789.png')">
-              </div>
-            
             <div class="post-content">
-              <p>可以利用VMTK扩展</p>
-<pre><code>reader = vmtkscripts.vmtkSurfaceReader()
-reader.InputFileName = ‘input.stl’
-reader.Execute()
-
-# network extraction
-networkExtraction = vmtkscripts.vmtkNetworkExtraction()
-networkExtraction.Surface = reader.Surface
-networkExtraction.Execute()
+              <p>如何利用slicer中删除相关的数据</p>
+<pre><code>RemoveNodeFromScene(shNode)
 </code></pre>
 
             </div>
@@ -125,9 +115,9 @@ networkExtraction.Execute()
         
           <div class="next-post">
             <div class="next">下一篇</div>
-            <a href="https://lizhenzhublog.github.io/HTML/post/dL-YnYF3i">
+            <a href="https://lizhenzhublog.github.io/HTML/post/ULaNbZC1y">
               <h3 class="post-title">
-                Python+OpenCV录制双目摄像头视频
+                如何在slicer中沿着一条弧线移动
               </h3>
             </a>
           </div>  
