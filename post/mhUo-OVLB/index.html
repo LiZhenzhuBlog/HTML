@@ -1,0 +1,217 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>slicer 中 批量使用注册 | Li Zhenzhu, Ph.D</title>
+<link rel="shortcut icon" href="https://lizhenzhublog.github.io/HTML/favicon.ico?v=1593063657778">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="stylesheet" href="https://lizhenzhublog.github.io/HTML/styles/main.css">
+
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/moment.js/2.23.0/moment.min.js"></script>
+
+
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://lizhenzhublog.github.io/HTML">
+  <img class="avatar" src="https://lizhenzhublog.github.io/HTML/images/avatar.png?v=1593063657778" alt="">
+  </a>
+  <h1 class="site-title">
+    Li Zhenzhu, Ph.D
+  </h1>
+  <p class="site-description">
+    Binzhou Medical University Hospital, Email: timeanddoctor@gmail.com.
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          Home
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          Archives
+        </a>
+      
+    
+      
+        <a href="/paper" class="menu">
+          Paper
+        </a>
+      
+    
+      
+        <a href="/3dprinting" class="menu">
+          3D printing
+        </a>
+      
+    
+      
+        <a href="/bigbridgerobot" class="menu">
+          BigBridgeRobot
+        </a>
+      
+    
+      
+        <a href="/business" class="menu">
+          Business
+        </a>
+      
+    
+      
+        <a href="https://lizhenzhublog.github.io/HTML/post/meeting/" class="menu">
+          Training
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+      
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              slicer 中 批量使用注册
+            </h2>
+            <div class="post-info">
+              <time class="post-time">
+                · 2020-06-25 ·
+              </time>
+              
+            </div>
+            
+            <div class="post-content">
+              <h1 id="核心代码">**核心代码：</h1>
+<pre><code>elastixLogic.registerVolumes(
+            fixedVolume, movingVolume,
+            outputVolumeNode = outputVol,
+            parameterFilenames = parameterFilenames,
+            outputTransformNode = outputTransform
+            )
+</code></pre>
+<h1 id="批量注册的代码">批量注册的代码****</h1>
+<pre><code>## Run the following command in Python Console.
+# execfile(&quot;path\to\BatchRegister.py&quot;)
+def Register(Fixedfilename,Movingfilename,OutVolumefilename,ind):
+    Nodename = 'Volume_{:02d}'.format(ind)
+    RegistrationPresets_ParameterFilenames = 5
+    # Load Volume
+    [ success,movingVolumeNode ] = slicer.util.loadVolume(Movingfilename,returnNode=True)
+    [ success, fixedVolumeNode] = slicer.util.loadVolume(Fixedfilename,returnNode=True)
+    
+
+    from Elastix import ElastixLogic
+    logic = ElastixLogic()
+    parameterFilenames = logic.getRegistrationPresets()[0][RegistrationPresets_ParameterFilenames]
+    outputVolume = slicer.vtkMRMLScalarVolumeNode()
+    slicer.mrmlScene.AddNode(outputVolume)
+    outputVolume.CreateDefaultDisplayNodes()
+    outputVolume.SetName(Nodename)
+    logic.registerVolumes(fixedVolumeNode, movingVolumeNode, parameterFilenames = parameterFilenames , outputVolumeNode = outputVolume)
+
+    # Create OutputVolume Node.
+    myNode = getNode(Nodename)
+    myStorageNode = myNode.CreateDefaultStorageNode()
+    myStorageNode.SetFileName(OutVolumefilename)
+    myStorageNode.WriteData(myNode)
+    slicer.mrmlScene.Clear(0)
+
+
+
+def BatchRegister():
+    path2subjects = 'path\to\dataset_directory'
+    import os
+    for ind,dir in enumerate(os.listdir(path2subjects)):
+        Fixedfilename = os.path.join(path2subjects,dir,'Fixed.ext')
+        print(Fixedfilename)
+        Movingfilename = os.path.join(path2subjects,dir,'Moving.ext')
+        OutVolumefilename = os.path.join(path2subjects,dir,'OutVolume.ext')
+        Register(Fixedfilename, Movingfilename, OutVolumefilename,ind)
+BatchRegister()
+</code></pre>
+<h1 id="运行程序">运行程序：</h1>
+<pre><code>2.Execute the Python script in the Slicer’s Python command as follow:
+&gt;&gt;execfile(&quot;path\to\BatchRegister.py&quot;)
+</code></pre>
+<h2 id="第二种方法">第二种方法</h2>
+<pre><code>Slicer.exe path\to\BatchRegister.py
+</code></pre>
+<h1 id="很好的思维利用try">很好的思维，利用try</h1>
+<pre><code> try:
+            import Elastix
+            elastixLogic = Elastix.ElastixLogic()
+            parameterFilenames                =elastixLogic.getRegistrationPresets([0]Elastix.RegistrationPresets_ParameterFilenames]
+            useelastix = True
+ except Exception as e:
+            print(e)
+            useelastix = False
+						
+	elastixLogic.registerVolumes(
+                                densRnode['node'], densnode['node'],
+                                parameterFilenames = parameterFilenames,
+                                outputTransformNode = transformNode
+                                )
+</code></pre>
+<h1 id="另一个比较直接的">另一个比较直接的</h1>
+<pre><code>import Elastix
+FixedVolume= slicer.util.loadVolume(‘L:/briend/Olivier_Slicer_try1/avg152T1.nii’, returnNode=True)
+n=slicer.util.getNode(‘avg15*’)
+MovingVolume= slicer.util.loadVolume(‘L:/briend/Olivier_Slicer_try1/t0697_t1_s03.nii’, returnNode=True)
+m=slicer.util.getNode(‘t06*’)
+outputVolume = slicer.vtkMRMLScalarVolumeNode()
+slicer.mrmlScene.AddNode(outputVolume)
+outputVolume.CreateDefaultDisplayNodes()
+logic = Elastix.ElastixLogic()
+RegistrationPresets_ParameterFilenames = 5
+parameterFilenames = logic.getRegistrationPresets()[0][RegistrationPresets_ParameterFilenames]
+logic.registerVolumes(n, m, parameterFilenames = parameterFilenames, outputVolumeNode = outputVolume)
+</code></pre>
+
+            </div>
+          </article>
+        </div>
+    
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://lizhenzhublog.github.io/HTML/post/POl9dIzPa">
+              <h3 class="post-title">
+                使用已知组件的3D–2D图像配准进行机器人钻机引导定位
+              </h3>
+            </a>
+          </div>  
+        
+
+        
+    
+        <div class="site-footer">
+  Powered by Li Zhenzhu
+</div>
+
+<script>
+  hljs.initHighlightingOnLoad()
+</script>
+
+      </div>
+    </div>
+  </body>
+</html>
