@@ -3,7 +3,7 @@
     <meta charset="utf-8" />
 <meta name="description" content="" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>3D slicer 提取STL中心线 | Li Zhenzhu, Ph.D</title>
+<title>3D slicer中视频的分辨率 | Li Zhenzhu, Ph.D</title>
 <link rel="shortcut icon" href="https://lizhenzhublog.github.io/HTML/favicon.ico?v=1593234167205">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 <link rel="stylesheet" href="https://lizhenzhublog.github.io/HTML/styles/main.css">
@@ -90,33 +90,23 @@
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              3D slicer 提取STL中心线
+              3D slicer中视频的分辨率
             </h2>
             <div class="post-info">
               <time class="post-time">
-                · 2020-06-11 ·
+                · 2020-06-27 ·
               </time>
-              
-                <a href="https://lizhenzhublog.github.io/HTML/tag/slicer" class="post-tags">
-                  # slicer
-                </a>
               
             </div>
             
-              <div class="post-feature-image" style="background-image: url('https://aws1.discourse-cdn.com/standard17/uploads/slicer/original/2X/d/dcc3837409b55533dbf93f543e94eb5cdf047789.png')">
-              </div>
-            
             <div class="post-content">
-              <p>可以利用VMTK扩展</p>
-<pre><code>reader = vmtkscripts.vmtkSurfaceReader()
-reader.InputFileName = ‘input.stl’
-reader.Execute()
-
-# network extraction
-networkExtraction = vmtkscripts.vmtkNetworkExtraction()
-networkExtraction.Surface = reader.Surface
-networkExtraction.Execute()
-</code></pre>
+              <p>默认情况下，在3D视图中显示的图像分辨率与在切片视图中显示的图像分辨率相同。在极端情况下，这确实可能会导致在3D视图中显示较低的分辨率，这可能不是您所期望的：</p>
+<p><a href="https://aws1.discourse-cdn.com/standard17/uploads/slicer/original/2X/5/58d094cc8d9ac601cde14800feef9bc8bf35c7ec.jpeg" title="图片"><img src="https://aws1.discourse-cdn.com/standard17/uploads/slicer/optimized/2X/5/58d094cc8d9ac601cde14800feef9bc8bf35c7ec_2_690x497.jpeg" alt="图片"></a>
+图片1640×1183 547 KB</p>
+<p>如果要将3D视图的分辨率与切片视图的分辨率解耦，则可以在切片视图可见性子菜单中选择“间距匹配体积”选项之一：</p>
+<p><a href="https://aws1.discourse-cdn.com/standard17/uploads/slicer/original/2X/3/31c48789697f356cfd0506090a9aebb30daed128.jpeg" title="图片"><img src="https://aws1.discourse-cdn.com/standard17/uploads/slicer/optimized/2X/3/31c48789697f356cfd0506090a9aebb30daed128_2_690x487.jpeg" alt="图片"></a>
+图片1676×1184 835 KB</p>
+<p>您使用哪种图像</p>
 
             </div>
           </article>
@@ -125,9 +115,9 @@ networkExtraction.Execute()
         
           <div class="next-post">
             <div class="next">下一篇</div>
-            <a href="https://lizhenzhublog.github.io/HTML/post/dL-YnYF3i">
+            <a href="https://lizhenzhublog.github.io/HTML/post/mhUo-OVLB">
               <h3 class="post-title">
-                Python+OpenCV录制双目摄像头视频
+                slicer 中 批量使用注册
               </h3>
             </a>
           </div>  
