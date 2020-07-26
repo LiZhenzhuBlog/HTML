@@ -1,0 +1,144 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>3D dsa数据加载 | Li Zhenzhu, Ph.D</title>
+<link rel="shortcut icon" href="https://lizhenzhublog.github.io/HTML/favicon.ico?v=1595759760634">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="stylesheet" href="https://lizhenzhublog.github.io/HTML/styles/main.css">
+
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/moment.js/2.23.0/moment.min.js"></script>
+
+
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://lizhenzhublog.github.io/HTML">
+  <img class="avatar" src="https://lizhenzhublog.github.io/HTML/images/avatar.png?v=1595759760634" alt="">
+  </a>
+  <h1 class="site-title">
+    Li Zhenzhu, Ph.D
+  </h1>
+  <p class="site-description">
+    Binzhou Medical University Hospital, Email: timeanddoctor@gmail.com.
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          Home
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          Archives
+        </a>
+      
+    
+      
+        <a href="/paper" class="menu">
+          Paper
+        </a>
+      
+    
+      
+        <a href="/3dprinting" class="menu">
+          3D printing
+        </a>
+      
+    
+      
+        <a href="/bigbridgerobot" class="menu">
+          BigBridgeRobot
+        </a>
+      
+    
+      
+        <a href="/business" class="menu">
+          Business
+        </a>
+      
+    
+      
+        <a href="https://lizhenzhublog.github.io/HTML/post/meeting/" class="menu">
+          Training
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+      
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              3D dsa数据加载
+            </h2>
+            <div class="post-info">
+              <time class="post-time">
+                · 2020-07-25 ·
+              </time>
+              
+                <a href="https://lizhenzhublog.github.io/HTML/tag/slicer" class="post-tags">
+                  # slicer
+                </a>
+              
+            </div>
+            
+            <div class="post-content">
+              <p>该系列由西门子Axiom Artis机器人C型臂创建，该C型臂可通过旋转XA采集重建锥形束CT。该系列包含一个重建的3D体积和一个定位器图像。</p>
+<p>本地化程序图像的存在会干扰默认加载，因此，现在您需要打开“高级”部分，并按imageType选择两个可加载项。其中一个是本地化图像，另一个是体积：</p>
+<p><a href="https://aws1.discourse-cdn.com/standard17/uploads/slicer/original/2X/b/bb167dbf0501e9037491ae16cdcad43c712792a5.png" title="图片"><img src="https://aws1.discourse-cdn.com/standard17/uploads/slicer/optimized/2X/b/bb167dbf0501e9037491ae16cdcad43c712792a5_2_690x416.png" alt="图片"></a>
+图片2255×1362 413 KB</p>
+<p>加载的3D体积：</p>
+<p><a href="https://aws1.discourse-cdn.com/standard17/uploads/slicer/original/2X/a/ace4042daa8dfb8b91362b27fc17c7f600f84523.jpeg" title="图片"><img src="https://aws1.discourse-cdn.com/standard17/uploads/slicer/optimized/2X/a/ace4042daa8dfb8b91362b27fc17c7f600f84523_2_690x419.jpeg" alt="图片"></a>
+图片2255×1370 630 KB</p>
+<p>我已经在DICOM模块中实现了一种机制，以检测此类定位器图像并使用默认设置正确加载音量。目前<a href="https://github.com/Slicer/Slicer/pull/5055">，</a>它正在<a href="https://github.com/Slicer/Slicer/pull/5055">接受审核</a>，几天后可能会在Slicer Preview版本中提供。</p>
+
+            </div>
+          </article>
+        </div>
+    
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://lizhenzhublog.github.io/HTML/post/47tOmy018">
+              <h3 class="post-title">
+                3D slicer后台加载module
+              </h3>
+            </a>
+          </div>  
+        
+
+        
+    
+        <div class="site-footer">
+  Powered by Li Zhenzhu
+</div>
+
+<script>
+  hljs.initHighlightingOnLoad()
+</script>
+
+      </div>
+    </div>
+  </body>
+</html>

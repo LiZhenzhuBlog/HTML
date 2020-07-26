@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://lizhenzhublog.github.io/HTML</id>
     <title>Li Zhenzhu, Ph.D</title>
-    <updated>2020-06-27T08:28:12.975Z</updated>
+    <updated>2020-07-26T10:36:40.922Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://lizhenzhublog.github.io/HTML"/>
     <link rel="self" href="https://lizhenzhublog.github.io/HTML/atom.xml"/>
@@ -10,6 +10,428 @@
     <logo>https://lizhenzhublog.github.io/HTML/images/avatar.png</logo>
     <icon>https://lizhenzhublog.github.io/HTML/favicon.ico</icon>
     <rights>All rights reserved 2020, Li Zhenzhu, Ph.D</rights>
+    <entry>
+        <title type="html"><![CDATA[3d slicer中通过鼠标点选显示模型的名字]]></title>
+        <id>https://lizhenzhublog.github.io/HTML/post/YQQCgyXIc</id>
+        <link href="https://lizhenzhublog.github.io/HTML/post/YQQCgyXIc">
+        </link>
+        <updated>2020-07-25T09:06:25.000Z</updated>
+        <content type="html"><![CDATA[<pre><code>import os
+import unittest
+import vtk, qt, ctk, slicer
+from slicer.ScriptedLoadableModule import *
+import logging
+
+#
+# DisplayName_v2
+#
+
+class DisplayName_v2(ScriptedLoadableModule):
+  &quot;&quot;&quot;Uses ScriptedLoadableModule base class, available at:
+  https://github.com/Slicer/Slicer/blob/master/Base/Python/slicer/ScriptedLoadableModule.py
+  &quot;&quot;&quot;
+  def __init__(self, parent):
+    ScriptedLoadableModule.__init__(self, parent)
+    self.parent.title = &quot;DisplayName_v2&quot; # TODO make this more human readable by adding spaces
+    self.parent.categories = [&quot;Examples&quot;]
+    self.parent.dependencies = []
+    self.parent.contributors = [&quot;John Doe (AnyWare Corp.)&quot;] # replace with &quot;Firstname Lastname (Organization)&quot;
+    self.parent.helpText = &quot;&quot;&quot;
+This is an example of scripted loadable module bundled in an extension.
+It performs a simple thresholding on the input volume and optionally captures a screenshot.
+&quot;&quot;&quot;
+    self.parent.helpText += self.getDefaultModuleDocumentationLink()
+    self.parent.acknowledgementText = &quot;&quot;&quot;
+This file was originally developed by Jean-Christophe Fillion-Robin, Kitware Inc.
+and Steve Pieper, Isomics, Inc. and was partially funded by NIH grant 3P41RR013218-12S1.
+&quot;&quot;&quot; # replace with organization, grant and thanks.
+
+#
+# DisplayName_v2Widget
+#
+
+class DisplayName_v2Widget(ScriptedLoadableModuleWidget):
+  &quot;&quot;&quot;Uses ScriptedLoadableModuleWidget base class, available at:
+  https://github.com/Slicer/Slicer/blob/master/Base/Python/slicer/ScriptedLoadableModule.py
+  &quot;&quot;&quot;
+  def setup(self):
+    ScriptedLoadableModuleWidget.setup(self)
+    #
+    # Parameters Area
+    #
+    parametersCollapsibleButton = ctk.ctkCollapsibleButton()
+    parametersCollapsibleButton.text = &quot;Update&quot;
+    self.layout.addWidget(parametersCollapsibleButton)
+    # Layout within the dummy collapsible button
+    parametersFormLayout = qt.QFormLayout(parametersCollapsibleButton)
+    
+    #
+    # Start Button
+    #
+    self.startButton = qt.QPushButton(&quot;Start&quot;)
+    self.startButton.toolTip = &quot;Run the algorithm.&quot;
+    self.startButton.enabled = True
+    parametersFormLayout.addRow(self.startButton)
+    # connections
+    self.startButton.connect('clicked(bool)', self.onstartButton)
+
+    #
+    # Stop Button
+    #
+    self.stopButton = qt.QPushButton(&quot;Stop&quot;)
+    self.stopButton.toolTip = &quot;Stop the algorithm.&quot;
+    self.stopButton.enabled = True
+    parametersFormLayout.addRow(self.stopButton)
+    # connections
+    self.stopButton.connect('clicked(bool)', self.onstopButton)
+    
+    # Add vertical spacer
+    self.layout.addStretch(1)
+
+    self.logic = DisplayName_v2Logic()
+
+  def cleanup(self):
+    pass
+
+  def onstartButton(self):
+    self.logic.setupCrossHairTracker()
+
+  def onstopButton(self):
+    self.logic.stopCrossHairTracker()
+
+
+#
+# DisplayName_v2Logic
+#
+
+class DisplayName_v2Logic(ScriptedLoadableModuleLogic):
+  &quot;&quot;&quot;This class should implement all the actual
+  computation done by your module.  The interface
+  should be such that other python code can import
+  this class and make use of the functionality without
+  requiring an instance of the Widget.
+  Uses ScriptedLoadableModuleLogic base class, available at:
+  https://github.com/Slicer/Slicer/blob/master/Base/Python/slicer/ScriptedLoadableModule.py
+  &quot;&quot;&quot;
+  def __init__(self):
+    self.previousModelPrinted = &quot;None&quot; 
+
+  #
+  # Code executed on start button
+  #
+  def setupCrossHairTracker(self):
+    print(&quot;Starting crosshair tracker&quot;)
+    self.crosshairNode = slicer.util.getNode('Crosshair')
+    # Set up observer for when tracker moves to execute class function printModelName
+    self.observationId = self.crosshairNode.AddObserver(slicer.vtkMRMLCrosshairNode.CursorPositionModifiedEvent, self.printModelName)
+
+  #
+  # Code executed on stop button
+  #
+  def stopCrossHairTracker(self):
+    self.crosshairNode.RemoveObserver(self.observationId)
+    print(&quot;Stopped crosshair tracker&quot;)
+
+  #
+  # Code executed when crosshair is moved
+  #
+  def printModelName(self, observer, eventid):
+    modelDisplayableManager = None
+    threeDViewWidget = slicer.app.layoutManager().threeDWidget(0)
+    managers = vtk.vtkCollection()
+    threeDViewWidget.getDisplayableManagers(managers)
+    for i in range(managers.GetNumberOfItems()):
+      obj = managers.GetItemAsObject(i)
+      if obj.IsA('vtkMRMLModelDisplayableManager'):
+        modelDisplayableManager = obj
+        break
+    if modelDisplayableManager is None:
+      logging.error('Failed to find the model displayable manager')
+
+    crosshairNode = slicer.mrmlScene.GetNodeByID(&quot;vtkMRMLCrosshairNodedefault&quot;)
+    modelDisplayableManager.Pick3D(crosshairNode.GetCrosshairRAS())
+
+    # Only print name once and make sure that the crosshair is not on nothing
+    if(slicer.mrmlScene.GetNodeByID(modelDisplayableManager.GetPickedNodeID())):
+      modelNode = slicer.mrmlScene.GetNodeByID(modelDisplayableManager.GetPickedNodeID()).GetDisplayableNode()
+      if(modelNode.GetName() != self.previousModelPrinted):
+        print(modelNode.GetName()).split('_')[1]
+        self.previousModelPrinted = modelNode.GetName() 
+    #else:
+      #print(&quot;Nothing Selected&quot;)
+
+
+class DisplayName_v2Test(ScriptedLoadableModuleTest):
+  &quot;&quot;&quot;
+  This is the test case for your scripted module.
+  Uses ScriptedLoadableModuleTest base class, available at:
+  https://github.com/Slicer/Slicer/blob/master/Base/Python/slicer/ScriptedLoadableModule.py
+  &quot;&quot;&quot;
+
+  def setUp(self):
+    &quot;&quot;&quot; Do whatever is needed to reset the state - typically a scene clear will be enough.
+    &quot;&quot;&quot;
+    slicer.mrmlScene.Clear(0)
+
+  def runTest(self):
+    &quot;&quot;&quot;Run as few or as many tests as needed here.
+    &quot;&quot;&quot;
+    self.setUp()
+    self.test_DisplayName_v21()
+
+  def test_DisplayName_v21(self):
+    &quot;&quot;&quot; Ideally you should have several levels of tests.  At the lowest level
+    tests should exercise the functionality of the logic with different inputs
+    (both valid and invalid).  At higher levels your tests should emulate the
+    way the user would interact with your code and confirm that it still works
+    the way you intended.
+    One of the most important features of the tests is that it should alert other
+    developers when their changes will have an impact on the behavior of your
+    module.  For example, if a developer removes a feature that you depend on,
+    your test should break so they know that the feature is needed.
+    &quot;&quot;&quot;
+    pass
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[3D slicer中给模型赋予不同的颜色和透明度设定]]></title>
+        <id>https://lizhenzhublog.github.io/HTML/post/GBXt_FJlL</id>
+        <link href="https://lizhenzhublog.github.io/HTML/post/GBXt_FJlL">
+        </link>
+        <updated>2020-07-25T08:51:31.000Z</updated>
+        <content type="html"><![CDATA[<pre><code>import os
+import unittest
+import vtk, qt, ctk, slicer
+from slicer.ScriptedLoadableModule import *
+import logging
+import numpy as np
+
+#
+# Color_All_Visible_Models
+#
+
+class Color_All_Visible_Models(ScriptedLoadableModule):
+  &quot;&quot;&quot;Uses ScriptedLoadableModule base class, available at:
+  https://github.com/Slicer/Slicer/blob/master/Base/Python/slicer/ScriptedLoadableModule.py
+  &quot;&quot;&quot;
+
+  def __init__(self, parent):
+    ScriptedLoadableModule.__init__(self, parent)
+    self.parent.title = &quot;Color_All_Visible_Models&quot; # TODO make this more human readable by adding spaces
+    self.parent.categories = [&quot;CustomExtensions&quot;]
+    self.parent.dependencies = []
+    self.parent.contributors = [&quot;Ryan Morrison&quot;] # replace with &quot;Firstname Lastname (Organization)&quot;
+    self.parent.helpText = &quot;&quot;&quot;
+This is an example of scripted loadable module bundled in an extension.
+It performs a simple thresholding on the input volume and optionally captures a screenshot.
+&quot;&quot;&quot;
+    self.parent.helpText += self.getDefaultModuleDocumentationLink()
+    self.parent.acknowledgementText = &quot;&quot;&quot;
+This file was originally developed by Jean-Christophe Fillion-Robin, Kitware Inc.
+and Steve Pieper, Isomics, Inc. and was partially funded by NIH grant 3P41RR013218-12S1.
+&quot;&quot;&quot; # replace with organization, grant and thanks.
+
+#
+# Color_All_Visible_ModelsWidget
+#
+
+class Color_All_Visible_ModelsWidget(ScriptedLoadableModuleWidget):
+  &quot;&quot;&quot;Uses ScriptedLoadableModuleWidget base class, available at:
+  https://github.com/Slicer/Slicer/blob/master/Base/Python/slicer/ScriptedLoadableModule.py
+  &quot;&quot;&quot;
+
+  def setup(self):
+    ScriptedLoadableModuleWidget.setup(self)
+
+    # Instantiate and connect widgets ...
+
+    #
+    # Parameters Area
+    #
+    parametersCollapsibleButton = ctk.ctkCollapsibleButton()
+    parametersCollapsibleButton.text = &quot;Update&quot;
+    self.layout.addWidget(parametersCollapsibleButton)
+    # Layout within the dummy collapsible button
+    parametersFormLayout = qt.QFormLayout(parametersCollapsibleButton)
+
+    #
+    # Red value
+    #
+    self.imageThresholdSliderWidget_Red = ctk.ctkSliderWidget()
+    self.imageThresholdSliderWidget_Red.singleStep = 1
+    self.imageThresholdSliderWidget_Red.minimum = 0
+    self.imageThresholdSliderWidget_Red.maximum = 255
+    self.imageThresholdSliderWidget_Red.value = 0
+    parametersFormLayout.addRow(&quot;Red&quot;, self.imageThresholdSliderWidget_Red)
+
+    #
+    # Green value
+    #
+    self.imageThresholdSliderWidget_Green = ctk.ctkSliderWidget()
+    self.imageThresholdSliderWidget_Green.singleStep = 1
+    self.imageThresholdSliderWidget_Green.minimum = 0
+    self.imageThresholdSliderWidget_Green.maximum = 255
+    self.imageThresholdSliderWidget_Green.value = 0
+    parametersFormLayout.addRow(&quot;Green&quot;, self.imageThresholdSliderWidget_Green)
+
+    #
+    # Blue value
+    #
+    self.imageThresholdSliderWidget_Blue = ctk.ctkSliderWidget()
+    self.imageThresholdSliderWidget_Blue.singleStep = 1
+    self.imageThresholdSliderWidget_Blue.minimum = 0
+    self.imageThresholdSliderWidget_Blue.maximum = 255
+    self.imageThresholdSliderWidget_Blue.value = 0
+    parametersFormLayout.addRow(&quot;Blue&quot;, self.imageThresholdSliderWidget_Blue)
+
+    #
+    # Opacity value
+    #
+    self.imageThresholdSliderWidget_Opacity = ctk.ctkSliderWidget()
+    self.imageThresholdSliderWidget_Opacity.singleStep = 0.01
+    self.imageThresholdSliderWidget_Opacity.minimum = 0
+    self.imageThresholdSliderWidget_Opacity.maximum = 1
+    self.imageThresholdSliderWidget_Opacity.value = 0
+    parametersFormLayout.addRow(&quot;Opacity&quot;, self.imageThresholdSliderWidget_Opacity)
+    
+    #
+    # Apply Button
+    #
+    self.startButton = qt.QPushButton(&quot;Apply Color&quot;)
+    self.startButton.toolTip = &quot;Run the algorithm.&quot;
+    self.startButton.enabled = True
+    parametersFormLayout.addRow(self.startButton)
+    # connections
+    self.startButton.connect('clicked(bool)', self.onstartButton)
+
+    
+    # Add vertical spacer
+    self.layout.addStretch(1)
+
+    self.logic = Color_All_Visible_ModelsLogic()
+
+  def cleanup(self):
+    pass
+
+  def onstartButton(self):
+    red = int(self.imageThresholdSliderWidget_Red.value)
+    green = int(self.imageThresholdSliderWidget_Green.value)
+    blue = int(self.imageThresholdSliderWidget_Blue.value)
+    opacity = int(self.imageThresholdSliderWidget_Blue.value)
+    self.logic.applyColor(red,green,blue,opacity)
+
+#
+# Color_All_Visible_ModelsLogic
+#
+
+class Color_All_Visible_ModelsLogic(ScriptedLoadableModuleLogic):
+  &quot;&quot;&quot;This class should implement all the actual
+  computation done by your module.  The interface
+  should be such that other python code can import
+  this class and make use of the functionality without
+  requiring an instance of the Widget.
+  Uses ScriptedLoadableModuleLogic base class, available at:
+  https://github.com/Slicer/Slicer/blob/master/Base/Python/slicer/ScriptedLoadableModule.py
+  &quot;&quot;&quot;
+
+  #
+  # Code executed when button pressed
+  #
+  def applyColor(self,red,green,blue,opacity):
+    print(&quot;Color applied: &quot; + str(red) + &quot;,&quot; + str(green) + &quot;,&quot; + str(blue) + &quot;, with opacity:&quot; + str(opacity))
+
+    modelDisplayableManager = None
+    threeDViewWidget = slicer.app.layoutManager().threeDWidget(0)
+    managers = vtk.vtkCollection()
+    threeDViewWidget.getDisplayableManagers(managers)
+    for i in range(managers.GetNumberOfItems()):
+      obj = managers.GetItemAsObject(i)
+      if obj.IsA('vtkMRMLModelDisplayableManager'):
+        modelDisplayableManager = obj
+        break
+    if modelDisplayableManager is None:
+      logging.error('Failed to find the model displayable manager')
+
+
+    #TODO set color and opacity to all visible models      
+
+
+class Color_All_Visible_ModelsTest(ScriptedLoadableModuleTest):
+  &quot;&quot;&quot;
+  This is the test case for your scripted module.
+  Uses ScriptedLoadableModuleTest base class, available at:
+  https://github.com/Slicer/Slicer/blob/master/Base/Python/slicer/ScriptedLoadableModule.py
+  &quot;&quot;&quot;
+
+  def setUp(self):
+    &quot;&quot;&quot; Do whatever is needed to reset the state - typically a scene clear will be enough.
+    &quot;&quot;&quot;
+    slicer.mrmlScene.Clear(0)
+
+  def runTest(self):
+    &quot;&quot;&quot;Run as few or as many tests as needed here.
+    &quot;&quot;&quot;
+    self.setUp()
+    self.test_Color_All_Visible_Models1()
+
+  def test_Color_All_Visible_Models1(self):
+    &quot;&quot;&quot; Ideally you should have several levels of tests.  At the lowest level
+    tests should exercise the functionality of the logic with different inputs
+    (both valid and invalid).  At higher levels your tests should emulate the
+    way the user would interact with your code and confirm that it still works
+    the way you intended.
+    One of the most important features of the tests is that it should alert other
+    developers when their changes will have an impact on the behavior of your
+    module.  For example, if a developer removes a feature that you depend on,
+    your test should break so they know that the feature is needed.
+    &quot;&quot;&quot;
+
+    self.delayDisplay(&quot;Starting the test&quot;)
+    #
+    # first, get some data
+    #
+    pass
+</code></pre>
+<p>另一种方法就是将模型遍历，然后随机赋予颜色。</p>
+<pre><code>for modelNode in slicer.util.getNodesByClass(&quot;vtkMRMLModelNode&quot;):
+  if modelNode.GetHideFromEditors():
+    continue # Skip hidden nodes, such as Red/Green/Yellow slice models
+  modelDisplayNode = modelNode.GetDisplayNode()
+  modelDisplayNode.SetColor(red,green,blue)
+  modelDisplayNode.SetOpacity(opacity)
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[一种快速的3D模型压缩方法]]></title>
+        <id>https://lizhenzhublog.github.io/HTML/post/n8SS4NXv8</id>
+        <link href="https://lizhenzhublog.github.io/HTML/post/n8SS4NXv8">
+        </link>
+        <updated>2020-07-25T08:50:52.000Z</updated>
+        <content type="html"><![CDATA[<p>在Slicer中的Decimation模块中添加了新的表面简化（简化）方法。QuadQuad及其近似但更快的版本，FastQuadric方法提供的质量比以前的DecimatePro方法高得多。</p>
+<p>例：</p>
+<p><a href="https://aws1.discourse-cdn.com/standard17/uploads/slicer/original/2X/4/49b6251df3e6d4a887c11b4658e157cdcfbc2115.jpeg" title="图片"><img src="https://aws1.discourse-cdn.com/standard17/uploads/slicer/optimized/2X/4/49b6251df3e6d4a887c11b4658e157cdcfbc2115_2_462x500.jpeg" alt="图片"></a>
+图片2214×2395 1000 KB</p>
+<p>最新的Slicer Preview版本中提供了该功能。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[3D dsa数据加载]]></title>
+        <id>https://lizhenzhublog.github.io/HTML/post/ltO6Pjz5Q</id>
+        <link href="https://lizhenzhublog.github.io/HTML/post/ltO6Pjz5Q">
+        </link>
+        <updated>2020-07-25T08:49:00.000Z</updated>
+        <content type="html"><![CDATA[<p>该系列由西门子Axiom Artis机器人C型臂创建，该C型臂可通过旋转XA采集重建锥形束CT。该系列包含一个重建的3D体积和一个定位器图像。</p>
+<p>本地化程序图像的存在会干扰默认加载，因此，现在您需要打开“高级”部分，并按imageType选择两个可加载项。其中一个是本地化图像，另一个是体积：</p>
+<p><a href="https://aws1.discourse-cdn.com/standard17/uploads/slicer/original/2X/b/bb167dbf0501e9037491ae16cdcad43c712792a5.png" title="图片"><img src="https://aws1.discourse-cdn.com/standard17/uploads/slicer/optimized/2X/b/bb167dbf0501e9037491ae16cdcad43c712792a5_2_690x416.png" alt="图片"></a>
+图片2255×1362 413 KB</p>
+<p>加载的3D体积：</p>
+<p><a href="https://aws1.discourse-cdn.com/standard17/uploads/slicer/original/2X/a/ace4042daa8dfb8b91362b27fc17c7f600f84523.jpeg" title="图片"><img src="https://aws1.discourse-cdn.com/standard17/uploads/slicer/optimized/2X/a/ace4042daa8dfb8b91362b27fc17c7f600f84523_2_690x419.jpeg" alt="图片"></a>
+图片2255×1370 630 KB</p>
+<p>我已经在DICOM模块中实现了一种机制，以检测此类定位器图像并使用默认设置正确加载音量。目前<a href="https://github.com/Slicer/Slicer/pull/5055">，</a>它正在<a href="https://github.com/Slicer/Slicer/pull/5055">接受审核</a>，几天后可能会在Slicer Preview版本中提供。</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[3D slicer后台加载module]]></title>
         <id>https://lizhenzhublog.github.io/HTML/post/47tOmy018</id>
@@ -1201,351 +1623,6 @@ cap.release()
 <p>我用一张白纸盖住了蓝色标记，除了一张纸以外，所有面都用白纸盖住了，这样我就可以避免连续画图，并且在画图之间留有缝隙。
 同样，对于需要通过颜色检测对象的任何应用程序，您可以重复使用步骤1-3。我希望你们中的一些人尝试扩展此应用程序，并可能构建更酷的功能。</p>
 <p>希望您喜欢本教程，谢谢。</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[ITK教程 python]]></title>
-        <id>https://lizhenzhublog.github.io/HTML/post/m-GVHor_Q</id>
-        <link href="https://lizhenzhublog.github.io/HTML/post/m-GVHor_Q">
-        </link>
-        <updated>2020-06-12T05:37:32.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="打开一个图片并且标准转化保存图片">打开一个图片并且标准转化保存图片</h1>
-<pre><code>import itk
-import sys
-import vtk
-
-inputfilename=&quot;D:/DATA/small/0200.dcm&quot;
-outputfilename=&quot;D:/DATA/0200.png&quot;
-#
-# Reads a 2D image in with signed short (16bits/pixel) pixel type
-# and save it as unsigned char (8bits/pixel) pixel type
-#
-InputImageType  = itk.Image.SS2
-OutputImageType = itk.Image.UC2
-
-reader = itk.ImageFileReader[InputImageType].New()
-writer = itk.ImageFileWriter[OutputImageType].New()
-
-
-filter = itk.RescaleIntensityImageFilter[InputImageType, OutputImageType].New()
-filter.SetOutputMinimum( 0 )
-filter.SetOutputMaximum(255)
-
-filter.SetInput( reader.GetOutput() )
-writer.SetInput( filter.GetOutput() )
-
-reader.SetFileName(inputfilename )
-writer.SetFileName(outputfilename )
-
-writer.Update()
-</code></pre>
-<h1 id="itk打开后vtk查看">Itk打开后VTK查看</h1>
-<p>在上述代码中加入</p>
-<pre><code>ivfilter=itk.ImageToVTKImageFilter[OutputImageType].New()
-ivfilter.SetInput(filter.GetOutput())
-viewer=vtk.vtkImageViewer()
-iren=vtk.vtkRenderWindowInteractor()
-viewer.SetupInteractor(iren)
-viewer.SetInput(ivfilter.GetOutput())
-viewer.Render()
-viewer.SetColorWindow(255)
-viewer.SetColorLevel(128)
-iren.Start()
-</code></pre>
-<h1 id="itk-配准的例子">ITK 配准的例子</h1>
-<pre><code>from InsightToolkit import *
-from sys import argv
-
-fixedImageName=&quot;D:/DATA/Brain.png&quot;
-movingImageName=&quot;D:/DATA/Brainshifted13x17y.png&quot;
-outputImageName=&quot;D:/DATA/Brainresult2.png&quot;
-
-fixedImageReader  = itkImageFileReaderIF2_New()
-movingImageReader = itkImageFileReaderIF2_New()
-
-fixedImageReader.SetFileName(  fixedImageName )
-movingImageReader.SetFileName( movingImageName )
-
-fixedImageReader.Update()
-movingImageReader.Update()
-
-fixedImage  = fixedImageReader.GetOutput()
-movingImage = movingImageReader.GetOutput()
-
-#
-#  Instantiate the classes for the registration framework
-#
-registration = itkImageRegistrationMethodIF2IF2_New()
-imageMetric  = itkMeanSquaresImageToImageMetricIF2IF2_New()
-transform    = itkTranslationTransformD2_New()
-optimizer    = itkRegularStepGradientDescentOptimizer_New()
-interpolator = itkLinearInterpolateImageFunctionIF2D_New()
-
-
-registration.SetOptimizer(    optimizer.GetPointer()    )
-registration.SetTransform(    transform.GetPointer()    )
-registration.SetInterpolator( interpolator.GetPointer() )
-registration.SetMetric(       imageMetric.GetPointer()  )
-registration.SetFixedImage(  fixedImage  )
-registration.SetMovingImage( movingImage )
-
-registration.SetFixedImageRegion( fixedImage.GetBufferedRegion() )
-
-transform.SetIdentity()
-initialParameters = transform.GetParameters()
-
-registration.SetInitialTransformParameters( initialParameters )
-
-#
-# Iteration Observer
-#
-def iterationUpdate():
-    currentParameter = transform.GetParameters()
-    print &quot;M: %f   P: %f %f &quot; % ( optimizer.GetValue(),
-                        currentParameter.GetElement(0),
-                        currentParameter.GetElement(1) )
-
-iterationCommand = itkPyCommand_New()
-iterationCommand.SetCommandCallable( iterationUpdate )
-optimizer.AddObserver( itkIterationEvent(), iterationCommand.GetPointer() )
-
-
-
-#
-#  Define optimizer parameters
-#
-optimizer.SetMaximumStepLength(  4.00 )
-optimizer.SetMinimumStepLength(  0.01 )
-optimizer.SetNumberOfIterations( 200  )
-
-
-print &quot;Starting registration&quot;
-
-#
-#  Start the registration process
-#
-
-registration.Update()
-
-
-#
-# Get the final parameters of the transformation
-#
-finalParameters = registration.GetLastTransformParameters()
-
-print &quot;Final Registration Parameters &quot;
-print &quot;Translation X =  %f&quot; % (finalParameters.GetElement(0),)
-print &quot;Translation Y =  %f&quot; % (finalParameters.GetElement(1),)
-
-#
-# Now, we use the final transform for resampling the
-# moving image.
-#
-resampler = itkResampleImageFilterIF2IF2_New()
-resampler.SetTransform( transform.GetPointer()    )
-resampler.SetInput(     movingImage  )
-
-region = fixedImage.GetLargestPossibleRegion()
-
-resampler.SetSize( region.GetSize() )
-
-resampler.SetOutputSpacing( fixedImage.GetSpacing() )
-resampler.SetOutputOrigin(  fixedImage.GetOrigin()  )
-resampler.SetOutputDirection(  fixedImage.GetDirection()  )
-resampler.SetDefaultPixelValue( 100 )
-
-outputCast = itkRescaleIntensityImageFilterIF2IUC2_New()
-outputCast.SetOutputMinimum(      0  )
-outputCast.SetOutputMaximum(  255  )
-outputCast.SetInput(resampler.GetOutput())
-
-#
-#  Write the resampled image
-#
-writer = itkImageFileWriterIUC2_New()
-
-writer.SetFileName( outputImageName )
-writer.SetInput( outputCast.GetOutput() )
-writer.Update()
-print &quot;image registration has been finished&quot;
-</code></pre>
-<h2 id="usage">Usage</h2>
-<h3 id="basic-examples">Basic examples</h3>
-<p>Here is a simple python script that reads an image, applies a median image filter (radius of 2 pixels), and writes the resulting image in a file.</p>
-<pre><code>#!/usr/bin/env python
-
-import itk
-import sys
-
-input_filename = sys.argv[1]
-output_filename = sys.argv[2]
-
-image = itk.imread(input_filename)
-median = itk.MedianImageFilter.New(image, Radius = 2)
-itk.imwrite(median, output_filename)
-</code></pre>
-<p>There are two ways to instantiate filters with ITKPython:</p>
-<ul>
-<li>Implicit (recommended): ITK type information is automatically detected from the data. Typed filter objects and images are implicitly created.</li>
-</ul>
-<pre><code>
- # Use `ImageFileReader` instead of the wrapping function `imread` to illustrate this example.
-reader = itk.ImageFileReader.New(FileName=input_filename)
-# Here we specify the filter input explicitly
-median = itk.MedianImageFilter.New(Input=reader.GetOutput())
-# Same as above but shortened. `Input` does not have to be specified.
-median = itk.MedianImageFilter.New(reader.GetOutput())
-# Same as above. `.GetOutput()` does not have to be specified.
-median = itk.MedianImageFilter.New(reader)
-
-*   Explicit: This can be useful if a filter cannot automatically select the type information (e.g. &lt;cite&gt;CastImageFilter&lt;/cite&gt;), or to detect type mismatch errors which can lead to cryptic error messages.
-
-Explicit instantiation of median image filter:
-
- # Use `ImageFileReader` instead of the wrapping function `imread` to illustrate this example.
-reader = itk.ImageFileReader.New(FileName=input_filename)
-# Here we specify the filter input explicitly
-median = itk.MedianImageFilter.New(Input=reader.GetOutput())
-# Same as above but shortened. `Input` does not have to be specified.
-median = itk.MedianImageFilter.New(reader.GetOutput())
-# Same as above. `.GetOutput()` does not have to be specified.
-median = itk.MedianImageFilter.New(reader)
-
-Explicit instantiation of cast image filter:
-
- image = itk.imread(input_filename)
-InputType = type(image)
-# Find input image dimension
-input_dimension = image.GetImageDimension()
-# Select float as output pixel type
-OutputType = itk.Image[itk.UC, input_dimension]
-castFilter = itk.CastImageFilter[InputType, OutputType].New()
-castFilter.SetInput(image)
-itk.imwrite(castFilter, output_filename)
-</code></pre>
-<h3 id="itk-python-types">ITK Python types</h3>
-<colgroup><col width="51%"><col width="49%"></colgroup>
-| C++ type | Python type |
-| --- | --- |
-| float | itk.F |
-| double | itk.D |
-| unsigned char | itk.UC |
-| std::complex<float> | itk.complex[itk.F] |
-<p>This list is not exhaustive and is only presented to illustrate the type names. The complete list of types can be found in the <a href="https://itk.org/ITKSoftwareGuide/html/Book1/ITKSoftwareGuide-Book1ch9.html#x48-1530009.5">ITK Software Guide</a>.</p>
-<p>Types can also be obtained from their name in the C programming language:</p>
-<p>itk.F == itk.ctype('float') # True</p>
-<h3 id="instantiate-an-itk-object">Instantiate an ITK object</h3>
-<p>There are two types of ITK objects. Most ITK objects (images, filters, adapters, …) are instantiated the following way:</p>
-<p>InputType = itk.Image[itk.F,3]
-OutputType = itk.Image[itk.F,3]
-median = itk.MedianImageFilter[InputType, OutputType].New()</p>
-<p>Some objects (matrix, vector, RGBPixel, …) do not require the attribute <cite>.New()</cite> to be added to instantiate them:</p>
-<p>pixel = itk.RGBPixel<a href="">itk.D</a></p>
-<p>In case of doubt, look at the attributes of the object you are trying to instantiate.</p>
-<h2 id="mixing-itk-and-numpy">Mixing ITK and NumPy</h2>
-<p>A common use case for using ITK in Python is to mingle NumPy and ITK operations on raster data. ITK provides a large number of I/O image formats and several sophisticated image processing algorithms not available in any other packages. The ability to intersperse that with numpy special purpose hacking provides a great tool for rapid prototyping.</p>
-<p>The following script shows how to integrate NumPy and ITK:</p>
-<pre><code>
- import itk
-import numpy as np
-
-# Read input image
-itk_image = itk.imread(input_filename)
-
-# Run filters on itk.Image
-
-# View only of itk.Image, data is not copied
-np_view = itk.GetArrayViewFromImage(itk_image)
-
-# Copy of itk.Image, data is copied
-np_copy = itk.GetArrayFromImage(itk_image)
-
-# Do numpy stuff
-
-# Convert back to itk, view only, data is not copied
-itk_np_view = itk.GetImageViewFromArray(np_copy)
-
-# Convert back to itk, data is copied
-itk_np_copy = itk.GetImageFromArray(np_copy)
-
-# Save result
-itk.imwrite(itk_np_view, output_filename)
-</code></pre>
-<p>Similar functions are available to work with VNL vector and matrices:</p>
-<pre><code> # Vnl matrix from array
-arr = np.zeros([3,3], np.uint8)
-matrix = itk.GetVnlMatrixFromArray(arr)
-
-# Array from Vnl matrix
-arr = itk.GetArrayFromVnlMatrix(matrix)
-
-# Vnl vector from array
-vec = np.zeros([3], np.uint8)
-vnl_vector = itk.GetVnlVectorFromArray(vec)
-
-# Array from Vnl vector
-vec = itk.GetArrayFromVnlVector(vnl_vector)
-</code></pre>
-<h2 id="examples">Examples</h2>
-<p>Examples can be found in the <a href="https://itk.org/ITKExamples/src/index.html">ITKExamples project</a>.</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[slicer 中删除Node]]></title>
-        <id>https://lizhenzhublog.github.io/HTML/post/4xnWUQLST</id>
-        <link href="https://lizhenzhublog.github.io/HTML/post/4xnWUQLST">
-        </link>
-        <updated>2020-06-12T05:22:19.000Z</updated>
-        <content type="html"><![CDATA[<p>如何利用slicer中删除相关的数据</p>
-<pre><code>RemoveNodeFromScene(shNode)
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[如何在slicer中沿着一条弧线移动]]></title>
-        <id>https://lizhenzhublog.github.io/HTML/post/ULaNbZC1y</id>
-        <link href="https://lizhenzhublog.github.io/HTML/post/ULaNbZC1y">
-        </link>
-        <updated>2020-06-11T03:17:34.000Z</updated>
-        <content type="html"><![CDATA[<p>如何在slicer中沿着一条弧线移动</p>
-<pre><code># Load sample volume
-import SampleData
-sampleDataLogic = SampleData.SampleDataLogic()
-mrHead = sampleDataLogic.downloadMRHead()
-
-# Create transform and apply to sample volume
-transformNode = slicer.vtkMRMLTransformNode()
-slicer.mrmlScene.AddNode(transformNode)
-mrHead.SetAndObserveTransformNodeID(transformNode.GetID())
-
-# How to move a volume along a trajectory using a transform:
-import time
-import math
-transformMatrix = vtk.vtkMatrix4x4()
-for xPos in range(-30,30):
-  transformMatrix.SetElement(0,3, xPos)
-  transformMatrix.SetElement(1,3, math.sin(xPos)*10)
-  transformNode.SetMatrixTransformToParent(transformMatrix)
-  slicer.app.processEvents()
-  time.sleep(0.02)
-# Note: for longer animations use qt.QTimer.singleShot(100, callbackFunction)
-# instead of a for loop.
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[更改点的颜色]]></title>
-        <id>https://lizhenzhublog.github.io/HTML/post/bEUc0fMT0</id>
-        <link href="https://lizhenzhublog.github.io/HTML/post/bEUc0fMT0">
-        </link>
-        <updated>2020-06-11T03:05:28.000Z</updated>
-        <content type="html"><![CDATA[<p>更改点的颜色要注意了
-错误的代码：</p>
-<pre><code>markupNode = getNode('MarkupsCurve')
-displayNode = markupNode.GetDisplayNode()
-displayNode.SetColor([0,0,0])
-</code></pre>
-<p>注意：Markups have Color and SelectedColor properties. SelectedColor is used if all control points are in “selected” state, which is the default. So, in most cases you want to use SetSelectedColor.</p>
 ]]></content>
     </entry>
 </feed>

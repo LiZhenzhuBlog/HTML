@@ -1,0 +1,337 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>3D slicer中给模型赋予不同的颜色和透明度设定 | Li Zhenzhu, Ph.D</title>
+<link rel="shortcut icon" href="https://lizhenzhublog.github.io/HTML/favicon.ico?v=1595759760634">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="stylesheet" href="https://lizhenzhublog.github.io/HTML/styles/main.css">
+
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/moment.js/2.23.0/moment.min.js"></script>
+
+
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://lizhenzhublog.github.io/HTML">
+  <img class="avatar" src="https://lizhenzhublog.github.io/HTML/images/avatar.png?v=1595759760634" alt="">
+  </a>
+  <h1 class="site-title">
+    Li Zhenzhu, Ph.D
+  </h1>
+  <p class="site-description">
+    Binzhou Medical University Hospital, Email: timeanddoctor@gmail.com.
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          Home
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          Archives
+        </a>
+      
+    
+      
+        <a href="/paper" class="menu">
+          Paper
+        </a>
+      
+    
+      
+        <a href="/3dprinting" class="menu">
+          3D printing
+        </a>
+      
+    
+      
+        <a href="/bigbridgerobot" class="menu">
+          BigBridgeRobot
+        </a>
+      
+    
+      
+        <a href="/business" class="menu">
+          Business
+        </a>
+      
+    
+      
+        <a href="https://lizhenzhublog.github.io/HTML/post/meeting/" class="menu">
+          Training
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+      
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              3D slicer中给模型赋予不同的颜色和透明度设定
+            </h2>
+            <div class="post-info">
+              <time class="post-time">
+                · 2020-07-25 ·
+              </time>
+              
+                <a href="https://lizhenzhublog.github.io/HTML/tag/slicer" class="post-tags">
+                  # slicer
+                </a>
+              
+            </div>
+            
+            <div class="post-content">
+              <pre><code>import os
+import unittest
+import vtk, qt, ctk, slicer
+from slicer.ScriptedLoadableModule import *
+import logging
+import numpy as np
+
+#
+# Color_All_Visible_Models
+#
+
+class Color_All_Visible_Models(ScriptedLoadableModule):
+  &quot;&quot;&quot;Uses ScriptedLoadableModule base class, available at:
+  https://github.com/Slicer/Slicer/blob/master/Base/Python/slicer/ScriptedLoadableModule.py
+  &quot;&quot;&quot;
+
+  def __init__(self, parent):
+    ScriptedLoadableModule.__init__(self, parent)
+    self.parent.title = &quot;Color_All_Visible_Models&quot; # TODO make this more human readable by adding spaces
+    self.parent.categories = [&quot;CustomExtensions&quot;]
+    self.parent.dependencies = []
+    self.parent.contributors = [&quot;Ryan Morrison&quot;] # replace with &quot;Firstname Lastname (Organization)&quot;
+    self.parent.helpText = &quot;&quot;&quot;
+This is an example of scripted loadable module bundled in an extension.
+It performs a simple thresholding on the input volume and optionally captures a screenshot.
+&quot;&quot;&quot;
+    self.parent.helpText += self.getDefaultModuleDocumentationLink()
+    self.parent.acknowledgementText = &quot;&quot;&quot;
+This file was originally developed by Jean-Christophe Fillion-Robin, Kitware Inc.
+and Steve Pieper, Isomics, Inc. and was partially funded by NIH grant 3P41RR013218-12S1.
+&quot;&quot;&quot; # replace with organization, grant and thanks.
+
+#
+# Color_All_Visible_ModelsWidget
+#
+
+class Color_All_Visible_ModelsWidget(ScriptedLoadableModuleWidget):
+  &quot;&quot;&quot;Uses ScriptedLoadableModuleWidget base class, available at:
+  https://github.com/Slicer/Slicer/blob/master/Base/Python/slicer/ScriptedLoadableModule.py
+  &quot;&quot;&quot;
+
+  def setup(self):
+    ScriptedLoadableModuleWidget.setup(self)
+
+    # Instantiate and connect widgets ...
+
+    #
+    # Parameters Area
+    #
+    parametersCollapsibleButton = ctk.ctkCollapsibleButton()
+    parametersCollapsibleButton.text = &quot;Update&quot;
+    self.layout.addWidget(parametersCollapsibleButton)
+    # Layout within the dummy collapsible button
+    parametersFormLayout = qt.QFormLayout(parametersCollapsibleButton)
+
+    #
+    # Red value
+    #
+    self.imageThresholdSliderWidget_Red = ctk.ctkSliderWidget()
+    self.imageThresholdSliderWidget_Red.singleStep = 1
+    self.imageThresholdSliderWidget_Red.minimum = 0
+    self.imageThresholdSliderWidget_Red.maximum = 255
+    self.imageThresholdSliderWidget_Red.value = 0
+    parametersFormLayout.addRow(&quot;Red&quot;, self.imageThresholdSliderWidget_Red)
+
+    #
+    # Green value
+    #
+    self.imageThresholdSliderWidget_Green = ctk.ctkSliderWidget()
+    self.imageThresholdSliderWidget_Green.singleStep = 1
+    self.imageThresholdSliderWidget_Green.minimum = 0
+    self.imageThresholdSliderWidget_Green.maximum = 255
+    self.imageThresholdSliderWidget_Green.value = 0
+    parametersFormLayout.addRow(&quot;Green&quot;, self.imageThresholdSliderWidget_Green)
+
+    #
+    # Blue value
+    #
+    self.imageThresholdSliderWidget_Blue = ctk.ctkSliderWidget()
+    self.imageThresholdSliderWidget_Blue.singleStep = 1
+    self.imageThresholdSliderWidget_Blue.minimum = 0
+    self.imageThresholdSliderWidget_Blue.maximum = 255
+    self.imageThresholdSliderWidget_Blue.value = 0
+    parametersFormLayout.addRow(&quot;Blue&quot;, self.imageThresholdSliderWidget_Blue)
+
+    #
+    # Opacity value
+    #
+    self.imageThresholdSliderWidget_Opacity = ctk.ctkSliderWidget()
+    self.imageThresholdSliderWidget_Opacity.singleStep = 0.01
+    self.imageThresholdSliderWidget_Opacity.minimum = 0
+    self.imageThresholdSliderWidget_Opacity.maximum = 1
+    self.imageThresholdSliderWidget_Opacity.value = 0
+    parametersFormLayout.addRow(&quot;Opacity&quot;, self.imageThresholdSliderWidget_Opacity)
+    
+    #
+    # Apply Button
+    #
+    self.startButton = qt.QPushButton(&quot;Apply Color&quot;)
+    self.startButton.toolTip = &quot;Run the algorithm.&quot;
+    self.startButton.enabled = True
+    parametersFormLayout.addRow(self.startButton)
+    # connections
+    self.startButton.connect('clicked(bool)', self.onstartButton)
+
+    
+    # Add vertical spacer
+    self.layout.addStretch(1)
+
+    self.logic = Color_All_Visible_ModelsLogic()
+
+  def cleanup(self):
+    pass
+
+  def onstartButton(self):
+    red = int(self.imageThresholdSliderWidget_Red.value)
+    green = int(self.imageThresholdSliderWidget_Green.value)
+    blue = int(self.imageThresholdSliderWidget_Blue.value)
+    opacity = int(self.imageThresholdSliderWidget_Blue.value)
+    self.logic.applyColor(red,green,blue,opacity)
+
+#
+# Color_All_Visible_ModelsLogic
+#
+
+class Color_All_Visible_ModelsLogic(ScriptedLoadableModuleLogic):
+  &quot;&quot;&quot;This class should implement all the actual
+  computation done by your module.  The interface
+  should be such that other python code can import
+  this class and make use of the functionality without
+  requiring an instance of the Widget.
+  Uses ScriptedLoadableModuleLogic base class, available at:
+  https://github.com/Slicer/Slicer/blob/master/Base/Python/slicer/ScriptedLoadableModule.py
+  &quot;&quot;&quot;
+
+  #
+  # Code executed when button pressed
+  #
+  def applyColor(self,red,green,blue,opacity):
+    print(&quot;Color applied: &quot; + str(red) + &quot;,&quot; + str(green) + &quot;,&quot; + str(blue) + &quot;, with opacity:&quot; + str(opacity))
+
+    modelDisplayableManager = None
+    threeDViewWidget = slicer.app.layoutManager().threeDWidget(0)
+    managers = vtk.vtkCollection()
+    threeDViewWidget.getDisplayableManagers(managers)
+    for i in range(managers.GetNumberOfItems()):
+      obj = managers.GetItemAsObject(i)
+      if obj.IsA('vtkMRMLModelDisplayableManager'):
+        modelDisplayableManager = obj
+        break
+    if modelDisplayableManager is None:
+      logging.error('Failed to find the model displayable manager')
+
+
+    #TODO set color and opacity to all visible models      
+
+
+class Color_All_Visible_ModelsTest(ScriptedLoadableModuleTest):
+  &quot;&quot;&quot;
+  This is the test case for your scripted module.
+  Uses ScriptedLoadableModuleTest base class, available at:
+  https://github.com/Slicer/Slicer/blob/master/Base/Python/slicer/ScriptedLoadableModule.py
+  &quot;&quot;&quot;
+
+  def setUp(self):
+    &quot;&quot;&quot; Do whatever is needed to reset the state - typically a scene clear will be enough.
+    &quot;&quot;&quot;
+    slicer.mrmlScene.Clear(0)
+
+  def runTest(self):
+    &quot;&quot;&quot;Run as few or as many tests as needed here.
+    &quot;&quot;&quot;
+    self.setUp()
+    self.test_Color_All_Visible_Models1()
+
+  def test_Color_All_Visible_Models1(self):
+    &quot;&quot;&quot; Ideally you should have several levels of tests.  At the lowest level
+    tests should exercise the functionality of the logic with different inputs
+    (both valid and invalid).  At higher levels your tests should emulate the
+    way the user would interact with your code and confirm that it still works
+    the way you intended.
+    One of the most important features of the tests is that it should alert other
+    developers when their changes will have an impact on the behavior of your
+    module.  For example, if a developer removes a feature that you depend on,
+    your test should break so they know that the feature is needed.
+    &quot;&quot;&quot;
+
+    self.delayDisplay(&quot;Starting the test&quot;)
+    #
+    # first, get some data
+    #
+    pass
+</code></pre>
+<p>另一种方法就是将模型遍历，然后随机赋予颜色。</p>
+<pre><code>for modelNode in slicer.util.getNodesByClass(&quot;vtkMRMLModelNode&quot;):
+  if modelNode.GetHideFromEditors():
+    continue # Skip hidden nodes, such as Red/Green/Yellow slice models
+  modelDisplayNode = modelNode.GetDisplayNode()
+  modelDisplayNode.SetColor(red,green,blue)
+  modelDisplayNode.SetOpacity(opacity)
+</code></pre>
+
+            </div>
+          </article>
+        </div>
+    
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://lizhenzhublog.github.io/HTML/post/n8SS4NXv8">
+              <h3 class="post-title">
+                一种快速的3D模型压缩方法
+              </h3>
+            </a>
+          </div>  
+        
+
+        
+    
+        <div class="site-footer">
+  Powered by Li Zhenzhu
+</div>
+
+<script>
+  hljs.initHighlightingOnLoad()
+</script>
+
+      </div>
+    </div>
+  </body>
+</html>
