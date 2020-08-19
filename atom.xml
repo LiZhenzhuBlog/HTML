@@ -1,19 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-    <id>https://lizhenzhublog.github.io/HTML</id>
+    <id>https://lizhenzhu.vercel.app/</id>
     <title>Li Zhenzhu, Ph.D</title>
-    <updated>2020-07-26T10:36:40.922Z</updated>
+    <updated>2020-08-19T08:56:10.429Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
-    <link rel="alternate" href="https://lizhenzhublog.github.io/HTML"/>
-    <link rel="self" href="https://lizhenzhublog.github.io/HTML/atom.xml"/>
+    <link rel="alternate" href="https://lizhenzhu.vercel.app/"/>
+    <link rel="self" href="https://lizhenzhu.vercel.app//atom.xml"/>
     <subtitle>Binzhou Medical University Hospital, Email: timeanddoctor@gmail.com.</subtitle>
-    <logo>https://lizhenzhublog.github.io/HTML/images/avatar.png</logo>
-    <icon>https://lizhenzhublog.github.io/HTML/favicon.ico</icon>
+    <logo>https://lizhenzhu.vercel.app//images/avatar.png</logo>
+    <icon>https://lizhenzhu.vercel.app//favicon.ico</icon>
     <rights>All rights reserved 2020, Li Zhenzhu, Ph.D</rights>
     <entry>
+        <title type="html"><![CDATA[STL转为切片图片显示]]></title>
+        <id>https://lizhenzhu.vercel.app//post/yJACQ9lnI</id>
+        <link href="https://lizhenzhu.vercel.app//post/yJACQ9lnI">
+        </link>
+        <updated>2020-08-19T08:51:03.000Z</updated>
+        <content type="html"><![CDATA[<p>stl_file_name = ...
+output_file_name = ...
+reference_volume_path = ...</p>
+<p>referenceVolumeNode = slicer.util.loadVolume(reference_volume_path)
+segmentationNode = slicer.util.loadSegmentation(stl_file_name)
+outputLabelmapVolumeNode = slicer.mrmlScene.AddNewNodeByClass('vtkMRMLLabelMapVolumeNode')
+slicer.modules.segmentations.logic().ExportVisibleSegmentsToLabelmapNode(segmentationNode, outputLabelmapVolumeNode, referenceVolumeNode)
+slicer.util.saveNode(outputLabelmapVolumeNode, output_file_name)</p>
+]]></content>
+    </entry>
+    <entry>
         <title type="html"><![CDATA[3d slicer中通过鼠标点选显示模型的名字]]></title>
-        <id>https://lizhenzhublog.github.io/HTML/post/YQQCgyXIc</id>
-        <link href="https://lizhenzhublog.github.io/HTML/post/YQQCgyXIc">
+        <id>https://lizhenzhu.vercel.app//post/YQQCgyXIc</id>
+        <link href="https://lizhenzhu.vercel.app//post/YQQCgyXIc">
         </link>
         <updated>2020-07-25T09:06:25.000Z</updated>
         <content type="html"><![CDATA[<pre><code>import os
@@ -196,8 +212,8 @@ class DisplayName_v2Test(ScriptedLoadableModuleTest):
     </entry>
     <entry>
         <title type="html"><![CDATA[3D slicer中给模型赋予不同的颜色和透明度设定]]></title>
-        <id>https://lizhenzhublog.github.io/HTML/post/GBXt_FJlL</id>
-        <link href="https://lizhenzhublog.github.io/HTML/post/GBXt_FJlL">
+        <id>https://lizhenzhu.vercel.app//post/GBXt_FJlL</id>
+        <link href="https://lizhenzhu.vercel.app//post/GBXt_FJlL">
         </link>
         <updated>2020-07-25T08:51:31.000Z</updated>
         <content type="html"><![CDATA[<pre><code>import os
@@ -405,8 +421,8 @@ class Color_All_Visible_ModelsTest(ScriptedLoadableModuleTest):
     </entry>
     <entry>
         <title type="html"><![CDATA[一种快速的3D模型压缩方法]]></title>
-        <id>https://lizhenzhublog.github.io/HTML/post/n8SS4NXv8</id>
-        <link href="https://lizhenzhublog.github.io/HTML/post/n8SS4NXv8">
+        <id>https://lizhenzhu.vercel.app//post/n8SS4NXv8</id>
+        <link href="https://lizhenzhu.vercel.app//post/n8SS4NXv8">
         </link>
         <updated>2020-07-25T08:50:52.000Z</updated>
         <content type="html"><![CDATA[<p>在Slicer中的Decimation模块中添加了新的表面简化（简化）方法。QuadQuad及其近似但更快的版本，FastQuadric方法提供的质量比以前的DecimatePro方法高得多。</p>
@@ -418,8 +434,8 @@ class Color_All_Visible_ModelsTest(ScriptedLoadableModuleTest):
     </entry>
     <entry>
         <title type="html"><![CDATA[3D dsa数据加载]]></title>
-        <id>https://lizhenzhublog.github.io/HTML/post/ltO6Pjz5Q</id>
-        <link href="https://lizhenzhublog.github.io/HTML/post/ltO6Pjz5Q">
+        <id>https://lizhenzhu.vercel.app//post/ltO6Pjz5Q</id>
+        <link href="https://lizhenzhu.vercel.app//post/ltO6Pjz5Q">
         </link>
         <updated>2020-07-25T08:49:00.000Z</updated>
         <content type="html"><![CDATA[<p>该系列由西门子Axiom Artis机器人C型臂创建，该C型臂可通过旋转XA采集重建锥形束CT。该系列包含一个重建的3D体积和一个定位器图像。</p>
@@ -434,8 +450,8 @@ class Color_All_Visible_ModelsTest(ScriptedLoadableModuleTest):
     </entry>
     <entry>
         <title type="html"><![CDATA[3D slicer后台加载module]]></title>
-        <id>https://lizhenzhublog.github.io/HTML/post/47tOmy018</id>
-        <link href="https://lizhenzhublog.github.io/HTML/post/47tOmy018">
+        <id>https://lizhenzhu.vercel.app//post/47tOmy018</id>
+        <link href="https://lizhenzhu.vercel.app//post/47tOmy018">
         </link>
         <updated>2020-06-27T08:27:32.000Z</updated>
         <content type="html"><![CDATA[<pre><code>import ExtensionWizard as ew
@@ -446,8 +462,8 @@ ew.ExtensionWizardWidget().loadModules(path=path)
     </entry>
     <entry>
         <title type="html"><![CDATA[3D slicer中视频的分辨率]]></title>
-        <id>https://lizhenzhublog.github.io/HTML/post/I9fNHn4wV</id>
-        <link href="https://lizhenzhublog.github.io/HTML/post/I9fNHn4wV">
+        <id>https://lizhenzhu.vercel.app//post/I9fNHn4wV</id>
+        <link href="https://lizhenzhu.vercel.app//post/I9fNHn4wV">
         </link>
         <updated>2020-06-27T05:01:18.000Z</updated>
         <content type="html"><![CDATA[<p>默认情况下，在3D视图中显示的图像分辨率与在切片视图中显示的图像分辨率相同。在极端情况下，这确实可能会导致在3D视图中显示较低的分辨率，这可能不是您所期望的：</p>
@@ -461,8 +477,8 @@ ew.ExtensionWizardWidget().loadModules(path=path)
     </entry>
     <entry>
         <title type="html"><![CDATA[slicer 中 批量使用注册]]></title>
-        <id>https://lizhenzhublog.github.io/HTML/post/mhUo-OVLB</id>
-        <link href="https://lizhenzhublog.github.io/HTML/post/mhUo-OVLB">
+        <id>https://lizhenzhu.vercel.app//post/mhUo-OVLB</id>
+        <link href="https://lizhenzhu.vercel.app//post/mhUo-OVLB">
         </link>
         <updated>2020-06-25T05:26:14.000Z</updated>
         <content type="html"><![CDATA[<h1 id="核心代码">**核心代码：</h1>
@@ -554,8 +570,8 @@ logic.registerVolumes(n, m, parameterFilenames = parameterFilenames, outputVolum
     </entry>
     <entry>
         <title type="html"><![CDATA[使用已知组件的3D–2D图像配准进行机器人钻机引导定位]]></title>
-        <id>https://lizhenzhublog.github.io/HTML/post/POl9dIzPa</id>
-        <link href="https://lizhenzhublog.github.io/HTML/post/POl9dIzPa">
+        <id>https://lizhenzhu.vercel.app//post/POl9dIzPa</id>
+        <link href="https://lizhenzhu.vercel.app//post/POl9dIzPa">
         </link>
         <updated>2020-06-23T14:02:13.000Z</updated>
         <content type="html"><![CDATA[<p>翻译免责声明</p>
@@ -816,8 +832,8 @@ logic.registerVolumes(n, m, parameterFilenames = parameterFilenames, outputVolum
     </entry>
     <entry>
         <title type="html"><![CDATA[elestrix]]></title>
-        <id>https://lizhenzhublog.github.io/HTML/post/xnapG7-CO</id>
-        <link href="https://lizhenzhublog.github.io/HTML/post/xnapG7-CO">
+        <id>https://lizhenzhu.vercel.app//post/xnapG7-CO</id>
+        <link href="https://lizhenzhu.vercel.app//post/xnapG7-CO">
         </link>
         <updated>2020-06-22T15:51:32.000Z</updated>
         <content type="html"><![CDATA[<h1 id="par0013">Par0013</h1>
@@ -959,670 +975,6 @@ logic.registerVolumes(n, m, parameterFilenames = parameterFilenames, outputVolum
 <p><a href="http://elastix.bigr.nl/wiki/index.php/elastix:General_disclaimer" title="elastix：一般免责声明">免责声明</a></p>
 </li>
 </ul>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[如何利用AI创建一个空中橡皮擦]]></title>
-        <id>https://lizhenzhublog.github.io/HTML/post/y0oFym3ys</id>
-        <link href="https://lizhenzhublog.github.io/HTML/post/y0oFym3ys">
-        </link>
-        <updated>2020-06-22T15:05:44.000Z</updated>
-        <content type="html"><![CDATA[<p>如何利用AI创建一个空中橡皮擦
-如果您可以在空中挥动笔以虚拟地绘制东西，然后实际上将其绘制在屏幕上，那会不会很酷？如果我们不使用任何特殊的硬件来实际实现这一目标，那可能会更加有趣，只需简单的计算机视觉即可，实际上，我们甚至不需要使用机器学习或深度学习来实现这一目标。</p>
-<p>这是我们将构建的应用程序的演示。</p>
-<p>因此，在本文中，您将学习如何创建自己的虚拟笔和虚拟橡皮擦。整个应用程序将从根本上构建轮廓检测。您可以将Contours看作是一条闭合的曲线，具有相同的颜色或强度，就像一个斑点，您可以<a href="https://docs.opencv.org/4.2.0/d4/d73/tutorial_py_contours_begin.html">在此处</a>阅读有关轮廓的更多信息  。</p>
-<h2 id="它是如何工作的">它是如何工作的：</h2>
-<p>因此，这是我们将如何实现此目的的方法，首先，我们将使用颜色遮罩来获得目标彩色笔的二进制遮罩（（<em>我将使用蓝色标记作为虚拟笔</em>）），然后使用轮廓检测​​来在整个屏幕上检测并跟踪该笔的位置。</p>
-<p>一旦完成，只需按_字面_连接点  ，是的，您只需要使用笔的先前位置（<em>在前一帧中的位置</em>）的x，y坐标与新的x，y点（<em>x，y指向新框架</em>），就是这样，您有一支虚拟笔。</p>
-<h2 id="结构体">结构体：</h2>
-<p>当然，现在要进行预处理，并添加一些其他功能，因此这里是我们应用程序每个步骤的细分。</p>
-<ol>
-<li><strong>步骤1：</strong> <em>找到目标对象的颜色范围并保存。</em></li>
-<li><strong>第2步：</strong> <em>应用正确的形态学操作以减少视频中的噪声</em></li>
-<li><strong>步骤3：</strong> <em>通过轮廓检测来检测和跟踪有色物体。</em></li>
-<li><strong>第4步：</strong> <em>找到要在屏幕上绘制的对象的x，y位置坐标。</em></li>
-<li><em>**步骤5：**添加雨刮器功能以擦除整个屏幕。</em></li>
-<li><em>**步骤6：**添加橡皮擦功能以擦除图形的某些部分。</em></li>
-</ol>
-<p>我已经设计了此应用程序的管道，以便可以轻松地将其重新用于其他项目，例如，如果要制作任何涉及跟踪彩色对象的项目，则可以使用步骤1-3。同样，这种故障使您自己运行一个步骤时调试起来变得容易得多，因为您将确切知道错误的步骤。每个步骤都可以独立运行。</p>
-<p>请注意，我们在第4步已准备好虚拟笔，因此我在第5-6步中添加了更多功能，例如，在第5步中，有一个虚拟刮水器，可以像从屏幕上擦除笔一样从屏幕上擦除笔标记。然后在第6步中，我们将添加一个切换器，使您可以使用橡皮擦切换笔。因此，让我们开始吧。</p>
-<p>首先导入所需的库</p>
-<pre><code>import cv2
-import numpy as np
-import time
-
-</code></pre>
-<h3 id="步骤1找到目标笔的颜色范围并保存">步骤1：找到目标笔的颜色范围并保存</h3>
-<p>首先，我们必须为目标彩色对象找到合适的颜色范围，该范围将在  <code>cv2.inrange()</code> 功能上用于过滤掉我们的对象。我们还将范围数组另存为<code>.npy</code>文件到磁盘中，以便以后访问。</p>
-<p>由于我们正在尝试进行颜色检测，因此我们将RGB（或OpenCV中的BGR）格式的图像转换为HSV（色相，饱和度，值）颜色格式，因为它在该模型中更容易处理颜色。</p>
-<p>下面的脚本将使您可以使用轨迹栏来调整图像的色相，饱和度和值通道。调整轨迹栏，直到只有您的目标对象可见，其余为黑色。</p>
-<pre><code># A required callback method that goes into the trackbar function.
-def nothing(x):
-    pass
-
-# Initializing the webcam feed.
-cap = cv2.VideoCapture(0)
-cap.set(3,1280)
-cap.set(4,720)
-
-# Create a window named trackbars.
-cv2.namedWindow(&quot;Trackbars&quot;)
-
-# Now create 6 trackbars that will control the lower and upper range of 
-# H,S and V channels. The Arguments are like this: Name of trackbar, 
-# window name, range,callback function. For Hue the range is 0-179 and
-# for S,V its 0-255.
-cv2.createTrackbar(&quot;L - H&quot;, &quot;Trackbars&quot;, 0, 179, nothing)
-cv2.createTrackbar(&quot;L - S&quot;, &quot;Trackbars&quot;, 0, 255, nothing)
-cv2.createTrackbar(&quot;L - V&quot;, &quot;Trackbars&quot;, 0, 255, nothing)
-cv2.createTrackbar(&quot;U - H&quot;, &quot;Trackbars&quot;, 179, 179, nothing)
-cv2.createTrackbar(&quot;U - S&quot;, &quot;Trackbars&quot;, 255, 255, nothing)
-cv2.createTrackbar(&quot;U - V&quot;, &quot;Trackbars&quot;, 255, 255, nothing)
- 
- 
-while True:
-    
-    # Start reading the webcam feed frame by frame.
-    ret, frame = cap.read()
-    if not ret:
-        break
-    # Flip the frame horizontally (Not required)
-    frame = cv2.flip( frame, 1 ) 
-    
-    # Convert the BGR image to HSV image.
-    hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
-    
-    # Get the new values of the trackbar in real time as the user changes 
-    # them
-    l_h = cv2.getTrackbarPos(&quot;L - H&quot;, &quot;Trackbars&quot;)
-    l_s = cv2.getTrackbarPos(&quot;L - S&quot;, &quot;Trackbars&quot;)
-    l_v = cv2.getTrackbarPos(&quot;L - V&quot;, &quot;Trackbars&quot;)
-    u_h = cv2.getTrackbarPos(&quot;U - H&quot;, &quot;Trackbars&quot;)
-    u_s = cv2.getTrackbarPos(&quot;U - S&quot;, &quot;Trackbars&quot;)
-    u_v = cv2.getTrackbarPos(&quot;U - V&quot;, &quot;Trackbars&quot;)
- 
-    # Set the lower and upper HSV range according to the value selected
-    # by the trackbar
-    lower_range = np.array([l_h, l_s, l_v])
-    upper_range = np.array([u_h, u_s, u_v])
-    
-    # Filter the image and get the binary mask, where white represents 
-    # your target color
-    mask = cv2.inRange(hsv, lower_range, upper_range)
- 
-    # You can also visualize the real part of the target color (Optional)
-    res = cv2.bitwise_and(frame, frame, mask=mask)
-    
-    # Converting the binary mask to 3 channel image, this is just so 
-    # we can stack it with the others
-    mask_3 = cv2.cvtColor(mask, cv2.COLOR_GRAY2BGR)
-    
-    # stack the mask, orginal frame and the filtered result
-    stacked = np.hstack((mask_3,frame,res))
-    
-    # Show this stacked frame at 40% of the size.
-    cv2.imshow('Trackbars',cv2.resize(stacked,None,fx=0.4,fy=0.4))
-    
-    # If the user presses ESC then exit the program
-    key = cv2.waitKey(1)
-    if key == 27:
-        break
-    
-    # If the user presses `s` then print this array.
-    if key == ord('s'):
-        
-        thearray = [[l_h,l_s,l_v],[u_h, u_s, u_v]]
-        print(thearray)
-        
-        # Also save this array as penval.npy
-        np.save('penval',thearray)
-        break
-    
-# Release the camera &amp; destroy the windows.    
-cap.release()
-cv2.destroyAllWindows()
-</code></pre>
-<h3 id="步骤2最大化检测掩模并消除噪声">步骤2：最大化检测掩模并消除噪声</h3>
-<p>现在，不需要在上一步中获得完美的蒙版，也可以在图像中出现一些像白点这样的杂色，我们可以在此步骤中通过形态学操作消除这种杂色。</p>
-<p>现在，我使用一个名为<strong>load_from_disk</strong>的变量   来确定是要从磁盘加载颜色范围还是要使用一些自定义值。</p>
-<pre><code># This variable determines if we want to load color range from memory 
-# or use the ones defined here. 
-load_from_disk = True
-
-# If true then load color range from memory
-if load_from_disk:
-    penval = np.load('penval.npy')
-
-cap = cv2.VideoCapture(0)
-cap.set(3,1280)
-cap.set(4,720)
-
-# Creating A 5x5 kernel for morphological operations
-kernel = np.ones((5,5),np.uint8)
-
-while(1):
-    
-    ret, frame = cap.read()
-    if not ret:
-        break
-        
-    frame = cv2.flip( frame, 1 )
-
-    # Convert BGR to HSV
-    hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
-    
-    # If you're reading from memory then load the upper and lower ranges 
-    # from there
-    if load_from_disk:
-            lower_range = penval[0]
-            upper_range = penval[1]
-            
-    # Otherwise define your own custom values for upper and lower range.
-    else:             
-       lower_range  = np.array([26,80,147])
-       upper_range = np.array([81,255,255])
-    
-    mask = cv2.inRange(hsv, lower_range, upper_range)
-    
-    # Perform the morphological operations to get rid of the noise.
-    # Erosion Eats away the white part while dilation expands it.
-    mask = cv2.erode(mask,kernel,iterations = 1)
-    mask = cv2.dilate(mask,kernel,iterations = 2)
-
-    res = cv2.bitwise_and(frame,frame, mask= mask)
-
-    mask_3 = cv2.cvtColor(mask, cv2.COLOR_GRAY2BGR)
-    
-    # stack all frames and show it
-    stacked = np.hstack((mask_3,frame,res))
-    cv2.imshow('Trackbars',cv2.resize(stacked,None,fx=0.4,fy=0.4))
-    
-    k = cv2.waitKey(5) &amp; 0xFF
-    if k == 27:
-        break
-
-cv2.destroyAllWindows()
-cap.release()
-</code></pre>
-<h3 id="步骤3追踪目标笔">步骤3：追踪目标笔</h3>
-<p>现在我们有了一个不错的蒙版，我们可以使用它通过轮廓检测来检测笔。我们将在对象周围绘制一个边界框，以确保在整个屏幕上都可以检测到它。</p>
-<pre><code># This variable determines if we want to load color range from memory 
-# or use the ones defined in the notebook. 
-load_from_disk = True
-
-# If true then load color range from memory
-if load_from_disk:
-    penval = np.load('penval.npy')
-
-cap = cv2.VideoCapture(0)
-cap.set(3,1280)
-cap.set(4,720)
-
-# kernel for morphological operations
-kernel = np.ones((5,5),np.uint8)
-
-# set the window to auto-size so we can view this full screen.
-cv2.namedWindow('image', cv2.WINDOW_NORMAL)
-
-# This threshold is used to filter noise, the contour area must be 
-# bigger than this to qualify as an actual contour.
-noiseth = 500
-
-while(1):
-    
-    _, frame = cap.read()
-    frame = cv2.flip( frame, 1 )
-
-    # Convert BGR to HSV
-    hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
-    
-    # If you're reading from memory then load the upper and lower 
-    # ranges from there
-    if load_from_disk:
-            lower_range = penval[0]
-            upper_range = penval[1]
-            
-    # Otherwise define your own custom values for upper and lower range.
-    else:             
-       lower_range  = np.array([26,80,147])
-       upper_range = np.array([81,255,255])
-    
-    mask = cv2.inRange(hsv, lower_range, upper_range)
-    
-    # Perform the morphological operations to get rid of the noise
-    mask = cv2.erode(mask,kernel,iterations = 1)
-    mask = cv2.dilate(mask,kernel,iterations = 2)
-    
-    # Find Contours in the frame.
-    contours, hierarchy = cv2.findContours(mask, cv2.RETR_EXTERNAL,
-                                           cv2.CHAIN_APPROX_SIMPLE)
-    
-    # Make sure there is a contour present and also make sure its size 
-    # is bigger than noise threshold.
-    if contours and cv2.contourArea(max(contours, 
-                               key = cv2.contourArea)) &gt; noiseth:
-        
-        # Grab the biggest contour with respect to area
-        c = max(contours, key = cv2.contourArea)
-        
-        # Get bounding box coordinates around that contour
-        x,y,w,h = cv2.boundingRect(c)
-        
-        # Draw that bounding box
-        cv2.rectangle(frame,(x,y),(x+w,y+h),(0,25,255),2)        
-
-    cv2.imshow('image',frame)
-    
-    k = cv2.waitKey(5) &amp; 0xFF
-    if k == 27:
-        break
-
-cv2.destroyAllWindows()
-cap.release()
-</code></pre>
-<h3 id="步骤4使用笔绘图">步骤4：使用笔绘图</h3>
-<p>现在，所有内容都已设置好，我们可以轻松跟踪目标对象了，现在可以使用该对象在屏幕上进行虚拟绘制了。</p>
-<p>现在我们只需要做的是使用  <code>x</code>，<code>y</code> 位置，距离返回  <strong><code>cv2.boundingRect()</code></strong> 功能从以前的帧（F-1），并将其与连接  <code>x</code>，<code>y</code> 物体的坐标，在新帧（F）。通过连接这两个点，我们绘制了一条线，并针对网络摄像头提要中的每一帧进行了绘制，通过这种方式，我们将看到使用笔进行的实时绘制。</p>
-<p>**注意：**我们将在黑色画布上绘制，然后将该画布与框架合并。这是因为每次迭代都会获得一个新的框架，因此我们无法使用实际的框架。</p>
-<pre><code>load_from_disk = True
-if load_from_disk:
-    penval = np.load('penval.npy')
-
-cap = cv2.VideoCapture(0)
-cap.set(3,1280)
-cap.set(4,720)
-
-kernel = np.ones((5,5),np.uint8)
-
-# Initializing the canvas on which we will draw upon
-canvas = None
-
-# Initilize x1,y1 points
-x1,y1=0,0
-
-# Threshold for noise
-noiseth = 800
-
-while(1):
-    _, frame = cap.read()
-    frame = cv2.flip( frame, 1 )
-    
-    # Initialize the canvas as a black image of the same size as the frame.
-    if canvas is None:
-        canvas = np.zeros_like(frame)
-
-    # Convert BGR to HSV
-    hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
-    
-    # If you're reading from memory then load the upper and lower ranges 
-    # from there
-    if load_from_disk:
-            lower_range = penval[0]
-            upper_range = penval[1]
-            
-    # Otherwise define your own custom values for upper and lower range.
-    else:             
-       lower_range  = np.array([26,80,147])
-       upper_range = np.array([81,255,255])
-    
-    mask = cv2.inRange(hsv, lower_range, upper_range)
-    
-    # Perform morphological operations to get rid of the noise
-    mask = cv2.erode(mask,kernel,iterations = 1)
-    mask = cv2.dilate(mask,kernel,iterations = 2)
-    
-    # Find Contours
-    contours, hierarchy = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
-    
-    # Make sure there is a contour present and also its size is bigger than 
-    # the noise threshold.
-    if contours and cv2.contourArea(max(contours, 
-                                 key = cv2.contourArea)) &gt; noiseth:
-                
-        c = max(contours, key = cv2.contourArea)    
-        x2,y2,w,h = cv2.boundingRect(c)
-        
-        # If there were no previous points then save the detected x2,y2 
-        # coordinates as x1,y1. 
-        # This is true when we writing for the first time or when writing 
-        # again when the pen had disappeared from view.
-        if x1 == 0 and y1 == 0:
-            x1,y1= x2,y2
-            
-        else:
-            # Draw the line on the canvas
-            canvas = cv2.line(canvas, (x1,y1),(x2,y2), [255,0,0], 4)
-        
-        # After the line is drawn the new points become the previous points.
-        x1,y1= x2,y2
-
-    else:
-        # If there were no contours detected then make x1,y1 = 0
-        x1,y1 =0,0
-    
-    # Merge the canvas and the frame.
-    frame = cv2.add(frame,canvas)
-    
-    # Optionally stack both frames and show it.
-    stacked = np.hstack((canvas,frame))
-    cv2.imshow('Trackbars',cv2.resize(stacked,None,fx=0.6,fy=0.6))
-
-    k = cv2.waitKey(1) &amp; 0xFF
-    if k == 27:
-        break
-        
-    # When c is pressed clear the canvas
-    if k == ord('c'):
-        canvas = None
-
-cv2.destroyAllWindows()
-cap.release()
-</code></pre>
-<h3 id="步骤5添加图像刮水器">步骤5：添加图像刮水器</h3>
-<p>在上面的脚本中，我们有一支可以正常工作的虚拟笔，并且当用户按下<code>c</code> 按钮时我们也清理或擦拭了屏幕  ，现在让我们也自动执行此擦拭部件的工作。一种简单的方法是检测目标对象何时离摄像机太近，然后如果目标离摄像机太近，则清除屏幕。</p>
-<p>轮廓的大小随着它靠近相机而增加，因此我们可以监控轮廓的大小以实现此目的。</p>
-<p>我们要做的另一件事是，我们还将警告用户我们将在几秒钟内清除屏幕，以便他/她可以将物体从框架中取出。</p>
-<pre><code>load_from_disk = True
-if load_from_disk:
-    penval = np.load('penval.npy')
-
-cap = cv2.VideoCapture(0)
-cap.set(3,1280)
-cap.set(4,720)
-
-kernel = np.ones((5,5),np.uint8)
-
-# Making window size adjustable
-cv2.namedWindow('image', cv2.WINDOW_NORMAL)
-
-# This is the canvas on which we will draw upon
-canvas=None
-
-# Initilize x1,y1 points
-x1,y1=0,0
-
-# Threshold for noise
-noiseth = 800
-
-# Threshold for wiper, the size of the contour must be bigger than for us to
-# clear the canvas 
-wiper_thresh = 40000
-
-# A variable which tells when to clear canvas, if its True then we clear the canvas
-clear = False
-
-while(1):
-    _, frame = cap.read()
-    frame = cv2.flip( frame, 1 )
-    
-    # Initialize the canvas as a black image
-    if canvas is None:
-        canvas = np.zeros_like(frame)
-
-    # Convert BGR to HSV
-    hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
-    
-    # If you're reading from memory then load the upper and lower ranges 
-    # from there
-    if load_from_disk:
-            lower_range = penval[0]
-            upper_range = penval[1]
-            
-    # Otherwise define your own custom values for upper and lower range.
-    else:             
-       lower_range  = np.array([26,80,147])
-       upper_range = np.array([81,255,255])
-    
-    mask = cv2.inRange(hsv, lower_range, upper_range)
-    
-    # Perform the morphological operations to get rid of the noise
-    mask = cv2.erode(mask,kernel,iterations = 1)
-    mask = cv2.dilate(mask,kernel,iterations = 2)
-    
-    # Find Contours.
-    contours, hierarchy = cv2.findContours(mask,
-    cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_SIMPLE)
-    
-    # Make sure there is a contour present and also its size is bigger than 
-    # the noise threshold.
-    if contours and cv2.contourArea(max(contours,
-                                   key = cv2.contourArea)) &gt; noiseth:
-                
-        c = max(contours, key = cv2.contourArea)    
-        x2,y2,w,h = cv2.boundingRect(c)
-        
-        # Get the area of the contour
-        area = cv2.contourArea(c)
-        
-        # If there were no previous points then save the detected x2,y2 
-        # coordinates as x1,y1. 
-        if x1 == 0 and y1 == 0:
-            x1,y1= x2,y2
-            
-        else:
-            # Draw the line on the canvas
-            canvas = cv2.line(canvas, (x1,y1),(x2,y2),
-            [255,0,0], 5)
-        
-        # After the line is drawn the new points become the previous points.
-        x1,y1= x2,y2
-        
-        # Now if the area is greater than the wiper threshold then set the  
-        # clear variable to True and warn User.
-        if area &gt; wiper_thresh:
-           cv2.putText(canvas,'Clearing Canvas', (100,200), 
-           cv2.FONT_HERSHEY_SIMPLEX,2, (0,0,255), 5, cv2.LINE_AA)
-           clear = True 
-
-    else:
-        # If there were no contours detected then make x1,y1 = 0
-        x1,y1 =0,0
-    
-   
-    # Now this piece of code is just for smooth drawing. (Optional)
-    _ , mask = cv2.threshold(cv2.cvtColor(canvas, cv2.COLOR_BGR2GRAY), 20, 
-    255, cv2.THRESH_BINARY)
-    foreground = cv2.bitwise_and(canvas, canvas, mask = mask)
-    background = cv2.bitwise_and(frame, frame,
-    mask = cv2.bitwise_not(mask))
-    frame = cv2.add(foreground,background)
-
-    cv2.imshow('image',frame)
-    
-    k = cv2.waitKey(5) &amp; 0xFF
-    if k == 27:
-        break
-    
-    # Clear the canvas after 1 second if the clear variable is true
-    if clear == True:
-        
-        time.sleep(1)
-        canvas = None
-        
-        # And then set clear to false
-        clear = False
-        
-cv2.destroyAllWindows()
-cap.release()
-</code></pre>
-<h3 id="步骤6添加橡皮擦功能">步骤6：添加橡皮擦功能</h3>
-<p>既然我们已经完成了笔和刮水器的工作，接下来就可以添加橡皮擦功能了。所以我想要的就是这样，当用户切换到橡皮擦而不是绘画时，它会擦除​​笔画的那一部分。做到这一点真的很容易，您只需要在画布上用黑色绘制橡皮擦就可以了。通过涂成黑色，该部分在合并期间恢复为原始状态，因此就像橡皮擦一样。橡皮擦功能的真正编码部分是如何在笔和橡皮擦之间进行切换，当然，最简单的方法是使用键盘按钮，但是我们想要比这更酷的东西。</p>
-<p>因此，我们要做的就是每当有人将手放在屏幕的左上角时执行切换。我们将使用背景减法来监视该区域，以便我们知道何时会有干扰。就像按下虚拟按钮一样。</p>
-<pre><code>load_from_disk = True
-if load_from_disk:
-    penval = np.load('penval.npy')
-
-cap = cv2.VideoCapture(0)
-
-# Load these 2 images and resize them to the same size.
-pen_img = cv2.resize(cv2.imread('pen.png',1), (50, 50))
-eraser_img = cv2.resize(cv2.imread('eraser.jpg',1), (50, 50))
-
-kernel = np.ones((5,5),np.uint8)
-
-# Making window size adjustable
-cv2.namedWindow('image', cv2.WINDOW_NORMAL)
-
-# This is the canvas on which we will draw upon
-canvas = None
-
-# Create a background subtractor Object
-backgroundobject = cv2.createBackgroundSubtractorMOG2(detectShadows = False)
-
-# This threshold determines the amount of disruption in the background.
-background_threshold = 600
-
-# A variable which tells you if you're using a pen or an eraser.
-switch = 'Pen'
-
-# With this variable we will monitor the time between previous switch.
-last_switch = time.time()
-
-# Initilize x1,y1 points
-x1,y1=0,0
-
-# Threshold for noise
-noiseth = 800
-
-# Threshold for wiper, the size of the contour must be bigger than this for # us to clear the canvas
-wiper_thresh = 40000
-
-# A variable which tells when to clear canvas
-clear = False
-
-while(1):
-    _, frame = cap.read()
-    frame = cv2.flip( frame, 1 )
-    
-    # Initilize the canvas as a black image
-    if canvas is None:
-        canvas = np.zeros_like(frame)
-        
-    # Take the top left of the frame and apply the background subtractor
-    # there    
-    top_left = frame[0: 50, 0: 50]
-    fgmask = backgroundobject.apply(top_left)
-    
-    # Note the number of pixels that are white, this is the level of 
-    # disruption.
-    switch_thresh = np.sum(fgmask==255)
-    
-    # If the disruption is greater than background threshold and there has 
-    # been some time after the previous switch then you. can change the 
-    # object type.
-    if switch_thresh&gt;background_threshold and (time.time()-last_switch) &gt; 1:
-
-        # Save the time of the switch. 
-        last_switch = time.time()
-        
-        if switch == 'Pen':
-            switch = 'Eraser'
-        else:
-            switch = 'Pen'
-
-    # Convert BGR to HSV
-    hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
-    
-    # If you're reading from memory then load the upper and lower ranges 
-    # from there
-    if load_from_disk:
-            lower_range = penval[0]
-            upper_range = penval[1]
-            
-    # Otherwise define your own custom values for upper and lower range.
-    else:             
-       lower_range  = np.array([26,80,147])
-       upper_range = np.array([81,255,255])
-    
-    mask = cv2.inRange(hsv, lower_range, upper_range)
-    
-    # Perform morphological operations to get rid of the noise
-    mask = cv2.erode(mask,kernel,iterations = 1)
-    mask = cv2.dilate(mask,kernel,iterations = 2)
-    
-    # Find Contours
-    contours, _ = cv2.findContours(mask, cv2.RETR_EXTERNAL, 
-    cv2.CHAIN_APPROX_SIMPLE)
-    
-    # Make sure there is a contour present and also it size is bigger than 
-    # noise threshold.
-    if contours and cv2.contourArea(max(contours,
-                                      key = cv2.contourArea)) &gt; noiseth:
-                
-        c = max(contours, key = cv2.contourArea)    
-        x2,y2,w,h = cv2.boundingRect(c)
-        
-        # Get the area of the contour
-        area = cv2.contourArea(c)
-        
-        # If there were no previous points then save the detected x2,y2 
-        # coordinates as x1,y1. 
-        if x1 == 0 and y1 == 0:
-            x1,y1= x2,y2
-            
-        else:
-            if switch == 'Pen':
-                # Draw the line on the canvas
-                canvas = cv2.line(canvas, (x1,y1),
-                (x2,y2), [255,0,0], 5)
-                
-            else:
-                cv2.circle(canvas, (x2, y2), 20,
-                (0,0,0), -1)
-            
-            
-        
-        # After the line is drawn the new points become the previous points.
-        x1,y1= x2,y2
-        
-        # Now if the area is greater than the wiper threshold then set the 
-        # clear variable to True
-        if area &gt; wiper_thresh:
-           cv2.putText(canvas,'Clearing Canvas',(0,200), 
-           cv2.FONT_HERSHEY_SIMPLEX, 2, (0,0,255), 1, cv2.LINE_AA)
-           clear = True 
-
-    else:
-        # If there were no contours detected then make x1,y1 = 0
-        x1,y1 =0,0
-    
-   
-    # Now this piece of code is just for smooth drawing. (Optional)
-    _ , mask = cv2.threshold(cv2.cvtColor (canvas, cv2.COLOR_BGR2GRAY), 20, 
-    255, cv2.THRESH_BINARY)
-    foreground = cv2.bitwise_and(canvas, canvas, mask = mask)
-    background = cv2.bitwise_and(frame, frame,
-    mask = cv2.bitwise_not(mask))
-    frame = cv2.add(foreground,background)
-
-    # Switch the images depending upon what we're using, pen or eraser.
-    if switch != 'Pen':
-        cv2.circle(frame, (x1, y1), 20, (255,255,255), -1)
-        frame[0: 50, 0: 50] = eraser_img
-    else:
-        frame[0: 50, 0: 50] = pen_img
-
-    cv2.imshow('image',frame)
-
-    k = cv2.waitKey(5) &amp; 0xFF
-    if k == 27:
-        break
-    
-    # Clear the canvas after 1 second, if the clear variable is true
-    if clear == True: 
-        time.sleep(1)
-        canvas = None
-        
-        # And then set clear to false
-        clear = False
-        
-cv2.destroyAllWindows()
-cap.release()
-</code></pre>
-<p>注意：  我选择的所有这些不同阈值的值都将取决于您的环境，因此请先对其进行调整，而不要尝试使我的值起作用。</p>
-<p>我用一张白纸盖住了蓝色标记，除了一张纸以外，所有面都用白纸盖住了，这样我就可以避免连续画图，并且在画图之间留有缝隙。
-同样，对于需要通过颜色检测对象的任何应用程序，您可以重复使用步骤1-3。我希望你们中的一些人尝试扩展此应用程序，并可能构建更酷的功能。</p>
-<p>希望您喜欢本教程，谢谢。</p>
 ]]></content>
     </entry>
 </feed>
