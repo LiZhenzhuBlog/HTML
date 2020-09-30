@@ -3,7 +3,7 @@
     <meta charset="utf-8" />
 <meta name="description" content="" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>slicer 中删除Node | Li Zhenzhu, Ph.D</title>
+<title>PLY文件的颜色映射 | Li Zhenzhu, Ph.D</title>
 <link rel="shortcut icon" href="https://lizhenzhu.vercel.app//favicon.ico?v=1601468950687">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 <link rel="stylesheet" href="https://lizhenzhu.vercel.app//styles/main.css">
@@ -90,23 +90,22 @@
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              slicer 中删除Node
+              PLY文件的颜色映射
             </h2>
             <div class="post-info">
               <time class="post-time">
-                · 2020-06-12 ·
+                · 2020-09-30 ·
               </time>
-              
-                <a href="https://lizhenzhu.vercel.app//tag/slicer" class="post-tags">
-                  # slicer
-                </a>
               
             </div>
             
+              <div class="post-feature-image" style="background-image: url('https://discourse-cloud-file-uploads.s3.dualstack.us-west-2.amazonaws.com/standard17/uploads/slicer/original/2X/9/934b46e845ce5f451309b5525543b97f3b18e18b.jpg')">
+              </div>
+            
             <div class="post-content">
-              <p>如何利用slicer中删除相关的数据</p>
-<pre><code>RemoveNodeFromScene(shNode)
-</code></pre>
+              <p>如果将文件导入到Meshlab中，则可以应用滤镜：将纹理转移为顶点颜色，然后将顶点颜色转移为面颜色，并导出为仅包含面颜色的新层网格。然后在3D Slicer中打开，转到“模型”，然后选中“ Scalars Visible”框，从下拉列表中选择RGB，它将加载。只要颜色是“面部颜色”，我也可以将它与obj一起使用。由于某种原因，如果将颜色保存在顶点中，它将无法正确读取颜色。</p>
+<p>方法二、
+将层文件作为模型加载，将jpg纹理文件作为体积加载，则可以使用Texture modelSlicerIGT扩展模块将纹理应用于模型。</p>
 
             </div>
           </article>
@@ -115,9 +114,9 @@
         
           <div class="next-post">
             <div class="next">下一篇</div>
-            <a href="https://lizhenzhu.vercel.app//post/ULaNbZC1y">
+            <a href="https://lizhenzhu.vercel.app//post/yJACQ9lnI">
               <h3 class="post-title">
-                如何在slicer中沿着一条弧线移动
+                STL转为切片图片显示
               </h3>
             </a>
           </div>  

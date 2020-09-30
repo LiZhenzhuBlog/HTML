@@ -3,7 +3,7 @@
     <meta charset="utf-8" />
 <meta name="description" content="" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>slicer 中删除Node | Li Zhenzhu, Ph.D</title>
+<title>模型的全自动注册方法 | Li Zhenzhu, Ph.D</title>
 <link rel="shortcut icon" href="https://lizhenzhu.vercel.app//favicon.ico?v=1601468950687">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 <link rel="stylesheet" href="https://lizhenzhu.vercel.app//styles/main.css">
@@ -90,23 +90,28 @@
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              slicer 中删除Node
+              模型的全自动注册方法
             </h2>
             <div class="post-info">
               <time class="post-time">
-                · 2020-06-12 ·
+                · 2020-09-30 ·
               </time>
-              
-                <a href="https://lizhenzhu.vercel.app//tag/slicer" class="post-tags">
-                  # slicer
-                </a>
               
             </div>
             
             <div class="post-content">
-              <p>如何利用slicer中删除相关的数据</p>
-<pre><code>RemoveNodeFromScene(shNode)
-</code></pre>
+              <h1 id="get-input-and-output-nodes">Get input and output nodes</h1>
+<p>sourceModel = getNode('Segment_1')
+targetModel = getNode('Segment_2')
+sourceToTargetTransform = slicer.mrmlScene.AddNewNodeByClass(&quot;vtkMRMLLinearTransformNode&quot;)</p>
+<h1 id="register">Register</h1>
+<p>import ModelRegistration
+mrLogic = ModelRegistration.ModelRegistrationLogic()
+mrLogic.run(sourceModel, targetModel, sourceToTargetTransform)</p>
+<h1 id="show-results">Show results</h1>
+<p>sourceModel.SetAndObserveTransformNodeID(sourceToTargetTransform.GetID())
+sourceModel.GetDisplayNode().SetOpacity(0.5)
+targetModel.GetDisplayNode().SetOpacity(0.5)</p>
 
             </div>
           </article>
@@ -115,9 +120,9 @@
         
           <div class="next-post">
             <div class="next">下一篇</div>
-            <a href="https://lizhenzhu.vercel.app//post/ULaNbZC1y">
+            <a href="https://lizhenzhu.vercel.app//post/pDIXtjf1e">
               <h3 class="post-title">
-                如何在slicer中沿着一条弧线移动
+                PLY文件的颜色映射
               </h3>
             </a>
           </div>  
